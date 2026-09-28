@@ -1,15 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { FileText, ShieldCheck, Sparkles, Coffee } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { FileText, ShieldCheck, Sparkles, Coffee, Globe, ChevronDown, Check } from "lucide-react";
 import RedPanda from "./RedPanda";
 import SponsorModal from "./SponsorModal";
-import { useLanguage } from "@/lib/i18n";
+import { useLanguage, LANGUAGES } from "@/lib/i18n";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { lang, setLang, t } = useLanguage();
   const [isSponsorOpen, setIsSponsorOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  const currentLang = LANGUAGES.find((l) => l.code === lang) || LANGUAGES[0];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setIsLangOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-14 pb-10 border-t border-slate-800">
@@ -46,9 +60,53 @@ export default function Footer() {
                 my<span className="text-orange-500">pick</span><span className="text-rose-500">pdf</span> 🐾
               </span>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
               {t("footer_about")}
             </p>
+
+            {/* iLovePDF-Style Language Selector Button */}
+            <div className="relative inline-block" ref={langRef}>
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700/80 flex items-center gap-2 transition-colors shadow-xs"
+                title="Change language / 언어 선택"
+              >
+                <Globe className="w-3.5 h-3.5 text-rose-400" />
+                <span>{currentLang.flag} {currentLang.label}</span>
+                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform ${isLangOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {isLangOpen && (
+                <div className="absolute bottom-full mb-2 left-0 w-56 bg-slate-800 border border-slate-700 rounded-2xl p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95">
+                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 px-3 py-1.5 border-b border-slate-700/60 mb-1 flex items-center justify-between">
+                    <span>Language / 언어</span>
+                    <Globe className="w-3 h-3" />
+                  </div>
+                  <div className="space-y-1">
+                    {LANGUAGES.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => {
+                          setLang(l.code);
+                          setIsLangOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition-colors ${
+                          lang === l.code
+                            ? "bg-rose-600/20 text-rose-400 border border-rose-500/30"
+                            : "text-slate-300 hover:bg-slate-700/60 hover:text-white"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>{l.flag}</span>
+                          <span>{l.label}</span>
+                        </span>
+                        {lang === l.code && <Check className="w-3.5 h-3.5 text-rose-400" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Col 2 */}
@@ -97,29 +155,19 @@ export default function Footer() {
                   {t("tool_watermark")}
                 </Link>
               </li>
-              <li>
-                <Link href="/rotate-pdf" className="hover:text-rose-400 transition-colors">
-                  {t("tool_rotate")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/ocr-pdf" className="hover:text-rose-400 transition-colors">
-                  {t("tool_ocr")}
-                </Link>
-              </li>
             </ul>
           </div>
 
           {/* Col 3 */}
           <div>
             <h5 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">
-              {t("footer_col_tech")}
+              {t("footer_col_security")}
             </h5>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li>WebAssembly Client Engine</li>
+              <li>100% Client-Side WebAssembly</li>
               <li>SSL/TLS 256-bit Encryption</li>
               <li>Zero Remote Server Storage</li>
-              <li>Mobile & Tablet Friendly</li>
+              <li>Mobile &amp; Tablet Friendly</li>
               <li>100% Free for Commercial Use</li>
             </ul>
           </div>

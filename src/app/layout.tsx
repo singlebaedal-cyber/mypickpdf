@@ -118,6 +118,14 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
+
+        {/* International SEO (hreflang) - Google Global Search Ranking */}
+        <link rel="alternate" hrefLang="x-default" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="ko" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="en" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="ja" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="es" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="zh" href="https://mypickpdf.vercel.app/" />
       </head>
       <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-rose-500 selection:text-white">
         <GoogleAnalytics />
