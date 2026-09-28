@@ -8,8 +8,10 @@ import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import MascotActionNotice from "@/components/MascotActionNotice";
+import UploadedFileCard from "@/components/UploadedFileCard";
 import { getPDFPageCount, parsePageRange, extractPDFPages, downloadBlob } from "@/lib/pdf-utils";
-import { Split, Download, CheckCircle, FileText, RefreshCw } from "lucide-react";
+import { Split, Download, CheckCircle, FileText } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function SplitPdfPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -113,29 +115,14 @@ export default function SplitPdfPage() {
           />
         ) : (
           <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm truncate max-w-sm">{file.name}</h4>
-                  <p className="text-xs text-slate-500">
-                    총 <span className="font-extrabold text-rose-600">{pageCount}</span>개 페이지 • {(file.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setFile(null);
-                  setSplitBlob(null);
-                }}
-                className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
-              >
-                <RefreshCw className="w-3.5 h-3.5" /> 다른 파일 선택
-              </button>
-            </div>
+            <UploadedFileCard
+              file={file}
+              pageCount={pageCount}
+              onReset={() => {
+                setFile(null);
+                setSplitBlob(null);
+              }}
+            />
 
             {/* Mascot Action Guide */}
             {!splitBlob && (

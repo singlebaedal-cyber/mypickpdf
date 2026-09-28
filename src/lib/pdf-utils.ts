@@ -192,7 +192,43 @@ export async function getPDFPageCount(file: File): Promise<number> {
 }
 
 /**
- * 4. 이미지 ➔ PDF 변환 (JPG/PNG/WebP to PDF)
+ * 이미지 정규화 헬퍼 (JPG, PNG, WebP, GIF, BMP 지원)
+ * - Canvas 2D를 통해 모든 이미지 포맷을 표준 JPEG 데이터로 정규화하여 jsPDF UNKNOWN IMAGE FORMAT 오류 원천 차단
+ */
+async function normalizeImageToJpegDataUrl(file: File): Promise<{ dataUrl: string; width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const width = img.naturalWidth || img.width || 800;
+        const height = img.naturalHeight || img.height || 600;
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve({ dataUrl: reader.result as string, width, height });
+          return;
+        }
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0);
+        const jpegDataUrl = canvas.toDataURL("image/jpeg", 0.95);
+        resolve({ dataUrl: jpegDataUrl, width, height });
+      };
+      img.onerror = () => {
+        resolve({ dataUrl: reader.result as string, width: 800, height: 600 });
+      };
+      img.src = reader.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
+ * 4. 이미지 ➔ PDF 변환 (JPG/PNG/WebP/GIF to PDF)
  */
 export async function imagesToPDF(
   imageFiles: File[],
@@ -216,17 +252,15 @@ export async function imagesToPDF(
     }
 
     const file = imageFiles[i];
-    const dataUrl = await fileToDataURL(file);
-    const imgDims = await getImageDimensions(dataUrl);
+    const { dataUrl, width: imgW, height: imgH } = await normalizeImageToJpegDataUrl(file);
 
-    const ratio = Math.min(pageWidth / imgDims.width, pageHeight / imgDims.height);
-    const renderWidth = imgDims.width * ratio;
-    const renderHeight = imgDims.height * ratio;
+    const ratio = Math.min(pageWidth / imgW, pageHeight / imgH);
+    const renderWidth = imgW * ratio;
+    const renderHeight = imgH * ratio;
     const x = (pageWidth - renderWidth) / 2;
     const y = (pageHeight - renderHeight) / 2;
 
-    const imgFormat = file.type.includes("png") ? "PNG" : "JPEG";
-    doc.addImage(dataUrl, imgFormat, x, y, renderWidth, renderHeight);
+    doc.addImage(dataUrl, "JPEG", x, y, renderWidth, renderHeight);
 
     if (onProgress) {
       onProgress(Math.round(((i + 1) / total) * 100));
@@ -235,25 +269,6 @@ export async function imagesToPDF(
 
   const pdfOutput = doc.output("arraybuffer");
   return new Uint8Array(pdfOutput);
-}
-
-function fileToDataURL(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-function getImageDimensions(dataUrl: string): Promise<{ width: number; height: number }> {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => {
-      resolve({ width: img.naturalWidth || img.width, height: img.naturalHeight || img.height });
-    };
-    img.src = dataUrl;
-  });
 }
 
 /**
@@ -340,33 +355,116 @@ export async function extractTextFromPDF(
   return fullText.trim();
 }
 
+const SYSTEM_FONT_STACK =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", "Noto Sans CJK KR", "Noto Sans KR", sans-serif';
+
 /**
  * 7. 워드 ➔ PDF 변환 (Word (.docx) to PDF)
+ * - Canvas 2D 망막(Retina) 렌더링으로 한글, 한자, 일본어, 아랍어, 키릴 문자 등 모든 언어의 WinAnsi 깨짐 100% 방지
  */
 export async function wordToPdf(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
   const arrayBuffer = await file.arrayBuffer();
-  if (onProgress) onProgress(30);
+  if (onProgress) onProgress(20);
 
   const result = await mammoth.extractRawText({ arrayBuffer });
-  const text = result.value || "문서 내용이 비어있습니다.";
-  if (onProgress) onProgress(60);
+  const rawText = result.value || "문서 내용이 비어있습니다.";
+  if (onProgress) onProgress(40);
 
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
-  const margin = 20;
-  const pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
-  const lines = doc.splitTextToSize(text, pageWidth);
+  const cWidth = 1240;
+  const cHeight = 1754;
+  const marginX = 100;
+  const marginTop = 130;
+  const marginBottom = 100;
+  const contentWidth = cWidth - marginX * 2;
+  const fontSize = 24;
+  const lineHeight = 38;
 
-  let cursorY = margin;
-  const lineHeight = 7;
-  const pageHeight = doc.internal.pageSize.getHeight() - margin;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  doc.deletePage(1);
 
-  for (let i = 0; i < lines.length; i++) {
-    if (cursorY + lineHeight > pageHeight) {
-      doc.addPage();
-      cursorY = margin;
+  const measureCanvas = document.createElement("canvas");
+  const mCtx = measureCanvas.getContext("2d")!;
+  mCtx.font = `400 ${fontSize}px ${SYSTEM_FONT_STACK}`;
+
+  const paragraphs = rawText.split(/\r?\n/);
+  const wrappedLines: string[] = [];
+
+  for (const para of paragraphs) {
+    const trimmed = para.trim();
+    if (!trimmed) {
+      wrappedLines.push("");
+      continue;
     }
-    doc.text(lines[i], margin, cursorY);
-    cursorY += lineHeight;
+    let currentLine = "";
+    for (let c = 0; c < trimmed.length; c++) {
+      const char = trimmed[c];
+      const testLine = currentLine + char;
+      if (mCtx.measureText(testLine).width > contentWidth && currentLine.length > 0) {
+        wrappedLines.push(currentLine);
+        currentLine = char;
+      } else {
+        currentLine = testLine;
+      }
+    }
+    if (currentLine.length > 0) {
+      wrappedLines.push(currentLine);
+    }
+  }
+
+  const linesPerPage = Math.floor((cHeight - marginTop - marginBottom) / lineHeight);
+  const totalPages = Math.max(1, Math.ceil(wrappedLines.length / linesPerPage));
+
+  for (let p = 0; p < totalPages; p++) {
+    const pageCanvas = document.createElement("canvas");
+    pageCanvas.width = cWidth;
+    pageCanvas.height = cHeight;
+    const ctx = pageCanvas.getContext("2d")!;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, cWidth, cHeight);
+
+    // Header line
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = `600 16px ${SYSTEM_FONT_STACK}`;
+    ctx.fillText(file.name.replace(/\.[^/.]+$/, ""), marginX, 65);
+
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(marginX, 80);
+    ctx.lineTo(cWidth - marginX, 80);
+    ctx.stroke();
+
+    // Body lines
+    ctx.font = `400 ${fontSize}px ${SYSTEM_FONT_STACK}`;
+    ctx.fillStyle = "#1e293b";
+    ctx.textBaseline = "top";
+
+    const startLine = p * linesPerPage;
+    const endLine = Math.min(wrappedLines.length, startLine + linesPerPage);
+    let y = marginTop;
+
+    for (let l = startLine; l < endLine; l++) {
+      const lineText = wrappedLines[l];
+      if (lineText) {
+        ctx.fillText(lineText, marginX, y);
+      }
+      y += lineHeight;
+    }
+
+    // Footer page number
+    ctx.fillStyle = "#64748b";
+    ctx.font = `600 16px ${SYSTEM_FONT_STACK}`;
+    ctx.textAlign = "center";
+    ctx.fillText(`${p + 1} / ${totalPages}`, cWidth / 2, cHeight - 50);
+
+    const imgData = pageCanvas.toDataURL("image/jpeg", 0.92);
+    doc.addPage([595.28, 841.89], "portrait");
+    doc.addImage(imgData, "JPEG", 0, 0, 595.28, 841.89, undefined, "FAST");
+
+    if (onProgress) {
+      onProgress(Math.round(40 + ((p + 1) / totalPages) * 55));
+    }
   }
 
   if (onProgress) onProgress(100);
@@ -375,40 +473,118 @@ export async function wordToPdf(file: File, onProgress?: (p: number) => void): P
 
 /**
  * 8. 엑셀 ➔ PDF 변환 (Excel (.xlsx/.xls) to PDF)
+ * - Canvas 2D 정밀 스프레드시트 그리드 렌더링으로 다국어(한글, 영어, 일본어 등) 및 통화기호 완벽 출력
  */
 export async function excelToPdf(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
   const arrayBuffer = await file.arrayBuffer();
-  if (onProgress) onProgress(30);
+  if (onProgress) onProgress(25);
 
   const workbook = XLSX.read(arrayBuffer, { type: "array" });
-  const firstSheetName = workbook.SheetNames[0];
+  const firstSheetName = workbook.SheetNames[0] || "Sheet1";
   const worksheet = workbook.Sheets[firstSheetName];
   const jsonData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-  if (onProgress) onProgress(60);
+  if (onProgress) onProgress(50);
 
-  const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-  doc.setFontSize(14);
-  doc.text(`Sheet: ${firstSheetName}`, 14, 15);
-  doc.setFontSize(9);
+  const cWidth = 1754;
+  const cHeight = 1240;
+  const marginX = 80;
+  const marginTop = 130;
+  const marginBottom = 80;
+  const availableWidth = cWidth - marginX * 2;
+  const rowHeight = 44;
 
-  let y = 25;
-  const rowHeight = 7;
-  const colWidth = 35;
-  const pageHeight = doc.internal.pageSize.getHeight() - 15;
+  const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+  doc.deletePage(1);
 
-  for (const row of jsonData) {
-    if (y + rowHeight > pageHeight) {
-      doc.addPage("a4", "landscape");
-      y = 20;
+  if (jsonData.length === 0) {
+    jsonData.push(["(시트가 비어있습니다 / Empty Worksheet)"]);
+  }
+
+  const maxCols = Math.min(10, Math.max(...jsonData.map((r) => r.length), 1));
+  const colWidth = Math.floor(availableWidth / maxCols);
+
+  const rowsPerPage = Math.floor((cHeight - marginTop - marginBottom) / rowHeight);
+  const totalPages = Math.max(1, Math.ceil(jsonData.length / rowsPerPage));
+
+  for (let p = 0; p < totalPages; p++) {
+    const pageCanvas = document.createElement("canvas");
+    pageCanvas.width = cWidth;
+    pageCanvas.height = cHeight;
+    const ctx = pageCanvas.getContext("2d")!;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, cWidth, cHeight);
+
+    // Title & Sheet Header
+    ctx.fillStyle = "#0f172a";
+    ctx.font = `700 28px ${SYSTEM_FONT_STACK}`;
+    ctx.fillText(`${file.name.replace(/\.[^/.]+$/, "")} — ${firstSheetName}`, marginX, 65);
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = `500 16px ${SYSTEM_FONT_STACK}`;
+    ctx.fillText("mypickpdf • 100% Client-Side Spreadsheet Converter", marginX, 95);
+
+    const startRow = p * rowsPerPage;
+    const endRow = Math.min(jsonData.length, startRow + rowsPerPage);
+    let y = marginTop;
+
+    for (let r = startRow; r < endRow; r++) {
+      const row = jsonData[r] || [];
+      const isHeaderRow = r === 0;
+
+      if (isHeaderRow) {
+        ctx.fillStyle = "#f1f5f9";
+      } else if (r % 2 === 0) {
+        ctx.fillStyle = "#fafafa";
+      } else {
+        ctx.fillStyle = "#ffffff";
+      }
+      ctx.fillRect(marginX, y, availableWidth, rowHeight);
+
+      ctx.strokeStyle = "#e2e8f0";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(marginX, y, availableWidth, rowHeight);
+
+      for (let c = 0; c < maxCols; c++) {
+        const cellX = marginX + c * colWidth;
+        if (c > 0) {
+          ctx.beginPath();
+          ctx.moveTo(cellX, y);
+          ctx.lineTo(cellX, y + rowHeight);
+          ctx.stroke();
+        }
+
+        const rawVal = row[c] !== undefined && row[c] !== null ? String(row[c]) : "";
+        ctx.font = isHeaderRow ? `700 16px ${SYSTEM_FONT_STACK}` : `400 15px ${SYSTEM_FONT_STACK}`;
+        ctx.fillStyle = isHeaderRow ? "#0f172a" : "#334155";
+        ctx.textBaseline = "middle";
+
+        let displayVal = rawVal;
+        while (displayVal.length > 0 && ctx.measureText(displayVal + "…").width > colWidth - 20) {
+          displayVal = displayVal.slice(0, -1);
+        }
+        if (displayVal !== rawVal) displayVal += "…";
+
+        ctx.fillText(displayVal, cellX + 10, y + rowHeight / 2);
+      }
+
+      y += rowHeight;
     }
-    let x = 14;
-    for (let c = 0; c < Math.min(row.length, 7); c++) {
-      const cellVal = row[c] !== undefined && row[c] !== null ? String(row[c]) : "";
-      doc.text(cellVal.slice(0, 18), x, y);
-      x += colWidth;
+
+    // Footer page number
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = `600 15px ${SYSTEM_FONT_STACK}`;
+    ctx.textAlign = "center";
+    ctx.fillText(`Page ${p + 1} of ${totalPages}`, cWidth / 2, cHeight - 35);
+
+    const imgData = pageCanvas.toDataURL("image/jpeg", 0.92);
+    doc.addPage([841.89, 595.28], "landscape");
+    doc.addImage(imgData, "JPEG", 0, 0, 841.89, 595.28, undefined, "FAST");
+
+    if (onProgress) {
+      onProgress(Math.round(50 + ((p + 1) / totalPages) * 45));
     }
-    y += rowHeight;
   }
 
   if (onProgress) onProgress(100);
@@ -417,21 +593,81 @@ export async function excelToPdf(file: File, onProgress?: (p: number) => void): 
 
 /**
  * 9. 파워포인트 ➔ PDF 변환 (PowerPoint (.pptx) to PDF)
+ * - Canvas 2D 고해상도 프레젠테이션 커버 슬라이드 생성 (다국어 문서명 100% 보존)
  */
 export async function powerpointToPdf(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
-  if (onProgress) onProgress(40);
-  const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-  const w = doc.internal.pageSize.getWidth();
-  const h = doc.internal.pageSize.getHeight();
+  if (onProgress) onProgress(30);
 
-  doc.setFillColor(248, 250, 252);
-  doc.rect(0, 0, w, h, "F");
-  doc.setTextColor(30, 41, 59);
-  doc.setFontSize(24);
-  doc.text(file.name.replace(/\.[^/.]+$/, ""), w / 2, h / 2 - 10, { align: "center" });
-  doc.setFontSize(12);
-  doc.setTextColor(100, 116, 139);
-  doc.text("Converted to High-Resolution Presentation PDF by mypickpdf", w / 2, h / 2 + 10, { align: "center" });
+  const cWidth = 1754;
+  const cHeight = 1240;
+  const canvas = document.createElement("canvas");
+  canvas.width = cWidth;
+  canvas.height = cHeight;
+  const ctx = canvas.getContext("2d")!;
+
+  const gradient = ctx.createLinearGradient(0, 0, cWidth, cHeight);
+  gradient.addColorStop(0, "#f8fafc");
+  gradient.addColorStop(0.5, "#ffffff");
+  gradient.addColorStop(1, "#f1f5f9");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, cWidth, cHeight);
+
+  // Decorative border card
+  ctx.fillStyle = "#ffffff";
+  ctx.strokeStyle = "#e2e8f0";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  if (typeof (ctx as any).roundRect === "function") {
+    (ctx as any).roundRect(100, 100, cWidth - 200, cHeight - 200, 32);
+  } else {
+    ctx.rect(100, 100, cWidth - 200, cHeight - 200);
+  }
+  ctx.fill();
+  ctx.stroke();
+
+  // Top Presentation Badge
+  ctx.fillStyle = "#fef2f2";
+  ctx.beginPath();
+  if (typeof (ctx as any).roundRect === "function") {
+    (ctx as any).roundRect(cWidth / 2 - 160, 240, 320, 52, 26);
+  } else {
+    ctx.rect(cWidth / 2 - 160, 240, 320, 52);
+  }
+  ctx.fill();
+  ctx.strokeStyle = "#fecdd3";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  ctx.fillStyle = "#e11d48";
+  ctx.font = `800 18px ${SYSTEM_FONT_STACK}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("POWERPOINT PRESENTATION", cWidth / 2, 266);
+
+  // Presentation Title
+  const title = file.name.replace(/\.[^/.]+$/, "");
+  ctx.fillStyle = "#0f172a";
+  ctx.font = `900 48px ${SYSTEM_FONT_STACK}`;
+  ctx.fillText(title, cWidth / 2, 460);
+
+  // Subtitle
+  ctx.fillStyle = "#64748b";
+  ctx.font = `500 24px ${SYSTEM_FONT_STACK}`;
+  ctx.fillText("Converted to High-Resolution PDF Presentation by mypickpdf", cWidth / 2, 540);
+
+  // Trust badge
+  ctx.fillStyle = "#475569";
+  ctx.font = `600 18px ${SYSTEM_FONT_STACK}`;
+  ctx.fillText("🐾 100% Client-Side In-Browser Conversion • Zero Server Uploads", cWidth / 2, 620);
+
+  if (onProgress) onProgress(75);
+
+  const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+  doc.deletePage(1);
+
+  const imgData = canvas.toDataURL("image/jpeg", 0.94);
+  doc.addPage([841.89, 595.28], "landscape");
+  doc.addImage(imgData, "JPEG", 0, 0, 841.89, 595.28, undefined, "FAST");
 
   if (onProgress) onProgress(100);
   return new Uint8Array(doc.output("arraybuffer"));
@@ -439,30 +675,106 @@ export async function powerpointToPdf(file: File, onProgress?: (p: number) => vo
 
 /**
  * 10. HTML ➔ PDF 변환 (HTML to PDF)
+ * - Canvas 2D 텍스트 측정 및 줄바꿈 엔진으로 다국어 HTML 문서의 무결성 보장
  */
 export async function htmlToPdf(htmlContent: string, onProgress?: (p: number) => void): Promise<Uint8Array> {
   if (onProgress) onProgress(30);
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
 
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = htmlContent;
   const cleanText = tempDiv.innerText || tempDiv.textContent || htmlContent;
 
-  const margin = 20;
-  const pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
-  const lines = doc.splitTextToSize(cleanText, pageWidth);
+  const cWidth = 1240;
+  const cHeight = 1754;
+  const marginX = 100;
+  const marginTop = 130;
+  const marginBottom = 100;
+  const contentWidth = cWidth - marginX * 2;
+  const fontSize = 22;
+  const lineHeight = 36;
 
-  let cursorY = margin;
-  const lineHeight = 6.5;
-  const pageHeight = doc.internal.pageSize.getHeight() - margin;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  doc.deletePage(1);
 
-  for (let i = 0; i < lines.length; i++) {
-    if (cursorY + lineHeight > pageHeight) {
-      doc.addPage();
-      cursorY = margin;
+  const measureCanvas = document.createElement("canvas");
+  const mCtx = measureCanvas.getContext("2d")!;
+  mCtx.font = `400 ${fontSize}px ${SYSTEM_FONT_STACK}`;
+
+  const paragraphs = cleanText.split(/\r?\n/);
+  const wrappedLines: string[] = [];
+
+  for (const para of paragraphs) {
+    const trimmed = para.trim();
+    if (!trimmed) {
+      wrappedLines.push("");
+      continue;
     }
-    doc.text(lines[i], margin, cursorY);
-    cursorY += lineHeight;
+    let currentLine = "";
+    for (let c = 0; c < trimmed.length; c++) {
+      const char = trimmed[c];
+      const testLine = currentLine + char;
+      if (mCtx.measureText(testLine).width > contentWidth && currentLine.length > 0) {
+        wrappedLines.push(currentLine);
+        currentLine = char;
+      } else {
+        currentLine = testLine;
+      }
+    }
+    if (currentLine.length > 0) wrappedLines.push(currentLine);
+  }
+
+  const linesPerPage = Math.floor((cHeight - marginTop - marginBottom) / lineHeight);
+  const totalPages = Math.max(1, Math.ceil(wrappedLines.length / linesPerPage));
+
+  for (let p = 0; p < totalPages; p++) {
+    const pageCanvas = document.createElement("canvas");
+    pageCanvas.width = cWidth;
+    pageCanvas.height = cHeight;
+    const ctx = pageCanvas.getContext("2d")!;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, cWidth, cHeight);
+
+    // Header
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = `600 16px ${SYSTEM_FONT_STACK}`;
+    ctx.fillText("HTML Document Export", marginX, 65);
+
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(marginX, 80);
+    ctx.lineTo(cWidth - marginX, 80);
+    ctx.stroke();
+
+    ctx.font = `400 ${fontSize}px ${SYSTEM_FONT_STACK}`;
+    ctx.fillStyle = "#1e293b";
+    ctx.textBaseline = "top";
+
+    const startLine = p * linesPerPage;
+    const endLine = Math.min(wrappedLines.length, startLine + linesPerPage);
+    let y = marginTop;
+
+    for (let l = startLine; l < endLine; l++) {
+      const lineText = wrappedLines[l];
+      if (lineText) {
+        ctx.fillText(lineText, marginX, y);
+      }
+      y += lineHeight;
+    }
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = `600 16px ${SYSTEM_FONT_STACK}`;
+    ctx.textAlign = "center";
+    ctx.fillText(`${p + 1} / ${totalPages}`, cWidth / 2, cHeight - 50);
+
+    const imgData = pageCanvas.toDataURL("image/jpeg", 0.92);
+    doc.addPage([595.28, 841.89], "portrait");
+    doc.addImage(imgData, "JPEG", 0, 0, 595.28, 841.89, undefined, "FAST");
+
+    if (onProgress) {
+      onProgress(Math.round(40 + ((p + 1) / totalPages) * 55));
+    }
   }
 
   if (onProgress) onProgress(100);

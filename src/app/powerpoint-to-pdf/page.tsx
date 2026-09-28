@@ -7,11 +7,13 @@ import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
-import MascotActionNotice from "@/components/MascotActionNotice";
+import UploadedFileCard from "@/components/UploadedFileCard";
 import { powerpointToPdf, downloadBlob } from "@/lib/pdf-utils";
-import { Presentation, Download, CheckCircle, RefreshCw } from "lucide-react";
+import { Presentation, Download, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function PowerpointToPdfPage() {
+  const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -20,7 +22,7 @@ export default function PowerpointToPdfPage() {
   const handleFileSelected = (files: File[]) => {
     const pptFile = files.find((f) => f.name.endsWith(".pptx") || f.name.endsWith(".ppt"));
     if (!pptFile) {
-      alert("PowerPoint (.pptx) 파일을 선택해 주세요.");
+      alert("PowerPoint (.pptx / .ppt) File required.");
       return;
     }
     setFile(pptFile);
@@ -88,34 +90,13 @@ export default function PowerpointToPdfPage() {
           />
         ) : (
           <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
-                  <Presentation className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm truncate max-w-sm">{file.name}</h4>
-                  <p className="text-xs text-slate-500">{(file.size / 1024).toFixed(0)} KB</p>
-                </div>
-              </div>
-
-              <MascotActionNotice
-                mood="ready"
-                title="PowerPoint 슬라이드가 안전하게 준비되었습니다!"
-                description="슬라이드 텍스트 및 개체를 분석하여 가로형 고품질 PDF로 즉시 변환합니다."
-                actionHint="우측 하단 [PDF로 변환 시작] 버튼을 눌러주세요!"
-              />
-
-              <button
-                onClick={() => {
-                  setFile(null);
-                  setPdfBlob(null);
-                }}
-                className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
-              >
-                <RefreshCw className="w-3.5 h-3.5" /> 다른 슬라이드 선택
-              </button>
-            </div>
+            <UploadedFileCard
+              file={file}
+              onReset={() => {
+                setFile(null);
+                setPdfBlob(null);
+              }}
+            />
 
             <div className="flex justify-end">
               <button
@@ -129,18 +110,12 @@ export default function PowerpointToPdfPage() {
 
             {pdfBlob && (
               <div className="space-y-4 animate-in fade-in">
-                <MascotActionNotice
-                  mood="hooray"
-                  title="PowerPoint ➔ PDF 변환이 완료되었습니다!"
-                  description="슬라이드가 전자문서 PDF로 성공적으로 변환되었습니다."
-                  actionHint="아래 [PDF 다시 다운로드] 버튼을 눌러 저장하세요!"
-                />
                 <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-8 h-8 text-emerald-600 shrink-0" />
                     <div>
-                      <h4 className="font-extrabold text-emerald-900">PDF 다운로드 준비 완료</h4>
-                      <p className="text-xs text-emerald-700">다운로드가 시작되지 않았다면 버튼을 클릭하세요.</p>
+                      <h4 className="font-extrabold text-emerald-900">{t("btn_download_again")}</h4>
+                      <p className="text-xs text-emerald-700">mypickpdf 100% Free & Secure</p>
                     </div>
                   </div>
                   <button
@@ -148,7 +123,7 @@ export default function PowerpointToPdfPage() {
                     className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 flex items-center gap-2 shrink-0 hover:scale-105 transition-all"
                   >
                     <Download className="w-4 h-4" />
-                    <span>PDF 다시 다운로드</span>
+                    <span>{t("btn_download_again")}</span>
                   </button>
                 </div>
               </div>

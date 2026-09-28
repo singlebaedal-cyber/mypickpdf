@@ -35,7 +35,7 @@ export default function ProcessingOverlay({
           <RedPanda
             mood="loading"
             size={120}
-            withSpeechBubble="초고속으로 문서를 다듬고 있어요! 🐾"
+            withSpeechBubble={t("processing_bubble")}
           />
         </div>
 
@@ -51,7 +51,7 @@ export default function ProcessingOverlay({
             style={{ width: `${Math.max(5, progress)}%` }}
           />
         </div>
-        <div className="text-xs font-extrabold text-slate-700 mb-4">{progress}% 완료</div>
+        <div className="text-xs font-extrabold text-slate-700 mb-4">{progress}% {t("processing_complete")}</div>
 
         {/* High CTR Ad slot during processing */}
         <div className="border-t border-slate-100 pt-4">

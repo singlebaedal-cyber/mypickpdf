@@ -7,11 +7,13 @@ import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
-import MascotActionNotice from "@/components/MascotActionNotice";
+import UploadedFileCard from "@/components/UploadedFileCard";
 import { pdfToPdfA, downloadBlob } from "@/lib/pdf-utils";
-import { Archive, Download, CheckCircle, RefreshCw, ShieldCheck } from "lucide-react";
+import { Archive, Download, CheckCircle, ShieldCheck } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function PdfToPdfaPage() {
+  const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -89,34 +91,13 @@ export default function PdfToPdfaPage() {
           />
         ) : (
           <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
-                  <Archive className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm truncate max-w-sm">{file.name}</h4>
-                  <p className="text-xs text-slate-500">{(file.size / 1024).toFixed(0)} KB</p>
-                </div>
-              </div>
-
-              <MascotActionNotice
-                mood="ready"
-                title="PDF 문서가 안전하게 준비되었습니다!"
-                description="국제 표준 장기 보관 규격인 PDF/A 형식으로 메타데이터 및 폰트를 안전하게 임베딩합니다."
-                actionHint="우측 하단 [PDF/A 규격으로 변환 시작] 버튼을 눌러주세요!"
-              />
-
-              <button
-                onClick={() => {
-                  setFile(null);
-                  setPdfaBlob(null);
-                }}
-                className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
-              >
-                <RefreshCw className="w-3.5 h-3.5" /> 다른 문서 선택
-              </button>
-            </div>
+            <UploadedFileCard
+              file={file}
+              onReset={() => {
+                setFile(null);
+                setPdfaBlob(null);
+              }}
+            />
 
             <div className="flex justify-end">
               <button

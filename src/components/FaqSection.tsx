@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 interface FAQItem {
   question: string;
@@ -16,10 +17,14 @@ interface FaqSectionProps {
 
 export default function FaqSection({
   items,
-  title = "자주 묻는 질문 (FAQ)",
-  subtitle = "mypickpdf 도구 사용 및 보안에 대해 궁금한 점을 확인하세요.",
+  title,
+  subtitle,
 }: FaqSectionProps) {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const displayTitle = title || t("faq_title");
+  const displaySubtitle = subtitle || t("faq_subtitle");
 
   // Schema.org FAQPage for AEO (Answer Engine Optimization)
   const faqSchema = {
@@ -45,12 +50,12 @@ export default function FaqSection({
 
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold mb-3">
-          <HelpCircle className="w-3.5 h-3.5" /> Q&A
+          <HelpCircle className="w-3.5 h-3.5" /> {t("faq_badge")}
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          {title}
+          {displayTitle}
         </h2>
-        <p className="text-sm text-slate-500 mt-2">{subtitle}</p>
+        <p className="text-sm text-slate-500 mt-2">{displaySubtitle}</p>
       </div>
 
       <div className="space-y-3">

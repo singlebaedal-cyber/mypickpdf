@@ -7,11 +7,13 @@ import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
-import MascotActionNotice from "@/components/MascotActionNotice";
+import UploadedFileCard from "@/components/UploadedFileCard";
 import { pdfToExcelXlsx, downloadBlob, getPDFPageCount } from "@/lib/pdf-utils";
-import { FileSpreadsheet, Download, CheckCircle, RefreshCw } from "lucide-react";
+import { FileSpreadsheet, Download, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function PdfToExcelPage() {
+  const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -93,34 +95,14 @@ export default function PdfToExcelPage() {
           />
         ) : (
           <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-                  <FileSpreadsheet className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm truncate max-w-sm">{file.name}</h4>
-                  <p className="text-xs text-slate-500">총 {pageCount}개 페이지</p>
-                </div>
-              </div>
-
-              <MascotActionNotice
-                mood="ready"
-                title="PDF 문서가 안전하게 첨부되었습니다!"
-                description="문서 속 표 및 텍스트 데이터를 Excel (.xlsx) 시트로 구조화할 준비가 되었습니다."
-                actionHint="우측 하단 [Excel (.xlsx)로 변환 시작] 버튼을 눌러주세요!"
-              />
-
-              <button
-                onClick={() => {
-                  setFile(null);
-                  setExcelBlob(null);
-                }}
-                className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
-              >
-                <RefreshCw className="w-3.5 h-3.5" /> 다른 문서 선택
-              </button>
-            </div>
+            <UploadedFileCard
+              file={file}
+              pageCount={pageCount}
+              onReset={() => {
+                setFile(null);
+                setExcelBlob(null);
+              }}
+            />
 
             <div className="flex justify-end">
               <button

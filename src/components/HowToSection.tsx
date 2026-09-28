@@ -1,4 +1,7 @@
+"use client";
+
 import { BookOpen, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 interface Step {
   step: number;
@@ -12,12 +15,14 @@ interface HowToSectionProps {
 }
 
 export default function HowToSection({ toolName, steps }: HowToSectionProps) {
+  const { t, lang } = useLanguage();
+
   // Schema.org HowTo for AEO and Google Featured Snippets
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: `${toolName} 사용 방법`,
-    description: `mypickpdf에서 간편하게 ${toolName}을 수행하는 가이드`,
+    name: `${toolName} ${t("howto_heading_suffix")}`,
+    description: `mypickpdf - ${toolName}`,
     step: steps.map((s) => ({
       "@type": "HowToStep",
       position: s.step,
@@ -31,6 +36,10 @@ export default function HowToSection({ toolName, steps }: HowToSectionProps) {
     })),
   };
 
+  const headingText = lang === "ko"
+    ? `${toolName}${t("howto_heading_suffix")}`
+    : `${t("howto_heading_suffix")} ${toolName}`.replace(/^[\s—\-:]+/, "").trim();
+
   return (
     <section className="my-16 max-w-5xl mx-auto px-4">
       {/* Inject AEO HowTo Schema */}
@@ -41,13 +50,13 @@ export default function HowToSection({ toolName, steps }: HowToSectionProps) {
 
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold mb-3">
-          <BookOpen className="w-3.5 h-3.5 text-rose-600" /> 간편 튜토리얼
+          <BookOpen className="w-3.5 h-3.5 text-rose-600" /> {t("howto_badge")}
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          {toolName}은 어떻게 사용하나요?
+          {headingText}
         </h2>
         <p className="text-sm text-slate-500 mt-2">
-          복잡한 소프트웨어 설치 없이 3단계만 거치면 작업이 완료됩니다.
+          {t("howto_subtitle")}
         </p>
       </div>
 

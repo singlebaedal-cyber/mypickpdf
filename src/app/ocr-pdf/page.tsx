@@ -7,11 +7,13 @@ import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
-import MascotActionNotice from "@/components/MascotActionNotice";
+import UploadedFileCard from "@/components/UploadedFileCard";
 import { extractTextFromPDF, downloadBlob, getPDFPageCount } from "@/lib/pdf-utils";
-import { FileSearch, Copy, Download, Check, RefreshCw, FileText } from "lucide-react";
+import { FileSearch, Copy, Download, Check, FileText } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function OcrPdfPage() {
+  const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [extractedText, setExtractedText] = useState<string>("");
@@ -109,36 +111,14 @@ export default function OcrPdfPage() {
           />
         ) : (
           <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm truncate max-w-sm">{file.name}</h4>
-                  <p className="text-xs text-slate-500">
-                    총 {pageCount}개 페이지 • {(file.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-              </div>
-
-              <MascotActionNotice
-                mood="ready"
-                title="텍스트를 추출할 PDF가 준비되었습니다!"
-                description="브라우저에서 문서를 분석하여 원문 텍스트를 바로 읽어냅니다."
-                actionHint="아래 [텍스트 추출 시작] 버튼을 눌러주세요!"
-              />
-
-              <button
-                onClick={() => {
-                  setFile(null);
-                  setExtractedText("");
-                }}
-                className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
-              >
-                <RefreshCw className="w-3.5 h-3.5" /> 다른 문서 선택
-              </button>
-            </div>
+            <UploadedFileCard
+              file={file}
+              pageCount={pageCount}
+              onReset={() => {
+                setFile(null);
+                setExtractedText("");
+              }}
+            />
 
             {!extractedText ? (
               <div className="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
