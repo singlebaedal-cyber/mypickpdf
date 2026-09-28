@@ -3313,7 +3313,8 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
       "ctaText": "Experience True Local Privacy at mypickpdf"
     }
   }
-}\n];
+}
+];
 
 export function getGuideBySlug(slug: string): GuideArticle | undefined {
   return GUIDE_ARTICLES.find((a) => a.slug === slug);
