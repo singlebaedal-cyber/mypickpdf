@@ -37,7 +37,7 @@ export default function HomePage() {
     { title: t("tool_split"), desc: t("tool_split_desc"), href: "/split-pdf", icon: Split, color: "from-amber-500 to-orange-600", badge: "POPULAR" },
     { title: t("tool_compress"), desc: t("tool_compress_desc"), href: "/compress-pdf", icon: Minimize2, color: "from-emerald-500 to-teal-600", badge: "HOT" },
     { title: t("tool_page_numbers"), desc: t("tool_page_numbers_desc"), href: "/add-page-numbers", icon: Hash, color: "from-blue-600 to-indigo-600", badge: "NEW" },
-    { title: t("tool_watermark"), desc: t("tool_watermark_desc"), href: "/add-watermark", icon: Shield, color: "from-rose-600 to-pink-600", badge: "보안" },
+    { title: t("tool_watermark"), desc: t("tool_watermark_desc"), href: "/add-watermark", icon: Shield, color: "from-rose-600 to-pink-600", badge: t("badge_security") },
     { title: t("tool_rotate"), desc: t("tool_rotate_desc"), href: "/rotate-pdf", icon: RotateCw, color: "from-purple-500 to-violet-600", badge: "FAST" },
     { title: t("tool_ocr"), desc: t("tool_ocr_desc"), href: "/ocr-pdf", icon: FileSearch, color: "from-cyan-500 to-sky-600", badge: "OCR" },
   ];
@@ -66,16 +66,16 @@ export default function HomePage() {
 
   const globalFaqs = [
     {
-      question: "mypickpdf는 정말 로그인이나 회원가입 없이 무료인가요?",
-      answer: "네! mypickpdf는 어떠한 로그인, 개인정보 입력, 유료 결제 유도 없이 평생 100% 무료로 모든 변환 및 편집 도구를 무제한 제공합니다.",
+      question: t("home_faq_q1"),
+      answer: t("home_faq_a1"),
     },
     {
-      question: "워드, 엑셀, 파워포인트 문서 변환 시 데이터가 서버에 저장되나요?",
-      answer: "절대 아닙니다. mypickpdf는 고도의 WebAssembly 및 브라우저 클라이언트 엔진을 사용하여 사용자의 컴퓨터 메모리 안에서 직접 문서를 변환합니다. 파일이 외부 서버로 전송되지 않아 완벽한 기밀을 보장합니다.",
+      question: t("home_faq_q2"),
+      answer: t("home_faq_a2"),
     },
     {
-      question: "변환된 오피스 문서(Word, Excel, PPT)는 편집이 가능한가요?",
-      answer: "네! PDF에서 추출된 Word(.docx), Excel(.xlsx), PowerPoint(.pptx) 파일은 마이크로소프트 오피스 및 한컴오피스 등에서 정상적으로 열리고 자유롭게 편집할 수 있습니다.",
+      question: t("home_faq_q3"),
+      answer: t("home_faq_a3"),
     },
   ];
 
@@ -120,7 +120,7 @@ export default function HomePage() {
           </span>
           <span className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-slate-200 shadow-xs">
             <Zap className="w-4 h-4 text-amber-500" />
-            <span>100% Client-Side Engine</span>
+            <span>{t("badge_client_engine")}</span>
           </span>
         </div>
       </section>
@@ -213,7 +213,7 @@ export default function HomePage() {
         <div className="mb-6">
           <div className="text-xs font-black uppercase tracking-wider text-rose-600 mb-1">Convert TO PDF</div>
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            {t("nav_to_pdf")} (Word, Excel, PPT, Image ➔ PDF)
+            {t("nav_to_pdf")} {t("home_to_pdf_sub")}
           </h2>
         </div>
 
@@ -251,7 +251,7 @@ export default function HomePage() {
         <div className="mb-6">
           <div className="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Convert FROM PDF</div>
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            {t("nav_from_pdf")} (PDF ➔ 한글, Word, Excel, PPT, JPG, PDF/A)
+            {t("nav_from_pdf")} {t("home_from_pdf_sub")}
           </h2>
         </div>
 
@@ -296,9 +296,9 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">100% 클라이언트 로컬 보안</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">{t("home_why_sec1_title")}</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                mypickpdf는 WebAssembly 및 브라우저 메모리 안에서 직접 문서를 변환하므로 파일이 외부 원격 서버로 전송되지 않아 기밀 문서도 안전합니다.
+                {t("home_why_sec1_desc")}
               </p>
             </div>
 
@@ -306,9 +306,9 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center mb-4">
                 <Zap className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg text-slate-900 mb-2">대기 없는 즉시 처리</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-2">{t("home_why_sec2_title")}</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                네트워크 업로드 대기 시간 없이, 기기 자체 연산력으로 수십 페이지를 1~2초 안에 빠르게 처리합니다.
+                {t("home_why_sec2_desc")}
               </p>
             </div>
           </div>
@@ -318,8 +318,8 @@ export default function HomePage() {
       <AdBanner format="responsive" />
 
       <FaqSection
-        title="자주 묻는 질문 (FAQ)"
-        subtitle="mypickpdf 서비스 이용 및 보안 정책 안내"
+        title={t("home_faq_title")}
+        subtitle={t("home_faq_subtitle")}
         items={globalFaqs}
       />
     </div>

@@ -396,7 +396,7 @@ export default function Navbar() {
               <BookOpen className="w-4 h-4 text-amber-500" />
               <span>{t("nav_guides")}</span>
               <span className="px-1.5 py-0.5 text-[10px] font-black bg-amber-100 text-amber-700 rounded-full">
-                20
+                40+
               </span>
             </Link>
           </nav>
@@ -417,8 +417,8 @@ export default function Navbar() {
                   setConvertDropdownOpen(false);
                 }}
                 className="px-2.5 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200/80 rounded-xl text-slate-700 transition-colors border border-slate-200/60 flex items-center gap-1.5 text-xs font-bold shrink-0 shadow-2xs"
-                aria-label="언어 선택 (Select Language)"
-                title="언어 선택 (Select Language)"
+                aria-label="Select Language"
+                title="Select Language"
               >
                 <span className="text-sm leading-none">{currentLangObj.flag}</span>
                 <span className="font-extrabold text-[11px] sm:text-xs text-slate-800 tracking-wider">{currentLangObj.initial}</span>
@@ -434,11 +434,11 @@ export default function Navbar() {
                         <Globe className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-xs font-black text-slate-800">
-                        Select Language / 언어 선택 (26)
+                        {t("nav_select_lang")} (26)
                       </span>
                     </div>
                     <span className="text-[11px] font-bold text-slate-400 hidden sm:inline">
-                      현재: {currentLangObj.flag} {currentLangObj.label}
+                      {t("nav_current_lang")}: {currentLangObj.flag} {currentLangObj.label}
                     </span>
                   </div>
 

@@ -114,7 +114,7 @@ export default function Footer() {
               <li className="pt-2 mt-1 border-t border-slate-800/80">
                 <Link href="/guides" className="text-amber-400 hover:text-amber-300 font-bold transition-colors flex items-center gap-1.5">
                   <span>📖</span>
-                  <span>{t("nav_guides")} (20선)</span>
+                  <span>{t("nav_guides")} (40+)</span>
                 </Link>
               </li>
             </ul>
