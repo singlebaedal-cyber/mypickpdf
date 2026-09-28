@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Guides Portal
     { url: "/guides", priority: 0.9, changeFrequency: "daily" as const },
 
-    // 20 Multilingual Guide Articles
+    // 43 Multilingual Guide Articles
     ...GUIDE_ARTICLES.map((article) => ({
       url: `/guides/${article.slug}`,
       priority: 0.85,
