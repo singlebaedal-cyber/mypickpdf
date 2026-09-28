@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Global Multilingual Typography: Prevent awkward syllable breaking */
+body, h1, h2, h3, h4, h5, h6, p, span, a, button, label, li, dd, dt, th, td {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Korean (ko): Keep whole words intact, wrap strictly at spaces */
+html[lang="ko"] body,
+html[lang="ko"] h1, html[lang="ko"] h2, html[lang="ko"] h3, html[lang="ko"] h4, html[lang="ko"] h5, html[lang="ko"] h6,
+html[lang="ko"] p, html[lang="ko"] span, html[lang="ko"] a, html[lang="ko"] button, html[lang="ko"] label, html[lang="ko"] li {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Japanese (ja) & Chinese (zh): Natural character breaking with strict punctuation kinsoku shori */
+html[lang="ja"] body,
+html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3, html[lang="ja"] h4, html[lang="ja"] h5, html[lang="ja"] h6,
+html[lang="ja"] p, html[lang="ja"] span, html[lang="ja"] a, html[lang="ja"] button, html[lang="ja"] label, html[lang="ja"] li,
+html[lang="zh"] body,
+html[lang="zh"] h1, html[lang="zh"] h2, html[lang="zh"] h3, html[lang="zh"] h4, html[lang="zh"] h5, html[lang="zh"] h6,
+html[lang="zh"] p, html[lang="zh"] span, html[lang="zh"] a, html[lang="zh"] button, html[lang="zh"] label, html[lang="zh"] li {
+  word-break: normal;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+
+/* English (en) & Spanish (es): Standard word-boundary wrapping */
+html[lang="en"] body,
+html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3, html[lang="en"] h4, html[lang="en"] h5, html[lang="en"] h6,
+html[lang="en"] p, html[lang="en"] span, html[lang="en"] a, html[lang="en"] button, html[lang="en"] label, html[lang="en"] li,
+html[lang="es"] body,
+html[lang="es"] h1, html[lang="es"] h2, html[lang="es"] h3, html[lang="es"] h4, html[lang="es"] h5, html[lang="es"] h6,
+html[lang="es"] p, html[lang="es"] span, html[lang="es"] a, html[lang="es"] button, html[lang="es"] label, html[lang="es"] li {
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

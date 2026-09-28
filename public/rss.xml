@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mypickpdf (마이픽피디에프) - 무료 PDF 합치기·압축·변환</title>
+    <link>https://mypickpdf.vercel.app</link>
+    <description>로그인 없이 브라우저에서 무료로 즐기는 올인원 PDF 솔루션. PDF 합치기, 분할, 압축, 한글/워드/엑셀/PPT 변환, 동영상 압축</description>
+    <language>ko</language>
+    <lastBuildDate>Mon, 28 Sep 2026 13:30:00 GMT</lastBuildDate>
+    <atom:link href="https://mypickpdf.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>무료 PDF 합치기 (다중 PDF 초고속 병합)</title>
+      <link>https://mypickpdf.vercel.app/merge-pdf</link>
+      <description>여러 개의 PDF 파일을 하나의 단일 문서로 순서대로 합치는 무료 웹 도구</description>
+      <guid>https://mypickpdf.vercel.app/merge-pdf</guid>
+    </item>
+    <item>
+      <title>무료 PDF 용량 줄이기 (품질 유지 초고속 PDF 압축)</title>
+      <link>https://mypickpdf.vercel.app/compress-pdf</link>
+      <description>화질 저하 없이 이메일/업로드용 대용량 PDF 용량을 최대 80% 축소</description>
+      <guid>https://mypickpdf.vercel.app/compress-pdf</guid>
+    </item>
+    <item>
+      <title>무료 PDF 나누기 / 분할 / 낱장 추출</title>
+      <link>https://mypickpdf.vercel.app/split-pdf</link>
+      <description>원하는 페이지 범위만 선택하여 추출하거나 모든 페이지를 개별 파일로 분할</description>
+      <guid>https://mypickpdf.vercel.app/split-pdf</guid>
+    </item>
+    <item>
+      <title>PDF HWP 한글 변환 (공공기관 서식 지원)</title>
+      <link>https://mypickpdf.vercel.app/pdf-to-hwp</link>
+      <description>PDF 문서를 한글 HWPX 문서로 변환하여 한컴오피스에서 편집 가능</description>
+      <guid>https://mypickpdf.vercel.app/pdf-to-hwp</guid>
+    </item>
+    <item>
+      <title>JPG/PNG 이미지 PDF 변환</title>
+      <link>https://mypickpdf.vercel.app/image-to-pdf</link>
+      <description>스마트폰 사진이나 캡처 이미지를 고화질 PDF 문서로 일괄 변환</description>
+      <guid>https://mypickpdf.vercel.app/image-to-pdf</guid>
+    </item>
+    <item>
+      <title>동영상 용량 줄이기 / 동영상 압축</title>
+      <link>https://mypickpdf.vercel.app/compress-video</link>
+      <description>카카오톡, 이메일 전송용 MP4/MOV 동영상 파일 용량 초고속 압축</description>
+      <guid>https://mypickpdf.vercel.app/compress-video</guid>
+    </item>
+    <item>
+      <title>동영상 GIF 움직이는 짤 변환</title>
+      <link>https://mypickpdf.vercel.app/video-to-gif</link>
+      <description>동영상 클립을 고화질 GIF 움짤로 변환하여 블로그, 커뮤니티 공유</description>
+      <guid>https://mypickpdf.vercel.app/video-to-gif</guid>
+    </item>
+  </channel>
+</rss>
