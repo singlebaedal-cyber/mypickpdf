@@ -161,7 +161,7 @@ export default function Footer() {
           {/* Col 3 */}
           <div>
             <h5 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">
-              {t("footer_col_security")}
+              {t("footer_col_tech")}
             </h5>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>100% Client-Side WebAssembly</li>
