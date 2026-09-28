@@ -63,50 +63,6 @@ export default function Footer() {
             <p className="text-xs text-slate-400 leading-relaxed mb-4">
               {t("footer_about")}
             </p>
-
-            {/* iLovePDF-Style Language Selector Button */}
-            <div className="relative inline-block" ref={langRef}>
-              <button
-                onClick={() => setIsLangOpen(!isLangOpen)}
-                className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700/80 flex items-center gap-2 transition-colors shadow-xs"
-                title="Change language / 언어 선택"
-              >
-                <Globe className="w-3.5 h-3.5 text-rose-400" />
-                <span>{currentLang.flag} {currentLang.label}</span>
-                <ChevronDown className={`w-3 h-3 text-slate-400 transition-transform ${isLangOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              {isLangOpen && (
-                <div className="absolute bottom-full mb-2 left-0 w-56 bg-slate-800 border border-slate-700 rounded-2xl p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95">
-                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 px-3 py-1.5 border-b border-slate-700/60 mb-1 flex items-center justify-between">
-                    <span>Language / 언어</span>
-                    <Globe className="w-3 h-3" />
-                  </div>
-                  <div className="space-y-1">
-                    {LANGUAGES.map((l) => (
-                      <button
-                        key={l.code}
-                        onClick={() => {
-                          setLang(l.code);
-                          setIsLangOpen(false);
-                        }}
-                        className={`w-full text-left px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition-colors ${
-                          lang === l.code
-                            ? "bg-rose-600/20 text-rose-400 border border-rose-500/30"
-                            : "text-slate-300 hover:bg-slate-700/60 hover:text-white"
-                        }`}
-                      >
-                        <span className="flex items-center gap-2">
-                          <span>{l.flag}</span>
-                          <span>{l.label}</span>
-                        </span>
-                        {lang === l.code && <Check className="w-3.5 h-3.5 text-rose-400" />}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Col 2 */}
@@ -202,10 +158,102 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <div className="flex items-center gap-3">
+        {/* Bottom Row (Exact iLovePDF Layout with 3-Column Language Selector) */}
+        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+          <div className="flex items-center gap-4">
+            {/* iLovePDF-Style Language Selector Button with 3-Column Modal */}
+            <div className="relative" ref={langRef}>
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700/80 flex items-center gap-2 transition-colors shadow-xs"
+                title="Change language / Select language"
+              >
+                <Globe className="w-3.5 h-3.5 text-slate-400" />
+                <span>{currentLang.label}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${isLangOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Exact iLovePDF 3-Column Floating Language Card */}
+              {isLangOpen && (
+                <div className="absolute bottom-full mb-3 left-0 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-5 z-50 animate-in fade-in zoom-in-95 min-w-[310px] sm:min-w-[620px] max-h-[85vh] overflow-y-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-1 gap-x-6 text-left">
+                    {/* Column 1 */}
+                    <div className="space-y-0.5">
+                      {LANGUAGES.filter((l) => l.column === 1).map((l) => (
+                        <button
+                          key={l.code}
+                          onClick={() => {
+                            setLang(l.code);
+                            setIsLangOpen(false);
+                          }}
+                          className={`w-full text-left py-1.5 px-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 ${
+                            lang === l.code
+                              ? "font-extrabold text-slate-900 bg-slate-100"
+                              : "text-slate-600 hover:text-rose-600 hover:bg-slate-50 font-normal"
+                          }`}
+                        >
+                          <span className="w-3.5 text-center shrink-0">
+                            {lang === l.code ? <Check className="w-3.5 h-3.5 text-rose-600 stroke-[3]" /> : null}
+                          </span>
+                          <span>{l.label}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Column 2 */}
+                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-2 sm:pt-0 sm:pl-6">
+                      {LANGUAGES.filter((l) => l.column === 2).map((l) => (
+                        <button
+                          key={l.code}
+                          onClick={() => {
+                            setLang(l.code);
+                            setIsLangOpen(false);
+                          }}
+                          className={`w-full text-left py-1.5 px-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 ${
+                            lang === l.code
+                              ? "font-extrabold text-slate-900 bg-slate-100"
+                              : "text-slate-600 hover:text-rose-600 hover:bg-slate-50 font-normal"
+                          }`}
+                        >
+                          <span className="w-3.5 text-center shrink-0">
+                            {lang === l.code ? <Check className="w-3.5 h-3.5 text-rose-600 stroke-[3]" /> : null}
+                          </span>
+                          <span>{l.label}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Column 3 */}
+                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-2 sm:pt-0 sm:pl-6">
+                      {LANGUAGES.filter((l) => l.column === 3).map((l) => (
+                        <button
+                          key={l.code}
+                          onClick={() => {
+                            setLang(l.code);
+                            setIsLangOpen(false);
+                          }}
+                          className={`w-full text-left py-1.5 px-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 ${
+                            lang === l.code
+                              ? "font-extrabold text-slate-900 bg-slate-100"
+                              : "text-slate-600 hover:text-rose-600 hover:bg-slate-50 font-normal"
+                          }`}
+                        >
+                          <span className="w-3.5 text-center shrink-0">
+                            {lang === l.code ? <Check className="w-3.5 h-3.5 text-rose-600 stroke-[3]" /> : null}
+                          </span>
+                          <span>{l.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <p>© {new Date().getFullYear()} mypickpdf. {t("footer_rights")}</p>
+          </div>
+
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setIsSponsorOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-orange-500/20 to-rose-500/20 hover:from-orange-500/30 hover:to-rose-500/30 text-orange-300 hover:text-orange-200 border border-orange-500/40 rounded-full text-[11px] font-bold transition-all shadow-xs"
@@ -213,12 +261,9 @@ export default function Footer() {
               <Coffee className="w-3.5 h-3.5 text-orange-400" />
               <span>{t("sponsor_snack_btn")}</span>
             </button>
-          </div>
-          <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:underline">{t("footer_privacy_link")}</Link>
             <Link href="/terms" className="hover:underline">{t("footer_terms_link")}</Link>
             <Link href="/contact" className="hover:underline">{t("footer_contact_link")}</Link>
-            <a href="mailto:fbihan@naver.com" className="hover:text-rose-400 font-mono">fbihan@naver.com</a>
           </div>
         </div>
       </div>
