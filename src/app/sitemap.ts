@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/lib/seo-config";
+import { GUIDE_ARTICLES } from "@/lib/guides-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.domain;
@@ -32,6 +33,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/pdf-to-powerpoint", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/pdf-to-excel", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/pdf-to-pdfa", priority: 0.8, changeFrequency: "weekly" as const },
+
+    // Guides Portal
+    { url: "/guides", priority: 0.9, changeFrequency: "daily" as const },
+
+    // 20 Multilingual Guide Articles
+    ...GUIDE_ARTICLES.map((article) => ({
+      url: `/guides/${article.slug}`,
+      priority: 0.85,
+      changeFrequency: "weekly" as const,
+    })),
 
     // Policy
     { url: "/privacy-policy", priority: 0.5, changeFrequency: "monthly" as const },

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mypickpdf (마이픽피디에프) - 무료 PDF 합치기·압축·변환</title>
+    <title>mypickpdf (마이픽피디에프) - 무료 PDF 합치기·압축·변환 &amp; 실전 가이드</title>
     <link>https://mypickpdf.vercel.app</link>
-    <description>로그인 없이 브라우저에서 무료로 즐기는 올인원 PDF 솔루션. PDF 합치기, 분할, 압축, 한글/워드/엑셀/PPT 변환, 동영상 압축</description>
+    <description>로그인 없이 브라우저에서 무료로 즐기는 올인원 PDF 솔루션 &amp; 20가지 PDF 실전 활용 가이드</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 28 Sep 2026 13:30:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 14:00:00 GMT</lastBuildDate>
     <atom:link href="https://mypickpdf.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
     
     <item>
@@ -49,6 +49,128 @@
       <link>https://mypickpdf.vercel.app/video-to-gif</link>
       <description>동영상 클립을 고화질 GIF 움짤로 변환하여 블로그, 커뮤니티 공유</description>
       <guid>https://mypickpdf.vercel.app/video-to-gif</guid>
+    </item>
+
+    <!-- 20 Practical SEO Guides -->
+    <item>
+      <title>프로그램 설치 없이 여러 PDF 하나로 합치는 가장 쉬운 방법</title>
+      <link>https://mypickpdf.vercel.app/guides/how-to-merge-pdf-free</link>
+      <description>비싼 유료 프로그램이나 무거운 소프트웨어 설치 없이 웹 브라우저에서 1초 만에 여러 개의 PDF 파일을 순서대로 병합하는 꿀팁</description>
+      <guid>https://mypickpdf.vercel.app/guides/how-to-merge-pdf-free</guid>
+    </item>
+    <item>
+      <title>PDF 파일 용량 80% 줄이는 꿀팁: 화질 깨짐 없이 압축하기</title>
+      <link>https://mypickpdf.vercel.app/guides/how-to-compress-pdf-80-percent</link>
+      <description>이메일 첨부나 공공기관 제출 시 용량 초과 오류를 완벽하게 해결하는 화질 보존 PDF 압축 노하우</description>
+      <guid>https://mypickpdf.vercel.app/guides/how-to-compress-pdf-80-percent</guid>
+    </item>
+    <item>
+      <title>대용량 PDF에서 원하는 페이지만 쏙쏙 골라 나누고 추출하기</title>
+      <link>https://mypickpdf.vercel.app/guides/how-to-split-extract-pdf-pages</link>
+      <description>수백 장짜리 PDF에서 필요한 몇 페이지만 개별 문서로 분리하거나 낱장으로 쪼개는 3초 꿀팁</description>
+      <guid>https://mypickpdf.vercel.app/guides/how-to-split-extract-pdf-pages</guid>
+    </item>
+    <item>
+      <title>PDF를 아래아한글(HWPX)로 변환하여 바로 편집하는 무료 방법</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-pdf-to-hwpx-free</link>
+      <description>대한민국 공공기관, 관공서 서식이나 학교 보고서 제출용 한글(HWPX) 문서로 즉시 변환하는 방법</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-pdf-to-hwpx-free</guid>
+    </item>
+    <item>
+      <title>스마트폰 사진(JPG, PNG) 여러 장을 고화질 PDF 하나로 묶기</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-photos-images-to-pdf</link>
+      <description>영수증, 신분증, 강의 필기 캡처 사진을 순서대로 깔끔하게 하나의 PDF 전자문서로 만드는 방법</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-photos-images-to-pdf</guid>
+    </item>
+    <item>
+      <title>카카오톡/이메일 대용량 동영상 용량 줄이기: 화질 저하 없는 압축</title>
+      <link>https://mypickpdf.vercel.app/guides/compress-video-for-kakao-email</link>
+      <description>카카오톡 300MB 전송 제한, 네이버 메일 첨부 불가 문제를 초고속으로 해결하는 웹 동영상 압축 노하우</description>
+      <guid>https://mypickpdf.vercel.app/guides/compress-video-for-kakao-email</guid>
+    </item>
+    <item>
+      <title>동영상 클립을 고화질 GIF 움짤로 변환하는 가장 빠른 방법</title>
+      <link>https://mypickpdf.vercel.app/guides/make-animated-gif-from-video</link>
+      <description>포토샵이나 복잡한 편집 툴 없이 웹 브라우저에서 원하는 동영상 구간을 고화질 GIF로 1초 만에 추출</description>
+      <guid>https://mypickpdf.vercel.app/guides/make-animated-gif-from-video</guid>
+    </item>
+    <item>
+      <title>회사 기밀 문서·개인정보 유출 제로! 왜 로컬 브라우저 PDF 처리가 안전할까?</title>
+      <link>https://mypickpdf.vercel.app/guides/why-client-side-pdf-is-safe</link>
+      <description>기존 온라인 PDF 변환 사이트의 서버 저장 위험성과 mypickpdf의 100% 클라이언트 사이드 WebAssembly 보안 메커니즘</description>
+      <guid>https://mypickpdf.vercel.app/guides/why-client-side-pdf-is-safe</guid>
+    </item>
+    <item>
+      <title>인쇄 및 보고서 제출 전 필수! PDF에 쪽 번호 일괄 삽입하기</title>
+      <link>https://mypickpdf.vercel.app/guides/add-page-numbers-to-pdf</link>
+      <description>페이지 번호가 누락된 논문, 제안서, 보고서에 원하는 위치와 양식으로 페이지 번호를 자동 매기는 법</description>
+      <guid>https://mypickpdf.vercel.app/guides/add-page-numbers-to-pdf</guid>
+    </item>
+    <item>
+      <title>계약서 무단 도용 방지! PDF에 대외비 워터마크 넣는 법</title>
+      <link>https://mypickpdf.vercel.app/guides/add-watermark-to-confidential-pdf</link>
+      <description>회사 보안 문서나 견적서에 [대외비 / CONFIDENTIAL / 사본] 텍스트 워터마크를 투명도 조절하여 깔끔하게 삽입</description>
+      <guid>https://mypickpdf.vercel.app/guides/add-watermark-to-confidential-pdf</guid>
+    </item>
+    <item>
+      <title>스캔 후 거꾸로 뒤집힌 PDF 페이지 바르게 회전하는 방법</title>
+      <link>https://mypickpdf.vercel.app/guides/rotate-upside-down-pdf-pages</link>
+      <description>스캐너로 입력받아 방향이 뒤죽박죽인 PDF 문서를 클릭 한 번으로 영구 90도/180도 회전 저장하기</description>
+      <guid>https://mypickpdf.vercel.app/guides/rotate-upside-down-pdf-pages</guid>
+    </item>
+    <item>
+      <title>스캔된 이미지 PDF에서 글자 복사하는 OCR 텍스트 추출 꿀팁</title>
+      <link>https://mypickpdf.vercel.app/guides/scanned-pdf-text-extract-ocr</link>
+      <description>드래그나 복사가 안 되는 이미지 형태의 PDF 문서에서 한글과 영문 텍스트를 인공지능 OCR로 추출</description>
+      <guid>https://mypickpdf.vercel.app/guides/scanned-pdf-text-extract-ocr</guid>
+    </item>
+    <item>
+      <title>PDF 문서를 워드(DOCX)로 변환하여 텍스트 수정하기</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-pdf-to-word-docx</link>
+      <description>원본 레이아웃과 폰트 스타일을 최대한 보존하며 마이크로소프트 워드 문서로 즉각 변환하는 방법</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-pdf-to-word-docx</guid>
+    </item>
+    <item>
+      <title>PDF 속 복잡한 표를 엑셀(XLSX) 시트로 깔끔하게 변환하기</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-pdf-to-excel-tables</link>
+      <description>일일이 타이핑할 필요 없이 재무제표, 결산서 등 PDF 표 데이터를 엑셀 행/열로 정렬하여 추출</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-pdf-to-excel-tables</guid>
+    </item>
+    <item>
+      <title>PDF 발표자료를 파워포인트(PPTX) 슬라이드로 복원하기</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-pdf-to-powerpoint-ppt</link>
+      <description>슬라이드 원본 PPT 파일이 분실되었을 때 PDF 발표자료로부터 편집 가능한 슬라이드를 복원하는 방법</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-pdf-to-powerpoint-ppt</guid>
+    </item>
+    <item>
+      <title>워드, PPT, 엑셀 문서를 깨짐 없는 표준 PDF로 한 번에 변환하기</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-word-ppt-excel-to-pdf</link>
+      <description>오피스 프로그램이 설치되지 않은 PC나 태블릿에서도 오피스 서류를 완벽한 고해상도 PDF로 인쇄 변환</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-word-ppt-excel-to-pdf</guid>
+    </item>
+    <item>
+      <title>공공기관 제출 및 장기 보관을 위한 ISO 표준 PDF/A 변환 가이드</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-pdf-to-pdfa-archive</link>
+      <description>시간이 지나도 폰트가 깨지지 않고 영구 보존이 가능한 공인 전자문서 표준 규격 PDF/A 변환 요령</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-pdf-to-pdfa-archive</guid>
+    </item>
+    <item>
+      <title>웹페이지(HTML) 레이아웃 그대로 고화질 PDF로 저장하는 방법</title>
+      <link>https://mypickpdf.vercel.app/guides/convert-web-html-to-pdf</link>
+      <description>온라인 기사, 영수증 웹페이지, 블로그 아티클을 잘림 없이 원본 비율 그대로 PDF 전자문서로 영구 보관</description>
+      <guid>https://mypickpdf.vercel.app/guides/convert-web-html-to-pdf</guid>
+    </item>
+    <item>
+      <title>아이폰/아이패드 사파리에서 어플 설치 없이 PDF 합치고 압축하기</title>
+      <link>https://mypickpdf.vercel.app/guides/iphone-pdf-management-tips</link>
+      <description>iOS 파일 앱과 사파리 브라우저의 궁합을 활용하여 모바일에서 무거운 앱 없이 초고속으로 문서를 다루는 꿀팁</description>
+      <guid>https://mypickpdf.vercel.app/guides/iphone-pdf-management-tips</guid>
+    </item>
+    <item>
+      <title>갤럭시 스마트폰에서 다운로드 없이 초고속으로 PDF 변환 및 압축하기</title>
+      <link>https://mypickpdf.vercel.app/guides/how-to-manage-pdf-on-galaxy-android</link>
+      <description>삼성 인터넷, 크롬, 카카오톡 인앱 브라우저 어디서나 별도 어플 설치 없이 대용량 PDF를 가볍게 압축하고 즉시 카톡으로 전송하는 방법</description>
+      <guid>https://mypickpdf.vercel.app/guides/how-to-manage-pdf-on-galaxy-android</guid>
     </item>
   </channel>
 </rss>

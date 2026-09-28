@@ -25,7 +25,8 @@ import {
   Hash,
   Shield,
   Video,
-  Sparkles
+  Sparkles,
+  BookOpen
 } from "lucide-react";
 import { useLanguage, LANGUAGES } from "@/lib/i18n";
 import RedPanda from "@/components/RedPanda";
@@ -386,6 +387,18 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+
+            {/* Guide & Blog link */}
+            <Link
+              href="/guides"
+              className="px-2.5 py-2 text-sm font-bold text-slate-700 hover:text-amber-600 rounded-xl hover:bg-amber-50/70 transition-colors flex items-center gap-1.5"
+            >
+              <BookOpen className="w-4 h-4 text-amber-500" />
+              <span>{t("nav_guides")}</span>
+              <span className="px-1.5 py-0.5 text-[10px] font-black bg-amber-100 text-amber-700 rounded-full">
+                20
+              </span>
+            </Link>
           </nav>
 
           {/* Right Actions: Language Switcher (Hover & Click Supported) */}
@@ -459,6 +472,19 @@ export default function Navbar() {
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-3">
+          {/* Mobile Guide Link */}
+          <Link
+            href="/guides"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-slate-800 font-bold text-xs shadow-2xs"
+          >
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-amber-600" />
+              <span>{t("nav_guides")} (20선 완벽 정리)</span>
+            </div>
+            <span className="text-[10px] bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full font-black">20</span>
+          </Link>
+
           <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2">
             {t("nav_all_tools")}
           </div>
