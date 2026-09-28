@@ -7,6 +7,7 @@ import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
+import MascotActionNotice from "@/components/MascotActionNotice";
 import UploadedFileCard from "@/components/UploadedFileCard";
 import { pdfToPowerpointPptx, downloadBlob, getPDFPageCount } from "@/lib/pdf-utils";
 import { Presentation, Download, CheckCircle } from "lucide-react";
