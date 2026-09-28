@@ -37,7 +37,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "cheering",
-    keywords: ["PDF 합치기", "무료 PDF 병합", "프로그램 없이 PDF 합치기", "merge pdf free online"],
+    keywords: [
+      "PDF 합치기",
+      "무료 PDF 병합",
+      "프로그램 없이 PDF 합치기",
+      "merge pdf free online",
+      "combine pdf files",
+      "PDF 結合 無料",
+      "unir pdf gratis online",
+      "PDF合并 免费"
+    ],
     translations: {
       ko: {
         title: "프로그램 설치 없이 여러 PDF 하나로 합치는 가장 쉬운 방법",
@@ -86,6 +95,53 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
           }
         ],
         ctaText: "Merge PDFs for Free Now"
+      },
+      ja: {
+        title: "インストール不要で複数のPDFをひとつに結合する最も簡単な方法",
+        summary: "高価な有料ソフトのインストール不要で、ブラウザ上でドラッグ＆ドロップするだけで複数のPDFファイルを順番通りに無料結合する裏技を解説します。",
+        sections: [
+          {
+            heading: "なぜデスクトップ専用PDFソフトの導入は不要なのか？",
+            body: [
+              "契約書やレポート、申請書類などをまとめる際、複数のPDFを1つのファイルに統合する機会は非常に多くあります。",
+              "従来のAdobe Acrobatなどは導入手順が複雑で月額費用もかかりますが、mypickpdfなら完全無料でブラウザから即座に結合できます。",
+              "ファイルは外部サーバーへ送信されず、端末内ローカルで暗号化処理されるため機密文書も安心です。"
+            ],
+            tip: "レッサーパンダの小ワザ: マウス操作でカードをドラッグして結合順序を自由に入れ替えられます！"
+          },
+          {
+            heading: "3ステップで完了するPDF結合手順",
+            body: [
+              "ステップ1: mypickpdfの「PDF結合」ツールページを開きます。",
+              "ステップ2: 結合したい複数のPDFファイルを画面にドラッグ＆ドロップします。",
+              "ステップ3: ページの並び順を確認して「PDFを結合」をクリックすれば即座にダウンロードできます。"
+            ]
+          }
+        ],
+        ctaText: "今すぐ無料でPDFを結合する"
+      },
+      es: {
+        title: "Cómo unir varios archivos PDF en uno gratis sin instalar programas",
+        summary: "Descubre el método más rápido y seguro para combinar documentos PDF en el orden deseado directamente desde tu navegador, 100% privado y sin límites.",
+        sections: [
+          {
+            heading: "¿Por qué ya no necesitas software pesado de pago?",
+            body: [
+              "Unir contratos, facturas o tareas académicas es una necesidad habitual en el trabajo y los estudios.",
+              "mypickpdf funciona íntegramente en tu navegador sin enviar datos a servidores externos, garantizando privacidad total y máxima rapidez."
+            ],
+            tip: "Consejo Panda: ¡Arrastra y suelta las tarjetas de archivos para ordenar la secuencia exacta!"
+          },
+          {
+            heading: "Pasos sencillos para unir tus PDFs",
+            body: [
+              "Paso 1: Entra en la herramienta [Unir PDF] de mypickpdf.",
+              "Paso 2: Arrastra y suelta todos los archivos PDF que deseas juntar.",
+              "Paso 3: Organiza el orden y pulsa [Unir PDF] para descargarlo al instante."
+            ]
+          }
+        ],
+        ctaText: "Unir PDFs gratis ahora"
       }
     }
   },
@@ -101,7 +157,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "idea",
-    keywords: ["PDF 용량 줄이기", "PDF 압축", "대용량 PDF 줄이기", "compress pdf online"],
+    keywords: [
+      "PDF 용량 줄이기",
+      "PDF 압축",
+      "대용량 PDF 줄이기",
+      "compress pdf online",
+      "reduce pdf file size",
+      "PDF 圧縮 容量 軽くする",
+      "comprimir pdf gratis sin perder calidad",
+      "PDF压缩 减小文件大小"
+    ],
     translations: {
       ko: {
         title: "화질 저하 없이 PDF 용량 80% 줄이는 초고속 압축법",
@@ -148,6 +213,52 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
           }
         ],
         ctaText: "Compress PDF Online Now"
+      },
+      ja: {
+        title: "画質を落とさずにPDF容量を最大80%軽量化する圧縮テクニック",
+        summary: "メール添付の容量オーバーやWeb申請の上限をクリア！テキストや画像の鮮明さを保ちながら超高速でPDFファイルサイズを削減する方法です。",
+        sections: [
+          {
+            heading: "メール添付制限を瞬時にクリアするスマート圧縮",
+            body: [
+              "高解像度画像が含まれたPDFは数十メガバイトになりがちで、メール送信エラーの原因になります。",
+              "mypickpdfは文字や図形のクリアさを維持したまま、余計な内部データのみを効率的に圧縮最適化します。"
+            ],
+            tip: "レッサーパンダの小ワザ: 30MB超の重いファイルも数秒で5MB以下にスリム化できます！"
+          },
+          {
+            heading: "簡単3ステップの圧縮手順",
+            body: [
+              "ステップ1: 「PDF圧縮」ツールページにアクセスします。",
+              "ステップ2: 圧縮したいファイルをドロップします。",
+              "ステップ3: 「PDFを圧縮」をクリックして軽量化されたファイルを保存します。"
+            ]
+          }
+        ],
+        ctaText: "今すぐPDF容量を圧縮する"
+      },
+      es: {
+        title: "Cómo reducir el tamaño de un PDF hasta un 80% sin perder calidad",
+        summary: "Supera los límites de subida y envío por correo electrónico comprimiendo tus documentos PDF con la máxima nitidez directamente en tu navegador.",
+        sections: [
+          {
+            heading: "Solución definitiva para PDFs demasiado pesados",
+            body: [
+              "Los documentos escaneados o con fotos suelen superar los 25MB permitidos por el correo.",
+              "mypickpdf optimiza los flujos de datos internos sin emborronar el texto ni las ilustraciones clave."
+            ],
+            tip: "Consejo Panda: ¡Comprime archivos pesados en pocos segundos con total seguridad!"
+          },
+          {
+            heading: "Pasos para comprimir en 3 clics",
+            body: [
+              "Paso 1: Abre la herramienta [Comprimir PDF] en mypickpdf.",
+              "Paso 2: Arrastra tu documento PDF al área de trabajo.",
+              "Paso 3: Haz clic en [Comprimir PDF] y guarda tu archivo optimizado."
+            ]
+          }
+        ],
+        ctaText: "Comprimir PDF gratis ahora"
       }
     }
   },
@@ -163,7 +274,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "ready",
-    keywords: ["PDF 나누기", "PDF 분할", "PDF 페이지만 추출", "split pdf free"],
+    keywords: [
+      "PDF 나누기",
+      "PDF 분할",
+      "PDF 페이지만 추출",
+      "split pdf free",
+      "extract pdf pages",
+      "PDF 分割 ページ抽出",
+      "dividir pdf gratis",
+      "PDF拆分"
+    ],
     translations: {
       ko: {
         title: "100페이지 대용량 PDF에서 원하는 페이지만 쏙 뽑아내는 방법",
@@ -209,7 +329,15 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "4분 읽기", en: "4 min read", es: "Lectura de 4 min", ja: "4分で読める", "zh-CN": "4分钟阅读" },
     mascotMood: "success",
-    keywords: ["PDF HWP 변환", "PDF 한글 변환", "공공기관 한글 서식", "pdf to hwp free"],
+    keywords: [
+      "PDF HWP 변환",
+      "PDF HWPX 변환",
+      "공공기관 한글 서식",
+      "알PDF 한글 변환 대체",
+      "pdf to hwp free",
+      "convert pdf to hwpx",
+      "PDFからHWPへ"
+    ],
     translations: {
       ko: {
         title: "공공기관 제출용 서식 완벽 호환! PDF 문서를 한글(HWPX)로 변환하는 법",
@@ -256,7 +384,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "ready",
-    keywords: ["JPG PDF 변환", "사진 PDF 변환", "이미지 PDF 묶기", "image to pdf converter"],
+    keywords: [
+      "JPG PDF 변환",
+      "사진 PDF 변환",
+      "이미지 PDF 묶기",
+      "image to pdf converter",
+      "jpg to pdf free",
+      "画像 PDF 変換",
+      "pasar fotos a pdf",
+      "图片转PDF"
+    ],
     translations: {
       ko: {
         title: "스마트폰 사진(JPG/PNG)을 깔끔한 단일 PDF 문서로 묶는 방법",
@@ -302,7 +439,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "idea",
-    keywords: ["PDF 워드 변환", "PDF docx 변환", "PDF 수정하는 법", "pdf to word editable free"],
+    keywords: [
+      "PDF 워드 변환",
+      "PDF docx 변환",
+      "PDF 수정하는 법",
+      "pdf to word editable free",
+      "convert pdf to word docx",
+      "PDF ワード 変換",
+      "convertir pdf a word",
+      "PDF转Word"
+    ],
     translations: {
       ko: {
         title: "PDF 글자 수정이 필요할 때! 편집 가능한 Word(.docx)로 변환하는 법",
@@ -348,7 +494,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "ready",
-    keywords: ["PDF 엑셀 변환", "PDF 표 추출", "재무제표 PDF 엑셀", "pdf to excel table extractor"],
+    keywords: [
+      "PDF 엑셀 변환",
+      "PDF 표 추출",
+      "재무제표 PDF 엑셀",
+      "pdf to excel table extractor",
+      "convert pdf to xlsx",
+      "PDF エクセル 変換",
+      "convertir pdf a excel",
+      "PDF转Excel"
+    ],
     translations: {
       ko: {
         title: "복잡한 표와 수치 데이터도 한 번에! PDF를 엑셀(XLSX)로 추출하는 법",
@@ -394,7 +549,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "cheering",
-    keywords: ["PDF PPT 변환", "PDF 파워포인트 변환", "발표자료 PDF 슬라이드", "pdf to powerpoint slides"],
+    keywords: [
+      "PDF PPT 변환",
+      "PDF 파워포인트 변환",
+      "발표자료 PDF 슬라이드",
+      "pdf to powerpoint slides",
+      "convert pdf to pptx",
+      "PDF パワーポイント 変換",
+      "convertir pdf a powerpoint",
+      "PDF转PPT"
+    ],
     translations: {
       ko: {
         title: "발표 자료 재활용: PDF 문서를 파워포인트(PPTX) 슬라이드로 변환하기",
@@ -440,7 +604,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "idea",
-    keywords: ["동영상 용량 줄이기", "카카오톡 동영상 압축", "MP4 용량 줄이기", "compress video for email"],
+    keywords: [
+      "동영상 용량 줄이기",
+      "카카오톡 동영상 압축",
+      "MP4 용량 줄이기",
+      "compress video for email",
+      "reduce mp4 size online",
+      "動画 圧縮 無料",
+      "comprimir video mp4",
+      "视频压缩"
+    ],
     translations: {
       ko: {
         title: "카카오톡·이메일 전송용 대용량 동영상 용량 80% 줄이는 꿀팁",
@@ -486,7 +659,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "cheering",
-    keywords: ["동영상 GIF 변환", "움짤 만들기", "카톡 움짤", "convert video to animated gif"],
+    keywords: [
+      "동영상 GIF 변환",
+      "움짤 만들기",
+      "카톡 움짤",
+      "convert video to animated gif",
+      "make gif from video",
+      "動画 GIF 変換",
+      "crear gif de video",
+      "视频转GIF动图"
+    ],
     translations: {
       ko: {
         title: "동영상 클립으로 1초 만에 고화질 움직이는 짤(GIF) 만들기",
@@ -532,7 +714,15 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "4분 읽기", en: "4 min read", es: "Lectura de 4 min", ja: "4分で読める", "zh-CN": "4分钟阅读" },
     mascotMood: "ready",
-    keywords: ["PDF 보안", "서버 전송 없는 PDF", "회사 기밀 문서 PDF", "secure client side pdf converter"],
+    keywords: [
+      "PDF 보안",
+      "서버 전송 없는 PDF",
+      "회사 기밀 문서 PDF",
+      "secure client side pdf converter",
+      "private pdf tools no server",
+      "ローカル PDF 変換 安全",
+      "pdf privado sin servidor"
+    ],
     translations: {
       ko: {
         title: "회사 기밀 문서도 안심! 서버 전송 0% 클라이언트 사이드 변환의 원리",
@@ -592,7 +782,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "idea",
-    keywords: ["PDF 페이지 번호", "PDF 쪽번호", "논문 쪽번호 매기기", "add page numbers to pdf online"],
+    keywords: [
+      "PDF 페이지 번호",
+      "PDF 쪽번호",
+      "논문 쪽번호 매기기",
+      "add page numbers to pdf online",
+      "number pdf pages free",
+      "PDF ページ番号 追加",
+      "numerar paginas pdf online",
+      "PDF添加页码"
+    ],
     translations: {
       ko: {
         title: "논문·보고서 제출 필수: PDF에 쪽번호/페이지 번호 일괄 삽입하기",
@@ -638,7 +837,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "ready",
-    keywords: ["PDF 워터마크", "대외비 표시", "PDF 기밀 워터마크", "add watermark to pdf document"],
+    keywords: [
+      "PDF 워터마크",
+      "대외비 표시",
+      "PDF 기밀 워터마크",
+      "add watermark to pdf document",
+      "watermark pdf free online",
+      "PDF 透かし 追加",
+      "marca de agua pdf gratis",
+      "PDF添加水印"
+    ],
     translations: {
       ko: {
         title: "대외비·기밀 문서 무단 유출 방지: PDF 반투명 워터마크 추가법",
@@ -684,7 +892,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "ready",
-    keywords: ["PDF 회전", "거꾸로 스캔된 PDF", "PDF 90도 회전", "rotate pdf permanently"],
+    keywords: [
+      "PDF 회전",
+      "거꾸로 스캔된 PDF",
+      "PDF 90도 회전",
+      "rotate pdf permanently",
+      "rotate pdf pages online free",
+      "PDF 回転 永久保存",
+      "rotar pdf online",
+      "旋转PDF页面"
+    ],
     translations: {
       ko: {
         title: "거꾸로 스캔된 문서 바로잡기: PDF 90도/180도 회전 및 영구 저장법",
@@ -730,7 +947,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "idea",
-    keywords: ["PDF OCR", "스캔 문서 글자 복사", "PDF 텍스트 추출", "extract text from scanned pdf ocr"],
+    keywords: [
+      "PDF OCR",
+      "스캔 문서 글자 복사",
+      "PDF 텍스트 추출",
+      "extract text from scanned pdf ocr",
+      "free online pdf ocr converter",
+      "PDF 文字認識 OCR 無料",
+      "reconocimiento ocr pdf gratis",
+      "PDF文字识别提取"
+    ],
     translations: {
       ko: {
         title: "스캔 문서에서 글자 복사하기: 이미지형 PDF OCR 텍스트 추출 꿀팁",
@@ -776,7 +1002,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "4분 읽기", en: "4 min read", es: "Lectura de 4 min", ja: "4分で読める", "zh-CN": "4分钟阅读" },
     mascotMood: "welcome",
-    keywords: ["알PDF 무료 대체", "어도비 애크로뱃 대체", "무료 PDF 프로그램", "free adobe acrobat alternative"],
+    keywords: [
+      "알PDF 무료 대체",
+      "어도비 애크로뱃 대체",
+      "무료 PDF 프로그램",
+      "free adobe acrobat alternative",
+      "best free pdf editor online no sign up",
+      "無料 PDF 編集 Adobe 代替",
+      "alternativa gratis a adobe acrobat",
+      "Adobe Acrobat免费替代工具"
+    ],
     translations: {
       ko: {
         title: "어도비·알PDF 유료화 결제창 없이 평생 무료로 쓰는 최고의 대체재",
@@ -822,7 +1057,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "ready",
-    keywords: ["HTML PDF 변환", "웹페이지 PDF 저장", "웹사이트 캡처 PDF", "convert html to pdf web page"],
+    keywords: [
+      "HTML PDF 변환",
+      "웹페이지 PDF 저장",
+      "웹사이트 캡처 PDF",
+      "convert html to pdf web page",
+      "save webpage as pdf high quality",
+      "HTML PDF 変換 Webページ保存",
+      "convertir html a pdf gratis",
+      "网页转PDF"
+    ],
     translations: {
       ko: {
         title: "웹페이지 전체 레이아웃을 깨짐 없이 깔끔한 PDF로 저장하기",
@@ -868,7 +1112,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
     mascotMood: "idea",
-    keywords: ["PDF/A 변환", "ISO 장기보관 PDF", "공공기관 10년 보관 서식", "convert pdf to pdfa iso compliance"],
+    keywords: [
+      "PDF/A 변환",
+      "ISO 장기보관 PDF",
+      "공공기관 10년 보관 서식",
+      "convert pdf to pdfa iso compliance",
+      "pdf to pdfa converter free",
+      "PDF/A 変換 長期保存規格",
+      "convertir pdf a pdfa archivo",
+      "PDF转PDFA长期保存"
+    ],
     translations: {
       ko: {
         title: "공공기관·연구소 10년 이상 장기 보관 필수: ISO 표준 PDF/A 규격 변환법",
@@ -914,7 +1167,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "welcome",
-    keywords: ["아이폰 PDF 합치기", "아이패드 PDF 변환", "사파리 PDF 합치기", "iphone merge pdf safari free"],
+    keywords: [
+      "아이폰 PDF 합치기",
+      "아이패드 PDF 변환",
+      "사파리 PDF 합치기",
+      "iphone merge pdf safari free",
+      "combine pdfs on ipad no app",
+      "iPhone PDF 結合 アプリ不要",
+      "unir pdf iphone sin app",
+      "苹果手机合并PDF"
+    ],
     translations: {
       ko: {
         title: "아이폰·아이패드 사파리에서 앱 설치 없이 PDF 합치고 용량 줄이기",
@@ -960,7 +1222,16 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
     date: "2026-09-28",
     readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
     mascotMood: "cheering",
-    keywords: ["갤럭시 PDF 합치기", "안드로이드 PDF 용량 줄이기", "스마트폰 PDF 변환", "android merge compress pdf free"],
+    keywords: [
+      "갤럭시 PDF 합치기",
+      "안드로이드 PDF 용량 줄이기",
+      "스마트폰 PDF 변환",
+      "android merge compress pdf free",
+      "samsung galaxy compress pdf chrome",
+      "Android PDF 圧縮 スマホ",
+      "comprimir pdf en celular android",
+      "安卓手机压缩PDF"
+    ],
     translations: {
       ko: {
         title: "갤럭시 스마트폰에서 다운로드 없이 초고속으로 PDF 변환 및 압축하기",

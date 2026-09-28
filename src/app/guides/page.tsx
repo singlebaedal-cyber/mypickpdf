@@ -106,11 +106,11 @@ export default function GuidesPage() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight max-w-3xl mx-auto mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight max-w-3xl mx-auto mb-4 [text-wrap:balance]">
             {t("guides_portal_title")}
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed mb-8 [text-wrap:pretty]">
             {t("guides_portal_subtitle")}
           </p>
 
@@ -260,13 +260,13 @@ export default function GuidesPage() {
 
                   {/* Title */}
                   <Link href={`/guides/${article.slug}`}>
-                    <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-rose-600 transition-colors line-clamp-2 leading-snug mb-2.5">
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-rose-600 transition-colors line-clamp-2 leading-snug mb-2.5 [text-wrap:balance]">
                       {tr.title}
                     </h3>
                   </Link>
 
                   {/* Summary */}
-                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4 [text-wrap:pretty]">
                     {tr.summary}
                   </p>
 

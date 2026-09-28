@@ -134,12 +134,12 @@ export default function GuideArticleView({ article }: GuideArticleViewProps) {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4 [text-wrap:balance]">
             {tr.title}
           </h1>
 
           {/* Lead Summary */}
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 mb-6">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 mb-6 [text-wrap:pretty]">
             {tr.summary}
           </p>
 
@@ -177,14 +177,14 @@ export default function GuideArticleView({ article }: GuideArticleViewProps) {
         <main className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xs mb-8 space-y-8">
           {tr.sections.map((section, sIdx) => (
             <section key={sIdx} className="space-y-4">
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2 pb-2 border-b border-slate-100">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2 pb-2 border-b border-slate-100 [text-wrap:balance]">
                 <span className="w-2 h-6 rounded-full bg-rose-500 inline-block" />
                 <span>{section.heading}</span>
               </h2>
 
               <div className="space-y-3 text-slate-700 text-sm sm:text-base leading-relaxed">
                 {section.body.map((para, pIdx) => (
-                  <p key={pIdx}>{para}</p>
+                  <p key={pIdx} className="[text-wrap:pretty]">{para}</p>
                 ))}
               </div>
 
@@ -197,7 +197,7 @@ export default function GuideArticleView({ article }: GuideArticleViewProps) {
                     <h4 className="text-xs font-black uppercase tracking-wider text-amber-800 mb-1">
                       래서팬더 꿀팁 (Panda Tip)
                     </h4>
-                    <p className="text-xs sm:text-sm text-amber-900 leading-relaxed font-medium">
+                    <p className="text-xs sm:text-sm text-amber-900 leading-relaxed font-medium [text-wrap:pretty]">
                       {section.tip}
                     </p>
                   </div>

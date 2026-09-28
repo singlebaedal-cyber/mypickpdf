@@ -891,6 +891,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setLangState(saved);
       if (typeof document !== "undefined") {
         document.documentElement.lang = saved;
+        document.documentElement.dir = saved === "ar" ? "rtl" : "ltr";
       }
     } else {
       const browserLang = navigator.language.toLowerCase();
@@ -901,6 +902,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setLangState(initial);
       if (typeof document !== "undefined") {
         document.documentElement.lang = initial;
+        document.documentElement.dir = initial === "ar" ? "rtl" : "ltr";
       }
     }
   }, []);
@@ -910,6 +912,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     localStorage.setItem("mypickpdf_lang", newLang);
     if (typeof document !== "undefined") {
       document.documentElement.lang = newLang;
+      document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
     }
   };
 

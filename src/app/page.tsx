@@ -97,14 +97,14 @@ export default function HomePage() {
           <span>{t("home_hero_tag")}</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15] mb-6 break-keep">
-          {t("home_hero_title1")}<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-red-500 to-rose-700">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.2] mb-6 [text-wrap:balance]">
+          <span className="inline-block">{t("home_hero_title1")}</span>{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-red-500 to-rose-700 inline-block">
             {t("home_hero_title2")}
           </span>
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl mx-auto break-keep">
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl mx-auto [text-wrap:pretty]">
           {t("home_hero_desc")}
         </p>
 

@@ -126,6 +126,20 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="ja" href="https://mypickpdf.vercel.app/" />
         <link rel="alternate" hrefLang="es" href="https://mypickpdf.vercel.app/" />
         <link rel="alternate" hrefLang="zh" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="zh-CN" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="zh-TW" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="de" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="fr" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="pt" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="ru" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="it" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="id" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="vi" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="ar" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="hi" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="th" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="tr" href="https://mypickpdf.vercel.app/" />
+        <link rel="alternate" hrefLang="pl" href="https://mypickpdf.vercel.app/" />
       </head>
       <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-rose-500 selection:text-white">
         <GoogleAnalytics />
