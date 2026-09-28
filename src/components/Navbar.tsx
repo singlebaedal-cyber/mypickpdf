@@ -426,32 +426,105 @@ export default function Navbar() {
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 p-1.5 z-50 animate-in fade-in slide-in-from-top-2">
-                  <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-1 flex items-center justify-between">
-                    <span>Select Language</span>
-                    <Globe className="w-3.5 h-3.5 text-slate-400" />
-                  </div>
-                  {LANGUAGES.map((item) => (
-                    <button
-                      key={item.code}
-                      onClick={() => {
-                        setLang(item.code);
-                        setLangDropdownOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-left transition-colors ${
-                        lang === item.code
-                          ? "bg-rose-50 text-rose-600 font-extrabold"
-                          : "text-slate-700 hover:bg-slate-50"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2">
-                        <span className="text-base">{item.flag}</span>
-                        <span className="font-extrabold text-xs text-slate-800">{item.initial}</span>
-                        <span className="text-slate-400 font-normal text-xs">({item.label})</span>
+                <div className="absolute right-0 mt-2 w-[92vw] sm:w-[580px] md:w-[620px] max-w-[calc(100vw-1.5rem)] bg-white rounded-3xl shadow-2xl border border-slate-200/90 p-4 sm:p-5 z-50 animate-in fade-in slide-in-from-top-2">
+                  {/* Header */}
+                  <div className="px-2 pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                        <Globe className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-xs font-black text-slate-800">
+                        Select Language / 언어 선택 (26)
                       </span>
-                      {lang === item.code && <Check className="w-3.5 h-3.5 text-rose-600" />}
-                    </button>
-                  ))}
+                    </div>
+                    <span className="text-[11px] font-bold text-slate-400 hidden sm:inline">
+                      현재: {currentLangObj.flag} {currentLangObj.label}
+                    </span>
+                  </div>
+
+                  {/* 3-Column Horizontal Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-1 gap-x-4">
+                    {/* Column 1 */}
+                    <div className="space-y-0.5">
+                      {LANGUAGES.filter((l) => l.column === 1).map((item) => {
+                        const isSelected = lang === item.code;
+                        return (
+                          <button
+                            key={item.code}
+                            onClick={() => {
+                              setLang(item.code);
+                              setLangDropdownOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs text-left transition-colors cursor-pointer ${
+                              isSelected
+                                ? "bg-rose-50 text-rose-600 font-extrabold shadow-2xs"
+                                : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 font-medium"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2 truncate">
+                              <span className="text-base leading-none shrink-0">{item.flag}</span>
+                              <span className="truncate">{item.label}</span>
+                            </span>
+                            {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 stroke-[2.5]" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Column 2 */}
+                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-1.5 sm:pt-0 sm:pl-3">
+                      {LANGUAGES.filter((l) => l.column === 2).map((item) => {
+                        const isSelected = lang === item.code;
+                        return (
+                          <button
+                            key={item.code}
+                            onClick={() => {
+                              setLang(item.code);
+                              setLangDropdownOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs text-left transition-colors cursor-pointer ${
+                              isSelected
+                                ? "bg-rose-50 text-rose-600 font-extrabold shadow-2xs"
+                                : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 font-medium"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2 truncate">
+                              <span className="text-base leading-none shrink-0">{item.flag}</span>
+                              <span className="truncate">{item.label}</span>
+                            </span>
+                            {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 stroke-[2.5]" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Column 3 */}
+                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-1.5 sm:pt-0 sm:pl-3">
+                      {LANGUAGES.filter((l) => l.column === 3).map((item) => {
+                        const isSelected = lang === item.code;
+                        return (
+                          <button
+                            key={item.code}
+                            onClick={() => {
+                              setLang(item.code);
+                              setLangDropdownOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs text-left transition-colors cursor-pointer ${
+                              isSelected
+                                ? "bg-rose-50 text-rose-600 font-extrabold shadow-2xs"
+                                : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 font-medium"
+                            }`}
+                          >
+                            <span className="flex items-center gap-2 truncate">
+                              <span className="text-base leading-none shrink-0">{item.flag}</span>
+                              <span className="truncate">{item.label}</span>
+                            </span>
+                            {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 stroke-[2.5]" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
