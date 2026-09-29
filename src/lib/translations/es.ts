@@ -185,7 +185,7 @@ export const es: TranslationDictionary = {
   "howto_subtitle": "Completa tu tarea en 3 sencillos pasos sin instalar software pesado.",
   "faq_badge": "Preguntas y respuestas",
   "faq_title": "Preguntas frecuentes (FAQ)",
-  "faq_subtitle": "Encuentra respuestas sobre el uso de las herramientas y la privacidad."
+  "faq_subtitle": "Encuentra respuestas sobre el uso de las herramientas y la privacidad.",
   "widget_ai_title": "Soporte AI en Tiempo Real",
   "widget_ai_sub": "Soluciones Inmediatas y Ajuste en Vivo",
   "widget_ai_err_title": "🚨 ¡Error Prioritario Detectado!",

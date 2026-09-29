@@ -185,7 +185,7 @@ export const tr: TranslationDictionary = {
   "footer_privacy_link": "Gizlilik Politikası",
   "footer_terms_link": "Kullanım Koşulları",
   "footer_contact_link": "İletişim ve Öneriler",
-  "footer_rights": "All rights reserved. Tüm hakları saklıdır."
+  "footer_rights": "All rights reserved. Tüm hakları saklıdır.",
   "widget_ai_title": "Gerçek Zamanlı AI Destek",
   "widget_ai_sub": "Anında Çözüm ve Canlı Ayarlama",
   "widget_ai_err_title": "🚨 Öncelikli Hata Tespit Edildi!",

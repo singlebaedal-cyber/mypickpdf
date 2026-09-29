@@ -185,7 +185,7 @@ export const hi: TranslationDictionary = {
   "footer_privacy_link": "गोपनीयता नीति",
   "footer_terms_link": "सेवा की शर्तें",
   "footer_contact_link": "संपर्क और सुझाव",
-  "footer_rights": "All rights reserved. सर्वाधिकार सुरक्षित।"
+  "footer_rights": "All rights reserved. सर्वाधिकार सुरक्षित।",
   "widget_ai_title": "AI रीयल-टाइम सहायता",
   "widget_ai_sub": "त्वरित समाधान और ऑन-साइट ट्यूनिंग",
   "widget_ai_err_title": "🚨 प्राथमिकता त्रुटि का पता चला!",

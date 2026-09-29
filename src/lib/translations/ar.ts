@@ -185,7 +185,7 @@ export const ar: TranslationDictionary = {
   "video_step_level": "اختر مستوى الضغط",
   "video_step_level_desc": "اختر التوازن المناسب بين جودة الفيديو وحجم الملف",
   "video_tag": "ميزة جديدة",
-  "video_title": "ضغط الفيديو (MP4 / MOV)"
+  "video_title": "ضغط الفيديو (MP4 / MOV)",
   "widget_ai_title": "دعم الذكاء الاصطناعي في الوقت الفعلي",
   "widget_ai_sub": "حل فوري وتحسين مباشر",
   "widget_ai_err_title": "🚨 تم اكتشاف خطأ ذو أولوية!",

@@ -185,7 +185,7 @@ export const nl: TranslationDictionary = {
   "footer_privacy_link": "Privacybeleid",
   "footer_terms_link": "Algemene Voorwaarden",
   "footer_contact_link": "Contact & Feedback",
-  "footer_rights": "All rights reserved. Alle rechten voorbehouden."
+  "footer_rights": "All rights reserved. Alle rechten voorbehouden.",
   "widget_ai_title": "AI Realtime Ondersteuning",
   "widget_ai_sub": "Directe Oplossingen & Live Afstemming",
   "widget_ai_err_title": "🚨 Prioriteitsfout Gedetecteerd!",

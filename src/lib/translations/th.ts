@@ -185,7 +185,7 @@ export const th: TranslationDictionary = {
   "footer_privacy_link": "นโยบายความเป็นส่วนตัว",
   "footer_terms_link": "เงื่อนไขการใช้บริการ",
   "footer_contact_link": "ติดต่อเราและข้อเสนอแนะ",
-  "footer_rights": "All rights reserved. สงวนลิขสิทธิ์ทั้งหมด"
+  "footer_rights": "All rights reserved. สงวนลิขสิทธิ์ทั้งหมด",
   "widget_ai_title": "ศูนย์ช่วยเหลือ AI แบบเรียลไทม์",
   "widget_ai_sub": "แก้ไขปัญหาทันทีและปรับแต่งการทำงาน",
   "widget_ai_err_title": "🚨 ตรวจพบข้อผิดพลาดสำคัญ!",

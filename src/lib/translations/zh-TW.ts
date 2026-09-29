@@ -185,7 +185,7 @@ export const zhTW: TranslationDictionary = {
   "footer_privacy_link": "隱私權保護政策",
   "footer_terms_link": "服務使用條款",
   "footer_contact_link": "聯絡我們與建議",
-  "footer_rights": "All rights reserved. 版權所有，翻印必究。"
+  "footer_rights": "All rights reserved. 版權所有，翻印必究。",
   "widget_ai_title": "AI 即時諮詢中心",
   "widget_ai_sub": "即時解決不滿意結果與線上微調",
   "widget_ai_err_title": "🚨 偵測到優先錯誤！",

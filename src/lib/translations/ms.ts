@@ -185,7 +185,7 @@ export const ms: TranslationDictionary = {
   "footer_privacy_link": "Dasar Privasi",
   "footer_terms_link": "Syarat Perkhidmatan",
   "footer_contact_link": "Hubungi & Cadangan",
-  "footer_rights": "All rights reserved. Hak cipta terpelihara."
+  "footer_rights": "All rights reserved. Hak cipta terpelihara.",
   "widget_ai_title": "Sokongan AI Masa Nyata",
   "widget_ai_sub": "Penyelesaian Segera & Penalaan Langsung",
   "widget_ai_err_title": "🚨 Ralat Keutamaan Dikesan!",

@@ -185,7 +185,7 @@ export const bg: TranslationDictionary = {
   "footer_privacy_link": "Политика за Поверителност",
   "footer_terms_link": "Условия за Ползване",
   "footer_contact_link": "Контакт и Предложения",
-  "footer_rights": "All rights reserved. Всички права запазени."
+  "footer_rights": "All rights reserved. Всички права запазени.",
   "widget_ai_title": "AI Поддръжка в Реално Време",
   "widget_ai_sub": "Незабавни Решения и Настройка на Живо",
   "widget_ai_err_title": "🚨 Открита е Приоритетна Грешка!",

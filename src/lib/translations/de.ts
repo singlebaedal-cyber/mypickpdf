@@ -185,7 +185,7 @@ export const de: TranslationDictionary = {
   "video_step_level": "Komprimierungsstufe wählen",
   "video_step_level_desc": "Wählen Sie die ideale Balance aus Bildqualität und Dateigröße",
   "video_tag": "Neue Funktion",
-  "video_title": "Video komprimieren (MP4 / MOV)"
+  "video_title": "Video komprimieren (MP4 / MOV)",
   "widget_ai_title": "AI Echtzeit-Support",
   "widget_ai_sub": "Sofortige Fehlerbehebung & Live-Tuning",
   "widget_ai_err_title": "🚨 Prioritätsfehler erkannt!",

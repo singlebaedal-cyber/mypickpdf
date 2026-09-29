@@ -185,7 +185,7 @@ export const id: TranslationDictionary = {
   "video_step_level": "Pilih Tingkat Kompresi",
   "video_step_level_desc": "Tentukan keseimbangan antara kualitas video dan ukuran file",
   "video_tag": "Fitur Baru",
-  "video_title": "Kompres Video (MP4 / MOV)"
+  "video_title": "Kompres Video (MP4 / MOV)",
   "widget_ai_title": "Dukungan AI Real-time",
   "widget_ai_sub": "Solusi Instan & Penyetelan Langsung",
   "widget_ai_err_title": "🚨 Kesalahan Prioritas Terdeteksi!",

@@ -185,7 +185,7 @@ export const ko: TranslationDictionary = {
   "share_btn": "카톡/링크 공유",
   "share_copied": "복사 완료! 🐾",
   "share_bookmark": "즐겨찾기",
-  "share_bookmark_tip": "키보드에서 Ctrl + D (맥: Cmd + D)를 누르면 바로 즐겨찾기에 추가됩니다!"
+  "share_bookmark_tip": "키보드에서 Ctrl + D (맥: Cmd + D)를 누르면 바로 즐겨찾기에 추가됩니다!",
   "widget_ai_title": "AI 실시간 상담소",
   "widget_ai_sub": "결과 불만족 즉시 해결 & 현장 튜닝",
   "widget_ai_err_title": "🚨 1순위 오류 감지!",

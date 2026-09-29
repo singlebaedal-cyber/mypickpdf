@@ -185,7 +185,7 @@ export const pl: TranslationDictionary = {
   "footer_privacy_link": "Polityka Prywatności",
   "footer_terms_link": "Regulamin Świadczenia Usług",
   "footer_contact_link": "Kontakt i Opinie",
-  "footer_rights": "All rights reserved. Wszelkie prawa zastrzeżone."
+  "footer_rights": "All rights reserved. Wszelkie prawa zastrzeżone.",
   "widget_ai_title": "Wsparcie AI w Czasie Rzeczywistym",
   "widget_ai_sub": "Natychmiastowe Rozwiązania i Dostrajanie",
   "widget_ai_err_title": "🚨 Wykryto Błąd Priorytetowy!",

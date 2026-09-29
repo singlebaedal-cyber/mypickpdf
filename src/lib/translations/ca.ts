@@ -185,7 +185,7 @@ export const ca: TranslationDictionary = {
   "footer_privacy_link": "Política de Privadesa",
   "footer_terms_link": "Condicions del Servei",
   "footer_contact_link": "Contacte i Suggeriments",
-  "footer_rights": "All rights reserved. Tots els drets reservats."
+  "footer_rights": "All rights reserved. Tots els drets reservats.",
   "widget_ai_title": "Suport IA en Temps Real",
   "widget_ai_sub": "Solucions Immediates i Ajust en Viu",
   "widget_ai_err_title": "🚨 Error Prioritari Detectat!",

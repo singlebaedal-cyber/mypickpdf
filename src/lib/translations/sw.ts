@@ -185,7 +185,7 @@ export const sw: TranslationDictionary = {
   "footer_privacy_link": "Sera ya Faragha",
   "footer_terms_link": "Masharti ya Huduma",
   "footer_contact_link": "Wasiliana Nasi na Maoni",
-  "footer_rights": "All rights reserved. Haki zote zimehifadhiwa."
+  "footer_rights": "All rights reserved. Haki zote zimehifadhiwa.",
   "widget_ai_title": "Usaidizi wa AI wa Moja kwa Moja",
   "widget_ai_sub": "Marekebisho ya Papo hapo na Uboreshaji wa Moja kwa Moja",
   "widget_ai_err_title": "🚨 Hitilafu ya Kipaumbele Imegunduliwa!",

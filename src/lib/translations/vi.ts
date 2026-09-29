@@ -185,7 +185,7 @@ export const vi: TranslationDictionary = {
   "video_step_level": "Chọn mức độ nén",
   "video_step_level_desc": "Lựa chọn mức cân bằng lý tưởng giữa chất lượng hình ảnh và kích thước tệp",
   "video_tag": "Tính năng mới",
-  "video_title": "Nén video (MP4 / MOV)"
+  "video_title": "Nén video (MP4 / MOV)",
   "widget_ai_title": "Hỗ Trợ AI Thời Gian Thực",
   "widget_ai_sub": "Khắc Phục Tức Thì & Tinh Chỉnh Trực Tiếp",
   "widget_ai_err_title": "🚨 Phát Hiện Lỗi Ưu Tiên!",

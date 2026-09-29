@@ -185,7 +185,7 @@ export const sv: TranslationDictionary = {
   "footer_privacy_link": "Integritetspolicy",
   "footer_terms_link": "Användarvillkor",
   "footer_contact_link": "Kontakt & Feedback",
-  "footer_rights": "All rights reserved. Alla rättigheter förbehållna."
+  "footer_rights": "All rights reserved. Alla rättigheter förbehållna.",
   "widget_ai_title": "AI Realtidsstöd",
   "widget_ai_sub": "Direkta Lösningar & Liveoptimering",
   "widget_ai_err_title": "🚨 Prioriterat Fel Upptäckt!",

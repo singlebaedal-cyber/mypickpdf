@@ -185,7 +185,7 @@ export const ru: TranslationDictionary = {
   "video_step_level": "Выберите уровень сжатия",
   "video_step_level_desc": "Выберите баланс между качеством картинки и размером файла",
   "video_tag": "Новинка",
-  "video_title": "Сжатие видео (MP4 / MOV)"
+  "video_title": "Сжатие видео (MP4 / MOV)",
   "widget_ai_title": "ИИ Поддержка в Реальном Времени",
   "widget_ai_sub": "Мгновенное Решение и Тонкая Настройка",
   "widget_ai_err_title": "🚨 Обнаружена Критическая Ошибка!",

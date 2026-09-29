@@ -185,7 +185,7 @@ export const el: TranslationDictionary = {
   "footer_privacy_link": "Πολιτική Απορρήτου",
   "footer_terms_link": "Όροι Χρήσης",
   "footer_contact_link": "Επικοινωνία & Προτάσεις",
-  "footer_rights": "All rights reserved. Με την επιφύλαξη παντός δικαιώματος."
+  "footer_rights": "All rights reserved. Με την επιφύλαξη παντός δικαιώματος.",
   "widget_ai_title": "Υποστήριξη AI σε Πραγματικό Χρόνο",
   "widget_ai_sub": "Άμεση Επίλυση & Ζωντανή Προσαρμογή",
   "widget_ai_err_title": "🚨 Εντοπίστηκε Σφάλμα Προτεραιότητας!",

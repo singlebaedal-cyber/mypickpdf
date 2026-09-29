@@ -185,7 +185,7 @@ export const en: TranslationDictionary = {
   "share_btn": "Share Link",
   "share_copied": "Copied! 🐾",
   "share_bookmark": "Bookmark",
-  "share_bookmark_tip": "Press Ctrl + D (Mac: Cmd + D) to instantly bookmark this page!"
+  "share_bookmark_tip": "Press Ctrl + D (Mac: Cmd + D) to instantly bookmark this page!",
   "widget_ai_title": "AI Real-time Support",
   "widget_ai_sub": "Instant Fixes & On-site Tuning",
   "widget_ai_err_title": "🚨 Priority Error Detected!",

@@ -185,7 +185,7 @@ export const zhCN: TranslationDictionary = {
   "howto_subtitle": "无需安装复杂软件，只需 3 步即可轻松搞定。",
   "faq_badge": "问答专区",
   "faq_title": "常见问题 (FAQ)",
-  "faq_subtitle": "查阅有关 mypickpdf 工具使用与安全性的解答。"
+  "faq_subtitle": "查阅有关 mypickpdf 工具使用与安全性的解答。",
   "widget_ai_title": "AI 实时咨询中心",
   "widget_ai_sub": "即时解决不满意结果与现场微调",
   "widget_ai_err_title": "🚨 检测到优先错误！",

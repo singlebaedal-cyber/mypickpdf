@@ -185,7 +185,7 @@ export const ja: TranslationDictionary = {
   "howto_subtitle": "複雑なソフトのインストール不要、わずか3ステップで完了します。",
   "faq_badge": "Q&A",
   "faq_title": "よくある質問 (FAQ)",
-  "faq_subtitle": "mypickpdfの機能やセキュリティに関する疑問をご確認ください。"
+  "faq_subtitle": "mypickpdfの機能やセキュリティに関する疑問をご確認ください。",
   "widget_ai_title": "AIリアルタイム相談所",
   "widget_ai_sub": "不満足な結果を即時解決＆現場チューニング",
   "widget_ai_err_title": "🚨 最優先エラーを検知！",

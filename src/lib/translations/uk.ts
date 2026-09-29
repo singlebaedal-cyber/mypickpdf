@@ -185,7 +185,7 @@ export const uk: TranslationDictionary = {
   "footer_privacy_link": "Політика конфіденційності",
   "footer_terms_link": "Умови надання послуг",
   "footer_contact_link": "Зв'язок та пропозиції",
-  "footer_rights": "All rights reserved. Всі права захищено."
+  "footer_rights": "All rights reserved. Всі права захищено.",
   "widget_ai_title": "Підтримка ШІ в Реальному Часі",
   "widget_ai_sub": "Миттєве Виправлення та Налаштування",
   "widget_ai_err_title": "🚨 Виявлено Пріоритетну Помилку!",
