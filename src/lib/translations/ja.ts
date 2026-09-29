@@ -186,4 +186,11 @@ export const ja: TranslationDictionary = {
   "faq_badge": "Q&A",
   "faq_title": "よくある質問 (FAQ)",
   "faq_subtitle": "mypickpdfの機能やセキュリティに関する疑問をご確認ください。"
+  "widget_ai_title": "AIリアルタイム相談所",
+  "widget_ai_sub": "不満足な結果を即時解決＆現場チューニング",
+  "widget_ai_err_title": "🚨 最優先エラーを検知！",
+  "widget_ai_err_sub": "クリックして即座に自動復旧",
+  "widget_ai_aria": "AIリアルタイム相談所を開く",
+  "sponsor_modal_title": "レッサーパンダにおやつを差し入れ",
+  "sponsor_modal_desc": "mypickpdfは会員登録や課金なしで100%完全無料です。コーヒー1杯のご支援がサーバー維持と新機能開発の大きな力になります！🐾",
 };

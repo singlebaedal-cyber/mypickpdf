@@ -186,4 +186,11 @@ export const fr: TranslationDictionary = {
   "video_step_level_desc": "Sélectionnez l'équilibre parfait entre qualité d'image et taille de fichier",
   "video_tag": "Nouveau",
   "video_title": "Compresser vidéo (MP4 / MOV)"
+  "widget_ai_title": "Support IA en Temps Réel",
+  "widget_ai_sub": "Résolution Immédiate & Réglage en Direct",
+  "widget_ai_err_title": "🚨 Erreur Prioritaire Détectée !",
+  "widget_ai_err_sub": "Cliquez pour une récupération automatique immédiate",
+  "widget_ai_aria": "Ouvrir le Support IA en Temps Réel",
+  "sponsor_modal_title": "Offrez un goûter au Panda Roux",
+  "sponsor_modal_desc": "mypickpdf est 100% gratuit, sans inscription ni paiement. Une tasse de café nous aide grandement à maintenir les serveurs et créer de nouveaux outils ! 🐾",
 };

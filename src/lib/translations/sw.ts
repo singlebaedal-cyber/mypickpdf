@@ -186,4 +186,11 @@ export const sw: TranslationDictionary = {
   "footer_terms_link": "Masharti ya Huduma",
   "footer_contact_link": "Wasiliana Nasi na Maoni",
   "footer_rights": "All rights reserved. Haki zote zimehifadhiwa."
+  "widget_ai_title": "Usaidizi wa AI wa Moja kwa Moja",
+  "widget_ai_sub": "Marekebisho ya Papo hapo na Uboreshaji wa Moja kwa Moja",
+  "widget_ai_err_title": "🚨 Hitilafu ya Kipaumbele Imegunduliwa!",
+  "widget_ai_err_sub": "Bofya kwa urejeshaji wa kiotomatiki wa papo hapo",
+  "widget_ai_aria": "Fungua Usaidizi wa AI wa Moja kwa Moja",
+  "sponsor_modal_title": "Msaidie Panda Mwekundu kwa Vitafunio",
+  "sponsor_modal_desc": "mypickpdf hufanya kazi 100% bure bila kujisajili au malipo. Kikombe cha kahawa kinasaidia sana kudumisha seva zetu na kuunda vipengele vipya! 🐾",
 };

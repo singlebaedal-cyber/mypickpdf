@@ -186,4 +186,11 @@ export const ar: TranslationDictionary = {
   "video_step_level_desc": "اختر التوازن المناسب بين جودة الفيديو وحجم الملف",
   "video_tag": "ميزة جديدة",
   "video_title": "ضغط الفيديو (MP4 / MOV)"
+  "widget_ai_title": "دعم الذكاء الاصطناعي في الوقت الفعلي",
+  "widget_ai_sub": "حل فوري وتحسين مباشر",
+  "widget_ai_err_title": "🚨 تم اكتشاف خطأ ذو أولوية!",
+  "widget_ai_err_sub": "انقر للاسترداد التلقائي الفوري",
+  "widget_ai_aria": "فتح دعم الذكاء الاصطناعي في الوقت الفعلي",
+  "sponsor_modal_title": "ادعم الباندا الأحمر بوجبة خفيفة",
+  "sponsor_modal_desc": "يعمل mypickpdf مجاناً بنسبة 100% دون تسجيل أو دفع. فنجان قهوة يدعمنا كثيراً في الحفاظ على الخوادم وتطوير ميزات جديدة! 🐾",
 };

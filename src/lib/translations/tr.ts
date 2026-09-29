@@ -186,4 +186,11 @@ export const tr: TranslationDictionary = {
   "footer_terms_link": "Kullanım Koşulları",
   "footer_contact_link": "İletişim ve Öneriler",
   "footer_rights": "All rights reserved. Tüm hakları saklıdır."
+  "widget_ai_title": "Gerçek Zamanlı AI Destek",
+  "widget_ai_sub": "Anında Çözüm ve Canlı Ayarlama",
+  "widget_ai_err_title": "🚨 Öncelikli Hata Tespit Edildi!",
+  "widget_ai_err_sub": "Anında otomatik kurtarma için tıklayın",
+  "widget_ai_aria": "Gerçek Zamanlı AI Desteği Aç",
+  "sponsor_modal_title": "Kızıl Panda'ya Atıştırmalık Ismarla",
+  "sponsor_modal_desc": "mypickpdf kayıt veya ödeme olmadan %100 ücretsizdir. Bir fincan kahve, sunucuları sürdürmemize ve yeni özellikler geliştirmemize çok yardımcı olur! 🐾",
 };

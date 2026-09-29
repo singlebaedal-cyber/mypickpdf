@@ -186,4 +186,11 @@ export const ms: TranslationDictionary = {
   "footer_terms_link": "Syarat Perkhidmatan",
   "footer_contact_link": "Hubungi & Cadangan",
   "footer_rights": "All rights reserved. Hak cipta terpelihara."
+  "widget_ai_title": "Sokongan AI Masa Nyata",
+  "widget_ai_sub": "Penyelesaian Segera & Penalaan Langsung",
+  "widget_ai_err_title": "🚨 Ralat Keutamaan Dikesan!",
+  "widget_ai_err_sub": "Klik untuk pemulihan automatik serta-merta",
+  "widget_ai_aria": "Buka Sokongan AI Masa Nyata",
+  "sponsor_modal_title": "Belanja Makanan Ringan Panda Merah",
+  "sponsor_modal_desc": "mypickpdf adalah 100% percuma tanpa perlu daftar atau bayar. Secawan kopi amat membantu mengekalkan pelayan dan membina ciri baharu! 🐾",
 };

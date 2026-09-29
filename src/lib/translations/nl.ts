@@ -186,4 +186,11 @@ export const nl: TranslationDictionary = {
   "footer_terms_link": "Algemene Voorwaarden",
   "footer_contact_link": "Contact & Feedback",
   "footer_rights": "All rights reserved. Alle rechten voorbehouden."
+  "widget_ai_title": "AI Realtime Ondersteuning",
+  "widget_ai_sub": "Directe Oplossingen & Live Afstemming",
+  "widget_ai_err_title": "🚨 Prioriteitsfout Gedetecteerd!",
+  "widget_ai_err_sub": "Klik voor direct automatisch herstel",
+  "widget_ai_aria": "Open AI Realtime Ondersteuning",
+  "sponsor_modal_title": "Trakteer de Rode Panda op een Snack",
+  "sponsor_modal_desc": "mypickpdf is 100% gratis zonder registratie of betaling. Een kop koffie helpt ons enorm om de servers draaiende te houden en nieuwe functies te bouwen! 🐾",
 };

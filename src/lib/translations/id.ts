@@ -186,4 +186,11 @@ export const id: TranslationDictionary = {
   "video_step_level_desc": "Tentukan keseimbangan antara kualitas video dan ukuran file",
   "video_tag": "Fitur Baru",
   "video_title": "Kompres Video (MP4 / MOV)"
+  "widget_ai_title": "Dukungan AI Real-time",
+  "widget_ai_sub": "Solusi Instan & Penyetelan Langsung",
+  "widget_ai_err_title": "🚨 Kesalahan Prioritas Terdeteksi!",
+  "widget_ai_err_sub": "Klik untuk pemulihan otomatis instan",
+  "widget_ai_aria": "Buka Dukungan AI Real-time",
+  "sponsor_modal_title": "Beri Camilan untuk Panda Merah",
+  "sponsor_modal_desc": "mypickpdf 100% gratis tanpa login atau pembayaran. Secangkir kopi sangat membantu kami merawat server dan membuat fitur baru! 🐾",
 };

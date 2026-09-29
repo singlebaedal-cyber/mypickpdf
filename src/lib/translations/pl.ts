@@ -186,4 +186,11 @@ export const pl: TranslationDictionary = {
   "footer_terms_link": "Regulamin Świadczenia Usług",
   "footer_contact_link": "Kontakt i Opinie",
   "footer_rights": "All rights reserved. Wszelkie prawa zastrzeżone."
+  "widget_ai_title": "Wsparcie AI w Czasie Rzeczywistym",
+  "widget_ai_sub": "Natychmiastowe Rozwiązania i Dostrajanie",
+  "widget_ai_err_title": "🚨 Wykryto Błąd Priorytetowy!",
+  "widget_ai_err_sub": "Kliknij, aby natychmiast automatycznie naprawić",
+  "widget_ai_aria": "Otwórz Wsparcie AI w Czasie Rzeczywistym",
+  "sponsor_modal_title": "Podaruj Przekąskę Czerwonej Pandzie",
+  "sponsor_modal_desc": "mypickpdf działa w 100% za darmo, bez rejestracji i opłat. Filiżanka kawy bardzo pomaga w utrzymaniu serwerów i rozwoju nowych narzędzi! 🐾",
 };

@@ -186,4 +186,11 @@ export const uk: TranslationDictionary = {
   "footer_terms_link": "Умови надання послуг",
   "footer_contact_link": "Зв'язок та пропозиції",
   "footer_rights": "All rights reserved. Всі права захищено."
+  "widget_ai_title": "Підтримка ШІ в Реальному Часі",
+  "widget_ai_sub": "Миттєве Виправлення та Налаштування",
+  "widget_ai_err_title": "🚨 Виявлено Пріоритетну Помилку!",
+  "widget_ai_err_sub": "Натисніть для негайного автооновлення",
+  "widget_ai_aria": "Відкрити Підтримку ШІ в Реальному Часі",
+  "sponsor_modal_title": "Пригостити Червону Панду смаколиком",
+  "sponsor_modal_desc": "mypickpdf працює на 100% безкоштовно без реєстрації та оплати. Чашка кави дуже допомагає у підтримці серверів та розробці нових інструментів! 🐾",
 };

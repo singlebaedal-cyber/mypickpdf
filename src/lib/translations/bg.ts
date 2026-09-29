@@ -186,4 +186,11 @@ export const bg: TranslationDictionary = {
   "footer_terms_link": "Условия за Ползване",
   "footer_contact_link": "Контакт и Предложения",
   "footer_rights": "All rights reserved. Всички права запазени."
+  "widget_ai_title": "AI Поддръжка в Реално Време",
+  "widget_ai_sub": "Незабавни Решения и Настройка на Живо",
+  "widget_ai_err_title": "🚨 Открита е Приоритетна Грешка!",
+  "widget_ai_err_sub": "Щракнете за незабавно автоматично възстановяване",
+  "widget_ai_aria": "Отворете AI Поддръжка в Реално Време",
+  "sponsor_modal_title": "Почерпете Червената Панда с лакомство",
+  "sponsor_modal_desc": "mypickpdf работи 100% безплатно без регистрация или плащане. Едно кафе ни помага много за поддръжката на сървърите и разработката на нови инструменти! 🐾",
 };

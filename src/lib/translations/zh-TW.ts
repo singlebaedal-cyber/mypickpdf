@@ -186,4 +186,11 @@ export const zhTW: TranslationDictionary = {
   "footer_terms_link": "服務使用條款",
   "footer_contact_link": "聯絡我們與建議",
   "footer_rights": "All rights reserved. 版權所有，翻印必究。"
+  "widget_ai_title": "AI 即時諮詢中心",
+  "widget_ai_sub": "即時解決不滿意結果與線上微調",
+  "widget_ai_err_title": "🚨 偵測到優先錯誤！",
+  "widget_ai_err_sub": "點擊立即進行第一優先自動修復",
+  "widget_ai_aria": "開啟 AI 即時諮詢中心",
+  "sponsor_modal_title": "贊助小熊貓點心",
+  "sponsor_modal_desc": "mypickpdf 100% 免費運營，無需註冊或付費。您贊助的一杯咖啡是我們維護伺服器與開發新功能的最大動力！🐾",
 };

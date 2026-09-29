@@ -186,4 +186,11 @@ export const sv: TranslationDictionary = {
   "footer_terms_link": "Användarvillkor",
   "footer_contact_link": "Kontakt & Feedback",
   "footer_rights": "All rights reserved. Alla rättigheter förbehållna."
+  "widget_ai_title": "AI Realtidsstöd",
+  "widget_ai_sub": "Direkta Lösningar & Liveoptimering",
+  "widget_ai_err_title": "🚨 Prioriterat Fel Upptäckt!",
+  "widget_ai_err_sub": "Klicka för direkt automatisk återställning",
+  "widget_ai_aria": "Öppna AI Realtidsstöd",
+  "sponsor_modal_title": "Bjud Röda Pandan på ett Snack",
+  "sponsor_modal_desc": "mypickpdf är 100% gratis utan inloggning eller betalning. En kopp kaffe hjälper oss enormt att driva servrarna och skapa nya funktioner! 🐾",
 };

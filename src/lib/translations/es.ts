@@ -186,4 +186,11 @@ export const es: TranslationDictionary = {
   "faq_badge": "Preguntas y respuestas",
   "faq_title": "Preguntas frecuentes (FAQ)",
   "faq_subtitle": "Encuentra respuestas sobre el uso de las herramientas y la privacidad."
+  "widget_ai_title": "Soporte AI en Tiempo Real",
+  "widget_ai_sub": "Soluciones Inmediatas y Ajuste en Vivo",
+  "widget_ai_err_title": "🚨 ¡Error Prioritario Detectado!",
+  "widget_ai_err_sub": "Haz clic para autorrecuperación instantánea",
+  "widget_ai_aria": "Abrir Soporte AI en Tiempo Real",
+  "sponsor_modal_title": "Apoya al Panda Rojo con un Snack",
+  "sponsor_modal_desc": "mypickpdf es 100% gratuito, sin registros ni pagos. ¡Un café nos ayuda enormemente a mantener los servidores y crear nuevas funciones! 🐾",
 };

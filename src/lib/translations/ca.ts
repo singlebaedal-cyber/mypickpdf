@@ -186,4 +186,11 @@ export const ca: TranslationDictionary = {
   "footer_terms_link": "Condicions del Servei",
   "footer_contact_link": "Contacte i Suggeriments",
   "footer_rights": "All rights reserved. Tots els drets reservats."
+  "widget_ai_title": "Suport IA en Temps Real",
+  "widget_ai_sub": "Solucions Immediates i Ajust en Viu",
+  "widget_ai_err_title": "🚨 Error Prioritari Detectat!",
+  "widget_ai_err_sub": "Fes clic per a la recuperació automàtica immediata",
+  "widget_ai_aria": "Obrir Suport IA en Temps Real",
+  "sponsor_modal_title": "Convida el Panda Vermell a un Snack",
+  "sponsor_modal_desc": "mypickpdf és 100% gratuït sense registres ni pagaments. Una tassa de cafè ens ajuda enormement a mantenir els servidors i crear noves funcions! 🐾",
 };

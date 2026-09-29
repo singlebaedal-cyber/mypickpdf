@@ -183,6 +183,13 @@ export type TranslationKey =
   | "footer_privacy_link"
   | "footer_terms_link"
   | "footer_contact_link"
+  | "widget_ai_title"
+  | "widget_ai_sub"
+  | "widget_ai_err_title"
+  | "widget_ai_err_sub"
+  | "widget_ai_aria"
+  | "sponsor_modal_title"
+  | "sponsor_modal_desc"
   | "footer_rights";
 
 export type TranslationDictionary = Record<TranslationKey, string>;

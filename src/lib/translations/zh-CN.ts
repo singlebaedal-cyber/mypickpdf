@@ -186,4 +186,11 @@ export const zhCN: TranslationDictionary = {
   "faq_badge": "问答专区",
   "faq_title": "常见问题 (FAQ)",
   "faq_subtitle": "查阅有关 mypickpdf 工具使用与安全性的解答。"
+  "widget_ai_title": "AI 实时咨询中心",
+  "widget_ai_sub": "即时解决不满意结果与现场微调",
+  "widget_ai_err_title": "🚨 检测到优先错误！",
+  "widget_ai_err_sub": "点击立即进行第一优先自动恢复",
+  "widget_ai_aria": "打开 AI 实时咨询中心",
+  "sponsor_modal_title": "赞助小熊猫零食",
+  "sponsor_modal_desc": "mypickpdf 100% 免费运营，无需注册或付费。您赞助的一杯咖啡是我们维护服务器与开发新功能的最大动力！🐾",
 };

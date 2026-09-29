@@ -120,7 +120,7 @@ export default function HomePage() {
           </span>
           <span className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-slate-200 shadow-xs">
             <Zap className="w-4 h-4 text-amber-500" />
-            <span>{t("badge_client_engine")}</span>
+            <span>100% Client-Side Engine</span>
           </span>
         </div>
       </section>
@@ -213,7 +213,7 @@ export default function HomePage() {
         <div className="mb-6">
           <div className="text-xs font-black uppercase tracking-wider text-rose-600 mb-1">Convert TO PDF</div>
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            {t("nav_to_pdf")} {t("home_to_pdf_sub")}
+            {t("nav_to_pdf")} (Word, Excel, PPT, Image ➔ PDF)
           </h2>
         </div>
 
@@ -251,7 +251,7 @@ export default function HomePage() {
         <div className="mb-6">
           <div className="text-xs font-black uppercase tracking-wider text-slate-500 mb-1">Convert FROM PDF</div>
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            {t("nav_from_pdf")} {t("home_from_pdf_sub")}
+            {t("nav_from_pdf")}
           </h2>
         </div>
 

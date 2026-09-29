@@ -186,4 +186,11 @@ export const ko: TranslationDictionary = {
   "share_copied": "복사 완료! 🐾",
   "share_bookmark": "즐겨찾기",
   "share_bookmark_tip": "키보드에서 Ctrl + D (맥: Cmd + D)를 누르면 바로 즐겨찾기에 추가됩니다!"
+  "widget_ai_title": "AI 실시간 상담소",
+  "widget_ai_sub": "결과 불만족 즉시 해결 & 현장 튜닝",
+  "widget_ai_err_title": "🚨 1순위 오류 감지!",
+  "widget_ai_err_sub": "클릭하여 즉시 1순위 자동 복구",
+  "widget_ai_aria": "AI 실시간 상담소 열기",
+  "sponsor_modal_title": "래서팬더 간식 후원하기",
+  "sponsor_modal_desc": "mypickpdf는 회원가입이나 결제 없이 100% 무료로 운영됩니다. 보내주신 커피 한 잔은 서비스 서버 유지와 신기능 개발에 큰 힘이 됩니다! 🐾",
 };

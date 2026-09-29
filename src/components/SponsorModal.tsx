@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { X, Heart, Coffee, Copy, Check, Sparkles, ExternalLink, QrCode, Smartphone, CreditCard } from "lucide-react";
 import RedPanda from "./RedPanda";
+import { useLanguage } from "@/lib/i18n";
 
 interface SponsorModalProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface SponsorModalProps {
 }
 
 export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
+  const { t } = useLanguage();
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [selectedTier, setSelectedTier] = useState<number>(3000);
   const [activeTab, setActiveTab] = useState<"easy" | "email">("easy");
@@ -51,12 +53,11 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
           </div>
 
           <h3 className="text-xl font-black tracking-tight text-white flex items-center justify-center gap-1.5">
-            <span>래서팬더 간식 후원하기</span>
+            <span>{t("sponsor_modal_title")}</span>
             <Sparkles className="w-4 h-4 text-amber-200 fill-amber-200" />
           </h3>
           <p className="text-xs text-orange-100 mt-1 font-medium leading-relaxed">
-            mypickpdf는 회원가입이나 결제 없이 100% 무료로 운영됩니다.<br />
-            보내주신 커피 한 잔은 서비스 서버 유지와 신기능 개발에 큰 힘이 됩니다! 🐾
+            {t("sponsor_modal_desc")}
           </p>
         </div>
 

@@ -396,7 +396,7 @@ export default function Navbar() {
               <BookOpen className="w-4 h-4 text-amber-500" />
               <span>{t("nav_guides")}</span>
               <span className="px-1.5 py-0.5 text-[10px] font-black bg-amber-100 text-amber-700 rounded-full">
-                40+
+                20
               </span>
             </Link>
           </nav>
@@ -417,8 +417,8 @@ export default function Navbar() {
                   setConvertDropdownOpen(false);
                 }}
                 className="px-2.5 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200/80 rounded-xl text-slate-700 transition-colors border border-slate-200/60 flex items-center gap-1.5 text-xs font-bold shrink-0 shadow-2xs"
-                aria-label="Select Language"
-                title="Select Language"
+                aria-label={t("nav_select_lang")}
+                title={t("nav_select_lang")}
               >
                 <span className="text-sm leading-none">{currentLangObj.flag}</span>
                 <span className="font-extrabold text-[11px] sm:text-xs text-slate-800 tracking-wider">{currentLangObj.initial}</span>
@@ -553,9 +553,9 @@ export default function Navbar() {
           >
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-amber-600" />
-              <span>{t("nav_guides")} (20선 완벽 정리)</span>
+              <span>{t("nav_guides")} (40+)</span>
             </div>
-            <span className="text-[10px] bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full font-black">20</span>
+            <span className="text-[10px] bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full font-black">40+</span>
           </Link>
 
           <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2">

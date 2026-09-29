@@ -11,7 +11,7 @@ export default function ShareBar() {
 
   const handleShare = async () => {
     const shareData = {
-      title: "mypickpdf",
+      title: t("brand_name"),
       text: t("home_hero_desc"),
       url: "https://mypickpdf.vercel.app",
     };

@@ -1,10 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { translations, TranslationKey } from "./translations";
+import { translations, TranslationKey, TranslationDictionary } from "./translations";
 
 export { translations };
-export type { TranslationKey };
+export type { TranslationKey, TranslationDictionary };
 
 export type Language =
   | "en" | "es" | "fr" | "de" | "it" | "pt" | "ja" | "ru" | "ko"
@@ -56,35 +56,32 @@ export const LANGUAGES: LanguageOption[] = [
 
 interface LanguageContextType {
   lang: Language;
-  setLang: (lang: Language) => void;
-  t: (key: TranslationKey) => string;
+  setLang: (l: Language) => void;
+  t: (key: TranslationKey | string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   lang: "ko",
   setLang: () => {},
-  t: (key) => key,
+  t: (key) => (translations.ko as any)[key] || (key as string),
 });
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [lang, setLangState] = useState<Language>("ko");
 
   useEffect(() => {
-    const saved = localStorage.getItem("mypickpdf_lang") as Language | null;
+    const saved = localStorage.getItem("mypickpdf_lang") as Language;
     if (saved && (LANGUAGES.some((l) => l.code === saved) || saved === "zh")) {
-      const validSaved = saved === "zh" ? "zh-CN" : (saved as Language);
-      setLangState(validSaved);
+      setLangState(saved);
       if (typeof document !== "undefined") {
-        document.documentElement.lang = validSaved;
-        document.documentElement.dir = validSaved === "ar" ? "rtl" : "ltr";
+        document.documentElement.lang = saved;
+        document.documentElement.dir = saved === "ar" ? "rtl" : "ltr";
       }
     } else {
-      const browserLang = (typeof navigator !== "undefined" ? navigator.language : "ko").toLowerCase();
-      const exactMatch = LANGUAGES.find((l) => l.code.toLowerCase() === browserLang);
-      const prefixMatch = LANGUAGES.find(
+      const browserLang = navigator.language.toLowerCase();
+      const matched = LANGUAGES.find(
         (l) => browserLang.startsWith(l.code.toLowerCase()) || l.code.toLowerCase().startsWith(browserLang.slice(0, 2))
       );
-      const matched = exactMatch || prefixMatch;
       const initial: Language = matched ? matched.code : "ko";
       setLangState(initial);
       if (typeof document !== "undefined") {
@@ -103,13 +100,20 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  const t = (key: TranslationKey): string => {
-    const dict = (translations as any)[lang] ||
-                 (lang === "zh-CN" ? (translations as any)["zh"] : null) ||
-                 (lang === "zh" ? (translations as any)["zh-CN"] : null) ||
-                 translations.en ||
-                 translations.ko;
-    return (dict && dict[key]) || (translations.en as any)?.[key] || (translations.ko as any)?.[key] || key;
+  const t = (key: TranslationKey | string): string => {
+    const dict =
+      translations[lang] ||
+      (lang === "zh-CN" ? translations["zh-CN"] : undefined) ||
+      (lang === "zh-TW" ? translations["zh-TW"] : undefined) ||
+      (lang === "zh" ? translations["zh-CN"] : undefined) ||
+      translations.en ||
+      translations.ko;
+    return (
+      (dict as any)?.[key] ||
+      (translations.en as any)?.[key] ||
+      (translations.ko as any)?.[key] ||
+      (key as string)
+    );
   };
 
   return (

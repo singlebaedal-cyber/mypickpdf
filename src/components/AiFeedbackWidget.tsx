@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import RedPanda from "./RedPanda";
 import { AppToolErrorDetail } from "@/lib/app-events";
+import { useLanguage } from "@/lib/i18n";
 
 interface ChatMessage {
   id: string;
@@ -246,6 +247,7 @@ function analyzeImageContent(img: HTMLImageElement): ImageAnalysisDetail {
 }
 
 export default function AiFeedbackWidget() {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState("");
   const [attachedImage, setAttachedImage] = useState<string | null>(null);
@@ -760,7 +762,7 @@ export default function AiFeedbackWidget() {
               ? "bg-gradient-to-r from-red-600 via-rose-600 to-red-600 shadow-rose-600/60 ring-4 ring-rose-400/50 animate-bounce"
               : "bg-gradient-to-r from-orange-500 via-rose-500 to-red-600 hover:from-orange-600 hover:to-red-700 shadow-rose-500/40 hover:shadow-rose-500/60 hover:scale-105"
           }`}
-          aria-label="AI 실시간 상담소 열기"
+          aria-label={t("widget_ai_aria")}
         >
           {/* Subtle Live Pulse Dot */}
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -776,11 +778,11 @@ export default function AiFeedbackWidget() {
 
           <div className="flex flex-col text-left">
             <span className="text-xs font-black tracking-tight leading-tight flex items-center gap-1">
-              <span>{activeError ? "🚨 1순위 오류 감지!" : "AI 실시간 상담소"}</span>
+              <span>{activeError ? t("widget_ai_err_title") : t("widget_ai_title")}</span>
               <Sparkles className="w-3 h-3 text-amber-200 fill-amber-200" />
             </span>
             <span className="text-[10px] text-orange-100 font-medium hidden sm:inline leading-tight">
-              {activeError ? "클릭하여 즉시 1순위 자동 복구" : "결과 불만족 즉시 해결 & 현장 튜닝"}
+              {activeError ? t("widget_ai_err_sub") : t("widget_ai_sub")}
             </span>
           </div>
         </button>

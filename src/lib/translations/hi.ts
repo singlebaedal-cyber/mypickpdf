@@ -186,4 +186,11 @@ export const hi: TranslationDictionary = {
   "footer_terms_link": "सेवा की शर्तें",
   "footer_contact_link": "संपर्क और सुझाव",
   "footer_rights": "All rights reserved. सर्वाधिकार सुरक्षित।"
+  "widget_ai_title": "AI रीयल-टाइम सहायता",
+  "widget_ai_sub": "त्वरित समाधान और ऑन-साइट ट्यूनिंग",
+  "widget_ai_err_title": "🚨 प्राथमिकता त्रुटि का पता चला!",
+  "widget_ai_err_sub": "त्वरित ऑटो-रिकवरी के लिए क्लिक करें",
+  "widget_ai_aria": "AI रीयल-टाइम सहायता खोलें",
+  "sponsor_modal_title": "रेड पांडा को स्नैक्स से समर्थन दें",
+  "sponsor_modal_desc": "mypickpdf बिना किसी साइन-अप या भुगतान के 100% मुफ़्त काम करता है। एक कप कॉफी सर्वर को बनाए रखने और नई सुविधाएँ विकसित करने में बहुत मदद करती है! 🐾",
 };

@@ -186,4 +186,11 @@ export const th: TranslationDictionary = {
   "footer_terms_link": "เงื่อนไขการใช้บริการ",
   "footer_contact_link": "ติดต่อเราและข้อเสนอแนะ",
   "footer_rights": "All rights reserved. สงวนลิขสิทธิ์ทั้งหมด"
+  "widget_ai_title": "ศูนย์ช่วยเหลือ AI แบบเรียลไทม์",
+  "widget_ai_sub": "แก้ไขปัญหาทันทีและปรับแต่งการทำงาน",
+  "widget_ai_err_title": "🚨 ตรวจพบข้อผิดพลาดสำคัญ!",
+  "widget_ai_err_sub": "คลิกเพื่อกู้คืนอัตโนมัติทันที",
+  "widget_ai_aria": "เปิดศูนย์ช่วยเหลือ AI แบบเรียลไทม์",
+  "sponsor_modal_title": "สนับสนุนขนมให้แพนด้าแดง",
+  "sponsor_modal_desc": "mypickpdf ให้บริการฟรี 100% โดยไม่ต้องสมัครสมาชิกหรือจ่ายเงิน กาแฟหนึ่งแก้วช่วยสนับสนุนค่าเซิร์ฟเวอร์และการพัฒนาฟีเจอร์ใหม่ได้อย่างมาก! 🐾",
 };

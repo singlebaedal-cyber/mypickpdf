@@ -186,4 +186,11 @@ export const en: TranslationDictionary = {
   "share_copied": "Copied! 🐾",
   "share_bookmark": "Bookmark",
   "share_bookmark_tip": "Press Ctrl + D (Mac: Cmd + D) to instantly bookmark this page!"
+  "widget_ai_title": "AI Real-time Support",
+  "widget_ai_sub": "Instant Fixes & On-site Tuning",
+  "widget_ai_err_title": "🚨 Priority Error Detected!",
+  "widget_ai_err_sub": "Click for Instant Auto-Recovery",
+  "widget_ai_aria": "Open AI Real-time Support",
+  "sponsor_modal_title": "Support Red Panda with Snacks",
+  "sponsor_modal_desc": "mypickpdf operates 100% free with no sign-ups or payments. A cup of coffee goes a long way to maintaining our servers and creating new features! 🐾",
 };
