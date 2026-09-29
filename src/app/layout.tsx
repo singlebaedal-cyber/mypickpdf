@@ -8,6 +8,8 @@ import { SITE_CONFIG, WEB_APPLICATION_SCHEMA, FAQ_SCHEMA } from "@/lib/seo-confi
 import { LanguageProvider } from "@/lib/i18n";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.domain),
@@ -150,6 +152,8 @@ export default function RootLayout({
           <Footer />
           <AiFeedbackWidget />
         </LanguageProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
