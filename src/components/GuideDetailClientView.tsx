@@ -75,7 +75,7 @@ export default function GuideDetailClientView({ slug }: GuideDetailClientViewPro
       } else if (token.startsWith("**") && token.endsWith("**")) {
         nodes.push(
           <strong key={`strong-${idx++}`} className="font-bold text-slate-900">
-            {token.slice(2, -2)}
+            {renderInline(token.slice(2, -2))}
           </strong>
         );
       } else if (token.startsWith("`") && token.endsWith("`")) {
