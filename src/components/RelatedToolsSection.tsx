@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, BookOpen } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Bookmark, Share2, Check } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
 import { getLocalizedArticles } from "@/lib/guides-data";
@@ -37,6 +38,28 @@ const WORKFLOW_PAIRS: Record<string, string[]> = {
 
 export default function RelatedToolsSection({ currentToolId }: RelatedToolsSectionProps) {
   const { t, lang } = useLanguage();
+  const [copied, setCopied] = useState(false);
+  const [bookmarkTip, setBookmarkTip] = useState(false);
+
+  const handleCopyShare = async () => {
+    try {
+      const url = typeof window !== "undefined" ? window.location.href.split("?")[0] : "https://pdfpick.kr";
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share({
+          title: document.title,
+          url,
+        });
+        return;
+      }
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    } catch {
+      // Fallback copy
+    }
+  };
 
   const pairIds = (currentToolId && WORKFLOW_PAIRS[currentToolId]) || [
     "edit-pdf",
@@ -64,6 +87,59 @@ export default function RelatedToolsSection({ currentToolId }: RelatedToolsSecti
 
   return (
     <section className="my-14 max-w-5xl mx-auto px-4 space-y-10">
+      {/* 0. Instant Bookmark & Colleague Share Retention Bar */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-rose-950 rounded-3xl p-5 sm:p-6 text-white shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-300">
+            <Bookmark className="w-3.5 h-3.5" />
+            <span>
+              {lang === "ko"
+                ? "급할 때 다시 찾지 마세요! (평생 100% 무료 · 서버 저장 0%)"
+                : "Bookmark for instant access (100% Free & Local Privacy)"}
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-200 font-medium">
+            {lang === "ko"
+              ? "키보드 [Ctrl + D] (Mac은 ⌘ + D)를 눌러 즐겨찾기에 추가하거나, 동료에게 링크를 공유해 보세요."
+              : "Press [Ctrl + D] (or ⌘ + D) to bookmark this tool, or share the link with your team."}
+          </p>
+          {bookmarkTip && (
+            <p className="text-xs font-bold text-emerald-300 pt-1">
+              {lang === "ko"
+                ? "💡 지금 키보드에서 [Ctrl + D] (Mac은 Command + D)를 누르면 브라우저 상단 북마크바에 바로 등록됩니다!"
+                : "💡 Press Ctrl + D (or Cmd + D on Mac) on your keyboard right now to save this page!"}
+            </p>
+          )}
+        </div>
+        <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
+          <button
+            type="button"
+            onClick={() => setBookmarkTip((prev) => !prev)}
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/15 transition-colors"
+          >
+            <Bookmark className="w-3.5 h-3.5 text-amber-300" />
+            <span>{lang === "ko" ? "즐겨찾기 안내 (Ctrl+D)" : "Bookmark (Ctrl+D)"}</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleCopyShare}
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-colors shadow-xs"
+          >
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5" />
+                <span>{lang === "ko" ? "주소 복사 완료!" : "Link Copied!"}</span>
+              </>
+            ) : (
+              <>
+                <Share2 className="w-3.5 h-3.5" />
+                <span>{lang === "ko" ? "카톡·슬랙 링크 공유" : "Share Tool Link"}</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
       {/* 1. Next Step Workflow Tools */}
       <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
@@ -74,7 +150,7 @@ export default function RelatedToolsSection({ currentToolId }: RelatedToolsSecti
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
               {lang === "ko"
-                ? "이 작업과 함께 가장 많이 사용하는 도구"
+                ? "이 작업과 함께 가장 많이 사용하는 다음 단계 도구"
                 : "Frequently Used Together With This Tool"}
             </h2>
           </div>

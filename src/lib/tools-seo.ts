@@ -327,6 +327,8 @@ export function constructToolMetadata(toolKey: string): Metadata {
   const data = TOOLS_SEO_MAP[toolKey];
   if (!data) return {};
 
+  const ogImageUrl = `https://pdfpick.kr/api/og?title=${encodeURIComponent(data.title.trim())}&subtitle=${encodeURIComponent(data.description)}&badge=${encodeURIComponent("무료 PDF 웹 도구")}`;
+
   return {
     title: data.title.trim(),
     description: data.description,
@@ -347,7 +349,7 @@ export function constructToolMetadata(toolKey: string): Metadata {
       type: "website",
       images: [
         {
-          url: "https://pdfpick.kr/opengraph-image",
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: data.title.trim(),
@@ -358,7 +360,7 @@ export function constructToolMetadata(toolKey: string): Metadata {
       card: "summary_large_image",
       title: `${data.title.trim()} | pdfpick`,
       description: data.description,
-      images: ["https://pdfpick.kr/opengraph-image"],
+      images: [ogImageUrl],
     },
   };
 }

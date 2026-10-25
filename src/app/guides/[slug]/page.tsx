@@ -19,6 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = GUIDE_ARTICLES.find((a) => a.slug === params.slug);
   if (!article) return {};
 
+  const ogImageUrl = `https://pdfpick.kr/api/og?title=${encodeURIComponent(article.title)}&subtitle=${encodeURIComponent(article.summary)}&badge=${encodeURIComponent(`실무 가이드 · ${article.category}`)}`;
+
   return {
     title: `${article.title} - 실무 가이드`,
     description: article.summary,
@@ -42,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       authors: ["pdfpick Editorial Team"],
       images: [
         {
-          url: "https://pdfpick.kr/opengraph-image",
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: article.title,
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: `${article.title} - 실무 가이드 | pdfpick`,
       description: article.summary,
-      images: ["https://pdfpick.kr/opengraph-image"],
+      images: [ogImageUrl],
     },
   };
 }
@@ -64,13 +66,15 @@ export default function GuideDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const ogImageUrl = `https://pdfpick.kr/api/og?title=${encodeURIComponent(article.title)}&subtitle=${encodeURIComponent(article.summary)}&badge=${encodeURIComponent(`실무 가이드 · ${article.category}`)}`;
+
   // Schema.org Article JSON-LD
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
     description: article.summary,
-    image: "https://pdfpick.kr/opengraph-image",
+    image: ogImageUrl,
     author: {
       "@type": "Organization",
       name: "pdfpick Editorial Team",

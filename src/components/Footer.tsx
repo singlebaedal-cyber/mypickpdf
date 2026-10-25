@@ -216,6 +216,18 @@ export default function Footer() {
             <Link href="/guides/how-to-manage-pdf-on-galaxy-android" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
               갤럭시 카톡 PDF 압축·변환
             </Link>
+            <Link href="/guides/court-ecfs-pdf-page-numbers-merge" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors text-emerald-300 font-bold">
+              법원 전자소송 PDF 합치기·쪽번호
+            </Link>
+            <Link href="/guides/cheongyak-lh-housing-pdf-merge-compress" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors text-emerald-400">
+              청약홈·LH·은행 대출서류 PDF 병합
+            </Link>
+            <Link href="/guides/thesis-dissertation-pdfa-conversion-guide" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              대학원 학위논문 도서관 제출 PDF/A 변환
+            </Link>
+            <Link href="/guides/job-resume-portfolio-pdf-merge-compress" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              취업 포트폴리오·자소서 10MB 압축
+            </Link>
           </div>
         </div>
 

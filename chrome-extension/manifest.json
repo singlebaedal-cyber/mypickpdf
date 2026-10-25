@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "pdfpick (피디에프픽) - 무료 PDF 합치기·압축·편집·한글(HWPX) 변환",
+  "short_name": "pdfpick",
+  "version": "1.0.0",
+  "description": "로그인·설치·서버저장 없이 브라우저에서 1초 만에 끝내는 무료 PDF 도장·서명·주민번호 가리기·합치기·압축·HWP 한글 변환·AI 논문 번역 도구",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "pdfpick 무료 PDF 도구 열기"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["contextMenus"],
+  "homepage_url": "https://pdfpick.kr"
+}
