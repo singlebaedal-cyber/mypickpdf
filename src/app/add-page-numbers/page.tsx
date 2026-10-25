@@ -109,7 +109,7 @@ export default function AddPageNumbersPage() {
     },
     {
       question: "원본 PDF 파일이 서버로 전송되어 유출될 위험은 없나요?",
-      answer: "mypickpdf는 100% 브라우저 메모리(Client-Side)에서 직접 번호를 인쇄하므로 파일이 외부 서버로 전송되지 않아 기밀 문서도 완벽하게 안전합니다.",
+      answer: "pdfpick는 100% 브라우저 메모리(Client-Side)에서 직접 번호를 인쇄하므로 파일이 외부 서버로 전송되지 않아 기밀 문서도 완벽하게 안전합니다.",
     },
     {
       question: "총 페이지 수 형식(예: 1 / 15)으로도 매길 수 있나요?",

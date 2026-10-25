@@ -149,7 +149,7 @@ export default function VideoToGifPage() {
       // Auto download
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${file.name.replace(/\.[^/.]+$/, "")}_mypick.gif`;
+      a.download = `${file.name.replace(/\.[^/.]+$/, "")}_pdfpick.gif`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -375,7 +375,7 @@ export default function VideoToGifPage() {
             <div className="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
               <a
                 href={gifUrl}
-                download={`${file.name.replace(/\.[^/.]+$/, "")}_mypick.gif`}
+                download={`${file.name.replace(/\.[^/.]+$/, "")}_pdfpick.gif`}
                 className="flex-1 py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-base shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
               >
                 <Download className="w-5 h-5" />

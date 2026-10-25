@@ -5,6 +5,7 @@ import ToolHeader from "@/components/ToolHeader";
 import FileDropzone from "@/components/FileDropzone";
 import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
+import DeepGuideSection from "@/components/DeepGuideSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import MascotActionNotice from "@/components/MascotActionNotice";
@@ -13,8 +14,13 @@ import StepBadge from "@/components/StepBadge";
 import { reportAppError } from "@/lib/app-events";
 import { mergePDFs, downloadBlob } from "@/lib/pdf-utils";
 import { FileText, ArrowUp, ArrowDown, Trash2, Download, CheckCircle, Plus, UploadCloud } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+import { getToolContent } from "@/lib/tool-content-data";
 
 export default function MergePdfPage() {
+  const { t, lang } = useLanguage();
+  const toolContent = getToolContent("merge-pdf", lang);
+  const ui = toolContent.ui || {};
   const [files, setFiles] = useState<File[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -154,11 +160,11 @@ export default function MergePdfPage() {
   const faqItems = [
     {
       question: "PDF 합치기 기능은 정말 100% 무료인가요?",
-      answer: "네, mypickpdf의 모든 PDF 도구는 회원가입이나 유료 결제 없이 평생 100% 무료로 무제한 사용하실 수 있습니다.",
+      answer: "네, pdfpick의 모든 PDF 도구는 회원가입이나 유료 결제 없이 평생 100% 무료로 무제한 사용하실 수 있습니다.",
     },
     {
       question: "업로드한 중요 문서가 유출될 위험은 없나요?",
-      answer: "전혀 없습니다. mypickpdf는 일반 사이트와 달리 사용자의 파일을 외부 서버로 전송하지 않고 사용자의 웹 브라우저 메모리(Client-side) 안에서만 처리합니다. 따라서 어떠한 개인정보나 문서 데이터도 서버에 남지 않습니다.",
+      answer: "전혀 없습니다. pdfpick는 일반 사이트와 달리 사용자의 파일을 외부 서버로 전송하지 않고 사용자의 웹 브라우저 메모리(Client-side) 안에서만 처리합니다. 따라서 어떠한 개인정보나 문서 데이터도 서버에 남지 않습니다.",
     },
     {
       question: "몇 개의 파일까지 한 번에 합칠 수 있나요?",
@@ -167,6 +173,22 @@ export default function MergePdfPage() {
     {
       question: "스마트폰이나 태블릿에서도 합치기가 가능한가요?",
       answer: "네! 아이폰(Safari), 갤럭시(Chrome), 아이패드 등 모든 모바일 기기의 웹 브라우저에서 동일하게 간편하게 사용하실 수 있습니다.",
+    },
+    {
+      question: "가로 방향(Landscape)과 세로 방향(Portrait) 문서가 섞여 있어도 정상 병합되나요?",
+      answer: "네! 각 페이지 고유의 회전 각도 및 가로세로 규격(A4, A3, Letter 등)이 왜곡 없이 그대로 유지된 상태로 하나의 통일된 마스터 PDF 파일로 정교하게 결합됩니다.",
+    },
+    {
+      question: "합친 후 특정 문서의 순서를 바꾸고 싶으면 어떻게 하나요?",
+      answer: "파일 목록 카드에 있는 '위로 이동(↑)' 및 '아래로 이동(↓)' 화살표 버튼을 누르거나, 마우스로 드래그하여 원하는 순서(표지 ➔ 목차 ➔ 본문 ➔ 부록)로 손쉽게 재배치할 수 있습니다.",
+    },
+    {
+      question: "여러 문서를 합쳤더니 용량이 너무 커져 이메일 첨부가 안 되면 어떻게 하나요?",
+      answer: "문서들을 합친 후 pdfpick의 [PDF 압축 도구]를 연속으로 이용하시면, 텍스트 가독성을 100% 보존하면서 용량만 50~80% 줄여 이메일 및 채용 사이트 첨부 규격에 맞추실 수 있습니다.",
+    },
+    {
+      question: "합쳐진 완성본 문서에 일괄적으로 쪽번호(페이지 번호)를 매길 수 있나요?",
+      answer: "네! 병합된 PDF를 pdfpick의 [페이지 번호 매기기] 도구에 넣으시면, 표지를 제외하고 2~3페이지부터 시작하여 하단 중앙에 깔끔한 페이지 번호를 일괄 삽입하실 수 있습니다.",
     },
   ];
 
@@ -332,9 +354,9 @@ export default function MergePdfPage() {
                     </div>
                     <div className="min-w-0">
                       <div className="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2 flex-wrap">
-                        <span>➕ 합칠 두 번째 PDF 파일 추가하기</span>
+                        <span>{ui.btn_add_second || "➕ 합칠 두 번째 PDF 파일 추가하기"}</span>
                         <span className="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-rose-600 text-white">
-                          필수 (1개 더 필요)
+                          {ui.badge_required || "필수 (1개 더 필요)"}
                         </span>
                       </div>
                       <p className="text-xs text-slate-600 mt-1">
@@ -346,7 +368,7 @@ export default function MergePdfPage() {
                   <div className="pointer-events-none shrink-0 w-full sm:w-auto">
                     <span className="w-full sm:w-auto px-5 py-2.5 bg-rose-600 group-hover:bg-rose-700 text-white font-extrabold text-xs rounded-xl shadow-md shadow-rose-600/20 transition-all flex items-center justify-center gap-1.5">
                       <UploadCloud className="w-4 h-4" />
-                      <span>두 번째 파일 선택하기</span>
+                      <span>{ui.btn_select_second || "두 번째 파일 선택하기"}</span>
                     </span>
                   </div>
                 </div>
@@ -367,7 +389,7 @@ export default function MergePdfPage() {
                   }`}
                 >
                   <Plus className="w-4 h-4 pointer-events-none" />
-                  <span className="pointer-events-none">문서 더 추가하기 (클릭 또는 파일 드래그)</span>
+                  <span className="pointer-events-none">{ui.btn_add_more || "문서 더 추가하기 (클릭 또는 파일 드래그)"}</span>
                 </div>
               )}
             </div>
@@ -379,8 +401,8 @@ export default function MergePdfPage() {
                   step={1}
                   label={
                     files.length < 2
-                      ? "1단계: 합칠 두 번째 PDF 파일을 등록해 주세요"
-                      : `1단계: 아래 버튼을 누르면 ${files.length}개 문서가 하나로 합쳐집니다!`
+                      ? ui.step1_need_more || "1단계: 합칠 두 번째 PDF 파일을 등록해 주세요"
+                      : (ui.step1_ready || "1단계: 아래 버튼을 누르면 {count}개 문서가 하나로 합쳐집니다!").replace("{count}", String(files.length))
                   }
                   isCurrent={true}
                   isCompleted={false}
@@ -389,7 +411,7 @@ export default function MergePdfPage() {
                   onClick={() => setFiles([])}
                   className="text-xs font-semibold text-slate-400 hover:text-rose-600 transition-colors ml-2"
                 >
-                  전체 초기화
+                  {ui.btn_reset || "전체 초기화"}
                 </button>
               </div>
 
@@ -400,7 +422,7 @@ export default function MergePdfPage() {
                   className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-rose-600 via-red-600 to-rose-600 hover:from-rose-700 hover:to-red-700 text-white font-black text-base rounded-2xl shadow-xl shadow-rose-600/30 ring-4 ring-rose-400/50 animate-pulse hover:scale-105 transition-all flex items-center justify-center gap-2.5"
                 >
                   <Plus className="w-5 h-5 stroke-[2.5]" />
-                  <span>👉 두 번째 PDF 파일 추가하기 (클릭)</span>
+                  <span>{ui.btn_cta_add || "👉 두 번째 PDF 파일 추가하기 (클릭)"}</span>
                 </button>
               ) : (
                 <button
@@ -419,9 +441,9 @@ export default function MergePdfPage() {
               <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50 border border-emerald-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in">
                 <MascotActionNotice
                   mood="hooray"
-                  title="PDF 병합이 성공적으로 완료되었습니다!"
-                  description="모든 문서들이 지정한 순서대로 하나로 합쳐졌습니다. 아래 [합쳐진 PDF 다운로드] 버튼을 눌러 새 문서를 저장하세요!"
-                  actionHint="[합쳐진 PDF 다시 다운로드] 버튼을 클릭하세요"
+                  title={ui.notice_success_title || "PDF 병합이 성공적으로 완료되었습니다!"}
+                  description={ui.notice_success_desc || "모든 문서들이 지정한 순서대로 하나로 합쳐졌습니다. 아래 [합쳐진 PDF 다운로드] 버튼을 눌러 새 문서를 저장하세요!"}
+                  actionHint={ui.action_hint || "[합쳐진 PDF 다시 다운로드] 버튼을 클릭하세요"}
                   className="border-0 bg-transparent p-0 flex-1 shadow-none"
                 />
                 <button
@@ -429,7 +451,7 @@ export default function MergePdfPage() {
                   className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 flex items-center gap-2 shrink-0 hover:scale-105 transition-transform"
                 >
                   <Download className="w-4 h-4" />
-                  <span>합쳐진 PDF 다시 다운로드</span>
+                  <span>{ui.btn_redownload || "합쳐진 PDF 다시 다운로드"}</span>
                 </button>
               </div>
             )}
@@ -441,23 +463,21 @@ export default function MergePdfPage() {
       <AdBanner format="horizontal" />
 
       {/* SEO & AEO Optimized How-To Section */}
-      <HowToSection toolName="PDF 합치기" steps={howToSteps} />
+      <HowToSection toolSlug="merge-pdf" />
+
+      <DeepGuideSection toolSlug="merge-pdf" />
 
       {/* Bottom Ad Slot */}
       <AdBanner format="responsive" />
 
       {/* AEO Optimized FAQ Section (JSON-LD FAQPage included) */}
-      <FaqSection
-        title="PDF 합치기 자주 묻는 질문"
-        subtitle="로그인 없이 안전하게 문서를 병합하는 방법에 대한 궁금증을 풀어드립니다."
-        items={faqItems}
-      />
+      <FaqSection toolSlug="merge-pdf" />
 
       {/* Loading Modal with In-Process Ad */}
       <ProcessingOverlay
         isProcessing={isProcessing}
         progress={progress}
-        message="PDF 문서들을 안전하게 병합하고 있습니다..."
+        message={ui.processing_msg || "PDF 문서들을 안전하게 병합하고 있습니다..."}
       />
     </div>
   );

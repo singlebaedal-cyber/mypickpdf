@@ -12,7 +12,7 @@ import { Code2, Download, CheckCircle, Upload } from "lucide-react";
 
 export default function HtmlToPdfPage() {
   const [htmlCode, setHtmlCode] = useState<string>(
-    "<h1>안녕하세요! mypickpdf입니다.</h1>\n<p>이곳에 HTML 코드를 입력하거나 .html 파일을 불러와서 인쇄용 PDF로 변환하세요.</p>"
+    "<h1>안녕하세요! pdfpick입니다.</h1>\n<p>이곳에 HTML 코드를 입력하거나 .html 파일을 불러와서 인쇄용 PDF로 변환하세요.</p>"
   );
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);

@@ -1,176 +1,311 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0">
   <channel>
-    <title>mypickpdf (마이픽피디에프) - 무료 PDF 합치기·압축·변환 &amp; 실전 가이드</title>
-    <link>https://mypickpdf.vercel.app</link>
-    <description>로그인 없이 브라우저에서 무료로 즐기는 올인원 PDF 솔루션 &amp; 20가지 PDF 실전 활용 가이드</description>
+    <title><![CDATA[pdfpick (피디에프픽) - 무료 PDF 합치기·압축·변환·편집 & 실전 가이드]]></title>
+    <link>https://pdfpick.kr/</link>
+    <description><![CDATA[로그인 없이 브라우저에서 무료로 즐기는 올인원 PDF 솔루션(서버저장 0%) 및 실전 활용 가이드]]></description>
     <language>ko</language>
-    <lastBuildDate>Mon, 28 Sep 2026 14:00:00 GMT</lastBuildDate>
-    <atom:link href="https://mypickpdf.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
-    
+    <lastBuildDate>Sun, 25 Oct 2026 10:50:00 +0900</lastBuildDate>
     <item>
-      <title>무료 PDF 합치기 (다중 PDF 초고속 병합)</title>
-      <link>https://mypickpdf.vercel.app/merge-pdf</link>
-      <description>여러 개의 PDF 파일을 하나의 단일 문서로 순서대로 합치는 무료 웹 도구</description>
-      <guid>https://mypickpdf.vercel.app/merge-pdf</guid>
+      <title><![CDATA[PDF 도장 찍기·전자서명 넣기 무료 방법 (투명 배경 자동 누끼 지원)]]></title>
+      <link>https://pdfpick.kr/guides/pdf-stamp-and-signature-free</link>
+      <description><![CDATA[계약서, 견적서, 동의서 PDF 파일에 프로그램 설치 없이 회사 직인 도장 이미지(투명 배경)나 자필 전자서명을 10초 만에 찍어 저장하는 실무 가이드]]></description>
+      <guid>https://pdfpick.kr/guides/pdf-stamp-and-signature-free</guid>
+      <pubDate>Sun, 25 Oct 2026 10:50:00 +0900</pubDate>
     </item>
     <item>
-      <title>무료 PDF 용량 줄이기 (품질 유지 초고속 PDF 압축)</title>
-      <link>https://mypickpdf.vercel.app/compress-pdf</link>
-      <description>화질 저하 없이 이메일/업로드용 대용량 PDF 용량을 최대 80% 축소</description>
-      <guid>https://mypickpdf.vercel.app/compress-pdf</guid>
+      <title><![CDATA[PDF 주민등록번호·계좌번호·개인정보 마스킹(가리기) 화이트아웃 완벽 가이드]]></title>
+      <link>https://pdfpick.kr/guides/pdf-redact-personal-info-whiteout</link>
+      <description><![CDATA[등본, 계약서, 통장사본 PDF 제출 전 주민번호 뒷자리와 민감한 금액·주소를 복구 불가능하게 영구 마스킹(화이트아웃) 처리하는 보안 노하우]]></description>
+      <guid>https://pdfpick.kr/guides/pdf-redact-personal-info-whiteout</guid>
+      <pubDate>Sat, 24 Oct 2026 18:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>무료 PDF 나누기 / 분할 / 낱장 추출</title>
-      <link>https://mypickpdf.vercel.app/split-pdf</link>
-      <description>원하는 페이지 범위만 선택하여 추출하거나 모든 페이지를 개별 파일로 분할</description>
-      <guid>https://mypickpdf.vercel.app/split-pdf</guid>
+      <title><![CDATA[영문 PDF 논문·해외 전공서적 레이아웃(표·수식·2단) 깨짐 없이 한국어로 번역하는 법]]></title>
+      <link>https://pdfpick.kr/guides/translate-english-paper-pdf-korean</link>
+      <description><![CDATA[2단 컬럼 학술 논문(IEEE, Springer, Nature), 영문 계약서, 해외 IR 보고서를 표와 그래프 서식 그대로 유지하며 AI 번역하고 좌우 대조본까지 만드는 꿀팁]]></description>
+      <guid>https://pdfpick.kr/guides/translate-english-paper-pdf-korean</guid>
+      <pubDate>Fri, 23 Oct 2026 15:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>PDF HWP 한글 변환 (공공기관 서식 지원)</title>
-      <link>https://mypickpdf.vercel.app/pdf-to-hwp</link>
-      <description>PDF 문서를 한글 HWPX 문서로 변환하여 한컴오피스에서 편집 가능</description>
-      <guid>https://mypickpdf.vercel.app/pdf-to-hwp</guid>
+      <title><![CDATA[정부24·나라장터·홈택스 제출용 PDF 용량 줄이기 & HWP 한글 변환 실무 총정리]]></title>
+      <link>https://pdfpick.kr/guides/gov24-nara-pdf-size-and-hwp-tips</link>
+      <description><![CDATA[관공서·공공기관 민원 서류 제출 시 가장 많이 겪는 첨부파일 용량 초과 오류 해결법과 공고문 PDF를 아래아한글(HWP·HWPX)로 변환해 바로 작성하는 실전 노하우]]></description>
+      <guid>https://pdfpick.kr/guides/gov24-nara-pdf-size-and-hwp-tips</guid>
+      <pubDate>Thu, 22 Oct 2026 12:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>JPG/PNG 이미지 PDF 변환</title>
-      <link>https://mypickpdf.vercel.app/image-to-pdf</link>
-      <description>스마트폰 사진이나 캡처 이미지를 고화질 PDF 문서로 일괄 변환</description>
-      <guid>https://mypickpdf.vercel.app/image-to-pdf</guid>
+      <title><![CDATA[무료 온라인 PDF 편집기 - 텍스트 수정·서명·도장·화이트아웃]]></title>
+      <link>https://pdfpick.kr/edit-pdf</link>
+      <description><![CDATA[설치 없이 웹에서 바로 쓰는 무료 온라인 PDF 편집기. 텍스트 추가, 오타 수정, 전자서명, 도장 날인, 개인정보 가리기(화이트아웃) 제공]]></description>
+      <guid>https://pdfpick.kr/edit-pdf</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>동영상 용량 줄이기 / 동영상 압축</title>
-      <link>https://mypickpdf.vercel.app/compress-video</link>
-      <description>카카오톡, 이메일 전송용 MP4/MOV 동영상 파일 용량 초고속 압축</description>
-      <guid>https://mypickpdf.vercel.app/compress-video</guid>
+      <title><![CDATA[무료 AI PDF 번역기 - 18개 언어 대조본 및 원문 서식 보존 번역]]></title>
+      <link>https://pdfpick.kr/translate-pdf</link>
+      <description><![CDATA[PDF 논문, 해외 계약서, 매뉴얼을 원문 서식 그대로 번역하고 좌우 대조본 및 단독 번역본 PDF로 즉시 다운로드]]></description>
+      <guid>https://pdfpick.kr/translate-pdf</guid>
+      <pubDate>Wed, 21 Oct 2026 08:55:00 +0900</pubDate>
     </item>
     <item>
-      <title>동영상 GIF 움직이는 짤 변환</title>
-      <link>https://mypickpdf.vercel.app/video-to-gif</link>
-      <description>동영상 클립을 고화질 GIF 움짤로 변환하여 블로그, 커뮤니티 공유</description>
-      <guid>https://mypickpdf.vercel.app/video-to-gif</guid>
-    </item>
-
-    <!-- 20 Practical SEO Guides -->
-    <item>
-      <title>프로그램 설치 없이 여러 PDF 하나로 합치는 가장 쉬운 방법</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-merge-pdf-free</link>
-      <description>비싼 유료 프로그램이나 무거운 소프트웨어 설치 없이 웹 브라우저에서 1초 만에 여러 개의 PDF 파일을 순서대로 병합하는 꿀팁</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-merge-pdf-free</guid>
+      <title><![CDATA[무료 PDF 합치기 (다중 PDF 초고속 병합)]]></title>
+      <link>https://pdfpick.kr/merge-pdf</link>
+      <description><![CDATA[여러 개의 PDF 파일을 하나의 단일 문서로 순서대로 합치는 무료 웹 도구 (100% 로컬 처리)]]></description>
+      <guid>https://pdfpick.kr/merge-pdf</guid>
+      <pubDate>Wed, 21 Oct 2026 08:50:00 +0900</pubDate>
     </item>
     <item>
-      <title>PDF 파일 용량 80% 줄이는 꿀팁: 화질 깨짐 없이 압축하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-compress-pdf-80-percent</link>
-      <description>이메일 첨부나 공공기관 제출 시 용량 초과 오류를 완벽하게 해결하는 화질 보존 PDF 압축 노하우</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-compress-pdf-80-percent</guid>
+      <title><![CDATA[무료 PDF 용량 줄이기 (품질 유지 초고속 PDF 압축)]]></title>
+      <link>https://pdfpick.kr/compress-pdf</link>
+      <description><![CDATA[화질 저하 없이 이메일/업로드용 대용량 PDF 용량을 최대 80% 축소]]></description>
+      <guid>https://pdfpick.kr/compress-pdf</guid>
+      <pubDate>Wed, 21 Oct 2026 08:45:00 +0900</pubDate>
     </item>
     <item>
-      <title>대용량 PDF에서 원하는 페이지만 쏙쏙 골라 나누고 추출하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-split-pdf-pages</link>
-      <description>수백 장짜리 PDF에서 필요한 몇 페이지만 개별 문서로 분리하거나 낱장으로 쪼개는 3초 꿀팁</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-split-pdf-pages</guid>
+      <title><![CDATA[무료 PDF 나누기 / 분할 / 특정 페이지 추출]]></title>
+      <link>https://pdfpick.kr/split-pdf</link>
+      <description><![CDATA[원하는 페이지 범위만 선택하여 추출하거나 모든 페이지를 개별 파일로 분할]]></description>
+      <guid>https://pdfpick.kr/split-pdf</guid>
+      <pubDate>Wed, 21 Oct 2026 08:40:00 +0900</pubDate>
     </item>
     <item>
-      <title>PDF를 아래아한글(HWPX)로 변환하여 바로 편집하는 무료 방법</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-hwp</link>
-      <description>대한민국 공공기관, 관공서 서식이나 학교 보고서 제출용 한글(HWPX) 문서로 즉시 변환하는 방법</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-hwp</guid>
+      <title><![CDATA[PDF HWP·HWPX 한글 변환 (공공기관 서식 지원)]]></title>
+      <link>https://pdfpick.kr/pdf-to-hwp</link>
+      <description><![CDATA[PDF 문서를 한글 HWP/HWPX 문서로 변환하여 한컴오피스에서 즉시 편집 가능]]></description>
+      <guid>https://pdfpick.kr/pdf-to-hwp</guid>
+      <pubDate>Wed, 21 Oct 2026 08:35:00 +0900</pubDate>
     </item>
     <item>
-      <title>스마트폰 사진(JPG, PNG) 여러 장을 고화질 PDF 하나로 묶기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-jpg-to-pdf</link>
-      <description>영수증, 신분증, 강의 필기 캡처 사진을 순서대로 깔끔하게 하나의 PDF 전자문서로 만드는 방법</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-jpg-to-pdf</guid>
+      <title><![CDATA[PDF 워드(DOCX) 변환기]]></title>
+      <link>https://pdfpick.kr/pdf-to-word</link>
+      <description><![CDATA[PDF 문서를 편집 가능한 Microsoft Word(.docx) 문서로 즉시 변환]]></description>
+      <guid>https://pdfpick.kr/pdf-to-word</guid>
+      <pubDate>Wed, 21 Oct 2026 08:30:00 +0900</pubDate>
     </item>
     <item>
-      <title>PDF 문서를 워드(DOCX)로 변환하여 텍스트 수정하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-word</link>
-      <description>원본 레이아웃과 폰트 스타일을 최대한 보존하며 마이크로소프트 워드 문서로 즉각 변환하는 방법</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-word</guid>
+      <title><![CDATA[PDF 엑셀(XLSX) 표 추출 변환기]]></title>
+      <link>https://pdfpick.kr/pdf-to-excel</link>
+      <description><![CDATA[PDF 속 표와 재무제표 데이터를 엑셀 스프레드시트로 깔끔하게 추출]]></description>
+      <guid>https://pdfpick.kr/pdf-to-excel</guid>
+      <pubDate>Wed, 21 Oct 2026 08:25:00 +0900</pubDate>
     </item>
     <item>
-      <title>PDF 속 복잡한 표를 엑셀(XLSX) 시트로 깔끔하게 변환하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-excel</link>
-      <description>일일이 타이핑할 필요 없이 재무제표, 결산서 등 PDF 표 데이터를 엑셀 행/열로 정렬하여 추출</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-excel</guid>
+      <title><![CDATA[PDF 파워포인트(PPTX) 변환기]]></title>
+      <link>https://pdfpick.kr/pdf-to-powerpoint</link>
+      <description><![CDATA[PDF 발표 자료를 편집 가능한 파워포인트 슬라이드로 변환]]></description>
+      <guid>https://pdfpick.kr/pdf-to-powerpoint</guid>
+      <pubDate>Wed, 21 Oct 2026 08:20:00 +0900</pubDate>
     </item>
     <item>
-      <title>PDF 발표자료를 파워포인트(PPTX) 슬라이드로 복원하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-powerpoint</link>
-      <description>슬라이드 원본 PPT 파일이 분실되었을 때 PDF 발표자료로부터 편집 가능한 슬라이드를 복원하는 방법</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-powerpoint</guid>
+      <title><![CDATA[JPG/PNG 이미지 PDF 변환]]></title>
+      <link>https://pdfpick.kr/image-to-pdf</link>
+      <description><![CDATA[스마트폰 사진이나 캡처 이미지를 고화질 A4 PDF 문서로 일괄 변환]]></description>
+      <guid>https://pdfpick.kr/image-to-pdf</guid>
+      <pubDate>Wed, 21 Oct 2026 08:15:00 +0900</pubDate>
     </item>
     <item>
-      <title>카카오톡/이메일 대용량 동영상 용량 줄이기: 화질 저하 없는 압축</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-compress-video-for-kakaotalk</link>
-      <description>카카오톡 300MB 전송 제한, 네이버 메일 첨부 불가 문제를 초고속으로 해결하는 웹 동영상 압축 노하우</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-compress-video-for-kakaotalk</guid>
+      <title><![CDATA[PDF JPG 고화질 이미지 변환]]></title>
+      <link>https://pdfpick.kr/pdf-to-image</link>
+      <description><![CDATA[PDF 각 페이지를 고해상도 JPG/PNG 이미지로 추출 및 일괄 저장]]></description>
+      <guid>https://pdfpick.kr/pdf-to-image</guid>
+      <pubDate>Wed, 21 Oct 2026 08:10:00 +0900</pubDate>
     </item>
     <item>
-      <title>동영상 클립을 고화질 GIF 움짤로 변환하는 가장 빠른 방법</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-make-gif-from-video</link>
-      <description>포토샵이나 복잡한 편집 툴 없이 웹 브라우저에서 원하는 동영상 구간을 고화질 GIF로 1초 만에 추출</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-make-gif-from-video</guid>
+      <title><![CDATA[동영상 용량 줄이기 / MP4 동영상 압축]]></title>
+      <link>https://pdfpick.kr/compress-video</link>
+      <description><![CDATA[카카오톡, 이메일 전송용 MP4/MOV 동영상 파일 용량 초고속 로컬 압축]]></description>
+      <guid>https://pdfpick.kr/compress-video</guid>
+      <pubDate>Wed, 21 Oct 2026 08:05:00 +0900</pubDate>
     </item>
     <item>
-      <title>회사 기밀 문서·개인정보 유출 제로! 왜 로컬 브라우저 PDF 처리가 안전할까?</title>
-      <link>https://mypickpdf.vercel.app/guides/client-side-pdf-security</link>
-      <description>기존 온라인 PDF 변환 사이트의 서버 저장 위험성과 mypickpdf의 100% 클라이언트 사이드 WebAssembly 보안 메커니즘</description>
-      <guid>https://mypickpdf.vercel.app/guides/client-side-pdf-security</guid>
+      <title><![CDATA[동영상 GIF 움직이는 짤(움짤) 변환]]></title>
+      <link>https://pdfpick.kr/video-to-gif</link>
+      <description><![CDATA[동영상 클립을 워터마크 없는 고화질 GIF 움짤로 변환]]></description>
+      <guid>https://pdfpick.kr/video-to-gif</guid>
+      <pubDate>Wed, 21 Oct 2026 08:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>인쇄 및 보고서 제출 전 필수! PDF에 쪽 번호 일괄 삽입하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-add-page-numbers-to-pdf</link>
-      <description>페이지 번호가 누락된 논문, 제안서, 보고서에 원하는 위치와 양식으로 페이지 번호를 자동 매기는 법</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-add-page-numbers-to-pdf</guid>
+      <title><![CDATA[갤럭시 스마트폰에서 앱 설치 없이 카톡으로 받은 PDF 변환·압축·편집하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-manage-pdf-on-galaxy-android</link>
+      <description><![CDATA[삼성 인터넷, 크롬, 카카오톡 인앱 브라우저 어디서나 별도 어플 설치 없이 대용량 PDF를 가볍게 압축하고 즉시 카톡으로 전송하는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-manage-pdf-on-galaxy-android</guid>
+      <pubDate>Wed, 21 Oct 2026 07:30:00 +0900</pubDate>
     </item>
     <item>
-      <title>계약서 무단 도용 방지! PDF에 대외비 워터마크 넣는 법</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-add-watermark-to-pdf</link>
-      <description>회사 보안 문서나 견적서에 [대외비 / CONFIDENTIAL / 사본] 텍스트 워터마크를 투명도 조절하여 깔끔하게 삽입</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-add-watermark-to-pdf</guid>
+      <title><![CDATA[아이폰·아이패드 사파리(Safari)에서 유료 앱 없이 PDF 합치고 서명하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-manage-pdf-on-iphone-ipad</link>
+      <description><![CDATA[iOS 파일 앱과 사파리 브라우저의 궁합을 활용하여 모바일에서 무거운 앱 없이 초고속으로 문서를 다루는 꿀팁]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-manage-pdf-on-iphone-ipad</guid>
+      <pubDate>Tue, 20 Oct 2026 18:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>스캔 후 거꾸로 뒤집힌 PDF 페이지 바르게 회전하는 방법</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-rotate-pdf-pages</link>
-      <description>스캐너로 입력받아 방향이 뒤죽박죽인 PDF 문서를 클릭 한 번으로 영구 90도/180도 회전 저장하기</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-rotate-pdf-pages</guid>
+      <title><![CDATA[공공기관 제출 및 영구 보관을 위한 ISO 국제표준 PDF/A 변환 가이드]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-pdf-to-pdfa-archive</link>
+      <description><![CDATA[시간이 지나도 폰트가 깨지지 않고 영구 보존이 가능한 공인 전자문서 표준 규격 PDF/A 변환 요령]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-pdf-to-pdfa-archive</guid>
+      <pubDate>Tue, 20 Oct 2026 12:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>스캔된 이미지 PDF에서 글자 복사하는 OCR 텍스트 추출 꿀팁</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-extract-text-ocr-pdf</link>
-      <description>드래그나 복사가 안 되는 이미지 형태의 PDF 문서에서 한글과 영문 텍스트를 인공지능 OCR로 추출</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-extract-text-ocr-pdf</guid>
+      <title><![CDATA[웹페이지(HTML) 코드와 디자인 레이아웃 그대로 고화질 PDF로 저장하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-html-to-pdf</link>
+      <description><![CDATA[온라인 기사, 영수증 웹페이지, 블로그 아티클을 잘림 없이 원본 비율 그대로 PDF 전자문서로 영구 보관]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-html-to-pdf</guid>
+      <pubDate>Mon, 19 Oct 2026 18:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>어도비 애크로뱃, 알PDF 유료 결제 대체! 평생 무료로 쓰는 브라우저 PDF 툴</title>
-      <link>https://mypickpdf.vercel.app/guides/best-free-alternative-to-adobe-alpdf</link>
-      <description>매달 청구되는 비싼 PDF 구독료를 아끼고 가볍고 빠른 웹 표준 툴로 갈아타는 방법</description>
-      <guid>https://mypickpdf.vercel.app/guides/best-free-alternative-to-adobe-alpdf</guid>
+      <title><![CDATA[어도비 애크로뱃·알PDF 유료 결제 대체! 평생 무료로 쓰는 웹 표준 PDF 툴]]></title>
+      <link>https://pdfpick.kr/guides/best-free-alternative-to-adobe-alpdf</link>
+      <description><![CDATA[매달 청구되는 비싼 PDF 구독료를 아끼고 가볍고 빠른 웹 표준 툴로 갈아타는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/best-free-alternative-to-adobe-alpdf</guid>
+      <pubDate>Mon, 19 Oct 2026 12:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>웹페이지(HTML) 레이아웃 그대로 고화질 PDF로 저장하는 방법</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-html-to-pdf</link>
-      <description>온라인 기사, 영수증 웹페이지, 블로그 아티클을 잘림 없이 원본 비율 그대로 PDF 전자문서로 영구 보관</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-html-to-pdf</guid>
+      <title><![CDATA[스캔된 이미지 PDF에서 글자 복사하는 AI OCR 텍스트 추출 실전 꿀팁]]></title>
+      <link>https://pdfpick.kr/guides/how-to-extract-text-ocr-pdf</link>
+      <description><![CDATA[드래그나 복사가 안 되는 이미지 형태의 PDF 문서에서 한글과 영문 텍스트를 인공지능 OCR로 추출]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-extract-text-ocr-pdf</guid>
+      <pubDate>Sun, 18 Oct 2026 12:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>공공기관 제출 및 장기 보관을 위한 ISO 표준 PDF/A 변환 가이드</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-pdfa-archive</link>
-      <description>시간이 지나도 폰트가 깨지지 않고 영구 보존이 가능한 공인 전자문서 표준 규격 PDF/A 변환 요령</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-convert-pdf-to-pdfa-archive</guid>
+      <title><![CDATA[스캔 후 거꾸로 뒤집히거나 옆으로 누운 PDF 페이지 바르게 회전 저장하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-rotate-pdf-pages</link>
+      <description><![CDATA[스캐너로 입력받아 방향이 뒤죽박죽인 PDF 문서를 클릭 한 번으로 영구 90도/180도 회전 저장하기]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-rotate-pdf-pages</guid>
+      <pubDate>Sat, 17 Oct 2026 12:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>아이폰/아이패드 사파리에서 어플 설치 없이 PDF 합치고 압축하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-manage-pdf-on-iphone-ipad</link>
-      <description>iOS 파일 앱과 사파리 브라우저의 궁합을 활용하여 모바일에서 무거운 앱 없이 초고속으로 문서를 다루는 꿀팁</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-manage-pdf-on-iphone-ipad</guid>
+      <title><![CDATA[계약서·도면 무단 도용 방지! PDF에 대외비 워터마크 투명하게 넣는 법]]></title>
+      <link>https://pdfpick.kr/guides/how-to-add-watermark-to-pdf</link>
+      <description><![CDATA[회사 보안 문서나 견적서에 대외비 / CONFIDENTIAL / 사본 텍스트 워터마크를 투명도 조절하여 깔끔하게 삽입]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-add-watermark-to-pdf</guid>
+      <pubDate>Fri, 16 Oct 2026 12:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>갤럭시 스마트폰에서 다운로드 없이 초고속으로 PDF 변환 및 압축하기</title>
-      <link>https://mypickpdf.vercel.app/guides/how-to-manage-pdf-on-galaxy-android</link>
-      <description>삼성 인터넷, 크롬, 카카오톡 인앱 브라우저 어디서나 별도 어플 설치 없이 대용량 PDF를 가볍게 압축하고 즉시 카톡으로 전송하는 방법</description>
-      <guid>https://mypickpdf.vercel.app/guides/how-to-manage-pdf-on-galaxy-android</guid>
+      <title><![CDATA[인쇄 및 보고서 제출 전 필수! PDF에 쪽번호(페이지 번호) 일괄 삽입하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-add-page-numbers-to-pdf</link>
+      <description><![CDATA[페이지 번호가 누락된 논문, 제안서, 보고서에 원하는 위치와 양식으로 페이지 번호를 자동 매기는 법]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-add-page-numbers-to-pdf</guid>
+      <pubDate>Thu, 15 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[회사 기밀 문서·개인정보 유출 제로! 로컬 브라우저 PDF 처리가 안전한 이유]]></title>
+      <link>https://pdfpick.kr/guides/client-side-pdf-security</link>
+      <description><![CDATA[기존 온라인 PDF 변환 사이트의 서버 저장 위험성과 pdfpick의 100% 클라이언트 사이드 WebAssembly 보안 메커니즘]]></description>
+      <guid>https://pdfpick.kr/guides/client-side-pdf-security</guid>
+      <pubDate>Wed, 14 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[동영상 클립을 고화질 GIF 움짤로 변환하는 가장 빠른 방법]]></title>
+      <link>https://pdfpick.kr/guides/how-to-make-gif-from-video</link>
+      <description><![CDATA[포토샵이나 복잡한 편집 툴 없이 웹 브라우저에서 원하는 동영상 구간을 고화질 GIF로 1초 만에 추출]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-make-gif-from-video</guid>
+      <pubDate>Tue, 13 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[카카오톡·이메일 대용량 동영상 용량 줄이기: 화질 저하 없는 MP4 압축]]></title>
+      <link>https://pdfpick.kr/guides/how-to-compress-video-for-kakaotalk</link>
+      <description><![CDATA[카카오톡 300MB 전송 제한, 네이버 메일 첨부 불가 문제를 초고속으로 해결하는 웹 동영상 압축 노하우]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-compress-video-for-kakaotalk</guid>
+      <pubDate>Mon, 12 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[PDF 발표자료를 파워포인트(PPTX) 슬라이드로 1초 만에 복원하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-pdf-to-powerpoint</link>
+      <description><![CDATA[슬라이드 원본 PPT 파일이 분실되었을 때 PDF 발표자료로부터 편집 가능한 슬라이드를 복원하는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-pdf-to-powerpoint</guid>
+      <pubDate>Sun, 11 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[PDF 속 복잡한 표와 숫자를 엑셀(XLSX) 시트로 깔끔하게 추출하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-pdf-to-excel</link>
+      <description><![CDATA[일일이 타이핑할 필요 없이 재무제표, 결산서 등 PDF 표 데이터를 엑셀 행/열로 정렬하여 추출]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-pdf-to-excel</guid>
+      <pubDate>Sat, 10 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[PDF 문서를 워드(DOCX)로 변환하여 서식 깨짐 없이 텍스트 수정하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-pdf-to-word</link>
+      <description><![CDATA[원본 레이아웃과 폰트 스타일을 최대한 보존하며 마이크로소프트 워드 문서로 즉각 변환하는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-pdf-to-word</guid>
+      <pubDate>Fri, 09 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[스마트폰 사진(JPG, PNG) 여러 장을 고화질 PDF 하나로 묶는 방법]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-jpg-to-pdf</link>
+      <description><![CDATA[영수증, 신분증, 강의 필기 캡처 사진을 순서대로 깔끔하게 하나의 PDF 전자문서로 만드는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-jpg-to-pdf</guid>
+      <pubDate>Thu, 08 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[PDF를 아래아한글(HWP·HWPX)로 변환하여 바로 편집하는 무료 방법]]></title>
+      <link>https://pdfpick.kr/guides/how-to-convert-pdf-to-hwp</link>
+      <description><![CDATA[대한민국 공공기관, 관공서 서식이나 학교 보고서 제출용 한글(HWPX) 문서로 즉시 변환하는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-convert-pdf-to-hwp</guid>
+      <pubDate>Wed, 07 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[대용량 PDF에서 원하는 페이지만 쏙쏙 골라 나누고 추출하기 (PDF 분할)]]></title>
+      <link>https://pdfpick.kr/guides/how-to-split-pdf-pages</link>
+      <description><![CDATA[수백 장짜리 PDF에서 필요한 몇 페이지만 개별 문서로 분리하거나 낱장으로 쪼개는 3초 꿀팁]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-split-pdf-pages</guid>
+      <pubDate>Tue, 06 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[PDF 파일 용량 80% 줄이는 꿀팁: 화질 깨짐 없이 초고속 압축하기]]></title>
+      <link>https://pdfpick.kr/guides/how-to-compress-pdf-80-percent</link>
+      <description><![CDATA[이메일 첨부나 공공기관 제출 시 용량 초과 오류를 완벽하게 해결하는 화질 보존 PDF 압축 노하우]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-compress-pdf-80-percent</guid>
+      <pubDate>Mon, 05 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[프로그램 설치 없이 여러 PDF 하나로 합치는 가장 쉬운 방법 (무료 병합 가이드)]]></title>
+      <link>https://pdfpick.kr/guides/how-to-merge-pdf-free</link>
+      <description><![CDATA[비싼 유료 프로그램이나 무거운 소프트웨어 설치 없이 웹 브라우저에서 1초 만에 여러 개의 PDF 파일을 순서대로 병합하는 꿀팁]]></description>
+      <guid>https://pdfpick.kr/guides/how-to-merge-pdf-free</guid>
+      <pubDate>Sun, 04 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[포트폴리오와 보고서의 완성도를 높이는 PDF 병합 및 일괄 쪽번호 매기기]]></title>
+      <link>https://pdfpick.kr/guides/portfolio-merge-and-page-numbering</link>
+      <description><![CDATA[서로 다른 프로그램에서 작성된 PDF들을 하나의 단일 문서로 합치고, 표지를 제외한 본문부터 일괄 쪽번호를 매기는 노하우]]></description>
+      <guid>https://pdfpick.kr/guides/portfolio-merge-and-page-numbering</guid>
+      <pubDate>Fri, 02 Oct 2026 15:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[스캔된 이미지 PDF에서 글자 복사 및 검색(OCR) 가능하게 만드는 방법]]></title>
+      <link>https://pdfpick.kr/guides/scanned-pdf-ocr-text-extraction</link>
+      <description><![CDATA[드래그나 글자 복사가 되지 않는 그림 형태의 스캔 PDF를 인공지능 OCR 기술로 텍스트 추출하는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/scanned-pdf-ocr-text-extraction</guid>
+      <pubDate>Fri, 02 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[스마트폰으로 찍은 서류·영수증 사진을 깨끗한 고화질 PDF로 10초 만에 묶기]]></title>
+      <link>https://pdfpick.kr/guides/smartphone-photo-to-clean-pdf</link>
+      <description><![CDATA[연말정산 영수증, 계약서, 신분증 사본을 스마트폰으로 촬영했을 때 깔끔한 A4 규격의 단일 PDF 문서로 묶는 방법]]></description>
+      <guid>https://pdfpick.kr/guides/smartphone-photo-to-clean-pdf</guid>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[사내 기밀 문서, 무료 온라인 PDF 툴에 업로드해도 안전할까? (로컬 브라우저 보안 기술의 비밀)]]></title>
+      <link>https://pdfpick.kr/guides/browser-local-pdf-security</link>
+      <description><![CDATA[서버 업로드 방식의 치명적 위험성과 WebAssembly 기반 100% 로컬 보안 기술의 차이를 상세히 분석합니다.]]></description>
+      <guid>https://pdfpick.kr/guides/browser-local-pdf-security</guid>
+      <pubDate>Wed, 30 Sep 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[공공기관 제출용 HWP·HWPX 한글 파일과 PDF 완벽 변환 및 깨짐 방지 팁]]></title>
+      <link>https://pdfpick.kr/guides/public-institution-hwp-pdf-guide</link>
+      <description><![CDATA[정부24, 조달청 나라장터, 국세청 홈택스 등 공공기관에 서류를 제출할 때 발생하는 HWP 서식 깨짐을 방지하고 완벽한 호환성을 확보하는 실무 노하우]]></description>
+      <guid>https://pdfpick.kr/guides/public-institution-hwp-pdf-guide</guid>
+      <pubDate>Tue, 29 Sep 2026 12:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[이메일 대용량 첨부 한계 극복: PDF 용량 80% 줄이는 완벽 압축 가이드]]></title>
+      <link>https://pdfpick.kr/guides/email-attachment-pdf-compression</link>
+      <description><![CDATA[네이버(10MB), 다음/한메일, 구글 지메일(25MB) 첨부 용량 제한을 우회하지 않고, 텍스트 가독성을 100% 보존하면서 PDF 용량만 최대 80% 스마트하게 줄이는 핵심 압축 기술]]></description>
+      <guid>https://pdfpick.kr/guides/email-attachment-pdf-compression</guid>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>

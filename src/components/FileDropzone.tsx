@@ -149,10 +149,10 @@ export default function FileDropzone({
 
       {/* Dynamic Title and Subtitle with pointer-events-none */}
       <div className="pointer-events-none">
-        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2 tracking-tight transition-colors">
+        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2 tracking-tight transition-colors [text-wrap:balance] break-keep">
           {isDragOver ? t("drop_drag_title") : displayTitle}
         </h3>
-        <p className="text-sm text-slate-500 mb-6 max-w-md transition-colors">
+        <p className="text-sm text-slate-500 mb-6 max-w-md mx-auto transition-colors [text-wrap:balance] break-keep">
           {isDragOver
             ? t("drop_drag_desc")
             : displaySubtitle}

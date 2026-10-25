@@ -1,224 +1,175 @@
 export const SITE_CONFIG = {
-  name: "mypickpdf",
-  brandName: "마이픽피디에프",
-  domain: "https://mypickpdf.vercel.app",
-  title: "무료 PDF 합치기·압축·변환 (프로그램 설치X, 서버저장 0%)",
-  description: "로그인이나 프로그램 설치 없이 1초 만에 무료로 끝내는 올인원 PDF 솔루션! PDF 합치기, 분할, 초고속 압축, 워드/엑셀/PPT/HWP 상호 변환 및 동영상 압축까지. 100% 브라우저 로컬 암호화 처리로 회사 기밀도 안전하게 보호됩니다.",
-  ogImage: "https://mypickpdf.vercel.app/mascot/mascot_main.png",
+  name: "pdfpick",
+  brandName: "피디에프픽 (pdfpick)",
+  domain: "https://pdfpick.kr",
+  title: "무료 온라인 PDF 도구 - 합치기·압축·편집·번역·HWP 한글 변환 (서버저장 0%) | 피디에프픽",
+  description:
+    "로그인·설치 없이 웹 브라우저에서 1초 만에 끝내는 무료 PDF 올인원 솔루션! PDF 합치기, 용량 줄이기(압축), 텍스트 수정·도장·서명 편집, AI 다국어 대조본 번역, 한글(HWP/HWPX)·워드·엑셀 변환까지. 100% 로컬 처리로 회사 기밀과 개인정보가 서버에 저장되지 않습니다.",
   keywords: [
-    // Brand & Direct
-    "mypickpdf",
-    "마이픽피디에프",
-    "mypickpdf online",
-    
-    // Korean High-Traffic SEO Keywords (네이버 & 구글 코리아 1위 타겟)
+    "pdfpick",
+    "피디에프픽",
     "PDF 합치기",
-    "PDF 합치기 무료",
-    "PDF 합치기 프로그램 없이",
-    "PDF 용량 줄이기",
+    "무료 PDF 합치기",
+    "PDF 병합",
     "PDF 압축",
-    "PDF 압축 무료",
+    "PDF 용량 줄이기",
+    "대용량 PDF 압축",
     "PDF 나누기",
     "PDF 분할",
     "PDF 페이지 추출",
-    "아이폰 PDF 합치기",
-    "갤럭시 PDF 합치기",
-    "워드 PDF 변환",
-    "파워포인트 PDF 변환",
-    "엑셀 PDF 변환",
-    "HTML PDF 변환",
-    "PDF 워드 변환",
-    "PDF 파워포인트 변환",
-    "PDF 엑셀 변환",
-    "PDF PDF/A 변환",
-    "JPG PDF 변환",
-    "이미지 PDF 변환",
-    "PDF JPG 변환",
-    "PDF 회전",
-    "PDF 페이지 번호",
-    "PDF 쪽번호",
-    "PDF 페이지 번호 매기기",
-    "PDF 워터마크",
-    "PDF 워터마크 추가",
-    "PDF 대외비 표시",
-    "PDF OCR 텍스트 추출",
-    "무료 PDF 변환기",
-    "무설치 PDF 툴",
-    "알PDF 무료 대체",
-    "어도비 애크로뱃 무료 대체",
+    "PDF 편집",
+    "무료 PDF 편집기",
+    "PDF 도장 찍기",
+    "PDF 서명 넣기",
+    "PDF 개인정보 가리기",
+    "PDF 주민번호 가리기",
+    "PDF 화이트아웃",
+    "PDF 한글 변환",
     "PDF HWP 변환",
     "PDF HWPX 변환",
-    "PDF 한글 변환",
-    "PDF 한글파일 변환",
-    "공공기관 한글 변환",
-    "동영상 압축",
+    "PDF 번역",
+    "영어 논문 PDF 번역",
+    "PDF 대조본 번역",
+    "PDF 워드 변환",
+    "PDF 엑셀 변환",
+    "PDF PPT 변환",
+    "JPG PDF 변환",
+    "PDF JPG 변환",
+    "PDF 쪽번호 매기기",
+    "PDF 워터마크 추가",
+    "PDF 회전",
+    "PDF OCR 글자 추출",
     "동영상 용량 줄이기",
     "동영상 GIF 변환",
-    "움짤 만들기",
-
-    // English Global High-Volume Keywords (Google US/UK/Global, Bing)
-    "merge pdf free",
-    "merge pdf online",
-    "combine pdf files",
-    "compress pdf free",
-    "reduce pdf size online",
-    "compress pdf without losing quality",
-    "split pdf pages",
-    "extract pdf pages",
-    "convert pdf to word docx",
-    "jpg to pdf converter",
-    "image to pdf",
-    "pdf to excel xlsx",
-    "pdf to powerpoint pptx",
-    "pdf to jpg converter",
-    "rotate pdf pages",
-    "add page numbers to pdf",
-    "add watermark to pdf",
-    "pdf ocr text extract",
-    "ilovepdf alternative free",
-    "smallpdf alternative free",
-    "adobe acrobat free alternative",
-    "client-side secure pdf converter",
-    "compress video online free",
-    "video to gif converter",
-
-    // Japanese High-Volume Keywords (Yahoo! JAPAN, Google JP)
-    "PDF 結合 無料",
-    "PDF 結合 オンライン",
-    "複数のPDFを一つにまとめる",
-    "PDF 圧縮 容量 軽くする",
-    "PDF 圧縮 無料",
-    "PDF 分割",
-    "PDF ページ 抽出",
-    "PDF ワード 変換",
-    "画像 PDF 変換",
-    "JPG PDF 変換",
-    "PDF エクセル 変換",
-    "PDF パワーポイント 変換",
-    "PDF ページ番号 追加",
-    "PDF 透かし 追加",
-    "PDF 回転",
-    "PDF OCR テキスト抽出",
-    "無料 PDF 編集 サイト",
-    "iLovePDF 代替 無料",
-    "Smallpdf 代替",
-    "安全なPDF変換 サーバー保存なし",
-    "動画 圧縮 無料",
-    "動画 GIF 変換",
-
-    // Spanish High-Volume Keywords (Google España / LatAm)
-    "unir pdf gratis",
-    "combinar pdf online",
-    "juntar archivos pdf",
-    "comprimir pdf gratis",
-    "reducir peso de pdf online",
-    "comprimir pdf sin perder calidad",
-    "dividir pdf extraer paginas",
-    "convertir pdf a word docx",
-    "pasar fotos a pdf",
-    "convertir pdf a excel xlsx",
-    "convertir pdf a powerpoint ppt",
-    "agregar numeros de pagina pdf",
-    "poner marca de agua a pdf",
-    "rotar pdf",
-    "alternativa ilovepdf gratis",
-    "comprimir video mp4 gratis",
-    "video a gif animado",
-
-    // Chinese Simplified & Traditional (Google, Baidu)
-    "PDF合并 免费",
-    "多个PDF合并为一个文件",
-    "PDF压缩 减小文件大小",
-    "保持画质压缩PDF",
-    "PDF拆分 提取页面",
-    "PDF转Word",
-    "图片转PDF",
-    "JPG转PDF",
-    "PDF转Excel表格",
-    "PDF转PPT幻灯片",
-    "PDF加页码",
-    "PDF添加水印",
-    "旋转PDF页面",
-    "PDF文本识别OCR",
-    "ilovepdf免费替代",
-    "本地安全PDF转换器 无需上传服务器",
-    "视频压缩 在线",
-    "视频转GIF动图"
   ],
-  author: "mypickpdf Team",
+  author: "pdfpick Team",
   contactEmail: "fbihan@naver.com",
   googleAdSensePublisherId: "ca-pub-3627143540462840",
-  naverSiteVerification: "6e99cef10e0d83ff11779a9206193559aee8eb28",
+  naverSiteVerification: "e39cf0c295093069a2d67e000797b3275af45d86",
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "G-C5NS93KXLR",
 };
 
-// Global WebApplication Schema for GEO & AEO
+// Global WebApplication Schema for GEO & AEO (Compliant with Google Structured Data Guidelines)
 export const WEB_APPLICATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "mypickpdf (마이픽피디에프)",
-  "alternateName": [
-    "mypickpdf",
-    "마이픽피디에프",
-    "mypickpdf - Free PDF Merge & Compress",
-    "mypickpdf - 無料PDF結合・圧縮",
-    "mypickpdf - Unir y Comprimir PDF Gratis",
-    "mypickpdf - 免费PDF合并与压缩"
-  ],
-  "url": "https://mypickpdf.vercel.app",
-  "description": "귀여운 래서팬더와 함께하는 무료 브라우저 기반 PDF 편집, 압축 및 오피스 상호 변환 올인원 웹 애플리케이션 (100% Client-Side Private)",
-  "keywords": "PDF 합치기, PDF 용량 줄이기, merge pdf, compress pdf, PDF 結合, PDF 圧縮, unir pdf, comprimir pdf, PDF合并, PDF压缩, client-side pdf",
-  "applicationCategory": "UtilityApplication",
-  "operatingSystem": "All (Windows, macOS, iOS, Android, Linux)",
-  "browserRequirements": "Requires JavaScript. Requires HTML5.",
-  "offers": {
+  name: "pdfpick (피디에프픽)",
+  alternateName: ["피디에프픽", "PDFPick", "pdfpick.kr"],
+  url: "https://pdfpick.kr",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "All (Windows, macOS, iOS, Android, Linux, ChromeOS)",
+  browserRequirements: "Requires JavaScript. Requires HTML5.",
+  description:
+    "프로그램 설치나 서버 업로드 없이 웹 브라우저 로컬 메모리(WebAssembly)에서 즉시 동작하는 100% 무료 PDF 편집·병합·압축·번역·한글(HWPX) 변환 웹 유틸리티",
+  inLanguage: "ko-KR",
+  offers: {
     "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "KRW"
+    price: "0",
+    priceCurrency: "KRW",
+    availability: "https://schema.org/InStock",
   },
-  "featureList": [
-    "로그인 및 회원가입 불필요",
-    "100% 브라우저 메모리 로컬 처리 (서버 전송 없음)",
-    "다중 PDF 파일 초고속 병합 및 분할",
-    "Word (.docx) ↔ PDF 상호 변환",
-    "Excel (.xlsx) ↔ PDF 상호 변환",
-    "PowerPoint (.pptx) ↔ PDF 상호 변환",
-    "HTML ➔ PDF 변환",
-    "PDF ➔ PDF/A 장기 보관 규격 변환",
-    "JPG/PNG 이미지 ↔ PDF 고화질 변환",
-    "PDF 회전 및 텍스트 추출",
-    "무제한 무료 사용"
-  ]
+  featureList: [
+    "100% 클라이언트 로컬 처리: 외부 서버 파일 업로드 0 바이트",
+    "로그인·회원가입·일일 횟수 제한 없는 완전 무료 PDF 도구",
+    "온라인 PDF 편집기: 텍스트 수정, 전자서명, 도장 날인, 형광펜, 개인정보 마스킹(화이트아웃)",
+    "AI 다국어 PDF 번역기: 18개 언어 원문 서식 유지 번역 및 좌우 대조본 PDF 생성",
+    "초고속 PDF 합치기(병합), 페이지 분할·추출, 화질 유지 용량 줄이기(압축)",
+    "공공기관 표준 아래아한글(HWP/HWPX), Word, Excel, PowerPoint, JPG 상호 변환",
+    "스캔 이미지 PDF 광학 문자 인식(OCR) 텍스트 추출 및 PDF/A 장기보관 규격 변환",
+    "고화질 MP4 동영상 용량 줄이기 및 GIF 움짤 변환",
+  ],
 };
 
-// FAQ Schema for Google Search Rich Snippet
+// Global Organization Schema
+export const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "pdfpick",
+  alternateName: "피디에프픽",
+  url: "https://pdfpick.kr",
+  logo: "https://pdfpick.kr/icon.png",
+  sameAs: ["https://pdfpick.kr"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: "fbihan@naver.com",
+    availableLanguage: ["Korean", "English", "Japanese"],
+  },
+};
+
+// Global FAQ Schema for Search Rich Snippets & AI Overviews
 export const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
+  mainEntity: [
     {
       "@type": "Question",
-      "name": "mypickpdf는 정말 무료이며 프로그램 설치가 필요 없나요?",
-      "acceptedAnswer": {
+      name: "pdfpick(피디에프픽)은 정말 로그인이나 회원가입 없이 무료인가요?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "네! mypickpdf는 프로그램 설치나 회원가입, 결제 없이 웹 브라우저에서 바로 사용할 수 있는 100% 무료 올인원 PDF 솔루션입니다."
-      }
+        text: "네! pdfpick은 어떠한 로그인, 개인정보 입력, 유료 결제 유도나 워터마크 없이 평생 100% 무료로 모든 PDF 변환 및 편집 도구를 무제한 제공합니다.",
+      },
     },
     {
       "@type": "Question",
-      "name": "업로드한 PDF 문서나 개인 정보가 서버에 저장되거나 유출되지 않나요?",
-      "acceptedAnswer": {
+      name: "문서 변환 및 편집 시 파일이 외부 서버에 저장되나요?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "절대 유출되지 않습니다. mypickpdf는 100% 클라이언트 사이드(Client-Side) WebAssembly 기술을 사용하여 사용자의 컴퓨터나 스마트폰 메모리 내에서 직접 처리합니다. 파일이 외부 서버로 전송되지 않으므로 회사 기밀 문서나 개인정보도 안전합니다."
-      }
+        text: "전혀 저장되지 않습니다. pdfpick은 최신 WebAssembly(Wasm) 기술을 통해 사용자의 PC나 스마트폰 웹 브라우저 메모리 안에서 100% 로컬 연산을 수행합니다. 문서가 외부 서버로 단 1바이트도 전송되지 않아 회사 기밀 계약서나 신분증·금융 서류도 완벽하게 보호됩니다.",
+      },
     },
     {
       "@type": "Question",
-      "name": "스마트폰(아이폰, 안드로이드)에서도 PDF를 합치거나 변환할 수 있나요?",
-      "acceptedAnswer": {
+      name: "공공기관 및 학교 제출용 한글(HWP/HWPX) 변환도 지원하나요?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "네! 모바일 사파리(Safari), 크롬(Chrome), 카카오톡 인앱 브라우저 등 모든 모바일 환경에서 별도 앱 설치 없이 터치 몇 번으로 손쉽게 PDF를 합치고 변환할 수 있습니다."
-      }
-    }
-  ]
+        text: "네! 정부24, 조달청 나라장터, 학교, 지자체 전자결재 표준 규격인 개방형 한글(HWPX) 및 HWP 포맷 변환을 지원하여 표와 텍스트를 한글 프로그램에서 즉시 수정할 수 있습니다.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "PDF에 도장을 찍거나 주민등록번호 뒷자리를 가릴 수 있나요?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "네! [PDF 편집] 도구에서 투명 배경 도장 이미지나 자필 전자서명을 원하는 위치에 날인할 수 있으며, 화이트아웃(가리기) 기능으로 주민등록번호, 계좌번호 등 민감한 개인정보를 영구 마스킹할 수 있습니다.",
+      },
+    },
+  ],
+};
+
+// Global HowTo Schema for Step-by-Step Google Rich Results
+export const HOWTO_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "프로그램 설치 및 서버 업로드 없이 무료로 PDF 합치기·압축·편집·변환하는 방법",
+  description:
+    "pdfpick을 활용하여 브라우저 로컬 환경에서 안전하게 PDF 문서를 병합, 분할, 용량 압축, 한글(HWPX)·오피스 변환하는 단계별 방법입니다.",
+  image: "https://pdfpick.kr/icon.png",
+  totalTime: "PT10S",
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "PDF 또는 오피스 문서 파일 선택",
+      text: "웹 브라우저 화면의 파일 영역에 문서를 끌어다 놓거나(드래그 앤 드롭) 파일 선택 버튼을 클릭합니다.",
+      url: "https://pdfpick.kr",
+    },
+    {
+      "@type": "HowToStep",
+      name: "편집·압축·변환 옵션 설정",
+      text: "페이지 순서 조정, 압축 강도 선택, 서명·도장 추가 또는 변환할 목표 포맷(HWPX, Word, Excel, JPG 등)을 선택합니다.",
+      url: "https://pdfpick.kr",
+    },
+    {
+      "@type": "HowToStep",
+      name: "100% 브라우저 로컬 초고속 처리",
+      text: "외부 서버 전송 없이 사용자의 기기 브라우저 메모리(WebAssembly) 안에서 1~3초 내에 안전하게 처리가 완료됩니다.",
+      url: "https://pdfpick.kr",
+    },
+    {
+      "@type": "HowToStep",
+      name: "완성된 파일 즉시 다운로드",
+      text: "다운로드 버튼을 눌러 워터마크나 횟수 제한 없이 완성된 문서를 내 기기에 즉시 저장합니다.",
+      url: "https://pdfpick.kr",
+    },
+  ],
 };

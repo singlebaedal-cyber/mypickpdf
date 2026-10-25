@@ -1,0 +1,578 @@
+{
+  "ko": {
+    "toolName": "PDF 용량 압축 & 파일 최적화",
+    "tagline": "화질 손상 없이 이메일 첨부 규격으로 감량하는 실무 가이드",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF 파일 업로드",
+        "desc": "용량을 줄이고 싶은 PDF 파일을 드래그 앤 드롭하거나 선택합니다."
+      },
+      {
+        "step": 2,
+        "title": "압축 강도 선택",
+        "desc": "권장 압축, 강력 압축 등 원하는 감량 비율과 화질 옵션을 선택합니다."
+      },
+      {
+        "step": 3,
+        "title": "압축 완료 및 다운로드",
+        "desc": "초경량화된 PDF 파일이 브라우저에서 1초 만에 완성되어 다운로드됩니다."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF 용량 압축 & 파일 최적화",
+      "tagline": "화질 손상 없이 이메일 첨부 규격으로 감량하는 실무 가이드",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "이메일 대용량 첨부 한계 극복 가이드",
+      "features": [
+        {
+          "title": "지능형 이미지 다운샘플링 (DPI 재조정)",
+          "description": "인쇄용 초고해상도(300 DPI) 이미지를 모니터 및 일반 출력에 최적화된 150 DPI 수준으로 스마트하게 재압축하여 크기를 최대 80% 줄입니다.",
+          "badge": "스마트 DPI"
+        },
+        {
+          "title": "벡터 폰트 & 텍스트 100% 무손실 보존",
+          "description": "본문의 글자, 도표 선, 로고 등 벡터 데이터는 해상도를 낮추지 않고 100% 원본 선명도를 유지하므로 확대해도 글자가 깨지지 않습니다.",
+          "badge": "무손실 텍스트"
+        },
+        {
+          "title": "불필요한 작업 메타데이터 정밀 제거",
+          "description": "한글, 워드, 파워포인트 등 편집 프로그램에서 누적된 작업 히스토리, 썸네일 캐시, 잉여 폰트 데이터를 깔끔하게 정리합니다.",
+          "badge": "메타데이터 소거"
+        }
+      ],
+      "proTips": [
+        "대기업/공공기관 채용 서류는 '권장 압축(Recommended)'을 선택하시면 서류 심사관의 모니터 열람 및 인쇄 가독성을 완벽하게 보장합니다.",
+        "네이버 메일(10MB) 및 채용 포털(사람인, 잡코리아) 등록 시 5MB 이하를 요구할 경우 '강력 압축(Extreme)'을 추천합니다.",
+        "이미지만으로 이루어진 스캔본 문서는 압축 효과가 가장 크며, 텍스트 위주 보고서는 10~30% 내외로 안정적인 감량이 이루어집니다."
+      ],
+      "securityNote": "pdfpick는 최신 WebAssembly(Wasm) 기술을 통해 사용자의 PC/스마트폰 브라우저 로컬 메모리 안에서만 압축을 수행합니다. 귀중한 계약서, 재무 보고서, 이력서 파일이 외부 원격 서버로 단 1바이트도 전송되지 않으므로 사내 보안 규정(DLP) 위반 걱정 없이 안전합니다."
+    },
+    "faqTitle": "PDF 압축 자주 묻는 질문",
+    "faqSubtitle": "화질 손상 없이 파일 용량을 줄이는 방법에 대한 궁금증을 풀어드립니다.",
+    "faqItems": [
+      {
+        "question": "PDF 압축을 실행하면 텍스트가 흐려지거나 깨지나요?",
+        "answer": "전혀 깨지지 않습니다. pdfpick는 본문 텍스트와 벡터 폰트의 해상도를 손상시키지 않고 그대로 유지합니다."
+      },
+      {
+        "question": "파일 용량은 보통 얼마나 줄어드나요?",
+        "answer": "고해상도 이미지가 포함된 문서는 50%~80% 이상 획기적으로 줄어들며, 일반 텍스트 문서는 10~30% 감량됩니다."
+      },
+      {
+        "question": "압축 작업 시 파일이 외부 서버로 전송되나요?",
+        "answer": "100% 브라우저 로컬 메모리 안에서만 처리되므로 외부 서버 전송이 전혀 없어 기밀 문서도 안전합니다."
+      }
+    ],
+    "ui": {
+      "btn_compress": "PDF 압축하기",
+      "mode_recommended": "권장 압축 (좋은 화질 + 용량 감량)",
+      "mode_extreme": "강력 압축 (최대 용량 절약)",
+      "mode_low": "가벼운 압축 (초고화질 유지)"
+    }
+  },
+  "en": {
+    "toolName": "Compress PDF & Optimize File Size",
+    "tagline": "Reduce PDF size for email attachment without losing clarity",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Drag and drop the PDF document you want to optimize."
+      },
+      {
+        "step": 2,
+        "title": "Choose Compression Level",
+        "desc": "Select Recommended, Extreme, or Light compression based on your file needs."
+      },
+      {
+        "step": 3,
+        "title": "Compress & Download",
+        "desc": "Your lightweight PDF is generated in 1 second right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF Compression & File Optimization",
+      "tagline": "Reduce PDF size for email attachment without losing clarity",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "Email Attachment Limit Overcoming Guide",
+      "features": [
+        {
+          "title": "Smart Image Downsampling (DPI Adjustment)",
+          "description": "Intelligently resamples print-grade 300 DPI images to screen-optimized 150 DPI, shrinking sizes up to 80%.",
+          "badge": "Smart DPI"
+        },
+        {
+          "title": "100% Lossless Vector Text Preservation",
+          "description": "Body text, diagrams, and logos remain pristine vectors without pixelation or blurriness even when zoomed in.",
+          "badge": "Lossless Text"
+        },
+        {
+          "title": "Metadata & Cache Stripping",
+          "description": "Cleans out redundant thumbnail caches, editing history, and embedded font bloat cleanly.",
+          "badge": "Clean Metadata"
+        }
+      ],
+      "proTips": [
+        "Choose 'Recommended' for job applications and public portal submissions to guarantee crystal clear readability.",
+        "Choose 'Extreme' when meeting strict portal upload limits (under 5MB or 2MB).",
+        "Scanned photo PDFs show the largest reduction (up to 80%), while pure text PDFs reduce by 10-30%."
+      ],
+      "securityNote": "pdfpick executes compression strictly inside your browser's local memory via WebAssembly. Confidential contracts, financials, and resumes are never transmitted over the internet."
+    },
+    "faqTitle": "Compress PDF FAQ",
+    "faqSubtitle": "Answers about shrinking PDF file sizes without quality loss.",
+    "faqItems": [
+      {
+        "question": "Will compressing make the text blurry?",
+        "answer": "Not at all. Text and vector graphics remain completely sharp and uncompressed."
+      },
+      {
+        "question": "How much will the file size be reduced?",
+        "answer": "Image-heavy PDFs typically reduce by 50% to 80%, while text documents reduce by 10% to 30%."
+      },
+      {
+        "question": "Are my files uploaded to a remote server?",
+        "answer": "100% processed in local browser memory. No data is ever uploaded to any external server."
+      }
+    ],
+    "ui": {
+      "btn_compress": "Compress PDF",
+      "mode_recommended": "Recommended Compression (Great quality & reduction)",
+      "mode_extreme": "Extreme Compression (Smallest file size)",
+      "mode_low": "Light Compression (High quality preserved)"
+    }
+  },
+  "ja": {
+    "toolName": "PDF圧縮・容量削減",
+    "tagline": "画質を損なわずにメール添付サイズへ軽量化する実践ガイド",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDFファイルをアップロード",
+        "desc": "容量を小さくしたいPDFファイルをドラッグ＆ドロップまたは選択します。"
+      },
+      {
+        "step": 2,
+        "title": "圧縮レベルを選択",
+        "desc": "推奨圧縮、強力圧縮などご希望の削減割合と画質オプションを選びます。"
+      },
+      {
+        "step": 3,
+        "title": "圧縮完了＆ダウンロード",
+        "desc": "ブラウザ内で1秒で軽量化が完了し、即座に保存されます。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF圧縮・ファイル最適化",
+      "tagline": "画質を損なわずにメール添付サイズへ軽量化する実践ガイド",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "大容量メール添付制限克服ガイド",
+      "features": [
+        {
+          "title": "スマート画像ダウンサンプリング",
+          "description": "印刷用高解像度画像をモニター表示に最適な水準へ再圧縮し、最大80%軽量化します。",
+          "badge": "スマートDPI"
+        },
+        {
+          "title": "ベクターテキスト100%無劣化保持",
+          "description": "本文の文字やロゴなどのベクター情報は解像度を落とさず鮮明な状態を保ちます。",
+          "badge": "無劣化テキスト"
+        },
+        {
+          "title": "不要なメタデータの完全消去",
+          "description": "編集履歴やサムネイルキャッシュなどの不要データを綺麗に除去します。",
+          "badge": "メタデータ消去"
+        }
+      ],
+      "proTips": [
+        "採用応募書類や官公庁への提出には、画面閲覧と印刷品質を両立する「推奨圧縮」がおすすめです。",
+        "添付ファイル上限（5MB以下など）が厳しい場合は「強力圧縮」を選択してください。",
+        "スキャン画像主体の文書は最大80%の大幅な削減効果が得られます。"
+      ],
+      "securityNote": "pdfpickはWebAssembly技術によりブラウザメモリ内でのみ圧縮を実行します。外部サーバーへデータが送信されることは一切ありません。"
+    },
+    "faqTitle": "PDF圧縮 よくある質問（FAQ）",
+    "faqSubtitle": "画質を落とさずにファイルサイズを軽量化する方法についてのFAQです。",
+    "faqItems": [
+      {
+        "question": "PDFを圧縮すると文字がぼやけたり潰れたりしますか？",
+        "answer": "一切潰れません。本文テキストやベクターフォントは鮮明なまま保持されます。"
+      },
+      {
+        "question": "ファイルサイズはどのくらい小さくなりますか？",
+        "answer": "画像が多い文書は50%〜80%大幅に削減され、テキスト主体の文書は10〜30%程度軽量化されます。"
+      },
+      {
+        "question": "機密書類を圧縮しても情報流出の心配はありませんか？",
+        "answer": "100%ブラウザメモリ内で完結するため、外部サーバーへの送信は一切なく安全です。"
+      }
+    ],
+    "ui": {
+      "btn_compress": "PDFを圧縮する",
+      "mode_recommended": "推奨圧縮（高画質＆大幅削減）",
+      "mode_extreme": "強力圧縮（最小ファイルサイズ）",
+      "mode_low": "低圧縮（超高画質維持）"
+    }
+  },
+  "zh": {
+    "toolName": "PDF压缩与文件瘦身",
+    "tagline": "无损清晰度缩减体积以满足邮件附件规格实操指南",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "上传PDF文件",
+        "desc": "拖放或选择要缩减体积的PDF文档。"
+      },
+      {
+        "step": 2,
+        "title": "选择压缩等级",
+        "desc": "根据需求选择推荐压缩、强力压缩或轻度压缩模式。"
+      },
+      {
+        "step": 3,
+        "title": "压缩完成并下载",
+        "desc": "在浏览器中1秒内完成瘦身并即时下载完成文件。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF文件压缩与体积优化",
+      "tagline": "无损清晰度缩减体积以满足邮件附件规格实操指南",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "突破邮件大附件限制指南",
+      "features": [
+        {
+          "title": "智能图像重采样 (DPI自适应)",
+          "description": "将印刷级300 DPI图像智能转为屏幕优化的150 DPI，文件最高减小80%。",
+          "badge": "智能DPI"
+        },
+        {
+          "title": "矢量文字100%无损保留",
+          "description": "正文文字、图表线条和LOGO保持矢量格式，放大依然边缘锐利。",
+          "badge": "无损文字"
+        },
+        {
+          "title": "清理冗余元数据与缓存",
+          "description": "清理编辑历史记录、缩略图缓存及冗余字体，纯净瘦身。",
+          "badge": "清除元数据"
+        }
+      ],
+      "proTips": [
+        "求职简历或招标文件推荐选择【推荐压缩】，兼顾屏幕审阅与打印清晰度。",
+        "遇严格限制（如小于5MB或2MB）时建议选择【强力压缩】。",
+        "纯扫描图片文档压缩效果最显著（可缩减50-80%）。"
+      ],
+      "securityNote": "pdfpick 全程在浏览器本地内存运行，绝不向远程服务器上传任何文档字节，安全合规。"
+    },
+    "faqTitle": "PDF压缩常见问题（FAQ）",
+    "faqSubtitle": "关于无损画质缩小PDF文件大小的常见解答。",
+    "faqItems": [
+      {
+        "question": "压缩后文字会变模糊吗？",
+        "answer": "完全不会。正文文本和矢量字体保持原本的锐利清晰度。"
+      },
+      {
+        "question": "文件体积通常能缩小多少？",
+        "answer": "包含高清图片的文档通常可缩减50%~80%，纯文本报告稳定缩减10%~30%。"
+      },
+      {
+        "question": "压缩过程会把文件上传到外部服务器吗？",
+        "answer": "100%在本地浏览器内存中处理，绝无任何服务器上传，商业机密绝对安全。"
+      }
+    ],
+    "ui": {
+      "btn_compress": "压缩PDF",
+      "mode_recommended": "推荐压缩（兼顾清晰度与体积）",
+      "mode_extreme": "强力压缩（极致缩减文件体积）",
+      "mode_low": "轻度压缩（保持超高画质）"
+    }
+  },
+  "zh-TW": {
+    "toolName": "PDF壓縮與檔案瘦身",
+    "tagline": "无损清晰度缩减体积以满足邮件附件规格实操指南",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "上传PDF文件",
+        "desc": "拖放或选择要缩减体积的PDF文档。"
+      },
+      {
+        "step": 2,
+        "title": "选择压缩等级",
+        "desc": "根据需求选择推荐压缩、强力压缩或轻度压缩模式。"
+      },
+      {
+        "step": 3,
+        "title": "压缩完成并下载",
+        "desc": "在浏览器中1秒内完成瘦身并即时下载完成文件。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF文件压缩与体积优化",
+      "tagline": "无损清晰度缩减体积以满足邮件附件规格实操指南",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "突破邮件大附件限制指南",
+      "features": [
+        {
+          "title": "智能图像重采样 (DPI自适应)",
+          "description": "将印刷级300 DPI图像智能转为屏幕优化的150 DPI，文件最高减小80%。",
+          "badge": "智能DPI"
+        },
+        {
+          "title": "矢量文字100%无损保留",
+          "description": "正文文字、图表线条和LOGO保持矢量格式，放大依然边缘锐利。",
+          "badge": "无损文字"
+        },
+        {
+          "title": "清理冗余元数据与缓存",
+          "description": "清理编辑历史记录、缩略图缓存及冗余字体，纯净瘦身。",
+          "badge": "清除元数据"
+        }
+      ],
+      "proTips": [
+        "求职简历或招标文件推荐选择【推荐压缩】，兼顾屏幕审阅与打印清晰度。",
+        "遇严格限制（如小于5MB或2MB）时建议选择【强力压缩】。",
+        "纯扫描图片文档压缩效果最显著（可缩减50-80%）。"
+      ],
+      "securityNote": "pdfpick 全程在浏览器本地内存运行，绝不向远程服务器上传任何文档字节，安全合规。"
+    },
+    "faqTitle": "PDF壓縮常見問題（FAQ）",
+    "faqSubtitle": "关于无损画质缩小PDF文件大小的常见解答。",
+    "faqItems": [
+      {
+        "question": "压缩后文字会变模糊吗？",
+        "answer": "完全不会。正文文本和矢量字体保持原本的锐利清晰度。"
+      },
+      {
+        "question": "文件体积通常能缩小多少？",
+        "answer": "包含高清图片的文档通常可缩减50%~80%，纯文本报告稳定缩减10%~30%。"
+      },
+      {
+        "question": "压缩过程会把文件上传到外部服务器吗？",
+        "answer": "100%在本地浏览器内存中处理，绝无任何服务器上传，商业机密绝对安全。"
+      }
+    ],
+    "ui": {
+      "btn_compress": "压缩PDF",
+      "mode_recommended": "推荐压缩（兼顾清晰度与体积）",
+      "mode_extreme": "强力压缩（极致缩减文件体积）",
+      "mode_low": "轻度压缩（保持超高画质）"
+    }
+  },
+  "es": {
+    "toolName": "Comprimir PDF",
+    "tagline": "Reduce PDF size for email attachment without losing clarity",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Drag and drop the PDF document you want to optimize."
+      },
+      {
+        "step": 2,
+        "title": "Choose Compression Level",
+        "desc": "Select Recommended, Extreme, or Light compression based on your file needs."
+      },
+      {
+        "step": 3,
+        "title": "Compress & Download",
+        "desc": "Your lightweight PDF is generated in 1 second right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF Compression & File Optimization",
+      "tagline": "Reduce PDF size for email attachment without losing clarity",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "Email Attachment Limit Overcoming Guide",
+      "features": [
+        {
+          "title": "Smart Image Downsampling (DPI Adjustment)",
+          "description": "Intelligently resamples print-grade 300 DPI images to screen-optimized 150 DPI, shrinking sizes up to 80%.",
+          "badge": "Smart DPI"
+        },
+        {
+          "title": "100% Lossless Vector Text Preservation",
+          "description": "Body text, diagrams, and logos remain pristine vectors without pixelation or blurriness even when zoomed in.",
+          "badge": "Lossless Text"
+        },
+        {
+          "title": "Metadata & Cache Stripping",
+          "description": "Cleans out redundant thumbnail caches, editing history, and embedded font bloat cleanly.",
+          "badge": "Clean Metadata"
+        }
+      ],
+      "proTips": [
+        "Choose 'Recommended' for job applications and public portal submissions to guarantee crystal clear readability.",
+        "Choose 'Extreme' when meeting strict portal upload limits (under 5MB or 2MB).",
+        "Scanned photo PDFs show the largest reduction (up to 80%), while pure text PDFs reduce by 10-30%."
+      ],
+      "securityNote": "pdfpick executes compression strictly inside your browser's local memory via WebAssembly. Confidential contracts, financials, and resumes are never transmitted over the internet."
+    },
+    "faqTitle": "Preguntas frecuentes sobre comprimir PDF",
+    "faqSubtitle": "Answers about shrinking PDF file sizes without quality loss.",
+    "faqItems": [
+      {
+        "question": "Will compressing make the text blurry?",
+        "answer": "Not at all. Text and vector graphics remain completely sharp and uncompressed."
+      },
+      {
+        "question": "How much will the file size be reduced?",
+        "answer": "Image-heavy PDFs typically reduce by 50% to 80%, while text documents reduce by 10% to 30%."
+      },
+      {
+        "question": "Are my files uploaded to a remote server?",
+        "answer": "100% processed in local browser memory. No data is ever uploaded to any external server."
+      }
+    ],
+    "ui": {
+      "btn_compress": "Compress PDF",
+      "mode_recommended": "Recommended Compression (Great quality & reduction)",
+      "mode_extreme": "Extreme Compression (Smallest file size)",
+      "mode_low": "Light Compression (High quality preserved)"
+    }
+  },
+  "fr": {
+    "toolName": "Compresser PDF",
+    "tagline": "Reduce PDF size for email attachment without losing clarity",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Drag and drop the PDF document you want to optimize."
+      },
+      {
+        "step": 2,
+        "title": "Choose Compression Level",
+        "desc": "Select Recommended, Extreme, or Light compression based on your file needs."
+      },
+      {
+        "step": 3,
+        "title": "Compress & Download",
+        "desc": "Your lightweight PDF is generated in 1 second right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF Compression & File Optimization",
+      "tagline": "Reduce PDF size for email attachment without losing clarity",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "Email Attachment Limit Overcoming Guide",
+      "features": [
+        {
+          "title": "Smart Image Downsampling (DPI Adjustment)",
+          "description": "Intelligently resamples print-grade 300 DPI images to screen-optimized 150 DPI, shrinking sizes up to 80%.",
+          "badge": "Smart DPI"
+        },
+        {
+          "title": "100% Lossless Vector Text Preservation",
+          "description": "Body text, diagrams, and logos remain pristine vectors without pixelation or blurriness even when zoomed in.",
+          "badge": "Lossless Text"
+        },
+        {
+          "title": "Metadata & Cache Stripping",
+          "description": "Cleans out redundant thumbnail caches, editing history, and embedded font bloat cleanly.",
+          "badge": "Clean Metadata"
+        }
+      ],
+      "proTips": [
+        "Choose 'Recommended' for job applications and public portal submissions to guarantee crystal clear readability.",
+        "Choose 'Extreme' when meeting strict portal upload limits (under 5MB or 2MB).",
+        "Scanned photo PDFs show the largest reduction (up to 80%), while pure text PDFs reduce by 10-30%."
+      ],
+      "securityNote": "pdfpick executes compression strictly inside your browser's local memory via WebAssembly. Confidential contracts, financials, and resumes are never transmitted over the internet."
+    },
+    "faqTitle": "FAQ sur la compression de PDF",
+    "faqSubtitle": "Answers about shrinking PDF file sizes without quality loss.",
+    "faqItems": [
+      {
+        "question": "Will compressing make the text blurry?",
+        "answer": "Not at all. Text and vector graphics remain completely sharp and uncompressed."
+      },
+      {
+        "question": "How much will the file size be reduced?",
+        "answer": "Image-heavy PDFs typically reduce by 50% to 80%, while text documents reduce by 10% to 30%."
+      },
+      {
+        "question": "Are my files uploaded to a remote server?",
+        "answer": "100% processed in local browser memory. No data is ever uploaded to any external server."
+      }
+    ],
+    "ui": {
+      "btn_compress": "Compress PDF",
+      "mode_recommended": "Recommended Compression (Great quality & reduction)",
+      "mode_extreme": "Extreme Compression (Smallest file size)",
+      "mode_low": "Light Compression (High quality preserved)"
+    }
+  },
+  "de": {
+    "toolName": "PDF komprimieren",
+    "tagline": "Reduce PDF size for email attachment without losing clarity",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Drag and drop the PDF document you want to optimize."
+      },
+      {
+        "step": 2,
+        "title": "Choose Compression Level",
+        "desc": "Select Recommended, Extreme, or Light compression based on your file needs."
+      },
+      {
+        "step": 3,
+        "title": "Compress & Download",
+        "desc": "Your lightweight PDF is generated in 1 second right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "PDF Compression & File Optimization",
+      "tagline": "Reduce PDF size for email attachment without losing clarity",
+      "relatedGuideSlug": "email-attachment-pdf-compression",
+      "relatedGuideTitle": "Email Attachment Limit Overcoming Guide",
+      "features": [
+        {
+          "title": "Smart Image Downsampling (DPI Adjustment)",
+          "description": "Intelligently resamples print-grade 300 DPI images to screen-optimized 150 DPI, shrinking sizes up to 80%.",
+          "badge": "Smart DPI"
+        },
+        {
+          "title": "100% Lossless Vector Text Preservation",
+          "description": "Body text, diagrams, and logos remain pristine vectors without pixelation or blurriness even when zoomed in.",
+          "badge": "Lossless Text"
+        },
+        {
+          "title": "Metadata & Cache Stripping",
+          "description": "Cleans out redundant thumbnail caches, editing history, and embedded font bloat cleanly.",
+          "badge": "Clean Metadata"
+        }
+      ],
+      "proTips": [
+        "Choose 'Recommended' for job applications and public portal submissions to guarantee crystal clear readability.",
+        "Choose 'Extreme' when meeting strict portal upload limits (under 5MB or 2MB).",
+        "Scanned photo PDFs show the largest reduction (up to 80%), while pure text PDFs reduce by 10-30%."
+      ],
+      "securityNote": "pdfpick executes compression strictly inside your browser's local memory via WebAssembly. Confidential contracts, financials, and resumes are never transmitted over the internet."
+    },
+    "faqTitle": "Häufige Fragen zur PDF-Kompression",
+    "faqSubtitle": "Answers about shrinking PDF file sizes without quality loss.",
+    "faqItems": [
+      {
+        "question": "Will compressing make the text blurry?",
+        "answer": "Not at all. Text and vector graphics remain completely sharp and uncompressed."
+      },
+      {
+        "question": "How much will the file size be reduced?",
+        "answer": "Image-heavy PDFs typically reduce by 50% to 80%, while text documents reduce by 10% to 30%."
+      },
+      {
+        "question": "Are my files uploaded to a remote server?",
+        "answer": "100% processed in local browser memory. No data is ever uploaded to any external server."
+      }
+    ],
+    "ui": {
+      "btn_compress": "Compress PDF",
+      "mode_recommended": "Recommended Compression (Great quality & reduction)",
+      "mode_extreme": "Extreme Compression (Smallest file size)",
+      "mode_low": "Light Compression (High quality preserved)"
+    }
+  }
+}

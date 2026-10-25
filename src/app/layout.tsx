@@ -2,14 +2,17 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AiFeedbackWidget from "@/components/AiFeedbackWidget";
 import KakaoInAppBanner from "@/components/KakaoInAppBanner";
-import { SITE_CONFIG, WEB_APPLICATION_SCHEMA, FAQ_SCHEMA } from "@/lib/seo-config";
+import { 
+  SITE_CONFIG, 
+  WEB_APPLICATION_SCHEMA, 
+  ORGANIZATION_SCHEMA 
+} from "@/lib/seo-config";
 import { LanguageProvider } from "@/lib/i18n";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import GlobalWelcomeBanner from "@/components/GlobalWelcomeBanner";
+import BackToTopButton from "@/components/BackToTopButton";
+import RecentToolTracker from "@/components/RecentToolTracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.domain),
@@ -47,10 +50,10 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.brandName,
     images: [
       {
-        url: SITE_CONFIG.ogImage,
-        width: 800,
-        height: 600,
-        alt: "mypickpdf - 마이픽피디에프 래서팬더",
+        url: `${SITE_CONFIG.domain}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
       },
     ],
   },
@@ -58,15 +61,19 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
     description: SITE_CONFIG.description,
-    images: [SITE_CONFIG.ogImage],
+    images: [`${SITE_CONFIG.domain}/opengraph-image`],
   },
   alternates: {
     canonical: SITE_CONFIG.domain,
+    languages: {
+      "ko-KR": SITE_CONFIG.domain,
+      "x-default": SITE_CONFIG.domain,
+    },
   },
   verification: {
-    google: "3GEf0s7jNKQSZ5NOk_8uD_aQUuHicYvr531ycq-5ib0",
+    google: ["03Ngr0_g-9M2mOC3lZQmNJOCtriK2ipqycGPOeySR_s", "3GEf0s7jNKQSZ5NOk_8uD_aQUuHicYvr531ycq-5ib0"],
     other: {
-      "naver-site-verification": "6e99cef10e0d83ff11779a9206193559aee8eb28",
+      "naver-site-verification": ["e39cf0c295093069a2d67e000797b3275af45d86", "6e99cef10e0d83ff11779a9206193559aee8eb28"],
     },
   },
   icons: {
@@ -79,6 +86,19 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.ico",
   },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: SITE_CONFIG.name,
+  },
+};
+
+export const viewport = {
+  themeColor: "#e11d48",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -87,13 +107,48 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className="scroll-smooth">
+    <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Google Search Console Verification */}
-        <meta name="google-site-verification" content="3GEf0s7jNKQSZ5NOk_8uD_aQUuHicYvr531ycq-5ib0" />
-
-        {/* Naver Search Advisor Verification */}
-        <meta name="naver-site-verification" content="6e99cef10e0d83ff11779a9206193559aee8eb28" />
+        {/* Instant zero-latency language detector to eliminate FOUC for global visitors */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var supported = ['ko','en','ja','zh','zh-TW','es','fr','de','it','pt','ru','vi','th','id','hi','ar','tr','nl'];
+                  var params = new URLSearchParams(window.location.search);
+                  var lang = params.get('lang');
+                  if (!lang || supported.indexOf(lang) === -1) {
+                    lang = localStorage.getItem('pdfpick_lang') || localStorage.getItem('mypickpdf_lang');
+                  }
+                  if (!lang || supported.indexOf(lang) === -1) {
+                    var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
+                    if (nav.startsWith('ko')) lang = 'ko';
+                    else if (nav.startsWith('ja')) lang = 'ja';
+                    else if (nav === 'zh-tw' || nav === 'zh-hk') lang = 'zh-TW';
+                    else if (nav.startsWith('zh')) lang = 'zh';
+                    else if (nav.startsWith('es')) lang = 'es';
+                    else if (nav.startsWith('fr')) lang = 'fr';
+                    else if (nav.startsWith('de')) lang = 'de';
+                    else if (nav.startsWith('it')) lang = 'it';
+                    else if (nav.startsWith('pt')) lang = 'pt';
+                    else if (nav.startsWith('ru')) lang = 'ru';
+                    else if (nav.startsWith('vi')) lang = 'vi';
+                    else if (nav.startsWith('th')) lang = 'th';
+                    else if (nav.startsWith('id')) lang = 'id';
+                    else if (nav.startsWith('hi')) lang = 'hi';
+                    else if (nav.startsWith('ar')) lang = 'ar';
+                    else if (nav.startsWith('tr')) lang = 'tr';
+                    else if (nav.startsWith('nl')) lang = 'nl';
+                    else lang = 'en';
+                  }
+                  window.__INITIAL_LANG__ = lang;
+                  document.documentElement.lang = lang;
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
 
         {/* Global WebApplication Schema for GEO & AEO */}
         <script
@@ -101,11 +156,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(WEB_APPLICATION_SCHEMA) }}
         />
 
-        {/* FAQ Schema for Google Search Rich Snippet */}
+        {/* Global Organization Schema */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
         />
+
+        {/* AI & LLM Agent discovery links & RSS Feed */}
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="pdfpick 공식 실무 가이드 & PDF 도구 RSS 피드" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="AI Agent Specification" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="AI Agent Full Documentation" />
 
         {/* Google AdSense Script (공식 소유권 인증 및 자동 광고 스크립트) */}
         {SITE_CONFIG.googleAdSensePublisherId !== "ca-pub-XXXXXXXXXXXXXXXX" && (
@@ -115,45 +175,18 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
         )}
-
-        {/* Favicons (래서판다 마스코트) */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
-
-        {/* International SEO (hreflang) - Google Global Search Ranking */}
-        <link rel="alternate" hrefLang="x-default" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="ko" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="en" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="ja" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="es" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="zh" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="zh-CN" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="zh-TW" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="de" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="fr" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="pt" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="ru" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="it" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="id" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="vi" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="ar" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="hi" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="th" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="tr" href="https://mypickpdf.vercel.app/" />
-        <link rel="alternate" hrefLang="pl" href="https://mypickpdf.vercel.app/" />
       </head>
       <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-rose-500 selection:text-white">
         <GoogleAnalytics />
         <LanguageProvider>
+          <GlobalWelcomeBanner />
           <KakaoInAppBanner />
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
-          <AiFeedbackWidget />
+          <BackToTopButton />
+          <RecentToolTracker />
         </LanguageProvider>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

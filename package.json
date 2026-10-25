@@ -1,5 +1,5 @@
 {
-  "name": "mypickpdf",
+  "name": "pdfpick",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "docx": "^9.7.1",
+    "hanspell": "^1.0.1",
     "hwpx-js": "^0.1.2",
     "jspdf": "^2.5.1",
     "jszip": "^3.10.1",
@@ -23,9 +24,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.5.4",
-    "xlsx": "^0.18.5",
-    "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20.17.0",

@@ -10,6 +10,7 @@ import {
 import RedPanda from "./RedPanda";
 import { AppToolErrorDetail } from "@/lib/app-events";
 import { useLanguage } from "@/lib/i18n";
+import { getWidgetLocale } from "@/lib/ai-widget-i18n";
 
 interface ChatMessage {
   id: string;
@@ -247,7 +248,8 @@ function analyzeImageContent(img: HTMLImageElement): ImageAnalysisDetail {
 }
 
 export default function AiFeedbackWidget() {
-  const { t } = useLanguage();
+  const { lang } = useLanguage();
+  const loc = getWidgetLocale(lang);
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState("");
   const [attachedImage, setAttachedImage] = useState<string | null>(null);
@@ -299,9 +301,11 @@ export default function AiFeedbackWidget() {
       }
     };
 
+    window.addEventListener("pdfpick:tool_error", handleErrorEvent);
     window.addEventListener("mypickpdf:tool_error", handleErrorEvent);
     return () => {
-      window.removeEventListener("mypickpdf:tool_error", handleErrorEvent);
+      window.removeEventListener("pdfpick:tool_error", handleErrorEvent);
+    window.removeEventListener("mypickpdf:tool_error", handleErrorEvent);
     };
   }, []);
 
@@ -378,28 +382,30 @@ export default function AiFeedbackWidget() {
     };
   }, [isOpen]);
 
-  // Initial welcome message with screenshot guidance
+  // Initial welcome message with screenshot guidance, localized per language
   useEffect(() => {
-    if (messages.length === 0) {
+    if (messages.length === 0 || (messages.length === 1 && messages[0].id === "welcome-msg")) {
       setMessages([
         {
           id: "welcome-msg",
           role: "bot",
-          text: "안녕하세요! mypickpdf의 래서팬더 AI 연구원입니다 🐾\n\n원하시는 결과물이 나오지 않으셨거나 오류가 발생하셨나요?\n\n📸 **오류 캡쳐 사진 첨부 지원**: 말로 설명하기 어려운 오류 화면은 카메라 버튼을 누르거나 키보드의 **[Ctrl + V]**로 바로 붙여넣어 주세요! 첨부해주신 사진을 AI가 정밀 분석하여, 실제 오류 화면인 경우 원인을 파악하고 개선 현황과 실질적인 대안을 솔직하게 안내해 드립니다.\n\n※ 도구 사용 중 오류가 감지되면 자동으로 **[1순위 긴급 해결 모드]**로 전환됩니다.",
+          text: loc.welcomeText,
           timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-          quickActions: [
-            { label: "📸 캡쳐 사진 첨부해서 분석 요청", action: () => fileInputRef.current?.click(), isPrimary: true },
-            { label: "⚡ 용량이 덜 줄어들었어요", action: () => handleQuickTopic("compress") },
-            { label: "📄 글자/표 서식이 깨져요", action: () => handleQuickTopic("format") },
-            { label: "💾 다운로드가 안 돼요", action: () => handleQuickTopic("download") },
-            { label: "🔒 암호 해제 방법이 궁금해요", action: () => handleQuickTopic("password") },
-            { label: "💡 새 기능 건의 / 버그 제보", action: () => handleQuickTopic("feature") },
-            { label: "✉ 운영자에게 중요 제휴 문의", action: () => handleQuickTopic("owner") },
-          ],
+          quickActions: loc.quickActions.map((qa) => ({
+            label: qa.label,
+            action: () => {
+              if (qa.topic === "photo") {
+                fileInputRef.current?.click();
+              } else {
+                handleQuickTopic(qa.topic);
+              }
+            },
+            isPrimary: qa.isPrimary,
+          })),
         },
       ]);
     }
-  }, [messages.length]);
+  }, [lang, messages.length]);
 
   const handleResolveActiveError = (err: AppToolErrorDetail) => {
     if (isTuning) return;
@@ -478,80 +484,62 @@ export default function AiFeedbackWidget() {
     if (isTuning) return;
 
     if (topic === "compress") {
-      addUserMessage("PDF 압축 결과 용량이 생각보다 덜 줄어들었어요.");
+      const top = loc.topics.compress;
+      addUserMessage(top.user);
       runRealtimeTuning(
-        "PDF 압축 최적화 파라미터 세션 적용 중",
-        [
-          "문서 내부 텍스트 벡터 및 이미지 레이어 비율 분석",
-          "WebAssembly 초고압축(Extreme 72 DPI) 양자화 파라미터 적용",
-          "브라우저 세션에 '초고압축 모드' 활성화 완료",
-        ],
-        "세션에 초고압축 프리셋이 적용되었습니다! ⚡\n\nAI 연구원이 현재 브라우저에 **'초고압축 Extreme 모드'**를 적용했습니다.\n스캔 이미지/사진이 포함된 PDF의 경우 최대 70~80%까지 파일 크기가 대폭 축소됩니다.\n\n⚠️ **솔직한 안내**: 원본 PDF가 이미 고도로 압축되어 있거나 텍스트/벡터 위주의 문서인 경우, 브라우저 설정만으로는 용량이 크게 줄어들지 않을 수 있습니다. 다시 시도해 보시고, 여전히 용량이 만족스럽지 않다면 편하게 말씀해 주세요!",
-        [
-          { label: "🚀 초고압축 모드로 다시 시도", action: () => window.location.href = "/compress-pdf", isPrimary: true },
-        ]
+        top.title,
+        top.steps,
+        top.bot,
+        [{ label: top.btnLabel, action: () => window.location.href = "/compress-pdf", isPrimary: true }]
       );
     } else if (topic === "format") {
-      addUserMessage("변환된 파일에서 글자나 표 서식이 일부 깨져요.");
+      const top = loc.topics.format;
+      addUserMessage(top.user);
       runRealtimeTuning(
-        "폰트 및 복합 표 서식 파싱 알고리즘 점검 중",
+        top.title,
+        top.steps,
+        top.bot,
         [
-          "임베디드 글꼴 및 테이블 그리드 셀 여백 데이터 구조 스캔",
-          "표준 한글 폰트 매핑 테이블 및 줄바꿈 보정 패치 적용",
-          "레이아웃 보정 필터 세션 적용 완료",
-        ],
-        "서식 보정 파라미터가 적용되었습니다! 📄\n\n특수 글꼴과 표 테두리 어긋남을 완화하는 **레이아웃 보완 파라미터**를 현재 세션에 반영했습니다.\n\n⚠️ **솔직한 안내**: 원본 문서의 비표준 폰트나 복잡한 다단 표는 브라우저 단독으로 100% 완벽하게 복구되지 않을 수 있습니다.\n\n💡 **100% 원본 보존 꿀팁**:\n표나 디자인을 1픽셀의 오차도 없이 원본 그대로 보존해야 한다면 **[PDF ➔ 고화질 이미지(JPG) 변환]**을 이용하시면 완벽한 원본 형태를 유지할 수 있습니다!",
-        [
-          { label: "📄 서식 보정 모드로 다시 변환하기", action: () => window.location.href = "/pdf-to-word", isPrimary: true },
-          { label: "🖼️ 100% 원본 보존 JPG 추출하기", action: () => window.location.href = "/pdf-to-image" },
+          { label: top.btnLabel1, action: () => window.location.href = "/pdf-to-word", isPrimary: true },
+          { label: top.btnLabel2, action: () => window.location.href = "/pdf-to-image" },
         ]
       );
     } else if (topic === "download") {
-      addUserMessage("변환은 된 것 같은데 파일 다운로드가 안 돼요 (셀룰러 안내 / 파일 형식 오류 등).");
+      const top = loc.topics.download;
+      addUserMessage(top.user);
       runRealtimeTuning(
-        "모바일 및 인앱 브라우저 다운로드 스트림 진단 중",
+        top.title,
+        top.steps,
+        top.bot,
         [
-          "스마트폰 및 카카오톡/인앱 브라우저 환경 감지",
-          "Web Share API(File 객체) 및 외부 브라우저 탈출 파이프라인 연동",
-          "모바일 1초 즉시 저장 가이드 준비 완료",
-        ],
-        "모바일 및 카카오톡 다운로드 해결 안내입니다! 💾\n\n1. **'셀룰러 데이터' 안내가 뜰 때**: 안심하고 [다운로드]를 누르셔도 됩니다. '셀룰러'는 일반 모바일 데이터(LTE/5G)를 의미하며, 이미 파일 크기가 대폭 압축되어 데이터 소모가 거의 없습니다 (약 1MB 미만).\n2. **'지원하지 않는 파일 형식' 오류가 날 때**: 카카오톡 인앱 브라우저의 자체 다운로드 제한 현상입니다. 아래 **[🌐 크롬 브라우저로 열기]**를 누르시면 크롬에서 막힘 없이 즉시 다운로드됩니다.\n3. **스마트폰 저장**: 다운로드 버튼 클릭 시 뜨는 스마트폰 '내 파일' 또는 '카카오톡 나에게 보내기'를 선택하시면 안전하게 저장됩니다!",
-        [
-          { label: "🌐 크롬(기본 브라우저)으로 열기", action: () => {
+          { label: top.btnLabel1, action: () => {
             window.location.href = "kakaotalk://web/openExternal?url=" + encodeURIComponent(window.location.href);
           }, isPrimary: true },
-          { label: "👍 해결 가이드 확인 완료", action: () => {} },
+          { label: top.btnLabel2, action: () => {} },
         ]
       );
     } else if (topic === "password") {
-      addUserMessage("암호가 걸린 PDF 문서는 어떻게 처리하나요?");
+      const top = loc.topics.password;
+      addUserMessage(top.user);
       runRealtimeTuning(
-        "PDF 암호 복호화 우회 파이프라인 생성 중",
-        [
-          "PDF 128/256-bit AES 보안 권한 정책 분석",
-          "무설치 브라우저 가상 인쇄(Virtual Print) 우회 경로 안내",
-          "10초 즉시 해결 가이드 준비 완료",
-        ],
-        "암호 해제 꿀팁 안내입니다! 🔓\n\n별도 프로그램을 설치하지 않고도 컴퓨터에서 10초 만에 암호를 영구 해제할 수 있습니다:\n\n1. 컴퓨터 크롬 브라우저에 해당 PDF를 드래그하여 엽니다.\n2. 비밀번호를 1회 입력하여 문서를 정상적으로 엽니다.\n3. 키보드의 **[Ctrl + P] (인쇄)**를 누릅니다.\n4. 대상을 **[PDF로 저장]**으로 선택하고 저장합니다.\n\n새로 저장된 파일은 암호가 100% 풀린 깨끗한 새 PDF이므로, mypickpdf에 올리시면 모든 변환과 편집이 정상 동작합니다!",
-        [
-          { label: "🐾 메인 홈에서 도구 사용하기", action: () => window.location.href = "/" },
-        ]
+        top.title,
+        top.steps,
+        top.bot,
+        [{ label: top.btnLabel, action: () => window.location.href = "/" }]
       );
     } else if (topic === "feature") {
-      addUserMessage("새로운 기능 건의나 버그를 제보하고 싶어요.");
+      const top = loc.topics.feature;
+      addUserMessage(top.user);
       setTimeout(() => {
-        addBotMessage(
-          "소중한 건의와 제보는 mypickpdf의 가장 큰 성장 원동력입니다! 💡\n\n어떤 기능이 추가되면 좋을지, 혹은 어떤 오류가 발생했는지 말씀해 주세요.\n\nAI 연구원이 읽고 개발자 백로그에 정식 등록하여 순차적으로 개선하겠습니다!"
-        );
+        addBotMessage(top.bot);
       }, 400);
     } else if (topic === "owner") {
-      addUserMessage("서비스 운영자에게 직접 중요한 비즈니스 제휴 문의를 남기고 싶어요.");
+      const top = loc.topics.owner;
+      addUserMessage(top.user);
       setTimeout(() => {
         addBotMessage(
-          "운영자 직접 문의 안내입니다 ✉\n\n기업 B2B 제휴, 광고 협업, 법적 문의 등 중요한 사안은 운영자 공식 이메일로 즉시 연결해 드립니다:\n\n👉 **fbihan@naver.com**\n\n아래 입력창에 제휴/문의 내용을 적어주셔도 제가 운영자에게 즉시 전달해 드립니다!",
-          [
-            { label: "✉ fbihan@naver.com 메일 바로 쓰기", action: () => window.location.href = "mailto:fbihan@naver.com", isPrimary: true },
-          ]
+          top.bot,
+          [{ label: top.btnLabel, action: () => window.location.href = "mailto:fbihan@naver.com", isPrimary: true }]
         );
       }, 400);
     }
@@ -650,7 +638,7 @@ export default function AiFeedbackWidget() {
             `시스템 에러창 패턴 매칭: 불일치 (${analysis.detectedSubject} 판정)`,
             "비전 진단 완료: 실제 오류 화면 재첨부 안내 생성",
           ],
-          `🐾 **이미지 정밀 분석 결과: ${analysis.detectedSubject} 감지**\n\n첨부해주신 사진을 분석한 결과, PDF 변환 실패나 오피스 프로그램 경고창 등의 오류 화면이 아닌 **${analysis.detectedSubject}**으로 확인되었습니다! 🐶\n\n⚠️ **솔직한 안내 (거짓 없음)**:\n거짓말로 '오류가 감지되어 수정되었습니다'라고 말씀드리지 않습니다! 현재 첨부해주신 사진에서는 mypickpdf 서비스와 관련된 오류를 찾을 수 없습니다.\n\n실제로 발생한 문제를 파악하고 해결해 드릴 수 있도록, **오류 메시지가 표시된 실제 화면을 캡쳐하여 첨부**해 주세요:\n- 📌 **Word/Excel 파일 열람 오류 경고창** (예: '읽을 수 없는 내용이 있습니다')\n- 📌 **PDF 변환 실패 에러 메시지 팝업창**\n- 📌 **글자나 표 서식이 어긋나 깨진 실제 문서 화면**\n\n실제 오류 화면을 보내주시면 원인을 정밀 분석하여 솔직하게 답변드리겠습니다!`,
+          `🐾 **이미지 정밀 분석 결과: ${analysis.detectedSubject} 감지**\n\n첨부해주신 사진을 분석한 결과, PDF 변환 실패나 오피스 프로그램 경고창 등의 오류 화면이 아닌 **${analysis.detectedSubject}**으로 확인되었습니다! 🐶\n\n⚠️ **솔직한 안내 (거짓 없음)**:\n거짓말로 '오류가 감지되어 수정되었습니다'라고 말씀드리지 않습니다! 현재 첨부해주신 사진에서는 pdfpick 서비스와 관련된 오류를 찾을 수 없습니다.\n\n실제로 발생한 문제를 파악하고 해결해 드릴 수 있도록, **오류 메시지가 표시된 실제 화면을 캡쳐하여 첨부**해 주세요:\n- 📌 **Word/Excel 파일 열람 오류 경고창** (예: '읽을 수 없는 내용이 있습니다')\n- 📌 **PDF 변환 실패 에러 메시지 팝업창**\n- 📌 **글자나 표 서식이 어긋나 깨진 실제 문서 화면**\n\n실제 오류 화면을 보내주시면 원인을 정밀 분석하여 솔직하게 답변드리겠습니다!`,
           [
             { label: "📸 실제 오류 화면 캡쳐해서 첨부하기", action: () => fileInputRef.current?.click(), isPrimary: true },
             { label: "💬 텍스트로 오류 증상 설명하기", action: () => {} },
@@ -762,7 +750,7 @@ export default function AiFeedbackWidget() {
               ? "bg-gradient-to-r from-red-600 via-rose-600 to-red-600 shadow-rose-600/60 ring-4 ring-rose-400/50 animate-bounce"
               : "bg-gradient-to-r from-orange-500 via-rose-500 to-red-600 hover:from-orange-600 hover:to-red-700 shadow-rose-500/40 hover:shadow-rose-500/60 hover:scale-105"
           }`}
-          aria-label={t("widget_ai_aria")}
+          aria-label="AI 실시간 상담소 열기"
         >
           {/* Subtle Live Pulse Dot */}
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -778,11 +766,11 @@ export default function AiFeedbackWidget() {
 
           <div className="flex flex-col text-left">
             <span className="text-xs font-black tracking-tight leading-tight flex items-center gap-1">
-              <span>{activeError ? t("widget_ai_err_title") : t("widget_ai_title")}</span>
+              <span>{activeError ? loc.triggerErrorTitle : loc.triggerTitle}</span>
               <Sparkles className="w-3 h-3 text-amber-200 fill-amber-200" />
             </span>
             <span className="text-[10px] text-orange-100 font-medium hidden sm:inline leading-tight">
-              {activeError ? t("widget_ai_err_sub") : t("widget_ai_sub")}
+              {activeError ? loc.triggerErrorSub : loc.triggerSub}
             </span>
           </div>
         </button>
@@ -799,12 +787,12 @@ export default function AiFeedbackWidget() {
               </div>
               <div className="min-w-0">
                 <h4 className="text-sm font-black text-white flex items-center gap-1.5 truncate">
-                  <span>mypickpdf AI 실시간 상담소</span>
+                  <span>{loc.headerTitle}</span>
                   <span className="text-xs">🐾</span>
                 </h4>
                 <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>{activeError ? "1순위 긴급 복구 모드 활성화" : "현장 즉시 튜닝 & 실시간 해결 지원"}</span>
+                  <span>{activeError ? loc.headerErrorStatus : loc.headerStatus}</span>
                 </div>
               </div>
             </div>
@@ -812,14 +800,14 @@ export default function AiFeedbackWidget() {
             <div className="flex items-center gap-1 shrink-0">
               <button
                 onClick={handleResetChat}
-                title="대화 처음으로 되돌리기"
+                title={loc.btnResetTitle}
                 className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                title="상담창 닫기"
+                title={loc.btnCloseTitle}
                 className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
@@ -833,14 +821,14 @@ export default function AiFeedbackWidget() {
               <div className="flex items-center gap-2 min-w-0 pr-2">
                 <AlertCircle className="w-4 h-4 shrink-0 text-amber-200" />
                 <span className="text-xs font-black truncate">
-                  [1순위 최우선] {activeError.toolName} 오류 발생 감지
+                  {loc.errorBannerTitle(activeError.toolName)}
                 </span>
               </div>
               <button
                 onClick={() => handleResolveActiveError(activeError)}
                 className="px-2.5 py-1 bg-white text-rose-700 rounded-lg text-[10px] font-black shrink-0 hover:bg-rose-50 shadow-xs"
               >
-                1순위 자동 복구
+                {loc.errorBannerBtn}
               </button>
             </div>
           )}
@@ -849,7 +837,7 @@ export default function AiFeedbackWidget() {
           <div className="px-4 py-2.5 bg-orange-50/90 border-b border-orange-100/80 flex items-center gap-2 text-[11px] text-orange-950 font-medium">
             <Zap className="w-4 h-4 text-orange-600 shrink-0" />
             <p className="leading-snug">
-              <strong>페이지를 벗어나지 마세요!</strong> AI 연구원이 현장에서 즉시 문제를 진단하고 엔진을 바로 수정해 드립니다.
+              {loc.missionBanner}
             </p>
           </div>
 
@@ -1091,7 +1079,7 @@ export default function AiFeedbackWidget() {
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder={attachedImage ? "화면에 대해 추가로 남기실 내용이 있다면 적어주세요 (생략 가능)" : "오류 내용 또는 캡쳐 사진(Ctrl+V)을 붙여넣으세요..."}
+                placeholder={attachedImage ? loc.inputPlaceholderImg : loc.inputPlaceholder}
                 className="flex-1 px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-400 transition-all text-slate-800"
                 disabled={isTuning}
               />
@@ -1099,7 +1087,7 @@ export default function AiFeedbackWidget() {
                 type="submit"
                 disabled={(!inputText.trim() && !attachedImage) || isTuning}
                 className="p-2.5 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 disabled:opacity-40 text-white rounded-xl shadow-md transition-all shrink-0 active:scale-95"
-                title="전송"
+                title={loc.btnSendTitle}
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -1108,9 +1096,9 @@ export default function AiFeedbackWidget() {
             <div className="flex items-center justify-between px-1 text-[10px] text-slate-400">
               <span className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
-                <span>📸 사진 첨부 / Ctrl+V 붙여넣기 지원</span>
+                <span>{loc.footerNotice1}</span>
               </span>
-              <span>🐾 24시간 실시간 AI 비전 분석</span>
+              <span>{loc.footerNotice2}</span>
             </div>
           </form>
         </div>

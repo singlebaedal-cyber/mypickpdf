@@ -23,5 +23,6 @@ export function reportAppError(error: {
     ...error,
     timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
   };
-  window.dispatchEvent(new CustomEvent("mypickpdf:tool_error", { detail }));
+  window.dispatchEvent(new CustomEvent("pdfpick:tool_error", { detail }));
+    window.dispatchEvent(new CustomEvent("mypickpdf:tool_error", { detail }));
 }

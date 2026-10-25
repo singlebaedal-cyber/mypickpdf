@@ -116,7 +116,7 @@ export default function AddWatermarkPage() {
     },
     {
       question: "대외비나 기밀 문서인데 외부에 유출되지 않나요?",
-      answer: "mypickpdf는 100% 브라우저 메모리 로컬에서 작동하므로 파일이 어떤 서버로도 전송되지 않아 보안 감사에도 안심입니다.",
+      answer: "pdfpick는 100% 브라우저 메모리 로컬에서 작동하므로 파일이 어떤 서버로도 전송되지 않아 보안 감사에도 안심입니다.",
     },
     {
       question: "한글과 영문 모두 지원되나요?",

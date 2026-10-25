@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { getFaqMeta } from "@/lib/faqs-data";
+import { getToolContent } from "@/lib/tool-content-data";
 
 interface FAQItem {
   question: string;
@@ -10,27 +12,38 @@ interface FAQItem {
 }
 
 interface FaqSectionProps {
-  items: FAQItem[];
+  toolSlug?: string;
+  items?: FAQItem[];
   title?: string;
   subtitle?: string;
 }
 
 export default function FaqSection({
+  toolSlug,
   items,
   title,
   subtitle,
 }: FaqSectionProps) {
-  const { t } = useLanguage();
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { lang } = useLanguage();
+  const defaultMeta = getFaqMeta(lang);
+  const content = toolSlug ? getToolContent(toolSlug, lang) : null;
 
-  const displayTitle = title || t("faq_title");
-  const displaySubtitle = subtitle || t("faq_subtitle");
+  const resolvedItems = (content?.faqItems && content.faqItems.length > 0)
+    ? content.faqItems
+    : (items || []);
+  const displayTitle = (toolSlug && content?.faqTitle)
+    ? (lang === "ko" ? (title || content.faqTitle) : content.faqTitle)
+    : (title || content?.faqTitle || defaultMeta.title);
+  const displaySubtitle = (toolSlug && content?.faqSubtitle)
+    ? (lang === "ko" ? (subtitle || content.faqSubtitle) : content.faqSubtitle)
+    : (subtitle || content?.faqSubtitle || defaultMeta.subtitle);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   // Schema.org FAQPage for AEO (Answer Engine Optimization)
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
+    mainEntity: resolvedItems.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -50,7 +63,7 @@ export default function FaqSection({
 
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold mb-3">
-          <HelpCircle className="w-3.5 h-3.5" /> {t("faq_badge")}
+          <HelpCircle className="w-3.5 h-3.5" /> Q&A
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           {displayTitle}
@@ -59,7 +72,7 @@ export default function FaqSection({
       </div>
 
       <div className="space-y-3">
-        {items.map((item, idx) => {
+        {resolvedItems.map((item, idx) => {
           const isOpen = openIndex === idx;
           return (
             <div

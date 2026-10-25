@@ -133,7 +133,7 @@ export default function CompressVideoPage() {
     },
     {
       question: "업로드한 개인 동영상이 외부 서버로 유출되지 않나요?",
-      answer: "절대 아닙니다! mypickpdf는 100% 브라우저 로컬 하드웨어 가속 인코딩 엔진을 사용하여 사용자의 기기 메모리 안에서만 영상을 압축합니다. 어떠한 동영상 데이터도 서버로 전송되지 않아 가족, 일상, 기밀 영상도 안심하고 사용할 수 있습니다.",
+      answer: "절대 아닙니다! pdfpick는 100% 브라우저 로컬 하드웨어 가속 인코딩 엔진을 사용하여 사용자의 기기 메모리 안에서만 영상을 압축합니다. 어떠한 동영상 데이터도 서버로 전송되지 않아 가족, 일상, 기밀 영상도 안심하고 사용할 수 있습니다.",
     },
     {
       question: "카카오톡 300MB 용량 제한이나 이메일 첨부파일 제한을 통과할 수 있나요?",
@@ -150,7 +150,7 @@ export default function CompressVideoPage() {
     },
     {
       question: "Is my personal video uploaded to any external server?",
-      answer: "Never! mypickpdf uses 100% in-browser client-side hardware-accelerated encoding. Your video never leaves your device memory, keeping personal and business videos completely safe and private.",
+      answer: "Never! pdfpick uses 100% in-browser client-side hardware-accelerated encoding. Your video never leaves your device memory, keeping personal and business videos completely safe and private.",
     },
     {
       question: "Can this pass messaging app and email attachment size limits?",

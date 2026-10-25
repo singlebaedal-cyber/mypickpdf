@@ -2,6 +2,7 @@
 
 import { BookOpen, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { getToolContent } from "@/lib/tool-content-data";
 
 interface Step {
   step: number;
@@ -10,20 +11,28 @@ interface Step {
 }
 
 interface HowToSectionProps {
-  toolName: string;
-  steps: Step[];
+  toolSlug?: string;
+  toolName?: string;
+  steps?: Step[];
 }
 
-export default function HowToSection({ toolName, steps }: HowToSectionProps) {
+export default function HowToSection({ toolSlug, toolName, steps }: HowToSectionProps) {
   const { t, lang } = useLanguage();
+  const content = toolSlug ? getToolContent(toolSlug, lang) : null;
+  const resolvedToolName = (toolSlug && content?.toolName)
+    ? (lang === "ko" ? (toolName || content.toolName) : content.toolName)
+    : (toolName || content?.toolName || "");
+  const resolvedSteps = (content?.howToSteps && content.howToSteps.length > 0)
+    ? content.howToSteps
+    : (steps || []);
 
   // Schema.org HowTo for AEO and Google Featured Snippets
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: `${toolName} ${t("howto_heading_suffix")}`,
-    description: `mypickpdf - ${toolName}`,
-    step: steps.map((s) => ({
+    name: `${resolvedToolName} ${t("howto_how_to_use")}`,
+    description: `pdfpick ${resolvedToolName}`,
+    step: resolvedSteps.map((s) => ({
       "@type": "HowToStep",
       position: s.step,
       name: s.title,
@@ -36,10 +45,6 @@ export default function HowToSection({ toolName, steps }: HowToSectionProps) {
     })),
   };
 
-  const headingText = lang === "ko"
-    ? `${toolName}${t("howto_heading_suffix")}`
-    : `${t("howto_heading_suffix")} ${toolName}`.replace(/^[\s—\-:]+/, "").trim();
-
   return (
     <section className="my-16 max-w-5xl mx-auto px-4">
       {/* Inject AEO HowTo Schema */}
@@ -50,18 +55,18 @@ export default function HowToSection({ toolName, steps }: HowToSectionProps) {
 
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold mb-3">
-          <BookOpen className="w-3.5 h-3.5 text-rose-600" /> {t("howto_badge")}
+          <BookOpen className="w-3.5 h-3.5 text-rose-600" /> {t("howto_tutorial_badge")}
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          {headingText}
+          {lang === "ko" ? `${resolvedToolName}은 어떻게 사용하나요?` : `${resolvedToolName} - ${t("howto_how_to_use")}`}
         </h2>
         <p className="text-sm text-slate-500 mt-2">
-          {t("howto_subtitle")}
+          {t("howto_easy_3steps")}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {steps.map((s) => (
+        {resolvedSteps.map((s) => (
           <div
             key={s.step}
             className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden flex flex-col"

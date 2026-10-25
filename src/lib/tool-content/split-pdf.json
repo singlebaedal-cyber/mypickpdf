@@ -1,0 +1,610 @@
+{
+  "ko": {
+    "toolName": "PDF 분할 및 페이지 추출",
+    "tagline": "원하는 페이지만 골라 새 문서로 추출하는 정밀 분할 가이드",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF 문서 선택",
+        "desc": "분할하거나 특정 페이지만 추출하고 싶은 PDF 문서를 추가합니다."
+      },
+      {
+        "step": 2,
+        "title": "추출할 페이지 범위 지정",
+        "desc": "'1-5' 같은 연속 범위나 '1, 3, 7'처럼 쉼표로 구분하여 필요한 페이지만 지정합니다."
+      },
+      {
+        "step": 3,
+        "title": "분할 실행 & 저장",
+        "desc": "[페이지 추출하기]를 누르면 즉시 선택한 페이지만 깔끔하게 새 PDF로 다운로드됩니다."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "고정밀 PDF 분할 & 페이지 추출",
+      "tagline": "원하는 페이지만 골라 새 문서로 추출하는 정밀 분할 가이드",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "대외비 페이지 제외 및 정밀 추출 가이드",
+      "features": [
+        {
+          "title": "단일/범위/콤마 다중 선택 지원",
+          "description": "'1-5, 8, 11-14'와 같이 복합 범위를 자유롭게 지정하여 필요한 페이지만 정확히 분리합니다.",
+          "badge": "정밀 추출"
+        },
+        {
+          "title": "민감 정보 & 대외비 페이지 원천 배제",
+          "description": "외부 거래처나 공공기관에 서류를 제출할 때 포함되어서는 안 될 개인정보나 사내 기밀 페이지를 완벽하게 제외할 수 있습니다.",
+          "badge": "보안 배제"
+        },
+        {
+          "title": "불필요한 데이터 제거로 용량 경량화",
+          "description": "선택하지 않은 수십 페이지의 이미지와 텍스트 스트림이 완전히 배제되어 결과물 파일의 용량이 대폭 축소됩니다.",
+          "badge": "용량 경량화"
+        }
+      ],
+      "proTips": [
+        "입찰 제안서나 포트폴리오에서 특정 프로젝트 페이지만 발췌하여 요약본을 만들 때 매우 유용합니다.",
+        "수백 페이지의 전공 서적이나 논문에서 필요한 챕터(예: '45-78')만 잘라내어 태블릿에서 가볍게 읽으실 수 있습니다.",
+        "추출된 파일에 새로운 페이지 번호를 다시 부여하고 싶다면 [PDF 페이지 번호 매기기] 도구를 연속으로 활용하세요."
+      ],
+      "securityNote": "pdfpick는 사용자의 문서를 서버에 저장하지 않습니다. 모든 분할과 페이지 추출은 사용자의 웹 브라우저 메모리 안에서 WebAssembly 가상 머신에 의해 100% 로컬로 연산되므로 안심하고 이용하세요."
+    },
+    "faqTitle": "PDF 분할 자주 묻는 질문",
+    "faqSubtitle": "원하는 페이지만 안전하게 추출하고 저장하는 방법에 대한 FAQ입니다.",
+    "faqItems": [
+      {
+        "question": "특정 페이지만 골라서 추출할 수 있나요?",
+        "answer": "네! 예를 들어 '1, 4, 7-10'과 같이 입력하시면 1페이지, 4페이지, 그리고 7페이지부터 10페이지까지만 묶어서 새 PDF 문서로 즉시 생성됩니다."
+      },
+      {
+        "question": "페이지를 나누면 화질이나 서식이 깨지나요?",
+        "answer": "전혀 깨지지 않습니다. pdfpick는 원본 PDF의 텍스트, 벡터 그래픽, 고해상도 이미지를 100% 손실 없이 그대로 보존하여 추출합니다."
+      },
+      {
+        "question": "비밀번호가 걸린 암호화 PDF도 분할 가능한가요?",
+        "answer": "암호가 설정된 문서는 보안상의 이유로 브라우저에서 읽지 못할 수 있습니다. 암호를 해제하신 후 업로드하시면 원활하게 분할 가능합니다."
+      },
+      {
+        "question": "대외비나 불필요한 페이지를 영구 제외하고 제출할 수 있나요?",
+        "answer": "네! 계약서나 입찰 서류에서 민감한 내부 정보가 포함된 페이지를 제외하고, 제출이 필요한 페이지만 골라 '1-3, 5-8' 형태로 추출하시면 안전한 새 문서가 생성됩니다."
+      }
+    ],
+    "ui": {
+      "btn_split": "선택한 페이지 추출하기",
+      "label_range": "추출할 페이지 번호 또는 범위 입력",
+      "hint_range": "예: 1-5 또는 1, 3, 5-8 (총 {total}페이지)",
+      "notice_success": "페이지 추출이 성공적으로 완료되었습니다!"
+    }
+  },
+  "en": {
+    "toolName": "Split PDF & Extract Pages",
+    "tagline": "Extract selected pages into a clean new PDF document",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Select PDF Document",
+        "desc": "Upload the PDF document from which you want to split or extract specific pages."
+      },
+      {
+        "step": 2,
+        "title": "Specify Page Range",
+        "desc": "Enter single numbers or ranges such as '1-5' or '1, 3, 7' separated by commas."
+      },
+      {
+        "step": 3,
+        "title": "Extract & Download",
+        "desc": "Click [Extract Pages] to instantly generate and download your new PDF right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "High Precision PDF Splitting & Extraction",
+      "tagline": "Extract selected pages into a clean new PDF document",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "Confidential Page Removal and Precision Split Guide",
+      "features": [
+        {
+          "title": "Complex Range & Comma Syntax",
+          "description": "Combine ranges like '1-5, 8, 11-14' to extract exact custom page selections.",
+          "badge": "Precise Extraction"
+        },
+        {
+          "title": "Exclude Confidential & Sensitive Pages",
+          "description": "Safely remove private corporate data or internal pages before sharing with clients.",
+          "badge": "Security Filter"
+        },
+        {
+          "title": "Drastic File Size Reduction",
+          "description": "Omitted pages and high-resolution images are completely removed, shrinking file size.",
+          "badge": "Lightweight Size"
+        }
+      ],
+      "proTips": [
+        "Extract specific project pages from large portfolios to create concise client summaries.",
+        "Split multi-chapter textbooks into single chapter files (e.g., '45-78') for light reading on tablets.",
+        "Re-number your extracted document cleanly with our [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick never uploads your documents to a server. All page splitting and extraction takes place locally inside your browser memory using WebAssembly."
+    },
+    "faqTitle": "Split PDF FAQ",
+    "faqSubtitle": "Answers to common questions about extracting and splitting PDF pages safely.",
+    "faqItems": [
+      {
+        "question": "Can I extract specific non-consecutive pages?",
+        "answer": "Yes! Simply type '1, 4, 7-10' to bundle pages 1, 4, and 7 through 10 into a brand new PDF instantly."
+      },
+      {
+        "question": "Does splitting degrade quality or break formatting?",
+        "answer": "Not at all. Original vector typography, high-res photos, and layouts are 100% losslessly preserved."
+      },
+      {
+        "question": "Can I split password-protected PDFs?",
+        "answer": "Encrypted files cannot be processed due to browser security restrictions. Please unlock the file before uploading."
+      },
+      {
+        "question": "Can I permanently exclude confidential pages before submitting?",
+        "answer": "Yes! Extract only the public submission pages (e.g. '1-3, 5-8') to guarantee confidential pages are never shared."
+      }
+    ],
+    "ui": {
+      "btn_split": "Extract Selected Pages",
+      "label_range": "Enter page numbers or ranges",
+      "hint_range": "e.g. 1-5 or 1, 3, 5-8 (Total: {total} pages)",
+      "notice_success": "Page extraction completed successfully!"
+    }
+  },
+  "ja": {
+    "toolName": "PDF分割・ページ抽出",
+    "tagline": "必要なページだけを選んで新しいPDFを生成する精密分割ガイド",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDFファイルを選択",
+        "desc": "分割または特定ページを抽出したいPDF文書を画面に追加します。"
+      },
+      {
+        "step": 2,
+        "title": "抽出するページ範囲を指定",
+        "desc": "「1-5」のような連続範囲や「1, 3, 7」のようにカンマで区切って指定します。"
+      },
+      {
+        "step": 3,
+        "title": "抽出実行＆ダウンロード",
+        "desc": "【ページ抽出】を押すと、選んだページだけが瞬時に新しいPDFとして保存されます。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "高精度PDF分割＆ページ抽出",
+      "tagline": "必要なページだけを選んで新しいPDFを生成する精密分割ガイド",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "機密ページ除外および精密抽出ガイド",
+      "features": [
+        {
+          "title": "複合範囲・カンマ指定対応",
+          "description": "「1-5, 8, 11-14」のように複雑なページ番号も正確に抽出・分離できます。",
+          "badge": "精密抽出"
+        },
+        {
+          "title": "機密・個人情報ページの完全除外",
+          "description": "取引先や官公庁への提出時に不要な社内機密ページを安全に排除できます。",
+          "badge": "セキュリティ除外"
+        },
+        {
+          "title": "不要データ除外による軽量化",
+          "description": "選択しなかったページの重い画像やテキストが完全に排除され容量が削減されます。",
+          "badge": "容量軽量化"
+        }
+      ],
+      "proTips": [
+        "大部数の提案書やポートフォリオから特定のプロジェクトだけを抜粋した要約版の作成に最適です。",
+        "専門書や学術論文から必要な章（例：「45-78」）だけを切り出してタブレットで身軽に閲覧できます。",
+        "抽出後の文書に通し番号を付け直すには【ページ番号追加ツール】を併用してください。"
+      ],
+      "securityNote": "pdfpickはお客様の文書をサーバーに保存しません。すべての分割処理はブラウザメモリ内（WebAssembly）で100%ローカル実行されます。"
+    },
+    "faqTitle": "PDF分割 よくある質問（FAQ）",
+    "faqSubtitle": "希望のページだけを安全に抽出して保存する方法についてのFAQです。",
+    "faqItems": [
+      {
+        "question": "特定のページだけを選んで抽出できますか？",
+        "answer": "はい！例えば「1, 4, 7-10」と入力すれば、1ページ、4ページ、7〜10ページだけをまとめた新しいPDFが生成されます。"
+      },
+      {
+        "question": "ページを分割すると画質や書式は劣化しますか？",
+        "answer": "一切劣化しません。原本のベクターテキストや高解像度画像を100%無損失でそのまま保持します。"
+      },
+      {
+        "question": "パスワードがかかったPDFも分割できますか？",
+        "answer": "暗号化された文書はブラウザ内で直接読み取れません。パスワードを解除してからアップロードしてください。"
+      },
+      {
+        "question": "機密ページを除外して提出用PDFを作成できますか？",
+        "answer": "はい！提出が必要なページだけを指定（例：「1-3, 5-8」）することで、安全な新文書を作成できます。"
+      }
+    ],
+    "ui": {
+      "btn_split": "選択したページを抽出する",
+      "label_range": "抽出するページ番号または範囲を入力",
+      "hint_range": "例: 1-5 または 1, 3, 5-8（全{total}ページ）",
+      "notice_success": "ページの抽出が正常に完了しました！"
+    }
+  },
+  "zh": {
+    "toolName": "PDF拆分与页面提取",
+    "tagline": "精准选取所需页面生成全新PDF文档指南",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "选择PDF文档",
+        "desc": "添加想要拆分或提取特定页面的PDF文件。"
+      },
+      {
+        "step": 2,
+        "title": "指定提取页面范围",
+        "desc": "输入如 '1-5' 连续范围或用逗号隔开如 '1, 3, 7' 指定页面。"
+      },
+      {
+        "step": 3,
+        "title": "执行拆分并保存",
+        "desc": "点击【提取页面】，选中的页面将即时生成为全新PDF并下载。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "高精度PDF拆分与页面提取",
+      "tagline": "精准选取所需页面生成全新PDF文档指南",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "涉密页面剔除与高精度提取指南",
+      "features": [
+        {
+          "title": "支持范围与逗号多选语法",
+          "description": "支持 '1-5, 8, 11-14' 复合语法，精准提取所需页面。",
+          "badge": "高精提取"
+        },
+        {
+          "title": "彻底剔除敏感及机密页面",
+          "description": "在向外部提交文件时，彻底排除含有隐私或商业机密的页面。",
+          "badge": "安全剔除"
+        },
+        {
+          "title": "去除冗余数据显著瘦身",
+          "description": "未选取的数十页图像和文字流被彻底剔除，文件体积大幅减小。",
+          "badge": "大幅瘦身"
+        }
+      ],
+      "proTips": [
+        "从大型作品集或投标书中仅提取关键项目页面制作精炼摘要版。",
+        "将数百页教材或论文按章节（如 '45-78'）切分成轻量文档在平板电脑上阅读。",
+        "使用【添加页码工具】为提取后的新文件重新编排连贯页码。"
+      ],
+      "securityNote": "pdfpick 绝不将文档存储到服务器。所有拆分操作均在浏览器本地内存中执行，安全保密。"
+    },
+    "faqTitle": "PDF拆分常见问题（FAQ）",
+    "faqSubtitle": "关于安全提取和保存指定页面的常见疑问解答。",
+    "faqItems": [
+      {
+        "question": "可以挑选特定不连续的页面提取吗？",
+        "answer": "可以！例如输入 '1, 4, 7-10'，即可将第1页、第4页及第7至10页打包成全新PDF。"
+      },
+      {
+        "question": "拆分后画质或格式会损坏吗？",
+        "answer": "完全不会。100%无损保留原始矢量文本、高分辨率图片和版式。"
+      },
+      {
+        "question": "设有密码保护的PDF可以拆分吗？",
+        "answer": "加密文件受浏览器安全限制无法直接读取，请解密后再上传拆分。"
+      },
+      {
+        "question": "可以在提交前彻底删除涉密页面吗？",
+        "answer": "可以！仅提取公开提交页面（如 '1-3, 5-8'），确保机密页面完全不会泄露。"
+      }
+    ],
+    "ui": {
+      "btn_split": "提取所选页面",
+      "label_range": "输入提取页面或范围",
+      "hint_range": "例如: 1-5 或 1, 3, 5-8 (共 {total} 页)",
+      "notice_success": "页面提取成功完成！"
+    }
+  },
+  "zh-TW": {
+    "toolName": "PDF拆分與頁面提取",
+    "tagline": "精准选取所需页面生成全新PDF文档指南",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "选择PDF文档",
+        "desc": "添加想要拆分或提取特定页面的PDF文件。"
+      },
+      {
+        "step": 2,
+        "title": "指定提取页面范围",
+        "desc": "输入如 '1-5' 连续范围或用逗号隔开如 '1, 3, 7' 指定页面。"
+      },
+      {
+        "step": 3,
+        "title": "执行拆分并保存",
+        "desc": "点击【提取页面】，选中的页面将即时生成为全新PDF并下载。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "高精度PDF拆分与页面提取",
+      "tagline": "精准选取所需页面生成全新PDF文档指南",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "涉密页面剔除与高精度提取指南",
+      "features": [
+        {
+          "title": "支持范围与逗号多选语法",
+          "description": "支持 '1-5, 8, 11-14' 复合语法，精准提取所需页面。",
+          "badge": "高精提取"
+        },
+        {
+          "title": "彻底剔除敏感及机密页面",
+          "description": "在向外部提交文件时，彻底排除含有隐私或商业机密的页面。",
+          "badge": "安全剔除"
+        },
+        {
+          "title": "去除冗余数据显著瘦身",
+          "description": "未选取的数十页图像和文字流被彻底剔除，文件体积大幅减小。",
+          "badge": "大幅瘦身"
+        }
+      ],
+      "proTips": [
+        "从大型作品集或投标书中仅提取关键项目页面制作精炼摘要版。",
+        "将数百页教材或论文按章节（如 '45-78'）切分成轻量文档在平板电脑上阅读。",
+        "使用【添加页码工具】为提取后的新文件重新编排连贯页码。"
+      ],
+      "securityNote": "pdfpick 绝不将文档存储到服务器。所有拆分操作均在浏览器本地内存中执行，安全保密。"
+    },
+    "faqTitle": "PDF拆分常見問題（FAQ）",
+    "faqSubtitle": "关于安全提取和保存指定页面的常见疑问解答。",
+    "faqItems": [
+      {
+        "question": "可以挑选特定不连续的页面提取吗？",
+        "answer": "可以！例如输入 '1, 4, 7-10'，即可将第1页、第4页及第7至10页打包成全新PDF。"
+      },
+      {
+        "question": "拆分后画质或格式会损坏吗？",
+        "answer": "完全不会。100%无损保留原始矢量文本、高分辨率图片和版式。"
+      },
+      {
+        "question": "设有密码保护的PDF可以拆分吗？",
+        "answer": "加密文件受浏览器安全限制无法直接读取，请解密后再上传拆分。"
+      },
+      {
+        "question": "可以在提交前彻底删除涉密页面吗？",
+        "answer": "可以！仅提取公开提交页面（如 '1-3, 5-8'），确保机密页面完全不会泄露。"
+      }
+    ],
+    "ui": {
+      "btn_split": "提取所选页面",
+      "label_range": "输入提取页面或范围",
+      "hint_range": "例如: 1-5 或 1, 3, 5-8 (共 {total} 页)",
+      "notice_success": "页面提取成功完成！"
+    }
+  },
+  "es": {
+    "toolName": "Dividir PDF",
+    "tagline": "Extract selected pages into a clean new PDF document",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Select PDF Document",
+        "desc": "Upload the PDF document from which you want to split or extract specific pages."
+      },
+      {
+        "step": 2,
+        "title": "Specify Page Range",
+        "desc": "Enter single numbers or ranges such as '1-5' or '1, 3, 7' separated by commas."
+      },
+      {
+        "step": 3,
+        "title": "Extract & Download",
+        "desc": "Click [Extract Pages] to instantly generate and download your new PDF right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "High Precision PDF Splitting & Extraction",
+      "tagline": "Extract selected pages into a clean new PDF document",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "Confidential Page Removal and Precision Split Guide",
+      "features": [
+        {
+          "title": "Complex Range & Comma Syntax",
+          "description": "Combine ranges like '1-5, 8, 11-14' to extract exact custom page selections.",
+          "badge": "Precise Extraction"
+        },
+        {
+          "title": "Exclude Confidential & Sensitive Pages",
+          "description": "Safely remove private corporate data or internal pages before sharing with clients.",
+          "badge": "Security Filter"
+        },
+        {
+          "title": "Drastic File Size Reduction",
+          "description": "Omitted pages and high-resolution images are completely removed, shrinking file size.",
+          "badge": "Lightweight Size"
+        }
+      ],
+      "proTips": [
+        "Extract specific project pages from large portfolios to create concise client summaries.",
+        "Split multi-chapter textbooks into single chapter files (e.g., '45-78') for light reading on tablets.",
+        "Re-number your extracted document cleanly with our [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick never uploads your documents to a server. All page splitting and extraction takes place locally inside your browser memory using WebAssembly."
+    },
+    "faqTitle": "Preguntas frecuentes sobre dividir PDF",
+    "faqSubtitle": "Answers to common questions about extracting and splitting PDF pages safely.",
+    "faqItems": [
+      {
+        "question": "Can I extract specific non-consecutive pages?",
+        "answer": "Yes! Simply type '1, 4, 7-10' to bundle pages 1, 4, and 7 through 10 into a brand new PDF instantly."
+      },
+      {
+        "question": "Does splitting degrade quality or break formatting?",
+        "answer": "Not at all. Original vector typography, high-res photos, and layouts are 100% losslessly preserved."
+      },
+      {
+        "question": "Can I split password-protected PDFs?",
+        "answer": "Encrypted files cannot be processed due to browser security restrictions. Please unlock the file before uploading."
+      },
+      {
+        "question": "Can I permanently exclude confidential pages before submitting?",
+        "answer": "Yes! Extract only the public submission pages (e.g. '1-3, 5-8') to guarantee confidential pages are never shared."
+      }
+    ],
+    "ui": {
+      "btn_split": "Extract Selected Pages",
+      "label_range": "Enter page numbers or ranges",
+      "hint_range": "e.g. 1-5 or 1, 3, 5-8 (Total: {total} pages)",
+      "notice_success": "Page extraction completed successfully!"
+    }
+  },
+  "fr": {
+    "toolName": "Diviser PDF",
+    "tagline": "Extract selected pages into a clean new PDF document",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Select PDF Document",
+        "desc": "Upload the PDF document from which you want to split or extract specific pages."
+      },
+      {
+        "step": 2,
+        "title": "Specify Page Range",
+        "desc": "Enter single numbers or ranges such as '1-5' or '1, 3, 7' separated by commas."
+      },
+      {
+        "step": 3,
+        "title": "Extract & Download",
+        "desc": "Click [Extract Pages] to instantly generate and download your new PDF right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "High Precision PDF Splitting & Extraction",
+      "tagline": "Extract selected pages into a clean new PDF document",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "Confidential Page Removal and Precision Split Guide",
+      "features": [
+        {
+          "title": "Complex Range & Comma Syntax",
+          "description": "Combine ranges like '1-5, 8, 11-14' to extract exact custom page selections.",
+          "badge": "Precise Extraction"
+        },
+        {
+          "title": "Exclude Confidential & Sensitive Pages",
+          "description": "Safely remove private corporate data or internal pages before sharing with clients.",
+          "badge": "Security Filter"
+        },
+        {
+          "title": "Drastic File Size Reduction",
+          "description": "Omitted pages and high-resolution images are completely removed, shrinking file size.",
+          "badge": "Lightweight Size"
+        }
+      ],
+      "proTips": [
+        "Extract specific project pages from large portfolios to create concise client summaries.",
+        "Split multi-chapter textbooks into single chapter files (e.g., '45-78') for light reading on tablets.",
+        "Re-number your extracted document cleanly with our [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick never uploads your documents to a server. All page splitting and extraction takes place locally inside your browser memory using WebAssembly."
+    },
+    "faqTitle": "FAQ sur la division de PDF",
+    "faqSubtitle": "Answers to common questions about extracting and splitting PDF pages safely.",
+    "faqItems": [
+      {
+        "question": "Can I extract specific non-consecutive pages?",
+        "answer": "Yes! Simply type '1, 4, 7-10' to bundle pages 1, 4, and 7 through 10 into a brand new PDF instantly."
+      },
+      {
+        "question": "Does splitting degrade quality or break formatting?",
+        "answer": "Not at all. Original vector typography, high-res photos, and layouts are 100% losslessly preserved."
+      },
+      {
+        "question": "Can I split password-protected PDFs?",
+        "answer": "Encrypted files cannot be processed due to browser security restrictions. Please unlock the file before uploading."
+      },
+      {
+        "question": "Can I permanently exclude confidential pages before submitting?",
+        "answer": "Yes! Extract only the public submission pages (e.g. '1-3, 5-8') to guarantee confidential pages are never shared."
+      }
+    ],
+    "ui": {
+      "btn_split": "Extract Selected Pages",
+      "label_range": "Enter page numbers or ranges",
+      "hint_range": "e.g. 1-5 or 1, 3, 5-8 (Total: {total} pages)",
+      "notice_success": "Page extraction completed successfully!"
+    }
+  },
+  "de": {
+    "toolName": "PDF teilen",
+    "tagline": "Extract selected pages into a clean new PDF document",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Select PDF Document",
+        "desc": "Upload the PDF document from which you want to split or extract specific pages."
+      },
+      {
+        "step": 2,
+        "title": "Specify Page Range",
+        "desc": "Enter single numbers or ranges such as '1-5' or '1, 3, 7' separated by commas."
+      },
+      {
+        "step": 3,
+        "title": "Extract & Download",
+        "desc": "Click [Extract Pages] to instantly generate and download your new PDF right in your browser."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "High Precision PDF Splitting & Extraction",
+      "tagline": "Extract selected pages into a clean new PDF document",
+      "relatedGuideSlug": "confidential-page-removal-and-split",
+      "relatedGuideTitle": "Confidential Page Removal and Precision Split Guide",
+      "features": [
+        {
+          "title": "Complex Range & Comma Syntax",
+          "description": "Combine ranges like '1-5, 8, 11-14' to extract exact custom page selections.",
+          "badge": "Precise Extraction"
+        },
+        {
+          "title": "Exclude Confidential & Sensitive Pages",
+          "description": "Safely remove private corporate data or internal pages before sharing with clients.",
+          "badge": "Security Filter"
+        },
+        {
+          "title": "Drastic File Size Reduction",
+          "description": "Omitted pages and high-resolution images are completely removed, shrinking file size.",
+          "badge": "Lightweight Size"
+        }
+      ],
+      "proTips": [
+        "Extract specific project pages from large portfolios to create concise client summaries.",
+        "Split multi-chapter textbooks into single chapter files (e.g., '45-78') for light reading on tablets.",
+        "Re-number your extracted document cleanly with our [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick never uploads your documents to a server. All page splitting and extraction takes place locally inside your browser memory using WebAssembly."
+    },
+    "faqTitle": "Häufige Fragen zum PDF-Teilen",
+    "faqSubtitle": "Answers to common questions about extracting and splitting PDF pages safely.",
+    "faqItems": [
+      {
+        "question": "Can I extract specific non-consecutive pages?",
+        "answer": "Yes! Simply type '1, 4, 7-10' to bundle pages 1, 4, and 7 through 10 into a brand new PDF instantly."
+      },
+      {
+        "question": "Does splitting degrade quality or break formatting?",
+        "answer": "Not at all. Original vector typography, high-res photos, and layouts are 100% losslessly preserved."
+      },
+      {
+        "question": "Can I split password-protected PDFs?",
+        "answer": "Encrypted files cannot be processed due to browser security restrictions. Please unlock the file before uploading."
+      },
+      {
+        "question": "Can I permanently exclude confidential pages before submitting?",
+        "answer": "Yes! Extract only the public submission pages (e.g. '1-3, 5-8') to guarantee confidential pages are never shared."
+      }
+    ],
+    "ui": {
+      "btn_split": "Extract Selected Pages",
+      "label_range": "Enter page numbers or ranges",
+      "hint_range": "e.g. 1-5 or 1, 3, 5-8 (Total: {total} pages)",
+      "notice_success": "Page extraction completed successfully!"
+    }
+  }
+}

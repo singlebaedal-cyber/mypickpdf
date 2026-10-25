@@ -1,2 +1,2 @@
-# Google AdSense ads.txt - mypickpdf
+# Google AdSense ads.txt - pdfpick
 google.com, pub-3627143540462840, DIRECT, f08c47fec0942fa0

@@ -1,29 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
-import { FileText, ShieldCheck, Sparkles, Coffee, Globe, ChevronDown, Check } from "lucide-react";
+import { useState } from "react";
+import { ShieldCheck, Sparkles, Coffee } from "lucide-react";
 import RedPanda from "./RedPanda";
 import SponsorModal from "./SponsorModal";
-import { useLanguage, LANGUAGES } from "@/lib/i18n";
+import { useLanguage } from "@/lib/i18n";
 
 export default function Footer() {
-  const { lang, setLang, t } = useLanguage();
+  const { t } = useLanguage();
   const [isSponsorOpen, setIsSponsorOpen] = useState(false);
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
-
-  const currentLang = LANGUAGES.find((l) => l.code === lang) || LANGUAGES[0];
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (langRef.current && !langRef.current.contains(event.target as Node)) {
-        setIsLangOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-14 pb-10 border-t border-slate-800">
@@ -57,10 +43,10 @@ export default function Footer() {
                 <RedPanda mood="avatar" size={26} />
               </div>
               <span className="font-black text-lg text-white tracking-tight">
-                my<span className="text-orange-500">pick</span><span className="text-rose-500">pdf</span> 🐾
+                pdf<span className="text-orange-500">pick</span> 🐾
               </span>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+            <p className="text-xs text-slate-400 leading-relaxed">
               {t("footer_about")}
             </p>
           </div>
@@ -71,6 +57,16 @@ export default function Footer() {
               {t("footer_col_tools")}
             </h5>
             <ul className="space-y-2 text-xs">
+              <li>
+                <Link href="/edit-pdf" className="hover:text-rose-400 transition-colors font-bold text-rose-400">
+                  {t("tool_edit")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/translate-pdf" className="hover:text-blue-400 transition-colors font-bold text-blue-400">
+                  {t("tool_translate")}
+                </Link>
+              </li>
               <li>
                 <Link href="/merge-pdf" className="hover:text-rose-400 transition-colors">
                   {t("tool_merge")}
@@ -111,10 +107,14 @@ export default function Footer() {
                   {t("tool_watermark")}
                 </Link>
               </li>
-              <li className="pt-2 mt-1 border-t border-slate-800/80">
-                <Link href="/guides" className="text-amber-400 hover:text-amber-300 font-bold transition-colors flex items-center gap-1.5">
-                  <span>📖</span>
-                  <span>{t("nav_guides")} (40+)</span>
+              <li>
+                <Link href="/rotate-pdf" className="hover:text-rose-400 transition-colors">
+                  {t("tool_rotate")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/ocr-pdf" className="hover:text-rose-400 transition-colors">
+                  {t("tool_ocr")}
                 </Link>
               </li>
             </ul>
@@ -126,10 +126,10 @@ export default function Footer() {
               {t("footer_col_tech")}
             </h5>
             <ul className="space-y-2 text-xs text-slate-400">
-              <li>100% Client-Side WebAssembly</li>
+              <li>WebAssembly Client Engine</li>
               <li>SSL/TLS 256-bit Encryption</li>
               <li>Zero Remote Server Storage</li>
-              <li>Mobile &amp; Tablet Friendly</li>
+              <li>Mobile & Tablet Friendly</li>
               <li>100% Free for Commercial Use</li>
             </ul>
           </div>
@@ -140,6 +140,11 @@ export default function Footer() {
               {t("footer_col_legal")}
             </h5>
             <ul className="space-y-2 text-xs">
+              <li>
+                <Link href="/guides" className="hover:text-rose-400 transition-colors font-bold text-orange-400">
+                  PDF 실무 가이드 & 꿀팁
+                </Link>
+              </li>
               <li>
                 <Link href="/privacy-policy" className="hover:text-rose-400 transition-colors">
                   {t("footer_privacy_link")}
@@ -164,102 +169,60 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Row (Exact iLovePDF Layout with 3-Column Language Selector) */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <div className="flex items-center gap-4">
-            {/* iLovePDF-Style Language Selector Button with 3-Column Modal */}
-            <div className="relative" ref={langRef}>
-              <button
-                onClick={() => setIsLangOpen(!isLangOpen)}
-                className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700/80 flex items-center gap-2 transition-colors shadow-xs"
-                title="Change language / Select language"
-              >
-                <Globe className="w-3.5 h-3.5 text-slate-400" />
-                <span>{currentLang.label}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${isLangOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              {/* Exact iLovePDF 3-Column Floating Language Card */}
-              {isLangOpen && (
-                <div className="absolute bottom-full mb-3 left-0 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-5 z-50 animate-in fade-in zoom-in-95 min-w-[310px] sm:min-w-[620px] max-h-[85vh] overflow-y-auto">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-1 gap-x-6 text-left">
-                    {/* Column 1 */}
-                    <div className="space-y-0.5">
-                      {LANGUAGES.filter((l) => l.column === 1).map((l) => (
-                        <button
-                          key={l.code}
-                          onClick={() => {
-                            setLang(l.code);
-                            setIsLangOpen(false);
-                          }}
-                          className={`w-full text-left py-1.5 px-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 ${
-                            lang === l.code
-                              ? "font-extrabold text-slate-900 bg-slate-100"
-                              : "text-slate-600 hover:text-rose-600 hover:bg-slate-50 font-normal"
-                          }`}
-                        >
-                          <span className="w-3.5 text-center shrink-0">
-                            {lang === l.code ? <Check className="w-3.5 h-3.5 text-rose-600 stroke-[3]" /> : null}
-                          </span>
-                          <span>{l.label}</span>
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Column 2 */}
-                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-2 sm:pt-0 sm:pl-6">
-                      {LANGUAGES.filter((l) => l.column === 2).map((l) => (
-                        <button
-                          key={l.code}
-                          onClick={() => {
-                            setLang(l.code);
-                            setIsLangOpen(false);
-                          }}
-                          className={`w-full text-left py-1.5 px-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 ${
-                            lang === l.code
-                              ? "font-extrabold text-slate-900 bg-slate-100"
-                              : "text-slate-600 hover:text-rose-600 hover:bg-slate-50 font-normal"
-                          }`}
-                        >
-                          <span className="w-3.5 text-center shrink-0">
-                            {lang === l.code ? <Check className="w-3.5 h-3.5 text-rose-600 stroke-[3]" /> : null}
-                          </span>
-                          <span>{l.label}</span>
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Column 3 */}
-                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-2 sm:pt-0 sm:pl-6">
-                      {LANGUAGES.filter((l) => l.column === 3).map((l) => (
-                        <button
-                          key={l.code}
-                          onClick={() => {
-                            setLang(l.code);
-                            setIsLangOpen(false);
-                          }}
-                          className={`w-full text-left py-1.5 px-2.5 rounded-lg text-xs transition-colors flex items-center gap-2 ${
-                            lang === l.code
-                              ? "font-extrabold text-slate-900 bg-slate-100"
-                              : "text-slate-600 hover:text-rose-600 hover:bg-slate-50 font-normal"
-                          }`}
-                        >
-                          <span className="w-3.5 text-center shrink-0">
-                            {lang === l.code ? <Check className="w-3.5 h-3.5 text-rose-600 stroke-[3]" /> : null}
-                          </span>
-                          <span>{l.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <p>© {new Date().getFullYear()} mypickpdf. {t("footer_rights")}</p>
+        {/* Clean Semantic Internal Link Hub for Practical Guides & Workflows (No Duplicate URL Spam) */}
+        <div className="pt-8 pb-8 border-t border-slate-800/80 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <span>📌</span> 상황별 PDF 실무 해결 가이드 바로가기
+            </span>
           </div>
+          <div className="flex flex-wrap gap-2 text-[11px] text-slate-400">
+            <Link href="/guides/pdf-stamp-and-signature-free" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors font-bold text-rose-400">
+              PDF 도장 찍기·전자서명 넣기
+            </Link>
+            <Link href="/guides/pdf-redact-personal-info-whiteout" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors font-medium text-rose-300">
+              PDF 주민번호·개인정보 가리기
+            </Link>
+            <Link href="/guides/public-institution-hwp-pdf-guide" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors text-blue-300">
+              공공기관·정부24 HWP·HWPX 변환
+            </Link>
+            <Link href="/guides/translate-english-paper-pdf-korean" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors font-bold text-blue-400">
+              영어 논문·계약서 PDF 대조본 번역
+            </Link>
+            <Link href="/guides/email-attachment-pdf-compression" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              이메일 첨부용 PDF 용량 80% 줄이기
+            </Link>
+            <Link href="/guides/gov24-nara-pdf-size-and-hwp-tips" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              나라장터·홈택스 제출 서류 변환 팁
+            </Link>
+            <Link href="/guides/scanned-pdf-ocr-text-extraction" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              스캔 이미지 PDF 글자 복사(OCR)
+            </Link>
+            <Link href="/guides/portfolio-merge-and-page-numbering" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              포트폴리오 PDF 합치기 & 쪽번호 매기기
+            </Link>
+            <Link href="/guides/smartphone-photo-to-clean-pdf" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              스마트폰 영수증 사진 A4 PDF 묶기
+            </Link>
+            <Link href="/guides/how-to-convert-pdf-to-excel" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              PDF 표·재무제표 엑셀(XLSX) 추출
+            </Link>
+            <Link href="/guides/how-to-compress-video-for-kakaotalk" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors text-amber-300">
+              카카오톡 대용량 동영상 용량 줄이기
+            </Link>
+            <Link href="/guides/how-to-manage-pdf-on-iphone-ipad" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              아이폰·아이패드 무설치 PDF 편집
+            </Link>
+            <Link href="/guides/how-to-manage-pdf-on-galaxy-android" className="hover:text-white hover:bg-slate-800 px-2.5 py-1 rounded-lg bg-slate-800/50 border border-slate-700/50 transition-colors">
+              갤럭시 카톡 PDF 압축·변환
+            </Link>
+          </div>
+        </div>
 
+        {/* Bottom Copyright */}
+        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <div className="flex items-center gap-3">
+            <p>© {new Date().getFullYear()} pdfpick. {t("footer_rights")}</p>
             <button
               onClick={() => setIsSponsorOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-orange-500/20 to-rose-500/20 hover:from-orange-500/30 hover:to-rose-500/30 text-orange-300 hover:text-orange-200 border border-orange-500/40 rounded-full text-[11px] font-bold transition-all shadow-xs"
@@ -267,9 +230,13 @@ export default function Footer() {
               <Coffee className="w-3.5 h-3.5 text-orange-400" />
               <span>{t("sponsor_snack_btn")}</span>
             </button>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/guides" className="hover:underline text-orange-400 font-bold">가이드 & 팁</Link>
             <Link href="/privacy-policy" className="hover:underline">{t("footer_privacy_link")}</Link>
             <Link href="/terms" className="hover:underline">{t("footer_terms_link")}</Link>
             <Link href="/contact" className="hover:underline">{t("footer_contact_link")}</Link>
+            <a href="mailto:fbihan@naver.com" className="hover:text-rose-400 font-mono">fbihan@naver.com</a>
           </div>
         </div>
       </div>

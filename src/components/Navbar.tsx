@@ -26,10 +26,15 @@ import {
   Shield,
   Video,
   Sparkles,
-  BookOpen
+  BookOpen,
+  PenTool,
+  Languages,
+  Search,
+  Command
 } from "lucide-react";
 import { useLanguage, LANGUAGES } from "@/lib/i18n";
 import RedPanda from "@/components/RedPanda";
+import QuickSearchModal from "@/components/QuickSearchModal";
 
 export default function Navbar() {
   const { lang, setLang, t } = useLanguage();
@@ -37,6 +42,7 @@ export default function Navbar() {
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
   const [convertDropdownOpen, setConvertDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const langRef = useRef<HTMLDivElement>(null);
   const convertRef = useRef<HTMLDivElement>(null);
@@ -112,6 +118,8 @@ export default function Navbar() {
   const currentLangObj = LANGUAGES.find((l) => l.code === lang) || LANGUAGES[0];
 
   const coreEditTools = [
+    { name: t("tool_edit"), href: "/edit-pdf", icon: PenTool, color: "text-rose-600 bg-rose-50" },
+    { name: t("tool_translate"), href: "/translate-pdf", icon: Languages, color: "text-blue-600 bg-blue-50" },
     { name: t("tool_merge"), href: "/merge-pdf", icon: Files, color: "text-rose-600 bg-rose-50" },
     { name: t("tool_split"), href: "/split-pdf", icon: Split, color: "text-amber-600 bg-amber-50" },
     { name: t("tool_compress"), href: "/compress-pdf", icon: Minimize2, color: "text-emerald-600 bg-emerald-50" },
@@ -160,7 +168,7 @@ export default function Navbar() {
               <RedPanda mood="avatar" size={28} />
             </div>
             <span className="font-black text-lg sm:text-xl tracking-tight text-slate-900 flex items-center">
-              my<span className="text-orange-500">pick</span><span className="text-rose-600">pdf</span>
+              pdf<span className="text-orange-500">pick</span>
               <span className="ml-1 text-xs">🐾</span>
             </span>
           </Link>
@@ -388,21 +396,34 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Guide & Blog link */}
+            {/* Guides & Tips Link */}
             <Link
               href="/guides"
-              className="px-2.5 py-2 text-sm font-bold text-slate-700 hover:text-amber-600 rounded-xl hover:bg-amber-50/70 transition-colors flex items-center gap-1.5"
+              className="px-3 py-2 text-sm font-bold text-slate-700 hover:text-orange-600 rounded-xl hover:bg-orange-50/60 transition-colors flex items-center gap-1.5"
             >
-              <BookOpen className="w-4 h-4 text-amber-500" />
+              <BookOpen className="w-4 h-4 text-orange-500" />
               <span>{t("nav_guides")}</span>
-              <span className="px-1.5 py-0.5 text-[10px] font-black bg-amber-100 text-amber-700 rounded-full">
-                20
-              </span>
             </Link>
           </nav>
 
-          {/* Right Actions: Language Switcher (Hover & Click Supported) */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          {/* Right Actions: Search & Language Switcher */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Quick Tool Search Button (Ctrl+K) */}
+            <button
+              onClick={() => setSearchModalOpen(true)}
+              className="flex items-center gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200/80 rounded-xl text-slate-700 transition-colors border border-slate-200/60 text-xs font-bold shrink-0 shadow-2xs group"
+              aria-label={lang === "ko" ? "도구 빠른 검색 (Ctrl+K)" : "Quick Tool Search (Ctrl+K)"}
+              title={lang === "ko" ? "도구 빠른 검색 (Ctrl+K)" : "Quick Tool Search (Ctrl+K)"}
+            >
+              <Search className="w-3.5 h-3.5 text-slate-500 group-hover:text-rose-600 transition-colors" />
+              <span className="hidden sm:inline text-slate-600 font-semibold">
+                {lang === "ko" ? "도구 검색" : "Search"}
+              </span>
+              <kbd className="hidden md:inline-flex items-center px-1.5 py-0.5 rounded bg-white text-[10px] text-slate-400 font-mono border border-slate-200/80 shadow-2xs">
+                ⌘K
+              </kbd>
+            </button>
+
             {/* Language Switcher Dropdown */}
             <div 
               className="relative" 
@@ -417,8 +438,8 @@ export default function Navbar() {
                   setConvertDropdownOpen(false);
                 }}
                 className="px-2.5 py-1.5 sm:px-3 sm:py-2 bg-slate-100 hover:bg-slate-200/80 rounded-xl text-slate-700 transition-colors border border-slate-200/60 flex items-center gap-1.5 text-xs font-bold shrink-0 shadow-2xs"
-                aria-label={t("nav_select_lang")}
-                title={t("nav_select_lang")}
+                aria-label="언어 선택 (Select Language)"
+                title="언어 선택 (Select Language)"
               >
                 <span className="text-sm leading-none">{currentLangObj.flag}</span>
                 <span className="font-extrabold text-[11px] sm:text-xs text-slate-800 tracking-wider">{currentLangObj.initial}</span>
@@ -426,104 +447,51 @@ export default function Navbar() {
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-[92vw] sm:w-[580px] md:w-[620px] max-w-[calc(100vw-1.5rem)] bg-white rounded-3xl shadow-2xl border border-slate-200/90 p-4 sm:p-5 z-50 animate-in fade-in slide-in-from-top-2">
-                  {/* Header */}
-                  <div className="px-2 pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
+                <div className="absolute right-0 top-full mt-2 w-[340px] sm:w-[580px] max-w-[calc(100vw-1.5rem)] bg-white rounded-3xl shadow-2xl border border-slate-100 p-4 sm:p-5 z-50 animate-in fade-in slide-in-from-top-2">
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
                     <div className="flex items-center gap-2">
                       <div className="w-6 h-6 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
                         <Globe className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-xs font-black text-slate-800">
-                        {t("nav_select_lang")} (26)
+                      <span className="text-xs font-black text-slate-800 uppercase tracking-wide">
+                        Select Language
                       </span>
                     </div>
-                    <span className="text-[11px] font-bold text-slate-400 hidden sm:inline">
-                      {t("nav_current_lang")}: {currentLangObj.flag} {currentLangObj.label}
+                    <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                      18 Languages
                     </span>
                   </div>
-
-                  {/* 3-Column Horizontal Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-1 gap-x-4">
-                    {/* Column 1 */}
-                    <div className="space-y-0.5">
-                      {LANGUAGES.filter((l) => l.column === 1).map((item) => {
-                        const isSelected = lang === item.code;
-                        return (
-                          <button
-                            key={item.code}
-                            onClick={() => {
-                              setLang(item.code);
-                              setLangDropdownOpen(false);
-                            }}
-                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs text-left transition-colors cursor-pointer ${
-                              isSelected
-                                ? "bg-rose-50 text-rose-600 font-extrabold shadow-2xs"
-                                : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 font-medium"
-                            }`}
-                          >
-                            <span className="flex items-center gap-2 truncate">
-                              <span className="text-base leading-none shrink-0">{item.flag}</span>
-                              <span className="truncate">{item.label}</span>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2">
+                    {LANGUAGES.map((item) => {
+                      const isSelected = lang === item.code;
+                      return (
+                        <button
+                          key={item.code}
+                          onClick={() => {
+                            setLang(item.code);
+                            setLangDropdownOpen(false);
+                          }}
+                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-left transition-all ${
+                            isSelected
+                              ? "bg-rose-50 text-rose-600 border border-rose-200/80 shadow-2xs font-extrabold"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 border border-transparent"
+                          }`}
+                        >
+                          <span className="flex items-center gap-2 min-w-0">
+                            <span className="text-base leading-none shrink-0">{item.flag}</span>
+                            <span className="flex flex-col min-w-0">
+                              <span className="text-xs font-bold text-slate-800 truncate leading-snug">
+                                {item.label}
+                              </span>
+                              <span className="text-[10px] text-slate-400 font-semibold leading-none">
+                                {item.initial}
+                              </span>
                             </span>
-                            {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 stroke-[2.5]" />}
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {/* Column 2 */}
-                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-1.5 sm:pt-0 sm:pl-3">
-                      {LANGUAGES.filter((l) => l.column === 2).map((item) => {
-                        const isSelected = lang === item.code;
-                        return (
-                          <button
-                            key={item.code}
-                            onClick={() => {
-                              setLang(item.code);
-                              setLangDropdownOpen(false);
-                            }}
-                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs text-left transition-colors cursor-pointer ${
-                              isSelected
-                                ? "bg-rose-50 text-rose-600 font-extrabold shadow-2xs"
-                                : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 font-medium"
-                            }`}
-                          >
-                            <span className="flex items-center gap-2 truncate">
-                              <span className="text-base leading-none shrink-0">{item.flag}</span>
-                              <span className="truncate">{item.label}</span>
-                            </span>
-                            {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 stroke-[2.5]" />}
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {/* Column 3 */}
-                    <div className="space-y-0.5 border-t sm:border-t-0 sm:border-l border-slate-100 pt-1.5 sm:pt-0 sm:pl-3">
-                      {LANGUAGES.filter((l) => l.column === 3).map((item) => {
-                        const isSelected = lang === item.code;
-                        return (
-                          <button
-                            key={item.code}
-                            onClick={() => {
-                              setLang(item.code);
-                              setLangDropdownOpen(false);
-                            }}
-                            className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs text-left transition-colors cursor-pointer ${
-                              isSelected
-                                ? "bg-rose-50 text-rose-600 font-extrabold shadow-2xs"
-                                : "text-slate-700 hover:bg-slate-50 hover:text-rose-600 font-medium"
-                            }`}
-                          >
-                            <span className="flex items-center gap-2 truncate">
-                              <span className="text-base leading-none shrink-0">{item.flag}</span>
-                              <span className="truncate">{item.label}</span>
-                            </span>
-                            {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 stroke-[2.5]" />}
-                          </button>
-                        );
-                      })}
-                    </div>
+                          </span>
+                          {isSelected && <Check className="w-3.5 h-3.5 text-rose-600 shrink-0 ml-1" />}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -545,19 +513,6 @@ export default function Navbar() {
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-3">
-          {/* Mobile Guide Link */}
-          <Link
-            href="/guides"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-slate-800 font-bold text-xs shadow-2xs"
-          >
-            <div className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-amber-600" />
-              <span>{t("nav_guides")} (40+)</span>
-            </div>
-            <span className="text-[10px] bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full font-black">40+</span>
-          </Link>
-
           <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2">
             {t("nav_all_tools")}
           </div>
@@ -574,8 +529,24 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+
+          <div className="pt-2 border-t border-slate-100">
+            <Link
+              href="/guides"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl bg-orange-50/80 border border-orange-200 text-orange-950 text-xs font-bold hover:bg-orange-100 transition-colors"
+            >
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-orange-600" />
+                <span>{t("nav_guides")}</span>
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
+            </Link>
+          </div>
         </div>
       )}
+      {/* Quick Tool Search Modal (Ctrl+K) */}
+      <QuickSearchModal isOpen={searchModalOpen} onClose={() => setSearchModalOpen(false)} />
     </header>
   );
 }

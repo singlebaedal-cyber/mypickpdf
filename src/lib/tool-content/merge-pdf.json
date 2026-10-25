@@ -1,0 +1,826 @@
+{
+  "ko": {
+    "toolName": "PDF 합치기",
+    "tagline": "다양한 포맷의 문서를 하나의 완벽한 마스터 PDF로 합치는 실무 팁",
+    "ui": {
+      "btn_add_second": "➕ 합칠 두 번째 PDF 파일 추가하기",
+      "badge_required": "필수 (1개 더 필요)",
+      "desc_drop": "여기를 클릭하거나 파일을 끌어다 놓으세요. (여러 개를 한 번에 추가해도 됩니다)",
+      "btn_select_second": "두 번째 파일 선택하기",
+      "btn_add_more": "문서 더 추가하기 (클릭 또는 파일 드래그)",
+      "step1_need_more": "1단계: 합칠 두 번째 PDF 파일을 등록해 주세요",
+      "step1_ready": "1단계: 아래 버튼을 누르면 {count}개 문서가 하나로 합쳐집니다!",
+      "btn_reset": "전체 초기화",
+      "btn_cta_add": "👉 두 번째 PDF 파일 추가하기 (클릭)",
+      "btn_cta_merge": "👉 PDF {count}개 하나로 합치기 시작",
+      "notice_success_title": "PDF 병합이 성공적으로 완료되었습니다!",
+      "notice_success_desc": "모든 문서들이 지정한 순서대로 하나로 합쳐졌습니다. 아래 [합쳐진 PDF 다시 다운로드] 버튼을 눌러 새 문서를 저장하세요!",
+      "action_hint": "[합쳐진 PDF 다시 다운로드] 버튼을 클릭하세요",
+      "btn_redownload": "합쳐진 PDF 다시 다운로드",
+      "processing_msg": "PDF 문서들을 안전하게 병합하고 있습니다..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF 파일 업로드",
+        "desc": "합치고 싶은 2개 이상의 PDF 파일을 드래그 앤 드롭하거나 파일 선택 버튼을 눌러 추가합니다."
+      },
+      {
+        "step": 2,
+        "title": "문서 순서 조절",
+        "desc": "화면에 표시된 목록에서 화살표 버튼을 이용해 원하는 문서 순서대로 자유롭게 재배치합니다."
+      },
+      {
+        "step": 3,
+        "title": "합치기 & 다운로드",
+        "desc": "[PDF 합치기] 버튼을 누르면 브라우저에서 1초 만에 병합되어 완성된 파일이 자동 저장됩니다."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "전문 보고서 및 포트폴리오 PDF 병합",
+      "tagline": "다양한 포맷의 문서를 하나의 완벽한 마스터 PDF로 합치는 실무 팁",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "포트폴리오 병합 및 일괄 쪽번호 가이드",
+      "features": [
+        {
+          "title": "자유로운 드래그 순서 재배치",
+          "description": "표지, 목차, 본문, 증빙 서류 등 서로 다른 출처의 파일들을 마우스 드래그나 화살표로 원하는 순서대로 정밀하게 정렬합니다.",
+          "badge": "순서 재배치"
+        },
+        {
+          "title": "다양한 판형(A4, A3, Letter) 호환",
+          "description": "문서마다 가로/세로 방향이 다르거나 용지 규격이 달라도 비율 왜곡 없이 원본 레이아웃을 100% 보존하며 병합합니다.",
+          "badge": "원본 규격 유지"
+        },
+        {
+          "title": "초고속 무손실 메모리 스트림 결합",
+          "description": "파일을 다시 인코딩하지 않고 PDF 객체 트리를 직접 결합하므로 화질 저하가 전혀 없으며 대용량 파일도 수 초 내에 완성됩니다.",
+          "badge": "무손실 결합"
+        }
+      ],
+      "proTips": [
+        "제안서나 포트폴리오를 구성할 때는 [표지 ➔ 목차 ➔ 이력서 ➔ 프로젝트 본문 ➔ 증빙 서류] 순서로 배치해야 심사관이 한눈에 파악할 수 있습니다.",
+        "여러 문서를 합친 후 용량이 커져 이메일 전송이 어려워진 경우 [PDF 압축 도구]를 함께 사용하면 5MB 이하로 깔끔하게 경량화할 수 있습니다.",
+        "완성된 마스터 문서의 가독성을 높이려면 [페이지 번호 매기기] 도구를 이용해 표지를 제외하고 본문부터 쪽번호를 삽입하세요."
+      ],
+      "securityNote": "pdfpick는 고객님의 문서를 웹 서버로 전송하지 않고 브라우저 가상 머신(WebAssembly) 메모리에서 직접 결합합니다. 계약서, 금융 거래 내역서, 인사 기록 카드 등 민감한 개인정보 문서도 외부 유출 위험 없이 100% 안전합니다."
+    },
+    "faqTitle": "PDF 합치기 자주 묻는 질문",
+    "faqSubtitle": "로그인 없이 안전하게 문서를 병합하는 방법에 대한 궁금증을 풀어드립니다.",
+    "faqItems": [
+      {
+        "question": "PDF 합치기 시 페이지 순서를 자유롭게 바꿀 수 있나요?",
+        "answer": "네! 업로드된 문서 목록에서 위/아래 화살표 버튼을 클릭하거나 드래그하여 원하는 순서대로 얼마든지 자유롭게 정렬할 수 있습니다."
+      },
+      {
+        "question": "합칠 수 있는 최대 파일 개수나 용량 제한이 있나요?",
+        "answer": "pdfpick는 클라이언트 메모리 기반으로 동작하므로 인위적인 파일 개수 제한이 없습니다. 일반적인 PC 및 스마트폰 환경에서 수십 개의 대용량 PDF 문서도 한 번에 병합 가능합니다."
+      },
+      {
+        "question": "용지 크기(A4, A3, Letter)나 방향(가로/세로)이 달라도 합쳐지나요?",
+        "answer": "네! 각 페이지의 고유 해상도와 크기, 회전 각도를 100% 그대로 보존하여 결합하므로 판형이 서로 다른 문서도 왜곡 없이 하나의 파일로 합쳐집니다."
+      },
+      {
+        "question": "파일을 합치면 화질이나 해상도가 떨어지나요?",
+        "answer": "전혀 떨어지지 않습니다. pdfpick는 문서를 재압축하거나 래스터화하지 않고, PDF 내부의 벡터 그래픽과 텍스트 스트림을 무손실로 직접 결합하므로 원본 화질이 온전히 유지됩니다."
+      },
+      {
+        "question": "계약서나 대외비 문서를 합쳐도 외부로 유출되지 않나요?",
+        "answer": "100% 안전합니다. 업로드하신 모든 파일은 외부 서버로 전송되지 않고 사용자의 웹 브라우저 로컬 메모리 안에서만 결합되므로 기업 기밀 문서나 금융 서류도 안심하고 처리하실 수 있습니다."
+      },
+      {
+        "question": "합친 후 특정 페이지만 삭제하거나 순서를 다시 바꿀 수 있나요?",
+        "answer": "네! 합친 문서를 [PDF 분할 및 페이지 추출] 도구에 넣으시면 불필요한 페이지만 제외하거나 순서를 다시 재구성하실 수 있습니다."
+      },
+      {
+        "question": "모바일 스마트폰이나 태블릿에서도 PDF 병합이 가능한가요?",
+        "answer": "네! 아이폰(Safari), 안드로이드(Chrome, 삼성 인터넷) 등 모든 모바일 브라우저에서 별도 앱 설치 없이 즉시 빠르게 병합할 수 있습니다."
+      },
+      {
+        "question": "PDF를 합친 후 용량이 너무 커졌을 때는 어떻게 하나요?",
+        "answer": "합쳐진 결과물 파일을 pdfpick의 [PDF 압축 도구]에 업로드하시면 텍스트와 이미지 손상 없이 파일 크기를 50~80% 대폭 줄여 이메일 첨부 규격에 맞출 수 있습니다."
+      }
+    ]
+  },
+  "en": {
+    "toolName": "Merge PDF",
+    "tagline": "Combine multiple documents into one perfect master PDF file",
+    "ui": {
+      "btn_add_second": "➕ Add Second PDF to Merge",
+      "badge_required": "Required (1 more needed)",
+      "desc_drop": "Click here or drag and drop files (you can add multiple files at once)",
+      "btn_select_second": "Choose Second File",
+      "btn_add_more": "Add More Documents (Click or Drag)",
+      "step1_need_more": "Step 1: Please add a second PDF to merge",
+      "step1_ready": "Step 1: Click the button below to merge {count} documents into one!",
+      "btn_reset": "Reset All",
+      "btn_cta_add": "👉 Add Second PDF File (Click)",
+      "btn_cta_merge": "👉 Start Merging {count} PDF Files",
+      "notice_success_title": "PDF Merge Completed Successfully!",
+      "notice_success_desc": "All documents have been combined in your specified order. Click [Download Merged PDF] below to save your new file!",
+      "action_hint": "Click [Download Merged PDF Again] button",
+      "btn_redownload": "Download Merged PDF Again",
+      "processing_msg": "Securely merging your PDF documents..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF Files",
+        "desc": "Drag and drop 2 or more PDF files you want to combine or click to browse."
+      },
+      {
+        "step": 2,
+        "title": "Arrange Document Order",
+        "desc": "Use the up/down arrow buttons to reorder your files in the exact sequence you desire."
+      },
+      {
+        "step": 3,
+        "title": "Merge & Download",
+        "desc": "Click [Merge PDF] to instantly combine files right in your browser for instant download."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Professional Reports & Portfolio PDF Merging",
+      "tagline": "Combine multiple documents into one perfect master PDF file",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "Portfolio Merge and Page Numbering Guide",
+      "features": [
+        {
+          "title": "Free Drag & Drop Reordering",
+          "description": "Organize covers, tables of contents, body text, and certificates in your exact custom sequence with arrows or dragging.",
+          "badge": "Reorder Easily"
+        },
+        {
+          "title": "Multi-Format (A4, A3, Letter) Compatibility",
+          "description": "Preserves landscape, portrait, and mixed page dimensions without layout distortion.",
+          "badge": "Preserve Sizes"
+        },
+        {
+          "title": "Ultra-Fast Lossless Memory Stream Join",
+          "description": "Directly combines PDF object trees without re-encoding, preserving 100% original visual fidelity.",
+          "badge": "Lossless Merge"
+        }
+      ],
+      "proTips": [
+        "When assembling proposals or portfolios, organize by [Cover ➔ TOC ➔ Resume ➔ Projects ➔ Certificates] for the best review flow.",
+        "If the combined document is too large for email, use our [Compress PDF Tool] to quickly reduce it below 5MB.",
+        "Add continuous page numbers across your new master document using the [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick merges files entirely within your web browser using WebAssembly. Your confidential contracts, financial records, and private documents never touch an external server."
+    },
+    "faqTitle": "Merge PDF FAQ",
+    "faqSubtitle": "Answers to common questions about merging PDF documents safely without logging in.",
+    "faqItems": [
+      {
+        "question": "Can I customize the order of pages and documents?",
+        "answer": "Yes! Use the up/down arrows or drag your documents in the list to rearrange them into any desired order."
+      },
+      {
+        "question": "Is there a limit on file count or total file size?",
+        "answer": "pdfpick runs client-side in your browser, with no artificial restrictions. You can merge dozens of large documents smoothly on modern devices."
+      },
+      {
+        "question": "Can I combine PDFs with different page sizes (A4, Letter, Landscape)?",
+        "answer": "Yes! Each page retains its original orientation, size, and aspect ratio without distortion."
+      },
+      {
+        "question": "Will merging reduce quality or resolution?",
+        "answer": "Not at all. pdfpick directly streams the PDF object trees without rasterizing or re-compressing, keeping 100% original quality."
+      },
+      {
+        "question": "Are confidential business contracts safe from leaks?",
+        "answer": "100% safe. All processing takes place locally inside your browser memory with zero server uploads."
+      },
+      {
+        "question": "Can I delete or rearrange specific pages after merging?",
+        "answer": "Yes! Use our [Split PDF Tool] to extract or exclude specific pages from your merged document."
+      },
+      {
+        "question": "Does this work on mobile devices and tablets?",
+        "answer": "Yes! It runs smoothly across iPhone Safari, Android Chrome, and tablets without requiring any app installation."
+      },
+      {
+        "question": "What should I do if the merged file is too large?",
+        "answer": "Upload the merged PDF to our [Compress PDF Tool] to reduce file size by 50-80% without losing text or image clarity."
+      }
+    ]
+  },
+  "ja": {
+    "toolName": "PDF結合（マージ）",
+    "tagline": "複数の文書を1つの完璧なマスターPDFにまとめる実践ガイド",
+    "ui": {
+      "btn_add_second": "➕ 結合する2つ目のPDFファイルを追加",
+      "badge_required": "必須（あと1つ必要）",
+      "desc_drop": "ここをクリックまたはファイルをドラッグ＆ドロップ（複数ファイルを一度に追加可能）",
+      "btn_select_second": "2つ目のファイルを選択",
+      "btn_add_more": "さらにファイルを追加（クリックまたはドラッグ）",
+      "step1_need_more": "ステップ1: 結合する2つ目のPDFファイルを登録してください",
+      "step1_ready": "ステップ1: 下のボタンを押すと{count}個の文書が1つに結合されます！",
+      "btn_reset": "すべてリセット",
+      "btn_cta_add": "👉 2つ目のPDFファイルを追加（クリック）",
+      "btn_cta_merge": "👉 PDF {count}個の結合を開始",
+      "notice_success_title": "PDFの結合が正常に完了しました！",
+      "notice_success_desc": "すべての文書が指定した順序で1つにまとまりました。下のボタンから保存してください！",
+      "action_hint": "【結合されたPDFを再ダウンロード】をクリック",
+      "btn_redownload": "結合されたPDFを再ダウンロード",
+      "processing_msg": "PDF文書を安全に結合しています..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDFファイルをアップロード",
+        "desc": "結合したい2つ以上のPDFファイルをドラッグ＆ドロップまたはファイル選択で追加します。"
+      },
+      {
+        "step": 2,
+        "title": "文書の並び順を調整",
+        "desc": "画面の一覧で矢印ボタンを使って、ご希望の順序に自由に並び替えます。"
+      },
+      {
+        "step": 3,
+        "title": "結合＆ダウンロード",
+        "desc": "【PDF結合】をクリックすると、ブラウザ内で瞬時に1つのファイルに統合され保存されます。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "報告書＆ポートフォリオPDF結合",
+      "tagline": "複数の文書を1つの完璧なマスターPDFにまとめる実践ガイド",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "ポートフォリオ結合および一括ページ番号ガイド",
+      "features": [
+        {
+          "title": "自由な順序並び替え",
+          "description": "表紙、目次、本文、添付書類など異なる文書を矢印やドラッグで正確に並び替えます。",
+          "badge": "順序並び替え"
+        },
+        {
+          "title": "A4・A3・横向き等マルチサイズ対応",
+          "description": "縦横の向きや用紙サイズが異なっても歪みなく100%原本サイズを保持して結合します。",
+          "badge": "原本サイズ保持"
+        },
+        {
+          "title": "超高速・無劣化ストリーム結合",
+          "description": "再エンコードせずPDFオブジェクトを直接統合するため画質低下が一切ありません。",
+          "badge": "無劣化結合"
+        }
+      ],
+      "proTips": [
+        "提案書やポートフォリオは【表紙 ➔ 目次 ➔ 経歴書 ➔ 本文 ➔ 証憑書類】の順序で配置すると見やすくなります。",
+        "結合後にファイルサイズが大きくなった場合は【PDF圧縮ツール】で5MB以下に軽量化できます。",
+        "マスター文書の通し番号付けには【ページ番号追加ツール】を併せてご活用ください。"
+      ],
+      "securityNote": "pdfpickはお客様の文書をサーバーにアップロードせず、ブラウザ内（WebAssembly）で安全に結合します。機密文書や個人情報も外部流出の心配なく安全です。"
+    },
+    "faqTitle": "PDF結合 よくある質問（FAQ）",
+    "faqSubtitle": "ログイン不要で安全に文書を結合する方法についての疑問にお答えします。",
+    "faqItems": [
+      {
+        "question": "PDF結合時にページの並び順を自由に変更できますか？",
+        "answer": "はい！一覧の矢印ボタンやドラッグ操作で、お好みの順序に何度でも簡単に並び替えることができます。"
+      },
+      {
+        "question": "結合できるファイル数や容量に制限はありますか？",
+        "answer": "pdfpickはブラウザメモリで動作するため制限はありません。大量のPDFもスムーズに結合可能です。"
+      },
+      {
+        "question": "用紙サイズ（A4、A3）や縦横が混ざっていても結合できますか？",
+        "answer": "はい！各ページの解像度と向きを100%保持したまま結合されるため、崩れる心配はありません。"
+      },
+      {
+        "question": "結合すると画質や解像度は低下しますか？",
+        "answer": "低下しません。再エンコードを行わず原本のベクターデータと画像をそのまま結合するため無劣化です。"
+      },
+      {
+        "question": "契約書や機密書類を結合しても安全ですか？",
+        "answer": "100%安全です。ファイルは外部サーバーへ送信されず、お使いの端末内でのみ処理されます。"
+      },
+      {
+        "question": "結合後に特定のページだけ削除することはできますか？",
+        "answer": "はい！結合したファイルを当サイトの【PDF分割ツール】にかけることで、不要なページを取り除くことができます。"
+      },
+      {
+        "question": "スマートフォンやタブレットでもPDF結合は可能ですか？",
+        "answer": "はい！iPhone（Safari）やAndroid（Chrome）など主要ブラウザからアプリ不要で即座にご利用いただけます。"
+      },
+      {
+        "question": "結合後にファイルサイズが大きくなりすぎた場合は？",
+        "answer": "当サイトの【PDF圧縮ツール】をご利用いただくと、画質を保ったまま50〜80%容量を縮小できます。"
+      }
+    ]
+  },
+  "zh": {
+    "toolName": "PDF合并",
+    "tagline": "将多份文档整合成一份完美的主PDF文档",
+    "ui": {
+      "btn_add_second": "➕ 添加第二份要合并的PDF",
+      "badge_required": "必填（还需1份）",
+      "desc_drop": "点击此处或拖放文件（可一次性添加多份文件）",
+      "btn_select_second": "选择第二份文件",
+      "btn_add_more": "添加更多文档（点击或拖放）",
+      "step1_need_more": "第1步：请添加第二份要合并的PDF文件",
+      "step1_ready": "第1步：点击下方按钮即可将 {count} 份文档合并为一份！",
+      "btn_reset": "全部重置",
+      "btn_cta_add": "👉 添加第二份PDF文件（点击）",
+      "btn_cta_merge": "👉 开始合并 {count} 份PDF文档",
+      "notice_success_title": "PDF合并成功完成！",
+      "notice_success_desc": "所有文档已按指定顺序整合成一份新文档。请点击下方按钮下载！",
+      "action_hint": "点击【重新下载合并后的PDF】按钮",
+      "btn_redownload": "重新下载合并后的PDF",
+      "processing_msg": "正在安全合并PDF文档..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "上传PDF文件",
+        "desc": "拖放2份或更多想要合并的PDF文件，或点击选择文件。"
+      },
+      {
+        "step": 2,
+        "title": "调整文件顺序",
+        "desc": "在列表中通过上下箭头按钮自由调整想要的文档排序。"
+      },
+      {
+        "step": 3,
+        "title": "合并并下载",
+        "desc": "点击【合并PDF】，在浏览器中1秒内完成拼合并自动下载。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "专业报告与作品集PDF合并",
+      "tagline": "将多份文档整合成一份完美的主PDF文档",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "作品集合并与页码编排指南",
+      "features": [
+        {
+          "title": "自由拖拽排序",
+          "description": "将封面、目录、正文和证明材料按自定义顺序精确排列。",
+          "badge": "自由排序"
+        },
+        {
+          "title": "兼容多种纸张规格（A4/A3/横纵向）",
+          "description": "无论横版还是竖版，100%保持原始页面尺寸与清晰度。",
+          "badge": "保留原规格"
+        },
+        {
+          "title": "超高速无损流式合并",
+          "description": "直接拼接PDF对象树，无需重新编码，保持100%原始画质。",
+          "badge": "无损合并"
+        }
+      ],
+      "proTips": [
+        "整合投标方案或作品集时，推荐按【封面 ➔ 目录 ➔ 简历 ➔ 项目正文 ➔ 证明材料】排序。",
+        "合并后文件过大无法邮件发送时，可使用本站【PDF压缩工具】轻松降至5MB以内。",
+        "使用【添加页码工具】为合并后的主文件添加连续统一的页码。"
+      ],
+      "securityNote": "pdfpick 100%在浏览器本地通过 WebAssembly 运行，合同和机密文件绝不会上传到外部服务器。"
+    },
+    "faqTitle": "PDF合并常见问题（FAQ）",
+    "faqSubtitle": "解答无需登录、安全合并文档的常见疑问。",
+    "faqItems": [
+      {
+        "question": "合并PDF时可以自由调整页面顺序吗？",
+        "answer": "可以！点击列表中的上下箭头或拖动文档即可轻松调整顺序。"
+      },
+      {
+        "question": "合并的文件数量或大小有限制吗？",
+        "answer": "完全没有数量限制，支持在本地浏览器中批量合并多份大文件。"
+      },
+      {
+        "question": "纸张大小或横纵方向不同可以合并吗？",
+        "answer": "可以！每个页面均保留原有的尺寸和旋转角度，不会变形。"
+      },
+      {
+        "question": "合并后画质或文字清晰度会下降吗？",
+        "answer": "绝不降低。采用无损流式合并，原始矢量文字与高清图像100%保留。"
+      },
+      {
+        "question": "涉及机密的合同合并安全吗？",
+        "answer": "100%安全。所有操作均在本地浏览器内存中完成，文件不离开设备。"
+      },
+      {
+        "question": "合并后可以删除某些特定页面吗？",
+        "answer": "可以！合并后可使用【PDF拆分与页面提取】工具剔除不需要的页面。"
+      },
+      {
+        "question": "手机或平板电脑也可以合并PDF吗？",
+        "answer": "可以！无需安装任何App，直接在手机浏览器中即可快速合并。"
+      },
+      {
+        "question": "合并后PDF文件体积过大怎么办？",
+        "answer": "使用本站【PDF压缩工具】即可将文件缩小50~80%，方便邮件发送。"
+      }
+    ]
+  },
+  "zh-TW": {
+    "toolName": "PDF合併",
+    "tagline": "將多份文件整合成一份完美的主PDF文件",
+    "ui": {
+      "btn_add_second": "➕ 添加第二份要合并的PDF",
+      "badge_required": "必填（还需1份）",
+      "desc_drop": "点击此处或拖放文件（可一次性添加多份文件）",
+      "btn_select_second": "选择第二份文件",
+      "btn_add_more": "添加更多文档（点击或拖放）",
+      "step1_need_more": "第1步：请添加第二份要合并的PDF文件",
+      "step1_ready": "第1步：点击下方按钮即可将 {count} 份文档合并为一份！",
+      "btn_reset": "全部重置",
+      "btn_cta_add": "👉 添加第二份PDF文件（点击）",
+      "btn_cta_merge": "👉 开始合并 {count} 份PDF文档",
+      "notice_success_title": "PDF合并成功完成！",
+      "notice_success_desc": "所有文档已按指定顺序整合成一份新文档。请点击下方按钮下载！",
+      "action_hint": "点击【重新下载合并后的PDF】按钮",
+      "btn_redownload": "重新下载合并后的PDF",
+      "processing_msg": "正在安全合并PDF文档..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "上传PDF文件",
+        "desc": "拖放2份或更多想要合并的PDF文件，或点击选择文件。"
+      },
+      {
+        "step": 2,
+        "title": "调整文件顺序",
+        "desc": "在列表中通过上下箭头按钮自由调整想要的文档排序。"
+      },
+      {
+        "step": 3,
+        "title": "合并并下载",
+        "desc": "点击【合并PDF】，在浏览器中1秒内完成拼合并自动下载。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "专业报告与作品集PDF合并",
+      "tagline": "将多份文档整合成一份完美的主PDF文档",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "作品集合并与页码编排指南",
+      "features": [
+        {
+          "title": "自由拖拽排序",
+          "description": "将封面、目录、正文和证明材料按自定义顺序精确排列。",
+          "badge": "自由排序"
+        },
+        {
+          "title": "兼容多种纸张规格（A4/A3/横纵向）",
+          "description": "无论横版还是竖版，100%保持原始页面尺寸与清晰度。",
+          "badge": "保留原规格"
+        },
+        {
+          "title": "超高速无损流式合并",
+          "description": "直接拼接PDF对象树，无需重新编码，保持100%原始画质。",
+          "badge": "无损合并"
+        }
+      ],
+      "proTips": [
+        "整合投标方案或作品集时，推荐按【封面 ➔ 目录 ➔ 简历 ➔ 项目正文 ➔ 证明材料】排序。",
+        "合并后文件过大无法邮件发送时，可使用本站【PDF压缩工具】轻松降至5MB以内。",
+        "使用【添加页码工具】为合并后的主文件添加连续统一的页码。"
+      ],
+      "securityNote": "pdfpick 100%在浏览器本地通过 WebAssembly 运行，合同和机密文件绝不会上传到外部服务器。"
+    },
+    "faqTitle": "PDF合併常見問題（FAQ）",
+    "faqSubtitle": "解答无需登录、安全合并文档的常见疑问。",
+    "faqItems": [
+      {
+        "question": "合并PDF时可以自由调整页面顺序吗？",
+        "answer": "可以！点击列表中的上下箭头或拖动文档即可轻松调整顺序。"
+      },
+      {
+        "question": "合并的文件数量或大小有限制吗？",
+        "answer": "完全没有数量限制，支持在本地浏览器中批量合并多份大文件。"
+      },
+      {
+        "question": "纸张大小或横纵方向不同可以合并吗？",
+        "answer": "可以！每个页面均保留原有的尺寸和旋转角度，不会变形。"
+      },
+      {
+        "question": "合并后画质或文字清晰度会下降吗？",
+        "answer": "绝不降低。采用无损流式合并，原始矢量文字与高清图像100%保留。"
+      },
+      {
+        "question": "涉及机密的合同合并安全吗？",
+        "answer": "100%安全。所有操作均在本地浏览器内存中完成，文件不离开设备。"
+      },
+      {
+        "question": "合并后可以删除某些特定页面吗？",
+        "answer": "可以！合并后可使用【PDF拆分与页面提取】工具剔除不需要的页面。"
+      },
+      {
+        "question": "手机或平板电脑也可以合并PDF吗？",
+        "answer": "可以！无需安装任何App，直接在手机浏览器中即可快速合并。"
+      },
+      {
+        "question": "合并后PDF文件体积过大怎么办？",
+        "answer": "使用本站【PDF压缩工具】即可将文件缩小50~80%，方便邮件发送。"
+      }
+    ]
+  },
+  "es": {
+    "toolName": "Unir PDF",
+    "tagline": "Combina varios documentos en un único archivo PDF maestro",
+    "ui": {
+      "btn_add_second": "➕ Añadir segundo PDF para unir",
+      "badge_required": "Obligatorio (falta 1)",
+      "desc_drop": "Click here or drag and drop files (you can add multiple files at once)",
+      "btn_select_second": "Seleccionar segundo archivo",
+      "btn_add_more": "Añadir más documentos (Clic o arrastrar)",
+      "step1_need_more": "Step 1: Please add a second PDF to merge",
+      "step1_ready": "Step 1: Click the button below to merge {count} documents into one!",
+      "btn_reset": "Restablecer todo",
+      "btn_cta_add": "👉 Add Second PDF File (Click)",
+      "btn_cta_merge": "👉 Empezar a unir {count} archivos PDF",
+      "notice_success_title": "¡PDFs unidos con éxito!",
+      "notice_success_desc": "All documents have been combined in your specified order. Click [Download Merged PDF] below to save your new file!",
+      "action_hint": "Click [Download Merged PDF Again] button",
+      "btn_redownload": "Volver a descargar PDF unido",
+      "processing_msg": "Uniendo documentos PDF de forma segura..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF Files",
+        "desc": "Drag and drop 2 or more PDF files you want to combine or click to browse."
+      },
+      {
+        "step": 2,
+        "title": "Arrange Document Order",
+        "desc": "Use the up/down arrow buttons to reorder your files in the exact sequence you desire."
+      },
+      {
+        "step": 3,
+        "title": "Merge & Download",
+        "desc": "Click [Merge PDF] to instantly combine files right in your browser for instant download."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Professional Reports & Portfolio PDF Merging",
+      "tagline": "Combine multiple documents into one perfect master PDF file",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "Portfolio Merge and Page Numbering Guide",
+      "features": [
+        {
+          "title": "Free Drag & Drop Reordering",
+          "description": "Organize covers, tables of contents, body text, and certificates in your exact custom sequence with arrows or dragging.",
+          "badge": "Reorder Easily"
+        },
+        {
+          "title": "Multi-Format (A4, A3, Letter) Compatibility",
+          "description": "Preserves landscape, portrait, and mixed page dimensions without layout distortion.",
+          "badge": "Preserve Sizes"
+        },
+        {
+          "title": "Ultra-Fast Lossless Memory Stream Join",
+          "description": "Directly combines PDF object trees without re-encoding, preserving 100% original visual fidelity.",
+          "badge": "Lossless Merge"
+        }
+      ],
+      "proTips": [
+        "When assembling proposals or portfolios, organize by [Cover ➔ TOC ➔ Resume ➔ Projects ➔ Certificates] for the best review flow.",
+        "If the combined document is too large for email, use our [Compress PDF Tool] to quickly reduce it below 5MB.",
+        "Add continuous page numbers across your new master document using the [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick merges files entirely within your web browser using WebAssembly. Your confidential contracts, financial records, and private documents never touch an external server."
+    },
+    "faqTitle": "Preguntas frecuentes sobre unir PDF (FAQ)",
+    "faqSubtitle": "Answers to common questions about merging PDF documents safely without logging in.",
+    "faqItems": [
+      {
+        "question": "Can I customize the order of pages and documents?",
+        "answer": "Yes! Use the up/down arrows or drag your documents in the list to rearrange them into any desired order."
+      },
+      {
+        "question": "Is there a limit on file count or total file size?",
+        "answer": "pdfpick runs client-side in your browser, with no artificial restrictions. You can merge dozens of large documents smoothly on modern devices."
+      },
+      {
+        "question": "Can I combine PDFs with different page sizes (A4, Letter, Landscape)?",
+        "answer": "Yes! Each page retains its original orientation, size, and aspect ratio without distortion."
+      },
+      {
+        "question": "Will merging reduce quality or resolution?",
+        "answer": "Not at all. pdfpick directly streams the PDF object trees without rasterizing or re-compressing, keeping 100% original quality."
+      },
+      {
+        "question": "Are confidential business contracts safe from leaks?",
+        "answer": "100% safe. All processing takes place locally inside your browser memory with zero server uploads."
+      },
+      {
+        "question": "Can I delete or rearrange specific pages after merging?",
+        "answer": "Yes! Use our [Split PDF Tool] to extract or exclude specific pages from your merged document."
+      },
+      {
+        "question": "Does this work on mobile devices and tablets?",
+        "answer": "Yes! It runs smoothly across iPhone Safari, Android Chrome, and tablets without requiring any app installation."
+      },
+      {
+        "question": "What should I do if the merged file is too large?",
+        "answer": "Upload the merged PDF to our [Compress PDF Tool] to reduce file size by 50-80% without losing text or image clarity."
+      }
+    ]
+  },
+  "fr": {
+    "toolName": "Fusionner PDF",
+    "tagline": "Assemblez plusieurs documents en un seul fichier PDF parfait",
+    "ui": {
+      "btn_add_second": "➕ Ajouter un deuxième PDF à fusionner",
+      "badge_required": "Requis (1 de plus nécessaire)",
+      "desc_drop": "Click here or drag and drop files (you can add multiple files at once)",
+      "btn_select_second": "Choisir le deuxième fichier",
+      "btn_add_more": "Ajouter d'autres documents",
+      "step1_need_more": "Step 1: Please add a second PDF to merge",
+      "step1_ready": "Step 1: Click the button below to merge {count} documents into one!",
+      "btn_reset": "Tout réinitialiser",
+      "btn_cta_add": "👉 Add Second PDF File (Click)",
+      "btn_cta_merge": "👉 Commencer la fusion de {count} PDF",
+      "notice_success_title": "Fusion PDF réussie !",
+      "notice_success_desc": "All documents have been combined in your specified order. Click [Download Merged PDF] below to save your new file!",
+      "action_hint": "Click [Download Merged PDF Again] button",
+      "btn_redownload": "Télécharger à nouveau le PDF fusionné",
+      "processing_msg": "Fusion sécurisée de vos fichiers PDF..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF Files",
+        "desc": "Drag and drop 2 or more PDF files you want to combine or click to browse."
+      },
+      {
+        "step": 2,
+        "title": "Arrange Document Order",
+        "desc": "Use the up/down arrow buttons to reorder your files in the exact sequence you desire."
+      },
+      {
+        "step": 3,
+        "title": "Merge & Download",
+        "desc": "Click [Merge PDF] to instantly combine files right in your browser for instant download."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Professional Reports & Portfolio PDF Merging",
+      "tagline": "Combine multiple documents into one perfect master PDF file",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "Portfolio Merge and Page Numbering Guide",
+      "features": [
+        {
+          "title": "Free Drag & Drop Reordering",
+          "description": "Organize covers, tables of contents, body text, and certificates in your exact custom sequence with arrows or dragging.",
+          "badge": "Reorder Easily"
+        },
+        {
+          "title": "Multi-Format (A4, A3, Letter) Compatibility",
+          "description": "Preserves landscape, portrait, and mixed page dimensions without layout distortion.",
+          "badge": "Preserve Sizes"
+        },
+        {
+          "title": "Ultra-Fast Lossless Memory Stream Join",
+          "description": "Directly combines PDF object trees without re-encoding, preserving 100% original visual fidelity.",
+          "badge": "Lossless Merge"
+        }
+      ],
+      "proTips": [
+        "When assembling proposals or portfolios, organize by [Cover ➔ TOC ➔ Resume ➔ Projects ➔ Certificates] for the best review flow.",
+        "If the combined document is too large for email, use our [Compress PDF Tool] to quickly reduce it below 5MB.",
+        "Add continuous page numbers across your new master document using the [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick merges files entirely within your web browser using WebAssembly. Your confidential contracts, financial records, and private documents never touch an external server."
+    },
+    "faqTitle": "FAQ sur la fusion de PDF",
+    "faqSubtitle": "Answers to common questions about merging PDF documents safely without logging in.",
+    "faqItems": [
+      {
+        "question": "Can I customize the order of pages and documents?",
+        "answer": "Yes! Use the up/down arrows or drag your documents in the list to rearrange them into any desired order."
+      },
+      {
+        "question": "Is there a limit on file count or total file size?",
+        "answer": "pdfpick runs client-side in your browser, with no artificial restrictions. You can merge dozens of large documents smoothly on modern devices."
+      },
+      {
+        "question": "Can I combine PDFs with different page sizes (A4, Letter, Landscape)?",
+        "answer": "Yes! Each page retains its original orientation, size, and aspect ratio without distortion."
+      },
+      {
+        "question": "Will merging reduce quality or resolution?",
+        "answer": "Not at all. pdfpick directly streams the PDF object trees without rasterizing or re-compressing, keeping 100% original quality."
+      },
+      {
+        "question": "Are confidential business contracts safe from leaks?",
+        "answer": "100% safe. All processing takes place locally inside your browser memory with zero server uploads."
+      },
+      {
+        "question": "Can I delete or rearrange specific pages after merging?",
+        "answer": "Yes! Use our [Split PDF Tool] to extract or exclude specific pages from your merged document."
+      },
+      {
+        "question": "Does this work on mobile devices and tablets?",
+        "answer": "Yes! It runs smoothly across iPhone Safari, Android Chrome, and tablets without requiring any app installation."
+      },
+      {
+        "question": "What should I do if the merged file is too large?",
+        "answer": "Upload the merged PDF to our [Compress PDF Tool] to reduce file size by 50-80% without losing text or image clarity."
+      }
+    ]
+  },
+  "de": {
+    "toolName": "PDF zusammenfügen",
+    "tagline": "Mehrere Dokumente zu einer perfekten Master-PDF-Datei kombinieren",
+    "ui": {
+      "btn_add_second": "➕ Zweite PDF-Datei zum Zusammenfügen hinzufügen",
+      "badge_required": "Erforderlich (noch 1 Datei)",
+      "desc_drop": "Click here or drag and drop files (you can add multiple files at once)",
+      "btn_select_second": "Zweite Datei auswählen",
+      "btn_add_more": "Weitere Dokumente hinzufügen",
+      "step1_need_more": "Step 1: Please add a second PDF to merge",
+      "step1_ready": "Step 1: Click the button below to merge {count} documents into one!",
+      "btn_reset": "Alles zurücksetzen",
+      "btn_cta_add": "👉 Add Second PDF File (Click)",
+      "btn_cta_merge": "👉 {count} PDF-Dateien zusammenfügen",
+      "notice_success_title": "PDF erfolgreich zusammengefügt!",
+      "notice_success_desc": "All documents have been combined in your specified order. Click [Download Merged PDF] below to save your new file!",
+      "action_hint": "Click [Download Merged PDF Again] button",
+      "btn_redownload": "Zusammengefügte PDF erneut herunterladen",
+      "processing_msg": "PDF-Dokumente werden sicher zusammengefügt..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF Files",
+        "desc": "Drag and drop 2 or more PDF files you want to combine or click to browse."
+      },
+      {
+        "step": 2,
+        "title": "Arrange Document Order",
+        "desc": "Use the up/down arrow buttons to reorder your files in the exact sequence you desire."
+      },
+      {
+        "step": 3,
+        "title": "Merge & Download",
+        "desc": "Click [Merge PDF] to instantly combine files right in your browser for instant download."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Professional Reports & Portfolio PDF Merging",
+      "tagline": "Combine multiple documents into one perfect master PDF file",
+      "relatedGuideSlug": "portfolio-merge-and-page-numbering",
+      "relatedGuideTitle": "Portfolio Merge and Page Numbering Guide",
+      "features": [
+        {
+          "title": "Free Drag & Drop Reordering",
+          "description": "Organize covers, tables of contents, body text, and certificates in your exact custom sequence with arrows or dragging.",
+          "badge": "Reorder Easily"
+        },
+        {
+          "title": "Multi-Format (A4, A3, Letter) Compatibility",
+          "description": "Preserves landscape, portrait, and mixed page dimensions without layout distortion.",
+          "badge": "Preserve Sizes"
+        },
+        {
+          "title": "Ultra-Fast Lossless Memory Stream Join",
+          "description": "Directly combines PDF object trees without re-encoding, preserving 100% original visual fidelity.",
+          "badge": "Lossless Merge"
+        }
+      ],
+      "proTips": [
+        "When assembling proposals or portfolios, organize by [Cover ➔ TOC ➔ Resume ➔ Projects ➔ Certificates] for the best review flow.",
+        "If the combined document is too large for email, use our [Compress PDF Tool] to quickly reduce it below 5MB.",
+        "Add continuous page numbers across your new master document using the [Add Page Numbers Tool]."
+      ],
+      "securityNote": "pdfpick merges files entirely within your web browser using WebAssembly. Your confidential contracts, financial records, and private documents never touch an external server."
+    },
+    "faqTitle": "Häufige Fragen zum PDF-Zusammenfügen",
+    "faqSubtitle": "Answers to common questions about merging PDF documents safely without logging in.",
+    "faqItems": [
+      {
+        "question": "Can I customize the order of pages and documents?",
+        "answer": "Yes! Use the up/down arrows or drag your documents in the list to rearrange them into any desired order."
+      },
+      {
+        "question": "Is there a limit on file count or total file size?",
+        "answer": "pdfpick runs client-side in your browser, with no artificial restrictions. You can merge dozens of large documents smoothly on modern devices."
+      },
+      {
+        "question": "Can I combine PDFs with different page sizes (A4, Letter, Landscape)?",
+        "answer": "Yes! Each page retains its original orientation, size, and aspect ratio without distortion."
+      },
+      {
+        "question": "Will merging reduce quality or resolution?",
+        "answer": "Not at all. pdfpick directly streams the PDF object trees without rasterizing or re-compressing, keeping 100% original quality."
+      },
+      {
+        "question": "Are confidential business contracts safe from leaks?",
+        "answer": "100% safe. All processing takes place locally inside your browser memory with zero server uploads."
+      },
+      {
+        "question": "Can I delete or rearrange specific pages after merging?",
+        "answer": "Yes! Use our [Split PDF Tool] to extract or exclude specific pages from your merged document."
+      },
+      {
+        "question": "Does this work on mobile devices and tablets?",
+        "answer": "Yes! It runs smoothly across iPhone Safari, Android Chrome, and tablets without requiring any app installation."
+      },
+      {
+        "question": "What should I do if the merged file is too large?",
+        "answer": "Upload the merged PDF to our [Compress PDF Tool] to reduce file size by 50-80% without losing text or image clarity."
+      }
+    ]
+  }
+}

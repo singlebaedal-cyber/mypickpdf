@@ -1,0 +1,1074 @@
+{
+  "ko": {
+    "toolName": "PDF 한글(HWP/HWPX) 변환",
+    "tagline": "정부24·나라장터 표준 호환 및 서식 깨짐 방지 완벽 가이드",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "하이브리드 모드 (강력 추천)",
+        "badge": "가장 추천",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "편집 가능한 텍스트 문단과 원본 서식/표/직인 고해상도 이미지를 함께 조립하여 서식 깨짐 없이 글자 수정 가능"
+      },
+      {
+        "id": "textOnly",
+        "title": "텍스트 전용 모드 (초경량)",
+        "badge": "용량 최소화",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "이미지 없이 본문 텍스트만 추출하여 가장 가볍고 타이핑 및 레이아웃 재구성에 최적화된 한글 파일 생성"
+      },
+      {
+        "id": "imageOnly",
+        "title": "스캔본 / 서식 보존형",
+        "badge": "원본 100%",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "글자가 깨지는 스캔본이나 복잡한 관공서 신청서 양식을 고화질 한글 문서 형태로 100% 원본 그대로 보존"
+      }
+    ],
+    "ui": {
+      "pill_local_security": "100% 기기 로컬 처리 (공문서 유출 0%)",
+      "pill_hancom_compat": "공공기관 온-나라 시스템 및 한글 2014~2024 호환",
+      "pill_format_preserve": "텍스트 편집 + 원본 서식 보존",
+      "step2_badge": "변환 옵션 및 포맷 선택",
+      "step2_hint": "원하는 변환 방식과 확장자를 선택하세요",
+      "format_select_title": "저장할 파일 형식 선택",
+      "format_select_desc": "공공기관 공식 표준은 .hwpx이며, 구형 포털 제출용은 .hwp를 선택하세요.",
+      "btn_hwpx": ".HWPX (공공기관 표준) 🌟",
+      "btn_hwp": ".HWP (구버전 호환)",
+      "selected_badge": "선택됨",
+      "mascot_title": "마이픽 래서팬더가 한글 문서 조립을 준비했어요!",
+      "mascot_desc": "PDF의 문단, 줄바꿈, 제목을 공공기관 OWPML 표준 한글 규격으로 안전하게 변환해 드립니다.",
+      "btn_convert": "한글({ext}) 문서로 변환하기",
+      "btn_cancel": "취소",
+      "complete_badge": "한글 문서 변환 완료!",
+      "complete_title": "편집 가능한 한글 문서가 생성되었습니다! 🎉",
+      "complete_desc": "총 {pages}페이지({chars}자)가 OWPML 한글 표준 문서로 안전하게 변환되었습니다.",
+      "btn_download_hwpx": ".HWPX 다운로드 (공공기관 표준)",
+      "btn_download_hwp": ".HWP 다운로드 (구버전 호환)",
+      "btn_convert_another": "다른 PDF 문서 변환하기",
+      "processing_msg": "PDF 문단을 분석하고 공공기관 OWPML 한글 문서를 조립하고 있습니다...",
+      "preview_title": "추출된 본문 텍스트 미리보기",
+      "preview_more": "... 외 다수 문단"
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF 공문서 / 보고서 파일 선택",
+        "desc": "한글 문서(HWP/HWPX)로 변환하고 싶은 PDF 파일을 화면에 끌어다 놓거나 파일 선택 버튼을 클릭합니다."
+      },
+      {
+        "step": 2,
+        "title": "변환 모드 및 확장자 선택",
+        "desc": "글자 수정과 원본 레이아웃을 모두 보존하는 [하이브리드 권장 모드]와 공공기관 표준 확장자(.hwpx 또는 .hwp)를 선택합니다."
+      },
+      {
+        "step": 3,
+        "title": "한글 문서 변환 및 다운로드",
+        "desc": "[한글 문서로 변환하기]를 누르면 브라우저에서 안전하게 OWPML 표준 한글 파일로 변환되어 즉시 다운로드됩니다."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "공공기관 서식 및 한글 문서 변환",
+      "tagline": "정부24·나라장터 표준 호환 및 서식 깨짐 방지 완벽 가이드",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "공공기관 HWP 한글 문서 변환 완벽 가이드",
+      "features": [
+        {
+          "title": "국가기술표준원(KS X 6101) OWPML 표준 지원",
+          "description": "행정안전부 및 관공서 온-나라 시스템 표준인 개방형 한글 포맷(HWPX) 규격을 완벽 지원하여 한컴오피스 2014~2024 버전과 100% 호환됩니다.",
+          "badge": "KS 국가표준"
+        },
+        {
+          "title": "공문서 표(Table) 구조 및 다단 서식 보존",
+          "description": "입찰 제안서, 사업계획서, 행정 서식 특유의 복잡한 중첩 표와 여백을 자동 분석하여 글자 겹침 현상을 원천 방지합니다.",
+          "badge": "표 서식 보존"
+        },
+        {
+          "title": "관공서 직인(도장) 및 서명 이미지 원본 유지",
+          "description": "하이브리드 모드 지원으로 텍스트 편집이 가능함과 동시에 인감도장, 기관 직인, 그래프 등의 시각적 요소를 깨짐 없이 온전히 보존합니다.",
+          "badge": "직인 원본 유지"
+        }
+      ],
+      "proTips": [
+        "조달청 나라장터나 공기업 입찰 제안서는 최신 '.hwpx' 형식을 우선 권장하며, 구형 관공서 제출 창구에는 '.hwp' 형식을 선택하세요.",
+        "스캔된 공문서의 경우 마우스 드래그로 글자 선택이 안 된다면 [PDF OCR 도구]로 텍스트 레이어를 먼저 복원한 후 한글로 변환하세요.",
+        "변환 후 한글 프로그램에서 열람 시 줄바꿈이 밀릴 경우 [서식 > 글꼴 바꾸기]를 통해 '맑은 고딕' 또는 '함초롬바탕'으로 지정하면 완벽히 정렬됩니다."
+      ],
+      "securityNote": "pdfpick는 공공기관 제출 서류의 엄격한 보안을 위해 100% 브라우저 메모리 안에서 변환을 완료합니다. 계약서, 주민등록증 사본, 법인 인감증명서 등 대외비 문서가 외부 서버로 전송되지 않아 안심하고 이용하실 수 있습니다."
+    },
+    "faqTitle": "PDF 한글 변환 자주 묻는 질문 (FAQ)",
+    "faqSubtitle": "공공기관 공문서, 한컴오피스 한글 호환성에 대한 궁금증을 풀어드립니다.",
+    "faqItems": [
+      {
+        "question": "HWP와 HWPX 파일은 어떤 차이가 있나요?",
+        "answer": "HWPX는 2021년 4월부터 국가기술표준원(KS X 6101) 및 행정안전부 공공기관 전자문서 표준으로 지정된 차세대 개방형 한글 문서(OWPML) 포맷입니다. 한글 2014 이상, 한컴독스(Hancom Docs), 폴라리스 오피스, 온-나라 전자문서 시스템에서 기본으로 지원하며, 구형 관공서 제출용 시스템에는 .hwp 확장자로도 저장하여 제출할 수 있습니다."
+      },
+      {
+        "question": "변환된 한글 문서에서 텍스트 수정 및 편집이 가능한가요?",
+        "answer": "네! PDF 내부의 텍스트가 한글 표준 문단으로 완벽히 추출되므로, 한글 프로그램에서 열어 오탈자 수정, 글자 서식 변경, 문단 추가 등 일반 한글 문서와 동일하게 자유롭게 편집할 수 있습니다."
+      },
+      {
+        "question": "정부24, 나라장터, 공공기관 제출 서류도 유출 없이 안전한가요?",
+        "answer": "100% 안전합니다! pdfpick는 변환 작업을 외부 서버로 전송하지 않고 사용자의 웹 브라우저 메모리 안에서만 로컬 처리합니다. 공공기관 제출 공문서, 계약서, 주민등록 등초본, 사업자등록증 등 민감한 개인정보나 기밀 문서도 안심하고 변환하실 수 있습니다."
+      },
+      {
+        "question": "표나 관공서 직인(도장), 서명 이미지도 보존되나요?",
+        "answer": "네! '하이브리드 모드 (권장)'를 사용하시면 편집 가능한 텍스트 문단과 함께 고해상도 원본 레이아웃 스냅샷이 한글 문서 내에 함께 포함되어, 복잡한 표 서식이나 직인, 도장, 그래프 등의 시각적 요소가 완벽하게 유지됩니다."
+      },
+      {
+        "question": "변환 후 한글 프로그램에서 폰트(글꼴)가 다르게 보이면 어떻게 하나요?",
+        "answer": "한컴오피스 프로그램의 [서식 > 글꼴 바꾸기] 기능을 통해 맑은 고딕, 나눔명조, 함초롬바탕 등 사용자 PC에 기본 설치된 표준 시스템 폰트로 일괄 지정하시면 행간과 자간이 깔끔하게 정돈됩니다."
+      },
+      {
+        "question": "스캐너로 복사한 이미지 PDF도 텍스트가 있는 한글 파일로 변환되나요?",
+        "answer": "스캐너로 복사한 종이 문서는 글자가 그림으로 캡처된 상태이므로, 먼저 pdfpick의 [PDF OCR 도구]를 통해 텍스트 레이어를 복원한 후 한글 문서로 변환하시면 텍스트 편집이 가능합니다."
+      },
+      {
+        "question": "조달청 나라장터나 정부24 제출 시 .hwp와 .hwpx 중 무엇을 선택해야 하나요?",
+        "answer": "최신 입찰 시스템은 국가 표준인 .hwpx를 기본 권장하지만, 구형 관공서 및 지방자치단체 접수 창구의 경우 .hwp만 지원하는 경우가 있습니다. 기관 공고문의 지정 확장자를 확인하시고 두 형식 중 자유롭게 선택하여 다운로드하세요."
+      },
+      {
+        "question": "한컴오피스가 설치되지 않은 PC나 스마트폰에서도 변환 파일을 열 수 있나요?",
+        "answer": "네! 웹 브라우저에서 '한컴독스(Hancom Docs) 무료 웹 뷰어', 폴라리스 오피스 웹 뷰어, 네이버 웨일 브라우저 HWP 뷰어 등을 이용하시면 프로그램 설치 없이도 즉시 열람 및 인쇄가 가능합니다."
+      }
+    ]
+  },
+  "en": {
+    "toolName": "PDF to HWP/HWPX (Hangul Document)",
+    "tagline": "Government Standard Compatibility & Layout Preservation Guide",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "Hybrid Mode (Recommended)",
+        "badge": "Best Choice",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "Combines editable text paragraphs with high-resolution original layout snapshots to prevent formatting distortion."
+      },
+      {
+        "id": "textOnly",
+        "title": "Text Only Mode (Lightweight)",
+        "badge": "Smallest Size",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "Extracts pure text without images for lightweight output, perfect for quick re-typing and custom restructuring."
+      },
+      {
+        "id": "imageOnly",
+        "title": "Scan / Layout Preserved",
+        "badge": "100% Original",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "Preserves 100% of complex application forms, stamps, and scanned documents in high resolution."
+      }
+    ],
+    "ui": {
+      "pill_local_security": "100% Local Device Processing (0% Data Leak)",
+      "pill_hancom_compat": "Compatible with Hancom Office 2014-2024 & Public Systems",
+      "pill_format_preserve": "Text Editing + Original Layout Preservation",
+      "step2_badge": "Choose Options & Format",
+      "step2_hint": "Select your desired conversion mode and file extension",
+      "format_select_title": "Choose Output File Format",
+      "format_select_desc": ".hwpx is the modern open standard (OWPML); choose .hwp for legacy submission portals.",
+      "btn_hwpx": ".HWPX (Official Standard) 🌟",
+      "btn_hwp": ".HWP (Legacy Compatible)",
+      "selected_badge": "Selected",
+      "mascot_title": "Red Panda is ready to build your Hangul document!",
+      "mascot_desc": "Securely converts PDF paragraphs, line breaks, and headings into standard OWPML Hangul format.",
+      "btn_convert": "Convert to Hangul ({ext}) Document",
+      "btn_cancel": "Cancel",
+      "complete_badge": "Hangul Document Created!",
+      "complete_title": "Editable Hangul document created successfully! 🎉",
+      "complete_desc": "Total {pages} pages ({chars} characters) securely converted into OWPML Hangul format.",
+      "btn_download_hwpx": "Download .HWPX (Standard)",
+      "btn_download_hwp": "Download .HWP (Legacy)",
+      "btn_convert_another": "Convert Another PDF",
+      "processing_msg": "Analyzing PDF paragraphs and assembling OWPML Hangul document...",
+      "preview_title": "Extracted Text Preview",
+      "preview_more": "... and more paragraphs"
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Select PDF Document",
+        "desc": "Drag & drop your PDF file or click to choose the document you want to convert to HWP/HWPX."
+      },
+      {
+        "step": 2,
+        "title": "Choose Mode & Extension",
+        "desc": "Select Hybrid Mode to keep formatting and text editable, and choose .hwpx or .hwp."
+      },
+      {
+        "step": 3,
+        "title": "Convert & Download",
+        "desc": "Click convert to instantly generate an OWPML Hangul file in your browser and download with one click."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Official Forms & Hangul Document Conversion",
+      "tagline": "Government Standard Compatibility & Layout Preservation Guide",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "Complete Guide to Converting HWP Hangul Documents",
+      "features": [
+        {
+          "title": "KS X 6101 OWPML National Standard Support",
+          "description": "Fully supports the modern open standard format (HWPX) used by official systems, 100% compatible with Hancom Office 2014-2024.",
+          "badge": "National Standard"
+        },
+        {
+          "title": "Table Structure & Multi-column Layout Preservation",
+          "description": "Automatically analyzes complex nested tables and margins in proposals and official forms to prevent overlapping text.",
+          "badge": "Table Preservation"
+        },
+        {
+          "title": "Official Seal & Signature Layer Transparency",
+          "description": "Hybrid mode keeps visual elements such as seals, signatures, and charts intact while enabling full text editing.",
+          "badge": "Seals Preserved"
+        }
+      ],
+      "proTips": [
+        "Official e-procurement systems recommend '.hwpx', while legacy submission portals may require '.hwp'.",
+        "For scanned PDFs where text cannot be highlighted, run our [PDF OCR tool] first to restore the text layer.",
+        "If line breaks look misaligned in Hancom Office, use [Format > Change Font] to apply standard system fonts."
+      ],
+      "securityNote": "pdfpick completes all conversions 100% locally in your browser memory. Confidential contracts, personal IDs, and corporate documents are never uploaded to any external server."
+    },
+    "faqTitle": "PDF to Hangul Conversion FAQ",
+    "faqSubtitle": "Frequently asked questions about government documents and Hancom Office compatibility.",
+    "faqItems": [
+      {
+        "question": "What is the difference between HWP and HWPX files?",
+        "answer": "HWPX is the open XML-based standard (OWPML) adopted as the national standard since 2021. It is supported by modern Hancom Office, Hancom Docs, and Polaris Office. .hwp is the legacy binary format supported for older portals."
+      },
+      {
+        "question": "Can I edit and modify text in the converted document?",
+        "answer": "Yes! Text paragraphs are fully extracted into native Hangul paragraphs so you can edit words, change font styles, and insert new content just like a regular document."
+      },
+      {
+        "question": "Is it safe to convert government and confidential files without leaks?",
+        "answer": "100% safe! pdfpick processes your document entirely in your browser memory without uploading any bytes to a server."
+      },
+      {
+        "question": "Are tables, official seals, and signatures preserved?",
+        "answer": "Yes! Hybrid Mode preserves high-resolution snapshots of stamps, seals, graphs, and complex tables alongside editable text."
+      },
+      {
+        "question": "What should I do if fonts appear different after conversion?",
+        "answer": "In Hancom Office, choose [Format > Change Font] to apply standard system fonts like Malgun Gothic or Batang."
+      },
+      {
+        "question": "Can scanned image PDFs be converted into editable text files?",
+        "answer": "For scanned documents without selectable text, use our [PDF OCR tool] first to detect the text, then convert to HWPX."
+      },
+      {
+        "question": "Which format should I choose between .hwp and .hwpx for submission?",
+        "answer": "Modern e-procurement systems prefer .hwpx, while older regional offices may specify .hwp. Check the submission guidelines and choose either format."
+      },
+      {
+        "question": "Can I view the converted file without Hancom Office installed?",
+        "answer": "Yes! Free web viewers like Hancom Docs Web Viewer, Polaris Office Viewer, and Naver Whale browser can view and print HWP/HWPX files directly."
+      }
+    ]
+  },
+  "ja": {
+    "toolName": "PDFからHWP/HWPX（ハングル文書）変換",
+    "tagline": "公的機関標準互換＆レイアウト崩れ防止ガイド",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "ハイブリッドモード（推奨）",
+        "badge": "おすすめ",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "編集可能なテキスト段落と原本の高解像度表・印鑑レイアウトを組み合わせて、崩れなく文字修正可能"
+      },
+      {
+        "id": "textOnly",
+        "title": "テキスト専用モード（軽量）",
+        "badge": "容量最小",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "画像を含めず本文テキストのみを抽出し、入力やレイアウト再構成に最適化された軽量ファイルを生成"
+      },
+      {
+        "id": "imageOnly",
+        "title": "スキャン・書式保持型",
+        "badge": "原本100%",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "文字化けしやすいスキャン文書や複雑な公的申請書式を高画質で100%原本のまま忠実に再現"
+      }
+    ],
+    "ui": {
+      "pill_local_security": "100%端末内ローカル処理（文書流出0%）",
+      "pill_hancom_compat": "公的システムおよびHancom 2014〜2024完全互換",
+      "pill_format_preserve": "テキスト編集＋原本書式保持",
+      "step2_badge": "変換オプションと形式選択",
+      "step2_hint": "ご希望の変換方式と拡張子を選択してください",
+      "format_select_title": "保存するファイル形式を選択",
+      "format_select_desc": "公式標準は.hwpxです。旧型システム提出用には.hwpを選択してください。",
+      "btn_hwpx": ".HWPX（公的標準）🌟",
+      "btn_hwp": ".HWP（旧バージョン互換）",
+      "selected_badge": "選択中",
+      "mascot_title": "レッサーパンダがハングル文書の生成準備を整えました！",
+      "mascot_desc": "PDFの段落や改行、見出しを公的標準OWPML規格に安全に変換します。",
+      "btn_convert": "ハングル（{ext}）文書に変換する",
+      "btn_cancel": "キャンセル",
+      "complete_badge": "ハングル文書変換完了！",
+      "complete_title": "編集可能なハングル文書が生成されました！ 🎉",
+      "complete_desc": "合計 {pages}ページ（{chars}文字）がOWPML標準形式で安全に変換されました。",
+      "btn_download_hwpx": ".HWPXダウンロード（公的標準）",
+      "btn_download_hwp": ".HWPダウンロード（旧バージョン互換）",
+      "btn_convert_another": "別のPDF文書を変換する",
+      "processing_msg": "PDFの段落を解析し、OWPMLハングル文書を生成しています...",
+      "preview_title": "抽出された本文テキストのプレビュー",
+      "preview_more": "... 他 多数の段落"
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF文書・レポートファイルを選択",
+        "desc": "ハングル文書（HWP/HWPX）に変換したいPDFファイルをドラッグ＆ドロップまたは選択します。"
+      },
+      {
+        "step": 2,
+        "title": "変換モードと拡張子の選択",
+        "desc": "文字編集と原本レイアウトを両立する【ハイブリッド推奨モード】と拡張子（.hwpxまたは.hwp）を選びます。"
+      },
+      {
+        "step": 3,
+        "title": "ハングル文書に変換＆ダウンロード",
+        "desc": "【ハングル文書に変換】をクリックすると、ブラウザ内で安全にOWPML規格ファイルが作成され即座に保存されます。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "公的機関書式＆ハングル文書変換",
+      "tagline": "公的機関標準互換＆レイアウト崩れ防止ガイド",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "公的機関HWPハングル文書変換の完全ガイド",
+      "features": [
+        {
+          "title": "国家標準（KS X 6101）OWPML規格対応",
+          "description": "公的機関で標準採用されている開放型ハングル形式（HWPX）に完全対応し、Hancom Office 2014〜2024と100%互換します。",
+          "badge": "国家標準"
+        },
+        {
+          "title": "公文書の表（Table）構造および段組み書式保持",
+          "description": "企画提案書や申請書特有の複雑な入れ子表や余白を自動解析し、文字の重なりを根本から防止します。",
+          "badge": "表書式保持"
+        },
+        {
+          "title": "公的機関の印鑑・署名レイヤーの透明度保持",
+          "description": "ハイブリッドモードにより文字修正を可能にしながら、公印や署名、グラフなどの視覚要素を鮮明に保ちます。",
+          "badge": "印鑑原本保持"
+        }
+      ],
+      "proTips": [
+        "公的調達システムには最新の「.hwpx」形式を推奨し、旧型窓口には「.hwp」を選択してください。",
+        "文字選択ができないスキャン文書は、まず当サイトの【PDF OCRツール】でテキストを認識してから変換してください。",
+        "変換後に改行のズレが生じる場合は、Hancom Officeで標準フォントに変更すると綺麗に整います。"
+      ],
+      "securityNote": "pdfpickは機密保護のため100%ブラウザメモリ内で完結します。契約書や身分証明書、企業秘密文書も外部サーバーに一切送信されず安全です。"
+    },
+    "faqTitle": "PDFハングル変換 よくある質問（FAQ）",
+    "faqSubtitle": "公的文書およびHancom Office互換性についての疑問にお答えします。",
+    "faqItems": [
+      {
+        "question": "HWPとHWPXファイルの違いは何ですか？",
+        "answer": "HWPXは2021年より韓国の国家技術標準に指定されたXMLベースの最新オープン規格（OWPML）です。最新のHancom Office、Hancom Docsで標準対応しています。.hwpは旧来のバイナリ形式です。"
+      },
+      {
+        "question": "変換されたハングル文書でテキストの修正や編集は可能ですか？",
+        "answer": "はい！PDF内のテキストがハングル標準の段落として抽出されるため、通常の文書同様に文字修正やフォント変更が自由に行えます。"
+      },
+      {
+        "question": "公的機関や契約書などの重要書類も漏洩の心配なく安全ですか？",
+        "answer": "100%安全です！pdfpickはサーバーにファイルを送信せず、お使いのブラウザメモリ内でのみ処理するため情報が外部に出ることはありません。"
+      },
+      {
+        "question": "表や公印・署名画像もそのまま保持されますか？",
+        "answer": "はい！ハイブリッドモードでは、高解像度の原本レイアウトと編集可能なテキストが両立して生成されるため、印鑑や表が崩れません。"
+      },
+      {
+        "question": "変換後にフォントが異なって見える場合はどうすればいいですか？",
+        "answer": "Hancom Officeの【書式 > フォント変更】で、Malgun GothicやBatangなどの標準フォントを指定すると綺麗に揃います。"
+      },
+      {
+        "question": "スキャナーで読み取った画像PDFもテキスト編集可能になりますか？",
+        "answer": "スキャン画像PDFの場合は、先に当サイトの【PDF OCRツール】で文字認識を行ってからハングル文書に変換してください。"
+      },
+      {
+        "question": "提出時には.hwpと.hwpxのどちらを選択すべきですか？",
+        "answer": "最新システムでは.hwpxが推奨されますが、一部の旧型窓口では.hwpが求められる場合があります。提出要件に合わせて選んでください。"
+      },
+      {
+        "question": "Hancom Officeがインストールされていない端末でも開けますか？",
+        "answer": "はい！「Hancom Docs 無料Webビューア」やPolaris Office、Naver Whaleブラウザなどで即座に閲覧および印刷が可能です。"
+      }
+    ]
+  },
+  "zh": {
+    "toolName": "PDF转HWP/HWPX（韩文文档）",
+    "tagline": "公共机构标准兼容及格式防崩完整指南",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "混合模式（强烈推荐）",
+        "badge": "最佳推荐",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "组合可编辑文本段落与高清晰度原版表格/图章，既可修改文字又防止排版错乱"
+      },
+      {
+        "id": "textOnly",
+        "title": "纯文本模式（超轻量）",
+        "badge": "体积最小",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "仅提取正文纯文本，生成体积最小、最易重新排版的文档"
+      },
+      {
+        "id": "imageOnly",
+        "title": "扫描版 / 格式保真型",
+        "badge": "100%还原",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "完美还原复杂申请表与扫描件，100%完整保留印章与原始排版"
+      }
+    ],
+    "ui": {
+      "pill_local_security": "100%本地设备处理（0%公文泄露）",
+      "pill_hancom_compat": "兼容公共机构系统与韩软Office 2014-2024",
+      "pill_format_preserve": "文字编辑＋原版格式保留",
+      "step2_badge": "选择转换选项与格式",
+      "step2_hint": "请选择所需的转换方式与文件后缀",
+      "format_select_title": "选择要保存的文件格式",
+      "format_select_desc": "官方推荐标准格式为.hwpx；如需兼容旧版系统请选择.hwp。",
+      "btn_hwpx": ".HWPX（官方标准）🌟",
+      "btn_hwp": ".HWP（兼容旧版本）",
+      "selected_badge": "已选择",
+      "mascot_title": "小熊猫已准备好生成韩文文档！",
+      "mascot_desc": "将PDF中的段落、换行与标题安全转换为符合OWPML标准的文档。",
+      "btn_convert": "转换为韩文（{ext}）文档",
+      "btn_cancel": "取消",
+      "complete_badge": "韩文文档转换完成！",
+      "complete_title": "可编辑的韩文文档已成功生成！ 🎉",
+      "complete_desc": "共计 {pages} 页（{chars} 字）已安全转换为OWPML标准文档。",
+      "btn_download_hwpx": "下载 .HWPX（标准格式）",
+      "btn_download_hwp": "下载 .HWP（旧版兼容）",
+      "btn_convert_another": "转换其他PDF文档",
+      "processing_msg": "正在解析PDF段落并构建符合标准的韩文文档...",
+      "preview_title": "提取的正文文本预览",
+      "preview_more": "... 及其余多个段落"
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "选择PDF公文或报告文件",
+        "desc": "将想要转换为韩文文档（HWP/HWPX）的PDF文件拖放到页面或点击选择文件。"
+      },
+      {
+        "step": 2,
+        "title": "选择转换模式与后缀",
+        "desc": "选择兼顾文字编辑与版面保真的【推荐混合模式】及标准后缀（.hwpx或.hwp）。"
+      },
+      {
+        "step": 3,
+        "title": "转换韩文文档并下载",
+        "desc": "点击【转换为韩文文档】，浏览器将在本地安全生成OWPML标准文件并一键自动下载。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "公共机构公文与韩文文档转换",
+      "tagline": "公共机构标准兼容及格式防崩完整指南",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "公共机构HWP韩文文档转换指南",
+      "features": [
+        {
+          "title": "支持国家技术标准（KS X 6101）OWPML",
+          "description": "完美支持行政公文系统采用的开放式格式（HWPX），与韩软Office 2014-2024实现100%无缝兼容。",
+          "badge": "国家标准"
+        },
+        {
+          "title": "保留公文表格结构及多栏排版",
+          "description": "自动解析招投标书与行政表格中复杂的嵌套表格和页边距，彻底防止文字重叠。",
+          "badge": "表格保真"
+        },
+        {
+          "title": "保留公章与手写签名透明图层",
+          "description": "混合模式在支持文本编辑的同时，完整保留印章、签名与图表等关键视觉要素。",
+          "badge": "印章完整"
+        }
+      ],
+      "proTips": [
+        "公共电子采购系统建议优先使用最新的.hwpx格式；旧版提交窗口请选用.hwp格式。",
+        "对于无法选中文本的扫描PDF，建议先使用本站【PDF OCR工具】识别文字后再进行转换。",
+        "转换后打开若发现排版微移，在文档中统一指定标准系统字体即可完美对齐。"
+      ],
+      "securityNote": "pdfpick采用100%纯本地浏览器内存转换，合同、身份证件、企业机密文件绝不上载至外部服务器，安全可靠。"
+    },
+    "faqTitle": "PDF转韩文文档 常见问题（FAQ）",
+    "faqSubtitle": "解答有关政府机关公文及韩软Office格式兼容性的常见问题。",
+    "faqItems": [
+      {
+        "question": "HWP与HWPX文件有什么区别？",
+        "answer": "HWPX是2021年起推行的国家开放标准（OWPML），支持现代办公软件。而.hwp为早期的专有二进制格式，可用于旧版窗口提交。"
+      },
+      {
+        "question": "转换后的文档可以直接编辑修改文字吗？",
+        "answer": "可以！PDF内部文字会被解析为韩文原生段落，打开后即可像编辑普通文档一样修改错字与版面。"
+      },
+      {
+        "question": "转换政府机关公文与合同文件是否安全保密？",
+        "answer": "100%安全！pdfpick绝不上传文件至云端服务器，全程仅在您本地浏览器内存中运行。"
+      },
+      {
+        "question": "表格、公章与手写签名图像是否能完整保留？",
+        "answer": "是的！混合模式会将高分辨率图章及表格视觉元素与文字结合生成，绝不丢失关键图形。"
+      },
+      {
+        "question": "转换后如果字体显示不同该如何处理？",
+        "answer": "在文档中批量替换为系统预装的微软雅黑或标准韩文字体，版面即可恢复规整。"
+      },
+      {
+        "question": "扫描版图片PDF能否转换为可编辑文字的文档？",
+        "answer": "扫描件请先使用本站【PDF OCR工具】提取文本，然后再转为HWPX文档即可。"
+      },
+      {
+        "question": "提交文件时应该选择.hwp还是.hwpx？",
+        "answer": "新版招标与在线申报推荐.hwpx；如单位明确要求.hwp，请下载.hwp版本。"
+      },
+      {
+        "question": "未安装韩软Office的电脑或手机能否打开转换后的文件？",
+        "answer": "可以通过Hancom Docs网页端免费预览，或使用Polaris Office、Whale浏览器直接打开查看。"
+      }
+    ]
+  },
+  "zh-TW": {
+    "toolName": "PDF轉HWP/HWPX（韓文文件）",
+    "tagline": "公共機構標準相容及格式防崩完整指南",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "混合模式（強烈推薦）",
+        "badge": "最佳推薦",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "組合可編輯文字段落與高清晰度原版表格/圖章，既可修改文字又防止排版錯亂"
+      },
+      {
+        "id": "textOnly",
+        "title": "純文字模式（超輕量）",
+        "badge": "體積最小",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "僅提取正文純文字，產生體積最小、最易重新排版的文件"
+      },
+      {
+        "id": "imageOnly",
+        "title": "掃描版 / 格式保真型",
+        "badge": "100%還原",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "完美還原複雜申請表與掃描件，100%完整保留印章與原始排版"
+      }
+    ],
+    "ui": {
+      "pill_local_security": "100%本機裝置處理（0%公文外洩）",
+      "pill_hancom_compat": "相容公共機構系統與韓軟Office 2014-2024",
+      "pill_format_preserve": "文字編輯＋原版格式保留",
+      "step2_badge": "選取轉換選項與格式",
+      "step2_hint": "請選取所需的轉換方式與檔案副檔名",
+      "format_select_title": "選擇要儲存的檔案格式",
+      "format_select_desc": "官方推薦標準格式為.hwpx；如需相容舊版系統請選擇.hwp。",
+      "btn_hwpx": ".HWPX（官方標準）🌟",
+      "btn_hwp": ".HWP（相容舊版本）",
+      "selected_badge": "已選取",
+      "mascot_title": "小熊貓已準備好產生韓文文件！",
+      "mascot_desc": "將PDF中的段落、換行與標題安全轉換為符合OWPML標準的文件。",
+      "btn_convert": "轉換為韓文（{ext}）文件",
+      "btn_cancel": "取消",
+      "complete_badge": "韓文文件轉換完成！",
+      "complete_title": "可編輯的韓文文件已成功產生！ 🎉",
+      "complete_desc": "共計 {pages} 頁（{chars} 字）已安全轉換為OWPML標準文件。",
+      "btn_download_hwpx": "下載 .HWPX（標準格式）",
+      "btn_download_hwp": "下載 .HWP（舊版相容）",
+      "btn_convert_another": "轉換其他PDF文件",
+      "processing_msg": "正在解析PDF段落並建構符合標準的韓文文件...",
+      "preview_title": "提取的正文文本預覽",
+      "preview_more": "... 及其餘多個段落"
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "選擇PDF公文或報告檔案",
+        "desc": "將想要轉換為韓文文件（HWP/HWPX）的PDF檔案拖放到頁面或點擊選擇檔案。"
+      },
+      {
+        "step": 2,
+        "title": "選擇轉換模式與副檔名",
+        "desc": "選擇兼顧文字編輯與版面保真的【推薦混合模式】及標準副檔名（.hwpx或.hwp）。"
+      },
+      {
+        "step": 3,
+        "title": "轉換韓文文件並下載",
+        "desc": "點擊【轉換為韓文文件】，瀏覽器將在本地安全產生OWPML標準檔案並一鍵自動下載。"
+      }
+    ],
+    "deepGuide": {
+      "toolName": "公共機構公文與韓文文件轉換",
+      "tagline": "公共機構標準相容及格式防崩完整指南",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "公共機構HWP韓文文件轉換指南",
+      "features": [
+        {
+          "title": "支援國家技術標準（KS X 6101）OWPML",
+          "description": "完美支援行政公文系統採用的開放式格式（HWPX），與韓軟Office 2014-2024實現100%無縫相容。",
+          "badge": "國家標準"
+        },
+        {
+          "title": "保留公文表格結構及多欄排版",
+          "description": "自動解析招投標書與行政表格中複雜的嵌套表格和頁邊距，徹底防止文字重疊。",
+          "badge": "表格保真"
+        },
+        {
+          "title": "保留公章與手寫簽名透明圖層",
+          "description": "混合模式在支援文字編輯的同時，完整保留印章、簽名與圖表等關鍵視覺要素。",
+          "badge": "印章完整"
+        }
+      ],
+      "proTips": [
+        "公共電子採購系統建議優先使用最新的.hwpx格式；舊版提交窗口請選用.hwp格式。",
+        "對於無法選取文字的掃描PDF，建議先使用本站【PDF OCR工具】辨識文字後再進行轉換。",
+        "轉換後開啟若發現排版微移，在文件中統一指定標準系統字型即可完美對齊。"
+      ],
+      "securityNote": "pdfpick採用100%純本機瀏覽器記憶體轉換，合約、身分證件、企業機密文件絕不上傳至外部伺服器，安全可靠。"
+    },
+    "faqTitle": "PDF轉韓文文件 常見問題（FAQ）",
+    "faqSubtitle": "解答有關政府機關公文及韓軟Office格式相容性的常見問題。",
+    "faqItems": [
+      {
+        "question": "HWP與HWPX檔案有什麼區別？",
+        "answer": "HWPX是2021年起推行的國家開放標準（OWPML），支援現代辦公軟體。而.hwp為早期的專有二進位格式，可用於舊版窗口提交。"
+      },
+      {
+        "question": "轉換後的文件可以直接編輯修改文字嗎？",
+        "answer": "可以！PDF內部文字會被解析為韓文原生段落，打開後即可像編輯普通文件一樣修改錯字與版面。"
+      },
+      {
+        "question": "轉換政府機關公文與合約文件是否安全保密？",
+        "answer": "100%安全！pdfpick絕不上傳檔案至雲端伺服器，全程僅在您本機瀏覽器記憶體中運作。"
+      },
+      {
+        "question": "表格、公章與手寫簽名圖像是否能完整保留？",
+        "answer": "是的！混合模式會將高解析度圖章及表格視覺元素與文字結合產生，絕不丟失關鍵圖形。"
+      },
+      {
+        "question": "轉換後如果字型顯示不同該如何處理？",
+        "answer": "在文件中批次替換為系統預裝的微軟正黑體或標準韓文字型，版面即可恢復整齊。"
+      },
+      {
+        "question": "掃描版圖片PDF能否轉換為可編輯文字的文件？",
+        "answer": "掃描件請先使用本站【PDF OCR工具】提取文字，然後再轉為HWPX文件即可。"
+      },
+      {
+        "question": "提交檔案時應該選擇.hwp還是.hwpx？",
+        "answer": "新版招標與線上申報推薦.hwpx；如單位明確要求.hwp，請下載.hwp版本。"
+      },
+      {
+        "question": "未安裝韓軟Office的電腦或手機能否打開轉換後的文件？",
+        "answer": "可以透過Hancom Docs網頁端免費預覽，或使用Polaris Office、Whale瀏覽器直接開啟檢視。"
+      }
+    ]
+  },
+  "es": {
+    "toolName": "Convertir PDF a HWP/HWPX (Hangul)",
+    "tagline": "Estándar oficial de instituciones públicas y preservación de formato",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "Modo híbrido (Recomendado)",
+        "badge": "Recomendado",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "Combina párrafos de texto editables con capturas de diseño de alta resolución para preservar sellos y tablas sin distorsión."
+      },
+      {
+        "id": "textOnly",
+        "title": "Modo solo texto (Ligero)",
+        "badge": "Tamaño mínimo",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "Extrae solo el texto sin imágenes para un tamaño mínimo, optimizado para reedición y mecanografiado."
+      },
+      {
+        "id": "imageOnly",
+        "title": "Escaneo / Formato preservado",
+        "badge": "100% Original",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "Preserva formularios escaneados y solicitudes complejas exactamente en su formato original de alta calidad."
+      }
+    ],
+    "ui": {
+      "pill_local_security": "Procesamiento 100% local en dispositivo (0% fugas)",
+      "pill_hancom_compat": "Compatible con sistemas públicos y Hancom Office 2014~2024",
+      "pill_format_preserve": "Texto editable + Formato original preservado",
+      "step2_badge": "Opciones de conversión y formato",
+      "step2_hint": "Elija el modo de conversión y extensión deseados",
+      "format_select_title": "Seleccionar formato de archivo",
+      "format_select_desc": "El estándar oficial es .hwpx; elija .hwp para portales antiguos.",
+      "btn_hwpx": ".HWPX (Estándar oficial) 🌟",
+      "btn_hwp": ".HWP (Compatible legado)",
+      "selected_badge": "Seleccionado",
+      "mascot_title": "¡El panda rojo está listo para armar su documento Hangul!",
+      "mascot_desc": "Los párrafos, saltos de línea y títulos se convierten de forma segura al estándar OWPML.",
+      "btn_convert": "Convertir a Hangul ({ext})",
+      "btn_cancel": "Cancelar",
+      "complete_badge": "¡Conversión a Hangul completada!",
+      "complete_title": "¡Documento Hangul editable listo! 🎉",
+      "complete_desc": "Se han convertido {pages} páginas ({chars} caracteres) al estándar OWPML de forma segura.",
+      "preview_title": "Vista previa del texto extraído",
+      "preview_more": "... y más párrafos",
+      "btn_download_hwpx": "Descargar .HWPX (Estándar oficial)",
+      "btn_download_hwp": "Descargar .HWP (Compatible legado)",
+      "btn_convert_another": "Convertir otro PDF",
+      "processing_msg": "Analizando párrafos de PDF y ensamblando documento OWPML..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Seleccionar PDF o informe",
+        "desc": "Arrastre y suelte su archivo PDF o haga clic para seleccionarlo."
+      },
+      {
+        "step": 2,
+        "title": "Elegir modo y extensión",
+        "desc": "Seleccione el Modo Híbrido Recomendado y el formato (.hwpx o .hwp)."
+      },
+      {
+        "step": 3,
+        "title": "Convertir y descargar",
+        "desc": "Haga clic en Convertir para generar el archivo Hangul OWPML en su navegador."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Documentos públicos y conversión a Hangul",
+      "tagline": "Estándar oficial de instituciones públicas y preservación de formato",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "Guía completa de conversión de PDF a Hangul",
+      "features": [
+        {
+          "title": "Soporte OWPML estándar (KS X 6101)",
+          "description": "Compatible al 100% con Hancom Office 2014~2024 y sistemas gubernamentales.",
+          "badge": "Estándar KS"
+        },
+        {
+          "title": "Preservación de tablas complejas",
+          "description": "Analiza tablas anidadas y márgenes para evitar solapamiento de textos.",
+          "badge": "Tablas intactas"
+        },
+        {
+          "title": "Sellos oficiales y firmas preservados",
+          "description": "Conserva sellos de instituciones y firmas gráficas con total fidelidad.",
+          "badge": "Sellos originales"
+        }
+      ],
+      "proTips": [
+        "Para licitaciones públicas se recomienda .hwpx; para portales antiguos use .hwp.",
+        "Para documentos escaneados sin texto seleccionable, use primero la herramienta OCR de pdfpick.",
+        "Si las fuentes se ven distintas en Hancom Office, cámbielas a Malgun Gothic o Batang."
+      ],
+      "securityNote": "pdfpick realiza todo el procesamiento en la memoria del navegador. Ningún dato confidencial se envía a servidores externos."
+    },
+    "faqTitle": "Preguntas frecuentes sobre conversión PDF a Hangul (FAQ)",
+    "faqSubtitle": "Respuestas a dudas sobre compatibilidad con Hancom Office y documentos públicos.",
+    "faqItems": [
+      {
+        "question": "¿Cuál es la diferencia entre archivos HWP y HWPX?",
+        "answer": "HWPX es el formato estándar abierto basado en XML (OWPML) adoptado desde 2021. .hwp es el formato binario anterior."
+      },
+      {
+        "question": "¿Puedo editar el texto en el documento convertido?",
+        "answer": "¡Sí! El texto se extrae en párrafos estándar de Hangul para editar libremente fuentes, estilos y contenido."
+      },
+      {
+        "question": "¿Es seguro para documentos oficiales y confidenciales?",
+        "answer": "100% seguro. Los archivos nunca salen de su navegador y se procesan en la memoria local."
+      },
+      {
+        "question": "¿Se conservan las tablas y sellos oficiales?",
+        "answer": "Sí, el modo híbrido preserva sellos, firmas y tablas con resolución nítida."
+      },
+      {
+        "question": "¿Qué hacer si la tipografía cambia?",
+        "answer": "En Hancom Office, use Formato > Cambiar fuente para aplicar fuentes estándar del sistema."
+      },
+      {
+        "question": "¿Se pueden convertir PDFs escaneados a texto editable?",
+        "answer": "Use primero nuestra herramienta OCR para reconocer el texto, luego convierta a HWPX."
+      },
+      {
+        "question": "¿Debo elegir .hwp o .hwpx para entregar?",
+        "answer": "Para trámites modernos elija .hwpx; si la entidad solicita expresamente .hwp, descargue la versión .hwp."
+      },
+      {
+        "question": "¿Puedo abrir el archivo sin Hancom Office instalado?",
+        "answer": "Sí, a través de visores gratuitos web como Hancom Docs Web Viewer, Polaris Office o el navegador Whale."
+      }
+    ]
+  },
+  "fr": {
+    "toolName": "Convertir PDF en HWP/HWPX (Hangul)",
+    "tagline": "Norme des organismes publics et préservation de la mise en page",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "Mode hybride (Recommandé)",
+        "badge": "Recommandé",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "Combine paragraphes éditables et instantanés haute résolution pour préserver sceaux et tableaux sans déformation."
+      },
+      {
+        "id": "textOnly",
+        "title": "Mode texte seul (Léger)",
+        "badge": "Taille minimale",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "Extrait uniquement le texte sans image pour un fichier ultra-léger optimisé pour la saisie."
+      },
+      {
+        "id": "imageOnly",
+        "title": "Numérisé / Mise en page préservée",
+        "badge": "100% Original",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "Préserve fidèlement les formulaires administratifs complexes et documents numérisés en haute qualité."
+      }
+    ],
+    "ui": {
+      "pill_local_security": "Traitement 100% local sur l'appareil (0% fuite)",
+      "pill_hancom_compat": "Compatible systèmes officiels et Hancom Office 2014~2024",
+      "pill_format_preserve": "Texte éditable + Mise en page originale préservée",
+      "step2_badge": "Options de conversion et format",
+      "step2_hint": "Choisissez le mode de conversion et l'extension souhaités",
+      "format_select_title": "Sélectionner le format de sortie",
+      "format_select_desc": "La norme officielle est .hwpx ; choisissez .hwp pour les anciens portails.",
+      "btn_hwpx": ".HWPX (Norme officielle) 🌟",
+      "btn_hwp": ".HWP (Compatibilité héritée)",
+      "selected_badge": "Sélectionné",
+      "mascot_title": "Le panda roux est prêt à assembler votre document Hangul !",
+      "mascot_desc": "Les paragraphes, sauts de ligne et titres sont convertis en toute sécurité selon la norme OWPML.",
+      "btn_convert": "Convertir en Hangul ({ext})",
+      "btn_cancel": "Annuler",
+      "complete_badge": "Conversion en Hangul terminée !",
+      "complete_title": "Document Hangul modifiable prêt ! 🎉",
+      "complete_desc": "{pages} pages ({chars} caractères) ont été converties avec succès selon la norme OWPML.",
+      "preview_title": "Aperçu du texte extrait",
+      "preview_more": "... et d'autres paragraphes",
+      "btn_download_hwpx": "Télécharger .HWPX (Norme officielle)",
+      "btn_download_hwp": "Télécharger .HWP (Compatibilité héritée)",
+      "btn_convert_another": "Convertir un autre PDF",
+      "processing_msg": "Analyse des paragraphes PDF et assemblage du document OWPML..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Sélectionner le fichier PDF",
+        "desc": "Glissez-déposez votre PDF ou cliquez pour sélectionner le document."
+      },
+      {
+        "step": 2,
+        "title": "Choisir le mode et l'extension",
+        "desc": "Sélectionnez le Mode Hybride Recommandé et le format (.hwpx ou .hwp)."
+      },
+      {
+        "step": 3,
+        "title": "Convertir et télécharger",
+        "desc": "Cliquez sur Convertir pour générer le fichier Hangul sécurisé dans votre navigateur."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Documents administratifs et conversion Hangul",
+      "tagline": "Norme des organismes publics et préservation de la mise en page",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "Guide complet de conversion PDF en Hangul",
+      "features": [
+        {
+          "title": "Support de la norme OWPML (KS X 6101)",
+          "description": "100% compatible avec Hancom Office 2014~2024 et les systèmes publics.",
+          "badge": "Norme KS"
+        },
+        {
+          "title": "Préservation des tableaux complexes",
+          "description": "Analyse automatique des tableaux imbriqués et marges pour éviter tout chevauchement.",
+          "badge": "Tableaux préservés"
+        },
+        {
+          "title": "Sceaux officiels et signatures intacts",
+          "description": "Conserve la netteté et la transparence des tampons et signatures.",
+          "badge": "Sceaux originaux"
+        }
+      ],
+      "proTips": [
+        "Pour les soumissions de marchés publics, .hwpx est recommandé ; pour les anciens portails, utilisez .hwp.",
+        "Pour les PDF numérisés sans texte sélectionnable, utilisez d'abord notre outil OCR.",
+        "Si la police diffère dans Hancom Office, remplacez-la par Malgun Gothic ou Batang."
+      ],
+      "securityNote": "pdfpick effectue l'intégralité du traitement dans la mémoire locale de votre navigateur. Aucun document confidentiel n'est téléversé vers des serveurs externes."
+    },
+    "faqTitle": "FAQ sur la conversion PDF en Hangul",
+    "faqSubtitle": "Toutes les réponses sur la compatibilité Hancom Office et les formulaires officiels.",
+    "faqItems": [
+      {
+        "question": "Quelle est la différence entre les fichiers HWP et HWPX ?",
+        "answer": "HWPX est la norme ouverte basée sur XML (OWPML) adoptée officiellement depuis 2021. .hwp est l'ancien format binaire."
+      },
+      {
+        "question": "Puis-je modifier le texte du document Hangul converti ?",
+        "answer": "Oui ! Le texte est extrait en paragraphes éditables avec styles et polices modifiables."
+      },
+      {
+        "question": "Est-ce sécurisé pour les documents confidentiels ?",
+        "answer": "Totalement sécurisé. Aucun fichier ne quitte votre ordinateur, tout reste dans votre navigateur."
+      },
+      {
+        "question": "Les tableaux et sceaux officiels sont-ils conservés ?",
+        "answer": "Oui, le mode hybride maintient la fidélité visuelle des tableaux, signatures et sceaux."
+      },
+      {
+        "question": "Que faire si la police d'écriture change ?",
+        "answer": "Dans Hancom Office, utilisez Format > Remplacer la police pour appliquer une police système standard."
+      },
+      {
+        "question": "Peut-on convertir des PDF scannés en texte éditable ?",
+        "answer": "Utilisez d'abord notre outil OCR pour détecter le texte, puis convertissez en HWPX."
+      },
+      {
+        "question": "Quel format choisir entre .hwp et .hwpx ?",
+        "answer": "Privilégiez .hwpx pour les systèmes modernes et .hwp si l'administration exige explicitement l'ancien format."
+      },
+      {
+        "question": "Peut-on ouvrir le fichier sans installer Hancom Office ?",
+        "answer": "Oui, avec les visionneuses gratuites Hancom Docs Web Viewer, Polaris Office ou Naver Whale."
+      }
+    ]
+  },
+  "de": {
+    "toolName": "PDF in HWP/HWPX (Hangul) umwandeln",
+    "tagline": "Behördenstandard-Kompatibilität & Layout-Erhaltung",
+    "modes": [
+      {
+        "id": "hybrid",
+        "title": "Hybrid-Modus (Empfohlen)",
+        "badge": "Empfohlen",
+        "badgeColor": "bg-rose-50 text-rose-700 border-rose-200",
+        "desc": "Kombiniert bearbeitbare Textabsätze mit hochauflösenden Layout-Schnappschüssen für fehlerfreie Stempel und Tabellen."
+      },
+      {
+        "id": "textOnly",
+        "title": "Nur-Text-Modus (Leicht)",
+        "badge": "Minimale Größe",
+        "badgeColor": "bg-blue-50 text-blue-700 border-blue-200",
+        "desc": "Extrahiert reinen Text ohne Bilder für minimale Dateigröße, ideal zur Überarbeitung und Neueingabe."
+      },
+      {
+        "id": "imageOnly",
+        "title": "Scan / Layout-erhaltend",
+        "badge": "100% Original",
+        "badgeColor": "bg-emerald-50 text-emerald-700 border-emerald-200",
+        "desc": "Erhält gescannte Formulare und behördliche Anträge in voller Originalauflösung und -qualität."
+      }
+    ],
+    "ui": {
+      "pill_local_security": "100% lokale Geräteverarbeitung (0% Datenleck)",
+      "pill_hancom_compat": "Kompatibel mit Behördensystemen & Hancom Office 2014~2024",
+      "pill_format_preserve": "Bearbeitbarer Text + Originalformatierung erhalten",
+      "step2_badge": "Konvertierungsoptionen und Format",
+      "step2_hint": "Wählen Sie den gewünschten Konvertierungsmodus und die Dateiendung",
+      "format_select_title": "Dateiformat auswählen",
+      "format_select_desc": "Offizieller Behördenstandard ist .hwpx; für ältere Portale .hwp wählen.",
+      "btn_hwpx": ".HWPX (Offizieller Standard) 🌟",
+      "btn_hwp": ".HWP (Legacy-kompatibel)",
+      "selected_badge": "Ausgewählt",
+      "mascot_title": "Der Rote Panda ist bereit für Ihr Hangul-Dokument!",
+      "mascot_desc": "Absätze, Zeilenumbrüche und Überschriften werden sicher in den OWPML-Standard konvertiert.",
+      "btn_convert": "In Hangul ({ext}) umwandeln",
+      "btn_cancel": "Abbrechen",
+      "complete_badge": "Hangul-Konvertierung abgeschlossen!",
+      "complete_title": "Bearbeitbares Hangul-Dokument fertig! 🎉",
+      "complete_desc": "{pages} Seiten ({chars} Zeichen) wurden erfolgreich in den OWPML-Standard konvertiert.",
+      "preview_title": "Vorschau des extrahierten Textes",
+      "preview_more": "... und weitere Absätze",
+      "btn_download_hwpx": ".HWPX herunterladen (Offizieller Standard)",
+      "btn_download_hwp": ".HWP herunterladen (Legacy-kompatibel)",
+      "btn_convert_another": "Anderes PDF umwandeln",
+      "processing_msg": "PDF-Absätze werden analysiert und OWPML-Dokument wird zusammengestellt..."
+    },
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF-Dokument auswählen",
+        "desc": "Ziehen Sie Ihr PDF per Drag & Drop hierher oder wählen Sie es aus."
+      },
+      {
+        "step": 2,
+        "title": "Modus & Endung wählen",
+        "desc": "Wählen Sie den empfohlenen Hybrid-Modus sowie .hwpx oder .hwp aus."
+      },
+      {
+        "step": 3,
+        "title": "Umwandeln & Herunterladen",
+        "desc": "Klicken Sie auf Umwandeln, um das OWPML-Dokument im Browser zu erzeugen."
+      }
+    ],
+    "deepGuide": {
+      "toolName": "Behördendokumente & Hangul-Konvertierung",
+      "tagline": "Behördenstandard-Kompatibilität & Layout-Erhaltung",
+      "relatedGuideSlug": "public-institution-hwp-pdf-guide",
+      "relatedGuideTitle": "Umfassender Leitfaden zur PDF-in-Hangul-Konvertierung",
+      "features": [
+        {
+          "title": "OWPML-Standard (KS X 6101) Unterstützung",
+          "description": "100% kompatibel mit Hancom Office 2014~2024 und staatlichen Portalen.",
+          "badge": "KS-Standard"
+        },
+        {
+          "title": "Erhalt komplexer Tabellenstrukturen",
+          "description": "Automatische Erkennung verschachtelter Tabellen und Ränder verhindert Textüberlappungen.",
+          "badge": "Tabellen intakt"
+        },
+        {
+          "title": "Offizielle Siegel und Unterschriften erhalten",
+          "description": "Erhält Amtsstempel, Unterschriften und Grafiken in scharfer Qualität.",
+          "badge": "Siegel erhalten"
+        }
+      ],
+      "proTips": [
+        "Für öffentliche Ausschreibungen wird .hwpx empfohlen; für ältere Systeme wählen Sie .hwp.",
+        "Bei gescannten Dokumenten ohne Textauswahl nutzen Sie zuvor das PDF-OCR-Tool von pdfpick.",
+        "Wenn Schriftarten in Hancom Office abweichen, ersetzen Sie diese durch Malgun Gothic oder Batang."
+      ],
+      "securityNote": "pdfpick verarbeitet alle Dokumente lokal im Speicher Ihres Webbrowsers. Keine vertraulichen Dateien werden an externe Server übertragen."
+    },
+    "faqTitle": "Häufig gestellte Fragen zur PDF-in-Hangul-Umwandlung (FAQ)",
+    "faqSubtitle": "Antworten zu Hancom Office Kompatibilität und amtlichen Formularen.",
+    "faqItems": [
+      {
+        "question": "Was ist der Unterschied zwischen HWP und HWPX?",
+        "answer": "HWPX ist das moderne, XML-basierte offene Standardformat (OWPML) seit 2021. .hwp ist das ältere Binärformat."
+      },
+      {
+        "question": "Kann der Text im konvertierten Dokument bearbeitet werden?",
+        "answer": "Ja! Der Text wird in Standardabsätzen extrahiert und kann frei formatiert und editiert werden."
+      },
+      {
+        "question": "Ist die Umwandlung für vertrauliche Unterlagen sicher?",
+        "answer": "100% sicher. Dokumente verlassen niemals Ihren Browser und werden nur im lokalen Speicher verarbeitet."
+      },
+      {
+        "question": "Bleiben Tabellen und Amtssiegel erhalten?",
+        "answer": "Ja, der Hybridmodus stellt sicher, dass Tabellen, Stempel und Unterschriften gestochen scharf bleiben."
+      },
+      {
+        "question": "Was tun, wenn Schriften anders aussehen?",
+        "answer": "In Hancom Office unter Format > Schriftart ändern eine installierte Standardschrift auswählen."
+      },
+      {
+        "question": "Können gescannte PDFs in bearbeitbaren Text umgewandelt werden?",
+        "answer": "Nutzen Sie zuerst unser PDF-OCR-Tool zur Texterkennung und konvertieren Sie anschließend in HWPX."
+      },
+      {
+        "question": "Sollte ich .hwp oder .hwpx zur Einreichung wählen?",
+        "answer": "Wählen Sie .hwpx für moderne Systeme und .hwp, falls die Behörde ausdrücklich das alte Format verlangt."
+      },
+      {
+        "question": "Kann man die Datei ohne installiertes Hancom Office öffnen?",
+        "answer": "Ja, über kostenlose Online-Betrachter wie Hancom Docs Web Viewer, Polaris Office oder Naver Whale."
+      }
+    ]
+  }
+}

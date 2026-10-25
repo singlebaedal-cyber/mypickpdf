@@ -5,16 +5,19 @@ import ToolHeader from "@/components/ToolHeader";
 import FileDropzone from "@/components/FileDropzone";
 import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
+import DeepGuideSection from "@/components/DeepGuideSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import MascotActionNotice from "@/components/MascotActionNotice";
-import UploadedFileCard from "@/components/UploadedFileCard";
 import { extractTextFromPDF, downloadBlob, getPDFPageCount } from "@/lib/pdf-utils";
-import { FileSearch, Copy, Download, Check, FileText } from "lucide-react";
+import { FileSearch, Copy, Download, Check, RefreshCw, FileText } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { getToolContent } from "@/lib/tool-content-data";
 
 export default function OcrPdfPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const toolContent = getToolContent("ocr-pdf", lang);
+  const ui = toolContent.ui || {};
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [extractedText, setExtractedText] = useState<string>("");
@@ -67,34 +70,7 @@ export default function OcrPdfPage() {
     downloadBlob(blob, `${file.name.replace(/\.[^/.]+$/, "")}_extracted_text.txt`, "text/plain");
   };
 
-  const howToSteps = [
-    {
-      step: 1,
-      title: "PDF 문서 추가",
-      desc: "글자를 추출하고 싶은 문서를 업로드 영역에 끌어다 놓습니다.",
-    },
-    {
-      step: 2,
-      title: "텍스트 추출 클릭",
-      desc: "브라우저 엔진이 문서의 모든 페이지에서 텍스트 요소를 신속하게 읽어들입니다.",
-    },
-    {
-      step: 3,
-      title: "복사 또는 메모장 저장",
-      desc: "추출된 내용을 원클릭으로 클립보드에 복사하거나 TXT 텍스트 파일로 다운로드합니다.",
-    },
-  ];
 
-  const faqItems = [
-    {
-      question: "표나 양식에 들어있는 글자도 추출되나요?",
-      answer: "네! PDF 내부에 텍스트 레이어로 입력되어 있는 표, 단락, 목록의 모든 텍스트를 페이지 순서대로 정렬하여 추출합니다.",
-    },
-    {
-      question: "텍스트 추출 데이터도 서버로 전송되지 않나요?",
-      answer: "네, 완전히 안전합니다. 브라우저 메모리 상에서 직접 텍스트 레이어를 디코딩하므로 어떤 민감한 계약서나 개인 문서도 외부로 노출되지 않습니다.",
-    },
-  ];
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
@@ -112,14 +88,36 @@ export default function OcrPdfPage() {
           />
         ) : (
           <div className="space-y-6">
-            <UploadedFileCard
-              file={file}
-              pageCount={pageCount}
-              onReset={() => {
-                setFile(null);
-                setExtractedText("");
-              }}
-            />
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 text-sm truncate max-w-sm">{file.name}</h4>
+                  <p className="text-xs text-slate-500">
+                    총 {pageCount}개 페이지 • {(file.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+                </div>
+              </div>
+
+              <MascotActionNotice
+                mood="ready"
+                title="텍스트를 추출할 PDF가 준비되었습니다!"
+                description="브라우저에서 문서를 분석하여 원문 텍스트를 바로 읽어냅니다."
+                actionHint="아래 [텍스트 추출 시작] 버튼을 눌러주세요!"
+              />
+
+              <button
+                onClick={() => {
+                  setFile(null);
+                  setExtractedText("");
+                }}
+                className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
+              >
+                <RefreshCw className="w-3.5 h-3.5" /> 다른 문서 선택
+              </button>
+            </div>
 
             {!extractedText ? (
               <div className="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
@@ -218,13 +216,12 @@ export default function OcrPdfPage() {
       </div>
 
       <AdBanner format="horizontal" />
-      <HowToSection toolName="PDF 텍스트 추출" steps={howToSteps} />
+      <HowToSection toolSlug="ocr-pdf" />
+
+      <DeepGuideSection toolSlug="ocr-pdf" />
+
       <AdBanner format="responsive" />
-      <FaqSection
-        title="PDF 텍스트 추출 자주 묻는 질문"
-        subtitle="문서 안의 글자를 복사하는 편리한 기능에 관한 안내입니다."
-        items={faqItems}
-      />
+      <FaqSection toolSlug="ocr-pdf" />
 
       <ProcessingOverlay
         isProcessing={isProcessing}

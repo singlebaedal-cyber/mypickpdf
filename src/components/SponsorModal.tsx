@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { X, Heart, Coffee, Copy, Check, Sparkles, ExternalLink, QrCode, Smartphone, CreditCard } from "lucide-react";
 import RedPanda from "./RedPanda";
-import { useLanguage } from "@/lib/i18n";
 
 interface SponsorModalProps {
   isOpen: boolean;
@@ -11,7 +10,6 @@ interface SponsorModalProps {
 }
 
 export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
-  const { t } = useLanguage();
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [selectedTier, setSelectedTier] = useState<number>(3000);
   const [activeTab, setActiveTab] = useState<"easy" | "email">("easy");
@@ -27,7 +25,7 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
   const getTierLabel = () => {
     if (selectedTier === 3000) return "☕ 시원한 아메리카노 1잔 (3,000원)";
     if (selectedTier === 5000) return "🍎 래서팬더 사과 바구니 (5,000원)";
-    return "🚀 mypickpdf 무한 응원 (자유 금액)";
+    return "🚀 pdfpick 무한 응원 (자유 금액)";
   };
 
   return (
@@ -53,11 +51,12 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
           </div>
 
           <h3 className="text-xl font-black tracking-tight text-white flex items-center justify-center gap-1.5">
-            <span>{t("sponsor_modal_title")}</span>
+            <span>래서팬더 간식 후원하기</span>
             <Sparkles className="w-4 h-4 text-amber-200 fill-amber-200" />
           </h3>
           <p className="text-xs text-orange-100 mt-1 font-medium leading-relaxed">
-            {t("sponsor_modal_desc")}
+            pdfpick는 회원가입이나 결제 없이 100% 무료로 운영됩니다.<br />
+            보내주신 커피 한 잔은 서비스 서버 유지와 신기능 개발에 큰 힘이 됩니다! 🐾
           </p>
         </div>
 
@@ -137,7 +136,7 @@ export default function SponsorModal({ isOpen, onClose }: SponsorModalProps) {
                   <span className="text-2xl">🚀</span>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                      <span>mypickpdf 무한 응원</span>
+                      <span>pdfpick 무한 응원</span>
                       {selectedTier === 0 && (
                         <span className="text-[10px] px-1.5 py-0.2 bg-amber-500 text-white rounded-md font-extrabold">
                           선택됨

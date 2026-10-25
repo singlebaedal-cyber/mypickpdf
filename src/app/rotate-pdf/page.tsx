@@ -13,8 +13,13 @@ import StepBadge from "@/components/StepBadge";
 import { reportAppError } from "@/lib/app-events";
 import { rotatePDF, downloadBlob, getPDFPageCount } from "@/lib/pdf-utils";
 import { RotateCw, RotateCcw, Download, CheckCircle, RefreshCw, FileText } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+import { getToolContent } from "@/lib/tool-content-data";
 
 export default function RotatePdfPage() {
+  const { t, lang } = useLanguage();
+  const toolContent = getToolContent("rotate-pdf", lang);
+  const ui = toolContent.ui || {};
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [rotation, setRotation] = useState<number>(0);
@@ -176,7 +181,7 @@ export default function RotatePdfPage() {
                   }`}
                 >
                   <RotateCcw className="w-4 h-4 text-rose-600" />
-                  <span>왼쪽으로 90° 회전</span>
+                  <span>{ui.btn_rotate_left || "왼쪽으로 90° 회전"}</span>
                 </button>
                 <button
                   type="button"
@@ -188,7 +193,7 @@ export default function RotatePdfPage() {
                   }`}
                 >
                   <RotateCw className={`w-4 h-4 ${rotation === 0 ? "text-white" : "text-rose-600"}`} />
-                  <span>오른쪽으로 90° 회전 (가장 많이 씀)</span>
+                  <span>{ui.btn_rotate_right || "오른쪽으로 90° 회전"} (가장 많이 씀)</span>
                 </button>
               </div>
             </div>
@@ -252,13 +257,9 @@ export default function RotatePdfPage() {
       </div>
 
       <AdBanner format="horizontal" />
-      <HowToSection toolName="PDF 회전" steps={howToSteps} />
+      <HowToSection toolSlug="rotate-pdf" />
       <AdBanner format="responsive" />
-      <FaqSection
-        title="PDF 회전 자주 묻는 질문"
-        subtitle="기울어진 문서를 바로잡을 때 참고할 사항입니다."
-        items={faqItems}
-      />
+      <FaqSection toolSlug="rotate-pdf" />
 
       <ProcessingOverlay
         isProcessing={isProcessing}

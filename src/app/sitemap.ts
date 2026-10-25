@@ -5,8 +5,10 @@ import { GUIDE_ARTICLES } from "@/lib/guides-data";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.domain;
 
-  const routes = [
+  const coreRoutes = [
     { url: "", priority: 1.0, changeFrequency: "daily" as const },
+    { url: "/edit-pdf", priority: 1.0, changeFrequency: "daily" as const },
+    { url: "/translate-pdf", priority: 1.0, changeFrequency: "daily" as const },
     { url: "/merge-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/split-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/compress-pdf", priority: 0.9, changeFrequency: "weekly" as const },
@@ -34,15 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/pdf-to-excel", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/pdf-to-pdfa", priority: 0.8, changeFrequency: "weekly" as const },
 
-    // Guides Portal
-    { url: "/guides", priority: 0.9, changeFrequency: "daily" as const },
-
-    // 43 Multilingual Guide Articles
-    ...GUIDE_ARTICLES.map((article) => ({
-      url: `/guides/${article.slug}`,
-      priority: 0.85,
-      changeFrequency: "weekly" as const,
-    })),
+    // Guides & Knowledge Hub
+    { url: "/guides", priority: 0.95, changeFrequency: "daily" as const },
 
     // Policy
     { url: "/privacy-policy", priority: 0.5, changeFrequency: "monthly" as const },
@@ -50,7 +45,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/contact", priority: 0.5, changeFrequency: "monthly" as const },
   ];
 
-  return routes.map((route) => ({
+  const guideRoutes = GUIDE_ARTICLES.map((article) => ({
+    url: `/guides/${article.slug}`,
+    priority: 0.85,
+    changeFrequency: "weekly" as const,
+  }));
+
+  const allRoutes = [...coreRoutes, ...guideRoutes];
+
+  return allRoutes.map((route) => ({
     url: `${baseUrl}${route.url}`,
     lastModified: new Date(),
     changeFrequency: route.changeFrequency,

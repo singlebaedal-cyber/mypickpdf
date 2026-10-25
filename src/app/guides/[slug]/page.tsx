@@ -1,10 +1,9 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { GUIDE_ARTICLES, getGuideBySlug } from "@/lib/guides-data";
-import { SITE_CONFIG } from "@/lib/seo-config";
-import GuideArticleView from "@/components/GuideArticleView";
+import { GUIDE_ARTICLES } from "@/lib/guides-data";
+import GuideDetailClientView from "@/components/GuideDetailClientView";
 
-interface GuidePageProps {
+interface PageProps {
   params: {
     slug: string;
   };
@@ -16,90 +15,74 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: GuidePageProps): Promise<Metadata> {
-  const article = getGuideBySlug(params.slug);
-  if (!article) {
-    return {
-      title: "가이드를 찾을 수 없습니다 | mypickpdf",
-    };
-  }
-
-  const title = `${article.translations.ko.title} | mypickpdf`;
-  const description = article.translations.ko.summary;
-  const canonicalUrl = `${SITE_CONFIG.domain}/guides/${article.slug}`;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const article = GUIDE_ARTICLES.find((a) => a.slug === params.slug);
+  if (!article) return {};
 
   return {
-    title,
-    description,
-    keywords: [
-      ...article.keywords,
-      "mypickpdf 가이드",
-      "PDF 팁",
-      "무료 PDF 도구",
-    ],
+    title: `${article.title} - 실무 가이드`,
+    description: article.summary,
+    keywords: [...article.tags, "pdfpick", "PDF 팁", "PDF 가이드"],
     alternates: {
-      canonical: canonicalUrl,
+      canonical: `https://pdfpick.kr/guides/${article.slug}`,
     },
     openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      siteName: "mypickpdf",
+      title: `${article.title} - 실무 가이드 | pdfpick`,
+      description: article.summary,
+      url: `https://pdfpick.kr/guides/${article.slug}`,
+      siteName: "pdfpick",
+      locale: "ko_KR",
+      type: "article",
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt,
+      authors: ["pdfpick Editorial Team"],
       images: [
         {
-          url: "/mascot/mascot_main.png",
+          url: "https://pdfpick.kr/opengraph-image",
           width: 1200,
           height: 630,
-          alt: title,
+          alt: article.title,
         },
       ],
-      type: "article",
-      publishedTime: `${article.date}T09:00:00+09:00`,
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
-      images: ["/mascot/mascot_main.png"],
+      title: `${article.title} - 실무 가이드 | pdfpick`,
+      description: article.summary,
+      images: ["https://pdfpick.kr/opengraph-image"],
     },
   };
 }
 
-export default function GuideDetailPage({ params }: GuidePageProps) {
-  const article = getGuideBySlug(params.slug);
-
+export default function GuideDetailPage({ params }: PageProps) {
+  const article = GUIDE_ARTICLES.find((a) => a.slug === params.slug);
   if (!article) {
     notFound();
   }
 
-  // JSON-LD Structured Data for Google & Naver
+  // Schema.org Article JSON-LD
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: article.translations.ko.title,
-    description: article.translations.ko.summary,
-    image: `${SITE_CONFIG.domain}/mascot/mascot_main.png`,
-    datePublished: `${article.date}T09:00:00+09:00`,
-    dateModified: `${article.date}T09:00:00+09:00`,
+    headline: article.title,
+    description: article.summary,
+    image: "https://pdfpick.kr/opengraph-image",
     author: {
       "@type": "Organization",
-      name: "mypickpdf Team",
-      url: SITE_CONFIG.domain,
+      name: "pdfpick Editorial Team",
+      url: "https://pdfpick.kr",
     },
     publisher: {
       "@type": "Organization",
-      name: "mypickpdf",
+      name: "pdfpick",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_CONFIG.domain}/mascot/mascot_main.png`,
+        url: "https://pdfpick.kr/icon.png",
       },
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${SITE_CONFIG.domain}/guides/${article.slug}`,
-    },
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    mainEntityOfPage: `https://pdfpick.kr/guides/${article.slug}`,
   };
 
   const breadcrumbSchema = {
@@ -110,26 +93,25 @@ export default function GuideDetailPage({ params }: GuidePageProps) {
         "@type": "ListItem",
         position: 1,
         name: "홈",
-        item: SITE_CONFIG.domain,
+        item: "https://pdfpick.kr",
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "가이드",
-        item: `${SITE_CONFIG.domain}/guides`,
+        name: "PDF 실무 가이드",
+        item: "https://pdfpick.kr/guides",
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: article.translations.ko.title,
-        item: `${SITE_CONFIG.domain}/guides/${article.slug}`,
+        name: article.title,
+        item: `https://pdfpick.kr/guides/${article.slug}`,
       },
     ],
   };
 
   return (
     <>
-      {/* Search Engine Rich Snippet JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -138,8 +120,7 @@ export default function GuideDetailPage({ params }: GuidePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-
-      <GuideArticleView article={article} />
+      <GuideDetailClientView slug={params.slug} />
     </>
   );
 }

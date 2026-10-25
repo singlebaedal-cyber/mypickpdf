@@ -5,13 +5,19 @@ import ToolHeader from "@/components/ToolHeader";
 import FileDropzone from "@/components/FileDropzone";
 import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
+import DeepGuideSection from "@/components/DeepGuideSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import MascotActionNotice from "@/components/MascotActionNotice";
 import { imagesToPDF, downloadBlob } from "@/lib/pdf-utils";
 import { Image as ImageIcon, Download, CheckCircle, Trash2, Plus, ArrowUp, ArrowDown } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+import { getToolContent } from "@/lib/tool-content-data";
 
 export default function ImageToPdfPage() {
+  const { t, lang } = useLanguage();
+  const toolContent = getToolContent("image-to-pdf", lang);
+  const ui = toolContent.ui || {};
   const [images, setImages] = useState<File[]>([]);
   const [orientation, setOrientation] = useState<"portrait" | "landscape">("portrait");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -82,11 +88,27 @@ export default function ImageToPdfPage() {
     },
     {
       question: "이미지 화질이 저하되지는 않나요?",
-      answer: "아닙니다. mypickpdf는 원본 이미지의 픽셀 해상도와 색감을 최대한 유지하면서 표준 A4 규격에 맞추어 최적화된 고화질 PDF를 생성합니다.",
+      answer: "아닙니다. pdfpick는 원본 이미지의 픽셀 해상도와 색감을 최대한 유지하면서 표준 A4 규격에 맞추어 최적화된 고화질 PDF를 생성합니다.",
     },
     {
       question: "여러 장의 사진을 1개의 PDF로 묶을 수 있나요?",
       answer: "네! 수십 장의 사진을 업로드하시면 사진 1장당 PDF 1페이지씩 차례대로 결합된 완성형 전자문서로 생성됩니다.",
+    },
+    {
+      question: "스마트폰으로 찍은 영수증이나 계약서 사진도 깨끗한 문서처럼 변환되나요?",
+      answer: "네! 촬영한 원본 이미지의 가로세로 비율을 유지하면서 표준 A4 규격의 최적 마진(여백)으로 자동 레이아웃 배치되어 세무서, 은행, 관공서 제출용으로 손색없는 깔끔한 문서가 완성됩니다.",
+    },
+    {
+      question: "가로 사진과 세로 사진이 섞여 있을 때 어떻게 처리되나요?",
+      answer: "기본 설정에서 세로(Portrait) 또는 가로(Landscape) 전체 일괄 방향을 지정할 수 있으며, 각 이미지의 방향에 맞추어 중앙 정렬되어 생성됩니다.",
+    },
+    {
+      question: "변환된 PDF 파일의 용량이 너무 크면 어떻게 줄이나요?",
+      answer: "고화질 스마트폰 사진이 여러 장 포함되면 PDF 용량이 수십 MB에 달할 수 있습니다. 변환 후 pdfpick의 [PDF 압축 도구]를 이용하시면 화질 저하 없이 이메일 첨부 규격(5MB 이하)으로 손쉽게 경량화할 수 있습니다.",
+    },
+    {
+      question: "아이폰 사진(HEIC)도 변환할 수 있나요?",
+      answer: "최신 iOS 및 사파리 환경에서는 HEIC 사진도 호환되며, 일반 JPG 또는 PNG로 저장된 사진은 모든 브라우저에서 100% 완벽하게 변환됩니다.",
     },
   ];
 
@@ -250,13 +272,12 @@ export default function ImageToPdfPage() {
       </div>
 
       <AdBanner format="horizontal" />
-      <HowToSection toolName="이미지 ➔ PDF 변환" steps={howToSteps} />
+      <HowToSection toolSlug="image-to-pdf" />
+
+      <DeepGuideSection toolSlug="image-to-pdf" />
+
       <AdBanner format="responsive" />
-      <FaqSection
-        title="이미지 PDF 변환 자주 묻는 질문"
-        subtitle="사진을 PDF 문서로 묶는 기능에 대해 가장 많이 묻는 내용입니다."
-        items={faqItems}
-      />
+      <FaqSection toolSlug="image-to-pdf" />
 
       <ProcessingOverlay
         isProcessing={isProcessing}

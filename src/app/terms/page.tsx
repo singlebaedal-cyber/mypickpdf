@@ -1,22 +1,15 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "서비스 이용약관",
-  description: "mypickpdf의 무료 온라인 서비스 이용 규정 및 책임 한계 안내입니다.",
-};
-
 export default function TermsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm">
         <h1 className="text-3xl font-black text-slate-900 mb-6">서비스 이용약관 (Terms of Service)</h1>
-        <p className="text-sm text-slate-500 mb-8">시행일자: {new Date().toLocaleDateString("ko-KR")}</p>
+        <p className="text-sm text-slate-500 mb-8">시행일자: 2026. 3. 1.</p>
 
         <div className="prose prose-slate max-w-none text-sm leading-relaxed space-y-6 text-slate-700">
           <section>
             <h2 className="text-lg font-bold text-slate-900 mb-2">제1조 (목적)</h2>
             <p>
-              본 약관은 mypickpdf(마이픽피디에프, 이하 &quot;서비스&quot;)가 제공하는 모든 웹 기반 PDF 편집 및 변환 유틸리티 도구의 이용 조건 및 절차에 관한 기본적인 사항을 규정함을 목적으로 합니다.
+              본 약관은 pdfpick(피디에프픽, 이하 &quot;서비스&quot;)가 제공하는 모든 웹 기반 PDF 편집 및 변환 유틸리티 도구의 이용 조건 및 절차에 관한 기본적인 사항을 규정함을 목적으로 합니다.
             </p>
           </section>
 

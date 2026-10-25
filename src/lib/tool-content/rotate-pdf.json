@@ -1,0 +1,306 @@
+{
+  "ko": {
+    "toolName": "PDF 회전",
+    "tagline": "삐뚤어지거나 뒤집힌 PDF 페이지를 90도/180도 바르게 회전하는 도구",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDF 파일 업로드",
+        "desc": "회전하고 싶은 PDF 문서를 화면에 추가합니다."
+      },
+      {
+        "step": 2,
+        "title": "회전 방향 선택",
+        "desc": "좌로 90도, 우로 90도, 180도 뒤집기 버튼으로 방향을 바로잡습니다."
+      },
+      {
+        "step": 3,
+        "title": "회전 적용 및 다운로드",
+        "desc": "올바른 각도로 회전된 새 PDF 문서를 즉시 다운로드합니다."
+      }
+    ],
+    "faqTitle": "PDF 회전 자주 묻는 질문",
+    "faqSubtitle": "PDF 페이지 방향을 바로잡는 방법에 대한 FAQ입니다.",
+    "faqItems": [
+      {
+        "question": "특정 페이지만 골라서 회전할 수 있나요?",
+        "answer": "네! 전체 페이지를 일괄 회전하거나 원하는 페이지만 개별적으로 90도씩 회전할 수 있습니다."
+      },
+      {
+        "question": "회전 후 글자나 이미지 화질이 손상되나요?",
+        "answer": "손상되지 않습니다. 페이지 회전 플래그 메타데이터만 변경하므로 원본 화질을 100% 무손실로 유지합니다."
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "왼쪽으로 90° 회전",
+      "btn_rotate_right": "오른쪽으로 90° 회전",
+      "btn_save": "회전된 PDF 저장하기"
+    }
+  },
+  "en": {
+    "toolName": "Rotate PDF",
+    "tagline": "Rotate upside-down or sideways PDF pages by 90° or 180° permanently",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Upload the PDF document you want to rotate."
+      },
+      {
+        "step": 2,
+        "title": "Select Rotation Direction",
+        "desc": "Rotate left 90°, right 90°, or 180° to fix orientations."
+      },
+      {
+        "step": 3,
+        "title": "Save & Download",
+        "desc": "Instantly download your permanently rotated PDF document."
+      }
+    ],
+    "faqTitle": "Rotate PDF FAQ",
+    "faqSubtitle": "Answers about rotating PDF page orientations safely.",
+    "faqItems": [
+      {
+        "question": "Can I rotate specific individual pages?",
+        "answer": "Yes! You can rotate all pages together or rotate specific pages individually by 90 degrees."
+      },
+      {
+        "question": "Does rotation degrade picture or text quality?",
+        "answer": "Not at all. Only the rotation flag metadata is updated, keeping 100% original lossless quality."
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "Rotate 90° Left",
+      "btn_rotate_right": "Rotate 90° Right",
+      "btn_save": "Save Rotated PDF"
+    }
+  },
+  "ja": {
+    "toolName": "PDF回転",
+    "tagline": "横向きや逆さまになったPDFページを90度・180度正しく回転",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "PDFファイルをアップロード",
+        "desc": "回転させたいPDF文書を画面に追加します。"
+      },
+      {
+        "step": 2,
+        "title": "回転方向を選択",
+        "desc": "左に90°、右に90°、または180°回転して向きを正しく揃えます。"
+      },
+      {
+        "step": 3,
+        "title": "保存＆ダウンロード",
+        "desc": "正しい向きに回転されたPDFを即座にダウンロードします。"
+      }
+    ],
+    "faqTitle": "PDF回転 よくある質問（FAQ）",
+    "faqSubtitle": "PDFの向きを修正する方法についてのFAQです。",
+    "faqItems": [
+      {
+        "question": "特定のページだけを選んで回転できますか？",
+        "answer": "はい！全ページ一括回転だけでなく、特定のページだけを個別に90度ずつ回転できます。"
+      },
+      {
+        "question": "回転後に画質が低下することはありますか？",
+        "answer": "ありません。回転フラグのメタデータのみを更新するため、無損失で原本の品質を保ちます。"
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "左へ90°回転",
+      "btn_rotate_right": "右へ90°回転",
+      "btn_save": "回転したPDFを保存"
+    }
+  },
+  "zh": {
+    "toolName": "PDF旋转",
+    "tagline": "将倒置或横向的PDF页面顺时针或逆时针旋转90°/180°",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "上传PDF文件",
+        "desc": "添加需要旋转方向的PDF文档。"
+      },
+      {
+        "step": 2,
+        "title": "选择旋转方向",
+        "desc": "向左旋转90°、向右旋转90°或旋转180°校正方向。"
+      },
+      {
+        "step": 3,
+        "title": "保存并下载",
+        "desc": "即时下载永久校正方向的全新PDF文档。"
+      }
+    ],
+    "faqTitle": "PDF旋转常见问题（FAQ）",
+    "faqSubtitle": "关于校正PDF页面方向的常见疑问解答。",
+    "faqItems": [
+      {
+        "question": "可以只旋转指定单个页面吗？",
+        "answer": "可以！支持全选一键批量旋转，也支持点击单个页面独立按90度旋转校正。"
+      },
+      {
+        "question": "旋转后画质或文字清晰度会受损吗？",
+        "answer": "绝不受损。仅修改PDF页面旋转元数据，100%无损保持原始质量。"
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "向左旋转90°",
+      "btn_rotate_right": "向右旋转90°",
+      "btn_save": "保存旋转后的PDF"
+    }
+  },
+  "zh-TW": {
+    "toolName": "PDF旋轉",
+    "tagline": "将倒置或横向的PDF页面顺时针或逆时针旋转90°/180°",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "上传PDF文件",
+        "desc": "添加需要旋转方向的PDF文档。"
+      },
+      {
+        "step": 2,
+        "title": "选择旋转方向",
+        "desc": "向左旋转90°、向右旋转90°或旋转180°校正方向。"
+      },
+      {
+        "step": 3,
+        "title": "保存并下载",
+        "desc": "即时下载永久校正方向的全新PDF文档。"
+      }
+    ],
+    "faqTitle": "PDF旋轉常見問題（FAQ）",
+    "faqSubtitle": "关于校正PDF页面方向的常见疑问解答。",
+    "faqItems": [
+      {
+        "question": "可以只旋转指定单个页面吗？",
+        "answer": "可以！支持全选一键批量旋转，也支持点击单个页面独立按90度旋转校正。"
+      },
+      {
+        "question": "旋转后画质或文字清晰度会受损吗？",
+        "answer": "绝不受损。仅修改PDF页面旋转元数据，100%无损保持原始质量。"
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "向左旋转90°",
+      "btn_rotate_right": "向右旋转90°",
+      "btn_save": "保存旋转后的PDF"
+    }
+  },
+  "es": {
+    "toolName": "Rotar PDF",
+    "tagline": "Rotate upside-down or sideways PDF pages by 90° or 180° permanently",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Upload the PDF document you want to rotate."
+      },
+      {
+        "step": 2,
+        "title": "Select Rotation Direction",
+        "desc": "Rotate left 90°, right 90°, or 180° to fix orientations."
+      },
+      {
+        "step": 3,
+        "title": "Save & Download",
+        "desc": "Instantly download your permanently rotated PDF document."
+      }
+    ],
+    "faqTitle": "Preguntas frecuentes sobre rotar PDF",
+    "faqSubtitle": "Answers about rotating PDF page orientations safely.",
+    "faqItems": [
+      {
+        "question": "Can I rotate specific individual pages?",
+        "answer": "Yes! You can rotate all pages together or rotate specific pages individually by 90 degrees."
+      },
+      {
+        "question": "Does rotation degrade picture or text quality?",
+        "answer": "Not at all. Only the rotation flag metadata is updated, keeping 100% original lossless quality."
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "Rotate 90° Left",
+      "btn_rotate_right": "Rotate 90° Right",
+      "btn_save": "Save Rotated PDF"
+    }
+  },
+  "fr": {
+    "toolName": "Faire pivoter PDF",
+    "tagline": "Rotate upside-down or sideways PDF pages by 90° or 180° permanently",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Upload the PDF document you want to rotate."
+      },
+      {
+        "step": 2,
+        "title": "Select Rotation Direction",
+        "desc": "Rotate left 90°, right 90°, or 180° to fix orientations."
+      },
+      {
+        "step": 3,
+        "title": "Save & Download",
+        "desc": "Instantly download your permanently rotated PDF document."
+      }
+    ],
+    "faqTitle": "FAQ sur la rotation de PDF",
+    "faqSubtitle": "Answers about rotating PDF page orientations safely.",
+    "faqItems": [
+      {
+        "question": "Can I rotate specific individual pages?",
+        "answer": "Yes! You can rotate all pages together or rotate specific pages individually by 90 degrees."
+      },
+      {
+        "question": "Does rotation degrade picture or text quality?",
+        "answer": "Not at all. Only the rotation flag metadata is updated, keeping 100% original lossless quality."
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "Rotate 90° Left",
+      "btn_rotate_right": "Rotate 90° Right",
+      "btn_save": "Save Rotated PDF"
+    }
+  },
+  "de": {
+    "toolName": "PDF drehen",
+    "tagline": "Rotate upside-down or sideways PDF pages by 90° or 180° permanently",
+    "howToSteps": [
+      {
+        "step": 1,
+        "title": "Upload PDF File",
+        "desc": "Upload the PDF document you want to rotate."
+      },
+      {
+        "step": 2,
+        "title": "Select Rotation Direction",
+        "desc": "Rotate left 90°, right 90°, or 180° to fix orientations."
+      },
+      {
+        "step": 3,
+        "title": "Save & Download",
+        "desc": "Instantly download your permanently rotated PDF document."
+      }
+    ],
+    "faqTitle": "Häufige Fragen zum PDF-Drehen",
+    "faqSubtitle": "Answers about rotating PDF page orientations safely.",
+    "faqItems": [
+      {
+        "question": "Can I rotate specific individual pages?",
+        "answer": "Yes! You can rotate all pages together or rotate specific pages individually by 90 degrees."
+      },
+      {
+        "question": "Does rotation degrade picture or text quality?",
+        "answer": "Not at all. Only the rotation flag metadata is updated, keeping 100% original lossless quality."
+      }
+    ],
+    "ui": {
+      "btn_rotate_left": "Rotate 90° Left",
+      "btn_rotate_right": "Rotate 90° Right",
+      "btn_save": "Save Rotated PDF"
+    }
+  }
+}

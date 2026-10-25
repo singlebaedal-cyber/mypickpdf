@@ -1,10 +1,4 @@
-import type { Metadata } from "next";
-import { Mail, MessageSquare, ShieldCheck, Zap } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "문의하기 & 서비스 소개",
-  description: "mypickpdf 서비스 소개 및 기술 문의, 기능 건의, 버그 제보 안내입니다.",
-};
+import { Mail, ShieldCheck, Zap } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -12,7 +6,7 @@ export default function ContactPage() {
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm">
         <h1 className="text-3xl font-black text-slate-900 mb-4">문의하기 & 서비스 소개</h1>
         <p className="text-base text-slate-600 mb-8 leading-relaxed">
-          mypickpdf(마이픽피디에프)는 복잡한 소프트웨어 설치나 유료 구독 없이도, 누구나 웹 브라우저에서 안전하고 빠르게 PDF를 다룰 수 있도록 개발된 무료 오픈 웹 유틸리티 서비스입니다.
+          pdfpick(피디에프픽)는 복잡한 소프트웨어 설치나 유료 구독 없이도, 누구나 웹 브라우저에서 안전하고 빠르게 PDF를 다룰 수 있도록 개발된 무료 오픈 웹 유틸리티 서비스입니다.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">

@@ -1,0 +1,704 @@
+{
+  "ko": {
+    "title": "자주 묻는 질문 (FAQ)",
+    "subtitle": "pdfpick 서비스 이용 및 보안 정책 안내",
+    "hub_tag": "실무 매거진 & 지식 허브",
+    "hub_title": "전문가가 알려주는 실전 PDF 노하우 & 가이드",
+    "hub_subtitle": "이메일 대용량 첨부부터 공공기관 HWP 변환까지, 업무와 학업 속도를 2배로 올려주는 실전 꿀팁",
+    "hub_view_all": "전체 가이드 보기",
+    "hub_read_btn": "가이드 읽기",
+    "why_security_title": "100% 클라이언트 로컬 보안",
+    "why_security_desc": "pdfpick은 WebAssembly 및 브라우저 메모리 안에서 직접 문서를 변환하므로 파일이 외부 원격 서버로 전송되지 않아 기밀 문서도 안전합니다.",
+    "why_speed_title": "대기 없는 즉시 처리",
+    "why_speed_desc": "네트워크 업로드 대기 시간 없이, 기기 자체 연산력으로 수십 페이지를 1~2초 안에 빠르게 처리합니다.",
+    "items": [
+      {
+        "question": "pdfpick은 정말 로그인이나 회원가입 없이 무료인가요? (Is it 100% free?)",
+        "answer": "네! pdfpick은 어떠한 회원가입, 신용카드 등록, 유료 결제 유도 없이 평생 100% 무료로 모든 PDF 변환 및 편집 도구를 무제한 제공합니다."
+      },
+      {
+        "question": "문서 변환 시 파일이 외부 서버에 업로드되나요? (100% Client-Side Privacy)",
+        "answer": "절대 아닙니다. pdfpick은 최신 WebAssembly(Wasm) 기술을 바탕으로 사용자의 브라우저 메모리 안에서 100% 로컬 연산을 수행합니다. 기업 기밀 계약서, 세무 자료, 개인정보가 외부 서버로 1바이트도 전송되지 않아 완벽한 기밀을 보장합니다."
+      },
+      {
+        "question": "변환된 오피스 문서(Word, Excel, PPT, HWP)는 편집이 가능한가요?",
+        "answer": "네! PDF에서 추출된 Word(.docx), Excel(.xlsx), PowerPoint(.pptx), 한글(HWP) 파일은 표준 오피스 소프트웨어에서 정상적으로 열리며 텍스트와 표 서식을 자유롭게 수정하고 편집할 수 있습니다."
+      },
+      {
+        "question": "PDF 압축(용량 줄이기) 시 글자나 표 화질이 흐려지나요?",
+        "answer": "아닙니다. 텍스트와 표 벡터 데이터의 선명도는 100% 보존하면서, 불필요한 메타데이터와 대용량 이미지 DPI만 선별적으로 최적화하므로 인쇄 시에도 깨짐 없는 고품질을 유지합니다."
+      },
+      {
+        "question": "공공기관 및 학교 제출용 한글(HWP/HWPX) 변환도 지원하나요?",
+        "answer": "네! 국내 관공서 및 공공기관 전자결재 규격에 맞춘 전용 HWP 변환 엔진을 제공하여, 별도의 한컴오피스 프로그램 설치 없이도 웹에서 즉시 한글 문서로 변환하실 수 있습니다."
+      },
+      {
+        "question": "동영상 압축 시 파일 용량은 얼마나 줄어드나요?",
+        "answer": "하드웨어 가속 Wasm 코덱을 통해 MP4, MOV, WebM 동영상 원본의 60%~80% 용량을 고화질로 압축할 수 있으며, 이메일이나 카카오톡 대용량 전송 제한을 간편하게 해결할 수 있습니다."
+      }
+    ]
+  },
+  "en": {
+    "title": "Frequently Asked Questions (FAQ)",
+    "subtitle": "Find answers about pdfpick tools, security, and privacy policies.",
+    "hub_tag": "Practical Magazine & Knowledge Hub",
+    "hub_title": "Expert Practical PDF Know-How & Guides",
+    "hub_subtitle": "From large email attachments to administrative formats, double your work and study efficiency with practical tips.",
+    "hub_view_all": "View All Guides",
+    "hub_read_btn": "Read Guide",
+    "why_security_title": "100% Client-Side Local Security",
+    "why_security_desc": "pdfpick processes documents directly within browser memory using WebAssembly. Files are never uploaded to remote servers, keeping confidential documents completely safe.",
+    "why_speed_title": "Instant Processing Without Waiting",
+    "why_speed_desc": "Without network upload latency, your device's own compute power processes dozens of pages in 1–2 seconds.",
+    "items": [
+      {
+        "question": "Is pdfpick really 100% free with no login or sign-up required?",
+        "answer": "Yes! pdfpick is 100% free forever. There is no sign-up, credit card registration, or paywall. You get unlimited access to all PDF conversion and editing tools."
+      },
+      {
+        "question": "Are my files uploaded to an external server? (100% Client-Side Privacy)",
+        "answer": "Absolutely not. pdfpick operates 100% locally in your browser memory using cutting-edge WebAssembly (Wasm). Confidential contracts, tax records, and personal documents never leave your device—zero bytes are sent to any server."
+      },
+      {
+        "question": "Can I edit the converted Office documents (Word, Excel, PPT)?",
+        "answer": "Yes! Converted Word (.docx), Excel (.xlsx), PowerPoint (.pptx), and document files can be opened in standard office suites with full support for text and table editing."
+      },
+      {
+        "question": "Does PDF compression reduce text sharpness or print quality?",
+        "answer": "No. Text fonts and table vector data are 100% preserved. Only unneeded metadata and oversized image DPI are selectively optimized, keeping crystal-clear quality for both screens and printing."
+      },
+      {
+        "question": "Does pdfpick support public institution format conversions (HWP/HWPX)?",
+        "answer": "Yes! pdfpick provides dedicated conversion engines for administrative and academic document standards, allowing instant conversions directly in your browser without extra software installations."
+      },
+      {
+        "question": "How much file size can be reduced when compressing videos?",
+        "answer": "Using hardware-accelerated Wasm codecs, MP4, MOV, and WebM videos can typically be compressed by 60% to 80% with high visual fidelity, making them easy to share via email or messaging apps."
+      }
+    ]
+  },
+  "ja": {
+    "title": "よくあるご質問 (FAQ)",
+    "subtitle": "pdfpickの機能・利用方法・セキュリティポリシーについて",
+    "hub_tag": "実務マガジン＆ナレッジハブ",
+    "hub_title": "専門家が教える実践的PDFノウハウ＆ガイド",
+    "hub_subtitle": "メール大容量添付から各種フォーマット変換まで、仕事と学習の効率を2倍に高める実践テクニック",
+    "hub_view_all": "すべてのガイドを見る",
+    "hub_read_btn": "ガイドを読む",
+    "why_security_title": "100%クライアントローカルセキュリティ",
+    "why_security_desc": "pdfpickはWebAssemblyおよびブラウザメモリ内で直接文書を処理するため、ファイルが外部サーバーに送信されず、機密文書も安全です。",
+    "why_speed_title": "待ち時間のない即時処理",
+    "why_speed_desc": "ネットワークのアップロード待ちなしに、端末自体の演算力で数十ページを1〜2秒で高速処理します。",
+    "items": [
+      {
+        "question": "pdfpickは会員登録やログインなしで本当に無料ですか？",
+        "answer": "はい！pdfpickは会員登録、クレジットカード登録、課金誘導が一切なく、すべてのPDF変換・編集ツールを無制限・永久完全無料でご利用いただけます。"
+      },
+      {
+        "question": "ファイルは外部サーバーにアップロードされますか？(100%ローカル暗号化)",
+        "answer": "いいえ、一切アップロードされません。最新のWebAssembly(Wasm)技術により、お使いのブラウザメモリ内で100%ローカル処理されます。企業の機密契約書や個人情報が外部サーバーへ送信されることはありません。"
+      },
+      {
+        "question": "変換したOffice文書(Word、Excel、PowerPoint)は編集可能ですか？",
+        "answer": "はい！抽出・変換されたWord(.docx)、Excel(.xlsx)、PowerPoint(.pptx)ファイルは、一般的なオフィスソフトで開き、テキストや表の体裁を自由に編集できます。"
+      },
+      {
+        "question": "PDFを圧縮すると文字や図表がぼやけますか？",
+        "answer": "いいえ。テキストや図表のベクターデータは100%鮮明に保持され、不要なメタデータと過剰な画像解像度のみを最適化するため、印刷時も高品質を維持します。"
+      },
+      {
+        "question": "行政機関や教育機関向けの専用フォーマット変換にも対応していますか？",
+        "answer": "はい！公的機関やビジネス標準規格に対応した変換エンジンを搭載しており、専用ソフトのインストール不要でブラウザ上で手軽に変換できます。"
+      },
+      {
+        "question": "動画圧縮ではファイルサイズをどれくらい削減できますか？",
+        "answer": "ハードウェアアクセラレーション対応Wasmコーデックにより、MP4やMOV動画の元容量を画質を保ったまま60%〜80%削減し、メール送信やチャット共有の容量制限を解消します。"
+      }
+    ]
+  },
+  "zh": {
+    "title": "常见问题解答 (FAQ)",
+    "subtitle": "关于 pdfpick 工具使用、安全保障与隐私政策",
+    "hub_tag": "实务资讯与知识中心",
+    "hub_title": "专家分享实用 PDF 技巧与操作指南",
+    "hub_subtitle": "从邮件超大附件压缩到办公格式极速转换，全面提升工作与学习效率的实用技巧",
+    "hub_view_all": "查看全部指南",
+    "hub_read_btn": "阅读指南",
+    "why_security_title": "100% 客户端本地安全",
+    "why_security_desc": "pdfpick 基于 WebAssembly 在浏览器内存中直接完成文档处理，文件绝不上传至远程服务器，确保商业与个人文件绝对机密。",
+    "why_speed_title": "无延迟即时极速处理",
+    "why_speed_desc": "无需漫长的网络上传等待，充分利用本地设备算力，数十页文件 1~2 秒即可飞速处理完成。",
+    "items": [
+      {
+        "question": "pdfpick 真的完全免费且无需登录注册吗？",
+        "answer": "是的！pdfpick 永久 100% 免费，无需注册账号、无需绑定信用卡、没有任何付费陷阱，所有 PDF 转换与编辑功能均可无限制使用。"
+      },
+      {
+        "question": "转换文件时会上传到外部服务器吗？(100% 本地隐私安全)",
+        "answer": "绝对不会。pdfpick 基于先进的 WebAssembly (Wasm) 技术，全部计算都在您的浏览器本地内存中完成。商业机密合同、财务报表和个人隐私绝不离开您的设备，服务器 0 字节存储。"
+      },
+      {
+        "question": "转换后的 Office 文档 (Word, Excel, PPT) 可以正常编辑吗？",
+        "answer": "可以！从 PDF 提取转换的 Word (.docx)、Excel (.xlsx)、PowerPoint (.pptx) 文件可以在主流办公软件中正常打开，文字与表格样式均可自由修改编辑。"
+      },
+      {
+        "question": "PDF 压缩后文字或表格画质会变模糊吗？",
+        "answer": "不会。文本和表格矢量数据 100% 保持原始清晰度，仅针对冗余元数据与过大图片分辨率进行智能优化，无论是屏幕阅读还是高清打印都依然清晰。"
+      },
+      {
+        "question": "支持机构及学校提交专用的文档格式转换吗？",
+        "answer": "支持！针对行政、办公与学术标准规范提供专业转换引擎，无需额外安装繁琐软件，即可在网页端极速完成格式转换。"
+      },
+      {
+        "question": "压缩视频时文件体积能缩小多少？",
+        "answer": "通过硬件加速 Wasm 编码技术，MP4、MOV 等视频可在保证清晰画质的同时缩小 60%~80% 体积，轻松解决邮件或即时通讯软件的附件大小限制。"
+      }
+    ]
+  },
+  "zh-TW": {
+    "title": "常見問題解答 (FAQ)",
+    "subtitle": "關於 pdfpick 工具使用、安全保障與隱私政策",
+    "hub_tag": "實務資訊與知識中心",
+    "hub_title": "專家分享實用 PDF 技巧與操作指南",
+    "hub_subtitle": "從郵件超大附件壓縮到辦公格式極速轉換，全面提升工作與學習效率的實用技巧",
+    "hub_view_all": "查看全部指南",
+    "hub_read_btn": "閱讀指南",
+    "why_security_title": "100% 客戶端本地安全",
+    "why_security_desc": "pdfpick 基於 WebAssembly 在瀏覽器記憶體中直接完成文件處理，檔案絕不上傳至遠端伺服器，確保商業與個人檔案絕對機密。",
+    "why_speed_title": "無延遲即時極速處理",
+    "why_speed_desc": "無需漫長網路等待，充分利用本地設備算力，數十頁文件 1~2 秒即可極速處理完成。",
+    "items": [
+      {
+        "question": "pdfpick 真的完全免費且無需登入註冊嗎？",
+        "answer": "是的！pdfpick 永久 100% 免費，無需註冊帳號、無需綁定信用卡、沒有任何付費限制，所有 PDF 轉換與編輯功能均可無限制自由使用。"
+      },
+      {
+        "question": "轉換文件時會上傳到外部伺服器嗎？(100% 本地隱私安全)",
+        "answer": "絕對不會。pdfpick 基於先進的 WebAssembly (Wasm) 技術，全部運算皆在您的瀏覽器記憶體中完成。商業機密合約、財務資料和個人隱私絕不離開您的裝置，伺服器 0 位元組儲存。"
+      },
+      {
+        "question": "轉換後的 Office 文件 (Word, Excel, PPT) 可以正常編輯嗎？",
+        "answer": "可以！從 PDF 提取轉換的 Word (.docx)、Excel (.xlsx)、PowerPoint (.pptx) 文件可在標準辦公軟體中正常開啟，文字與表格樣式皆可自由修改編輯。"
+      },
+      {
+        "question": "PDF 壓縮後文字或圖表會變模糊嗎？",
+        "answer": "不會。文字和表格向量資料 100% 保持清晰，僅針對冗餘中繼資料與過高圖片解析度進行智慧最佳化，無論是螢幕瀏覽還是列印皆保持高品質。"
+      },
+      {
+        "question": "支援行政機關與學術機構專用的文件格式轉換嗎？",
+        "answer": "支援！針對公務與學術標準規範提供專屬轉換引擎，無需額外安裝軟體，即可在網頁端極速完成格式轉換。"
+      },
+      {
+        "question": "壓縮影片時檔案容量能縮小多少？",
+        "answer": "透過硬體加速 Wasm 編碼技術，MP4、MOV 等影片可在維持高畫質的同時縮小 60%~80% 容量，輕鬆解決郵件或通訊軟體的附件大小限制。"
+      }
+    ]
+  },
+  "es": {
+    "title": "Preguntas Frecuentes (FAQ)",
+    "subtitle": "Respuestas sobre el uso de herramientas, seguridad y privacidad en pdfpick.",
+    "hub_tag": "Revista Práctica y Centro de Conocimiento",
+    "hub_title": "Guías y Consejos Prácticos de PDF por Expertos",
+    "hub_subtitle": "Desde archivos adjuntos pesados hasta conversiones administrativas, duplica tu productividad con consejos prácticos.",
+    "hub_view_all": "Ver Todas las Guías",
+    "hub_read_btn": "Leer Guía",
+    "why_security_title": "100% Seguridad Local en el Cliente",
+    "why_security_desc": "pdfpick procesa documentos directamente en la memoria del navegador con WebAssembly. Los archivos nunca se suben a servidores externos, garantizando confidencialidad absoluta.",
+    "why_speed_title": "Procesamiento Instantáneo Sin Esperas",
+    "why_speed_desc": "Sin tiempos de subida de red, la potencia de tu propio dispositivo procesa docenas de páginas en 1 a 2 segundos.",
+    "items": [
+      {
+        "question": "¿pdfpick es realmente 100% gratuito sin necesidad de registro o inicio de sesión?",
+        "answer": "¡Sí! pdfpick es 100% gratuito para siempre. No requiere registro, tarjetas de crédito ni suscripciones. Tienes acceso ilimitado a todas las herramientas de conversión y edición de PDF."
+      },
+      {
+        "question": "¿Se suben mis archivos a un servidor externo? (100% Privacidad Local)",
+        "answer": "Absolutamente no. pdfpick opera localmente en la memoria de tu navegador mediante tecnología WebAssembly (Wasm). Tus contratos confidenciales y datos personales nunca salen de tu dispositivo."
+      },
+      {
+        "question": "¿Se pueden editar los documentos de Office convertidos (Word, Excel, PPT)?",
+        "answer": "¡Sí! Los archivos Word (.docx), Excel (.xlsx) y PowerPoint (.pptx) extraídos se pueden abrir y editar en cualquier suite ofimática estándar conservando textos y tablas."
+      },
+      {
+        "question": "¿La compresión de PDF reduce la nitidez del texto o la calidad de impresión?",
+        "answer": "No. El texto y los vectores se conservan al 100%. Solo se optimizan los metadatos innecesarios y los DPI de imágenes pesadas, manteniendo una calidad nítida incluso al imprimir."
+      },
+      {
+        "question": "¿Admite conversiones de formatos administrativos e institucionales?",
+        "answer": "¡Sí! Ofrecemos compatibilidad con estándares ofimáticos internacionales para que puedas convertir documentos directamente en el navegador sin instalar programas adicionales."
+      },
+      {
+        "question": "¿Cuánto se reduce el tamaño de los archivos al comprimir videos?",
+        "answer": "Gracias a los códecs Wasm con aceleración por hardware, los videos MP4 y MOV pueden reducirse entre un 60% y un 80% manteniendo una gran calidad visual, facilitando su envío por correo."
+      }
+    ]
+  },
+  "fr": {
+    "title": "Foire Aux Questions (FAQ)",
+    "subtitle": "Découvrez le fonctionnement, la sécurité et la confidentialité de pdfpick.",
+    "hub_tag": "Magazine Pratique & Centre de Savoir",
+    "hub_title": "Guides et Conseils Pratiques PDF par des Experts",
+    "hub_subtitle": "Des pièces jointes volumineuses aux conversions bureautiques, doublez votre efficacité grâce à nos astuces.",
+    "hub_view_all": "Voir Tous les Guides",
+    "hub_read_btn": "Lire le Guide",
+    "why_security_title": "100% Sécurité Locale Côté Client",
+    "why_security_desc": "pdfpick traite les documents directement dans la mémoire de votre navigateur via WebAssembly. Vos fichiers ne sont jamais transférés sur des serveurs distants.",
+    "why_speed_title": "Traitement Instantané Sans Attente",
+    "why_speed_desc": "Sans délai de téléversement réseau, la puissance de votre appareil traite des dizaines de pages en 1 à 2 secondes.",
+    "items": [
+      {
+        "question": "pdfpick est-il vraiment 100% gratuit, sans inscription ni connexion ?",
+        "answer": "Oui ! pdfpick est 100% gratuit pour toujours, sans inscription, sans carte bancaire et sans abonnement. Profitez d'un accès illimité à tous nos outils PDF."
+      },
+      {
+        "question": "Mes fichiers sont-ils envoyés sur un serveur externe ? (Confidentialité locale)",
+        "answer": "Absolument pas. pdfpick fonctionne entièrement en local dans la mémoire de votre navigateur grâce à WebAssembly (Wasm). Vos documents confidentiels ne quittent jamais votre appareil."
+      },
+      {
+        "question": "Les documents Office convertis (Word, Excel, PPT) sont-ils modifiables ?",
+        "answer": "Oui ! Les fichiers Word (.docx), Excel (.xlsx) et PowerPoint (.pptx) générés s'ouvrent parfaitement dans votre suite bureautique habituelle avec textes et tableaux éditables."
+      },
+      {
+        "question": "La compression PDF diminue-t-elle la netteté du texte ou la qualité d'impression ?",
+        "answer": "Non. Les textes vectoriels conservent 100% de leur netteté. Seuls les métadonnées superflues et la résolution d'image excessive sont optimisées pour une lecture et une impression parfaites."
+      },
+      {
+        "question": "Prenez-vous en charge la conversion vers des formats administratifs et officiels ?",
+        "answer": "Oui ! Notre moteur respecte les standards bureautiques pour vous permettre de convertir vos documents directement en ligne, sans logiciel supplémentaire."
+      },
+      {
+        "question": "De combien le volume est-il réduit lors de la compression vidéo ?",
+        "answer": "Grâce à l'encodage Wasm accéléré, les vidéos MP4 et MOV sont réduites de 60% à 80% tout en préservant une excellente qualité, facilitant l'envoi par e-mail ou messagerie."
+      }
+    ]
+  },
+  "de": {
+    "title": "Häufig gestellte Fragen (FAQ)",
+    "subtitle": "Erfahren Sie mehr über Funktionen, Sicherheit und Datenschutz bei pdfpick.",
+    "hub_tag": "Praxis-Magazin & Wissens-Hub",
+    "hub_title": "Praxiserprobte PDF-Tipps & Anleitungen von Experten",
+    "hub_subtitle": "Von großen E-Mail-Anhängen bis zu Formatkonvertierungen: Verdoppeln Sie Ihre Produktivität mit praxisnahen Tipps.",
+    "hub_view_all": "Alle Leitfäden ansehen",
+    "hub_read_btn": "Leitfaden lesen",
+    "why_security_title": "100% Lokale Sicherheit auf dem Client",
+    "why_security_desc": "pdfpick verarbeitet Dokumente direkt im Speicher Ihres Browsers mittels WebAssembly. Dateien werden niemals auf Remoteserver hochgeladen.",
+    "why_speed_title": "Sofortige Verarbeitung Ohne Wartezeit",
+    "why_speed_desc": "Ohne Netzwerk-Uploads verarbeitet die Rechenleistung Ihres eigenen Geräts Dutzende Seiten in nur 1–2 Sekunden.",
+    "items": [
+      {
+        "question": "Ist pdfpick wirklich 100% kostenlos ohne Registrierung oder Login?",
+        "answer": "Ja! pdfpick ist dauerhaft 100% kostenlos. Keine Registrierung, keine Kreditkarte, keine Abofallen. Alle PDF-Tools stehen unbegrenzt zur Verfügung."
+      },
+      {
+        "question": "Werden meine Dateien auf externe Server hochgeladen? (100% lokaler Datenschutz)",
+        "answer": "Nein, keineswegs. pdfpick verarbeitet alle Dokumente lokal im Browserspeicher mittels moderner WebAssembly-Technologie (Wasm). Vertrauliche Daten verlassen niemals Ihr Gerät."
+      },
+      {
+        "question": "Können konvertierte Office-Dokumente (Word, Excel, PPT) bearbeitet werden?",
+        "answer": "Ja! Konvertierte Dateien in den Formaten Word (.docx), Excel (.xlsx) und PowerPoint (.pptx) können in gängigen Office-Programmen mit voller Text- und Tabellenbearbeitung geöffnet werden."
+      },
+      {
+        "question": "Verliert das PDF beim Komprimieren an Textschärfe oder Druckqualität?",
+        "answer": "Nein. Vektortexte und Tabellenlinien bleiben zu 100% scharf. Nur unnötige Metadaten und übermäßige Bildauflösungen werden optimiert, sodass der Druck makellos bleibt."
+      },
+      {
+        "question": "Werden Konvertierungen für offizielle und behördliche Standards unterstützt?",
+        "answer": "Ja! Wir bieten optimierte Konvertierungsmodule für behördliche und universitäre Anforderungen direkt im Webbrowser ohne zusätzliche Softwareinstallation."
+      },
+      {
+        "question": "Um wie viel verringert sich die Dateigröße bei der Videokomprimierung?",
+        "answer": "Mit hardwarebeschleunigten Wasm-Codecs lässt sich die Größe von MP4- und MOV-Videos um 60% bis 80% reduzieren – ideal für den E-Mail- und Messenger-Versand."
+      }
+    ]
+  },
+  "it": {
+    "title": "Domande Frequenti (FAQ)",
+    "subtitle": "Tutto su strumenti, sicurezza e privacy di pdfpick.",
+    "hub_tag": "Magazine Pratico & Centro di Conoscenza",
+    "hub_title": "Guide pratiche e segreti del PDF spiegati da esperti",
+    "hub_subtitle": "Dagli allegati e-mail pesanti alle conversioni d'ufficio, raddoppia la tua produttività con consigli pratici.",
+    "hub_view_all": "Vedi Tutte le Guide",
+    "hub_read_btn": "Leggi Guida",
+    "why_security_title": "100% Sicurezza Locale Lato Client",
+    "why_security_desc": "pdfpick elabora i documenti direttamente nella memoria del browser tramite WebAssembly. I file non vengono mai inviati a server esterni.",
+    "why_speed_title": "Elaborazione Immediata Senza Attese",
+    "why_speed_desc": "Senza tempi di caricamento di rete, la potenza del tuo dispositivo elabora decine di pagine in 1–2 secondi.",
+    "items": [
+      {
+        "question": "pdfpick è davvero gratuito al 100% senza registrazione o login?",
+        "answer": "Sì! pdfpick è 100% gratuito per sempre. Nessuna registrazione, nessuna carta di credito e nessun costo nascosto. Accesso illimitato a tutti gli strumenti PDF."
+      },
+      {
+        "question": "I miei file vengono caricati su un server esterno? (100% Privacy Locale)",
+        "answer": "Assolutamente no. pdfpick elabora i dati interamente nella memoria locale del browser tramite WebAssembly (Wasm). I documenti riservati non lasciano mai il tuo dispositivo."
+      },
+      {
+        "question": "I documenti Office convertiti (Word, Excel, PPT) sono modificabili?",
+        "answer": "Sì! I file Word (.docx), Excel (.xlsx) e PowerPoint (.pptx) estratti possono essere aperti e modificati liberamente in qualsiasi software di produttività standard."
+      },
+      {
+        "question": "La compressione PDF riduce la nitidezza del testo o la qualità di stampa?",
+        "answer": "No. Testi e tabelle vettoriali mantengono il 100% della nitidezza originale. Vengono ottimizzati solo i metadati e la risoluzione delle immagini per garantire stampe perfette."
+      },
+      {
+        "question": "Supportate la conversione verso formati istituzionali e accademici?",
+        "answer": "Sì! Supportiamo gli standard documentali ufficiali per consentirti di convertire file direttamente nel browser senza installare applicazioni esterne."
+      },
+      {
+        "question": "Quanto si riducono le dimensioni con la compressione video?",
+        "answer": "Grazie ai codec Wasm con accelerazione hardware, i video MP4 e MOV possono essere ridotti del 60%-80% mantenendo un'ottima resa visiva per email e messaggistica."
+      }
+    ]
+  },
+  "pt": {
+    "title": "Perguntas Frequentes (FAQ)",
+    "subtitle": "Tudo sobre o uso, segurança e privacidade das ferramentas pdfpick.",
+    "hub_tag": "Revista Prática & Central de Conhecimento",
+    "hub_title": "Guias Práticos e Dicas de Especialistas em PDF",
+    "hub_subtitle": "De anexos pesados de e-mail a conversões de formatos, duplique sua produtividade com dicas práticas.",
+    "hub_view_all": "Ver Todos os Guias",
+    "hub_read_btn": "Ler Guia",
+    "why_security_title": "100% Segurança Local no Cliente",
+    "why_security_desc": "O pdfpick processa documentos diretamente na memória do navegador via WebAssembly. Os arquivos nunca são enviados a servidores remotos.",
+    "why_speed_title": "Processamento Instantâneo Sem Espera",
+    "why_speed_desc": "Sem tempo de upload na rede, a potência do seu próprio aparelho processa dezenas de páginas em 1 a 2 segundos.",
+    "items": [
+      {
+        "question": "O pdfpick é realmente 100% gratuito sem necessidade de cadastro ou login?",
+        "answer": "Sim! O pdfpick é 100% gratuito para sempre. Sem cadastro, sem cartão de crédito e sem assinaturas. Acesso ilimitado a todas as ferramentas de conversão e edição de PDF."
+      },
+      {
+        "question": "Meus arquivos são enviados para um servidor externo? (100% Privacidade Local)",
+        "answer": "De forma alguma. O pdfpick opera 100% localmente na memória do seu navegador através de WebAssembly (Wasm). Seus documentos confidenciais nunca saem do seu aparelho."
+      },
+      {
+        "question": "Os documentos do Office convertidos (Word, Excel, PPT) podem ser editados?",
+        "answer": "Sim! Os arquivos Word (.docx), Excel (.xlsx) e PowerPoint (.pptx) gerados abrem normalmente nos programas de escritório padrão com textos e tabelas totalmente editáveis."
+      },
+      {
+        "question": "A compactação de PDF reduz a nitidez do texto ou a qualidade de impressão?",
+        "answer": "Não. Textos vetoriais e tabelas mantêm 100% da nitidez. Apenas metadados e DPI excessivo de imagens são otimizados, mantendo alta definição para telas e impressão."
+      },
+      {
+        "question": "Vocês suportam conversões para padrões oficiais e corporativos?",
+        "answer": "Sim! Disponibilizamos motores de conversão compatíveis com os principais padrões documentais corporativos e acadêmicos, sem precisar instalar programas adicionais."
+      },
+      {
+        "question": "Quanto diminui o tamanho do arquivo ao compactar vídeos?",
+        "answer": "Com codecs Wasm acelerados por hardware, vídeos MP4 e MOV podem ter o tamanho reduzido entre 60% e 80% com ótima qualidade, facilitando o envio por e-mail e apps."
+      }
+    ]
+  },
+  "ru": {
+    "title": "Часто задаваемые вопросы (FAQ)",
+    "subtitle": "Узнайте больше о работе инструментов, безопасности и конфиденциальности в pdfpick.",
+    "hub_tag": "Практический Журнал & Центр Знаний",
+    "hub_title": "Практические Руководства и Секреты PDF от Экспертов",
+    "hub_subtitle": "От больших вложений в почту до конвертации форматов: удвойте продуктивность с нашими советами.",
+    "hub_view_all": "Все Руководства",
+    "hub_read_btn": "Читать Руководство",
+    "why_security_title": "100% Локальная Безопасность на Клиенте",
+    "why_security_desc": "pdfpick обрабатывает документы прямо в оперативной памяти браузера с помощью WebAssembly. Файлы никогда не отправляются на удаленные серверы.",
+    "why_speed_title": "Мгновенная Обработка Без Ожидания",
+    "why_speed_desc": "Без задержек на передачу по сети мощность вашего устройства обрабатывает десятки страниц за 1–2 секунды.",
+    "items": [
+      {
+        "question": "Сервис pdfpick действительно на 100% бесплатный и не требует регистрации?",
+        "answer": "Да! pdfpick полностью и навсегда бесплатен. Никакой регистрации, привязки карт или платных тарифов. Неограниченный доступ ко всем инструментам для PDF."
+      },
+      {
+        "question": "Загружаются ли файлы на внешние серверы? (100% локальная безопасность)",
+        "answer": "Категорически нет. pdfpick выполняет обработку локально в оперативной памяти вашего браузера на базе WebAssembly (Wasm). Ваши конфиденциальные документы не покидают ваше устройство."
+      },
+      {
+        "question": "Можно ли редактировать сконвертированные документы Office (Word, Excel, PPT)?",
+        "answer": "Да! Полученные файлы Word (.docx), Excel (.xlsx) и PowerPoint (.pptx) полноценно открываются в стандартных офисных пакетах с возможностью редактирования текста и таблиц."
+      },
+      {
+        "question": "Ухудшается ли четкость текста или качество печати при сжатии PDF?",
+        "answer": "Нет. Векторный текст и таблицы сохраняют 100% исходной четкости. Оптимизируются лишь лишние метаданные и разрешение тяжелых изображений, обеспечивая идеальную печать."
+      },
+      {
+        "question": "Поддерживается ли конвертация для официальных стандартов и отчетов?",
+        "answer": "Да! pdfpick оснащен механизмами для преобразования документов в строгом соответствии с офисными стандартами прямо в браузере без установки сторонних программ."
+      },
+      {
+        "question": "Насколько уменьшается размер видеофайлов при сжатии?",
+        "answer": "Благодаря аппаратному ускорению Wasm, видео MP4 и MOV сжимаются на 60%–80% с сохранением высокого качества, что позволяет легко отправлять их по почте или в мессенджерах."
+      }
+    ]
+  },
+  "vi": {
+    "title": "Câu hỏi thường gặp (FAQ)",
+    "subtitle": "Giải đáp thắc mắc về tính năng, bảo mật và quyền riêng tư tại pdfpick.",
+    "hub_tag": "Tạp Chí Thực Hành & Trung Tâm Tri Thức",
+    "hub_title": "Cẩm Nang Thực Chiến & Mẹo Xử Lý PDF Từ Chuyên Gia",
+    "hub_subtitle": "Từ nén tệp đính kèm email đến chuyển đổi tài liệu chuẩn, nhân đôi hiệu suất công việc và học tập.",
+    "hub_view_all": "Xem Tất Cả Hướng Dẫn",
+    "hub_read_btn": "Đọc Hướng Dẫn",
+    "why_security_title": "100% Bảo Mật Cục Bộ Phía Máy Khách",
+    "why_security_desc": "pdfpick xử lý tài liệu trực tiếp trong bộ nhớ trình duyệt qua WebAssembly. Tệp không bao giờ tải lên máy chủ ngoài, an toàn tuyệt đối.",
+    "why_speed_title": "Xử Lý Tức Thì Không Phải Chờ Đợi",
+    "why_speed_desc": "Không tốn thời gian tải lên mạng, sức mạnh máy tính của bạn xử lý hàng chục trang chỉ trong 1-2 giây.",
+    "items": [
+      {
+        "question": "pdfpick có thực sự miễn phí 100% mà không cần đăng ký hay đăng nhập không?",
+        "answer": "Đúng vậy! pdfpick hoàn toàn miễn phí trọn đời 100%. Không cần đăng ký tài khoản, không cần thẻ tín dụng, không giới hạn số lần chuyển đổi và chỉnh sửa PDF."
+      },
+      {
+        "question": "Tệp của tôi có bị tải lên máy chủ bên ngoài không? (Bảo mật cục bộ 100%)",
+        "answer": "Hoàn toàn không. pdfpick xử lý 100% trực tiếp trong bộ nhớ trình duyệt nhờ công nghệ WebAssembly (Wasm). Các tài liệu mật và thông tin cá nhân không bao giờ rời khỏi thiết bị của bạn."
+      },
+      {
+        "question": "Tài liệu Office sau khi chuyển đổi (Word, Excel, PPT) có chỉnh sửa được không?",
+        "answer": "Có! Các tệp Word (.docx), Excel (.xlsx), PowerPoint (.pptx) trích xuất từ PDF mở được bình thường trên các phần mềm văn phòng chuẩn, cho phép tự do chỉnh sửa văn bản và bảng biểu."
+      },
+      {
+        "question": "Nén PDF có làm mờ chữ hoặc giảm chất lượng khi in ấn không?",
+        "answer": "Không hề. Văn bản và bảng dạng vector được giữ nguyên 100% độ sắc nét. Hệ thống chỉ tối ưu hóa siêu dữ liệu thừa và độ phân giải hình ảnh, đảm bảo bản in luôn rõ ràng."
+      },
+      {
+        "question": "pdfpick có hỗ trợ chuyển đổi tài liệu chuẩn cơ quan và trường học không?",
+        "answer": "Có! pdfpick cung cấp công cụ chuyển đổi tương thích với các quy chuẩn văn phòng hành chính và học thuật, giúp bạn thao tác ngay trên web mà không cần cài đặt phần mềm."
+      },
+      {
+        "question": "Nén video giúp giảm dung lượng tệp được bao nhiêu?",
+        "answer": "Với bộ giải mã Wasm tăng tốc phần cứng, video MP4, MOV có thể giảm từ 60% đến 80% dung lượng mà vẫn giữ độ nét cao, dễ dàng gửi qua email hay ứng dụng nhắn tin."
+      }
+    ]
+  },
+  "th": {
+    "title": "คำถามที่พบบ่อย (FAQ)",
+    "subtitle": "คำตอบเกี่ยวกับความปลอดภัย นโยบายความเป็นส่วนตัว และการใช้งาน pdfpick",
+    "hub_tag": "นิตยสารการทำงาน & ศูนย์ความรู้",
+    "hub_title": "เคล็ดลับและแนวทางปฏิบัติสำหรับ PDF โดยผู้เชี่ยวชาญ",
+    "hub_subtitle": "ตั้งแต่การบีบอัดไฟล์แนบอีเมลไปจนถึงการแปลงไฟล์ เพิ่มประสิทธิภาพการทำงานและการเรียนเป็นสองเท่า",
+    "hub_view_all": "ดูคู่มือทั้งหมด",
+    "hub_read_btn": "อ่านคู่มือ",
+    "why_security_title": "100% ความปลอดภัยในเครื่องฝั่งผู้ใช้",
+    "why_security_desc": "pdfpick ประมวลผลเอกสารโดยตรงในหน่วยความจำของเบราว์เซอร์ผ่าน WebAssembly ไฟล์จะไม่ถูกอัปโหลดไปยังเซิร์ฟเวอร์ภายนอก",
+    "why_speed_title": "ประมวลผลทันใจไม่ต้องรอคอย",
+    "why_speed_desc": "ไม่ต้องเสียเวลากับการอัปโหลดเครือข่าย พลังการประมวลผลของอุปกรณ์คุณจัดการเอกสารหลายสิบหน้าได้ใน 1-2 วินาที",
+    "items": [
+      {
+        "question": "pdfpick ใช้งานฟรี 100% โดยไม่ต้องสมัครสมาชิกหรือล็อกอินจริงหรือไม่?",
+        "answer": "ใช่ครับ! pdfpick ใช้งานได้ฟรี 100% ตลอดชีพ ไม่ต้องสมัครสมาชิก ไม่ต้องกรอกบัตรเครดิต ไม่มีค่าใช้จ่ายแอบแฝง สามารถใช้เครื่องมือแปลงและแก้ไข PDF ได้ไม่จำกัด"
+      },
+      {
+        "question": "ไฟล์ของฉันจะถูกอัปโหลดไปยังเซิร์ฟเวอร์ภายนอกหรือไม่? (ความเป็นส่วนตัวระดับ 100%)",
+        "answer": "ไม่เลยครับ pdfpick ทำงานประมวลผลบนหน่วยความจำของเบราว์เซอร์คุณโดยตรง 100% ด้วยเทคโนโลยี WebAssembly (Wasm) เอกสารลับและข้อมูลส่วนบุคคลจะไม่ถูกส่งออกจากอุปกรณ์ของคุณ"
+      },
+      {
+        "question": "เอกสาร Office ที่แปลงแล้ว (Word, Excel, PPT) สามารถแก้ไขข้อความได้หรือไม่?",
+        "answer": "ได้แน่นอนครับ! ไฟล์ Word (.docx), Excel (.xlsx), PowerPoint (.pptx) ที่แปลงจาก PDF สามารถเปิดในโปรแกรมออฟฟิศมาตรฐานและแก้ไขข้อความหรือตารางได้ตามต้องการ"
+      },
+      {
+        "question": "การบีบอัด PDF จะทำให้ตัวหนังสือหรือตารางมัวหรือไม่?",
+        "answer": "ไม่ครับ ตัวอักษรและเส้นตารางแบบเวกเตอร์จะคงความคมชัดไว้ 100% โดยระบบจะเลือกปรับเฉพาะข้อมูลเมทาดาทาและขนาดภาพเท่านั้น เพื่อให้งานพิมพ์ยังคงคมชัดสมบูรณ์แบบ"
+      },
+      {
+        "question": "รองรับการแปลงไฟล์มาตรฐานสำหรับหน่วยงานราชการและสถาบันการศึกษาหรือไม่?",
+        "answer": "รองรับครับ! pdfpick มีระบบแปลงไฟล์ที่ได้มาตรฐานสากล สามารถใช้งานได้ทันทีบนเว็บเบราว์เซอร์โดยไม่ต้องติดตั้งโปรแกรมเพิ่มเติม"
+      },
+      {
+        "question": "การบีบอัดวิดีโอสามารถลดขนาดไฟล์ได้มากน้อยเพียงใด?",
+        "answer": "ด้วยโคเดก Wasm ที่เร่งความเร็วด้วยฮาร์ดแวร์ วิดีโอ MP4 และ MOV สามารถลดขนาดได้ถึง 60% - 80% โดยคงความคมชัดสูง สะดวกต่อการส่งผ่านอีเมลและแอปแชท"
+      }
+    ]
+  },
+  "id": {
+    "title": "Pertanyaan yang Sering Diajukan (FAQ)",
+    "subtitle": "Informasi lengkap tentang alat, keamanan, dan kebijakan privasi pdfpick.",
+    "hub_tag": "Majalah Praktis & Pusat Pengetahuan",
+    "hub_title": "Panduan dan Kiat Praktis PDF dari Para Ahli",
+    "hub_subtitle": "Dari lampiran email berukuran besar hingga konversi format, lipatgandakan efisiensi kerja dan studi Anda.",
+    "hub_view_all": "Lihat Semua Panduan",
+    "hub_read_btn": "Baca Panduan",
+    "why_security_title": "100% Keamanan Lokal di Sisi Klien",
+    "why_security_desc": "pdfpick memproses dokumen langsung di memori browser menggunakan WebAssembly. Berkas tidak pernah diunggah ke server eksternal.",
+    "why_speed_title": "Pemrosesan Instan Tanpa Menunggu",
+    "why_speed_desc": "Tanpa latensi unggah jaringan, daya komputasi perangkat Anda sendiri memproses puluhan halaman dalam 1–2 detik.",
+    "items": [
+      {
+        "question": "Apakah pdfpick benar-benar 100% gratis tanpa perlu daftar atau login?",
+        "answer": "Ya! pdfpick 100% gratis selamanya tanpa perlu pendaftaran akun, tanpa kartu kredit, dan tanpa biaya tersembunyi. Akses tak terbatas ke semua alat konversi dan edit PDF."
+      },
+      {
+        "question": "Apakah file saya diunggah ke server eksternal? (100% Privasi Lokal)",
+        "answer": "Sama sekali tidak. pdfpick memproses dokumen 100% secara lokal di memori browser Anda menggunakan teknologi WebAssembly (Wasm). Dokumen rahasia Anda tidak pernah keluar dari perangkat."
+      },
+      {
+        "question": "Apakah dokumen Office hasil konversi (Word, Excel, PPT) dapat diedit?",
+        "answer": "Ya! File Word (.docx), Excel (.xlsx), dan PowerPoint (.pptx) hasil ekstraksi dapat dibuka di aplikasi perkantoran standar dengan teks dan tabel yang dapat diedit bebas."
+      },
+      {
+        "question": "Apakah kompresi PDF akan membuat teks atau tabel menjadi buram?",
+        "answer": "Tidak. Teks dan garis vektor tetap 100% tajam. Sistem hanya mengoptimalkan metadata berlebih dan resolusi gambar besar sehingga kualitas cetak tetap prima."
+      },
+      {
+        "question": "Apakah mendukung konversi dokumen resmi untuk instansi dan sekolah?",
+        "answer": "Ya! pdfpick menyediakan mesin konversi dokumen standar perkantoran yang bekerja langsung di browser Anda tanpa perlu menginstal aplikasi tambahan."
+      },
+      {
+        "question": "Berapa banyak ukuran file yang dapat dikurangi saat kompresi video?",
+        "answer": "Dengan akselerasi hardware Wasm, video MP4 dan MOV dapat dikompresi sebesar 60% hingga 80% dengan kualitas tetap jernih untuk dikirim lewat email atau chat."
+      }
+    ]
+  },
+  "hi": {
+    "title": "अक्सर पूछे जाने वाले प्रश्न (FAQ)",
+    "subtitle": "pdfpick टूल्स, सुरक्षा और गोपनीयता नीतियों के बारे में महत्वपूर्ण जानकारी।",
+    "hub_tag": "व्यावहारिक पत्रिका और ज्ञान केंद्र",
+    "hub_title": "विशेषज्ञों द्वारा व्यावहारिक PDF युक्तियाँ और मार्गदर्शिकाएँ",
+    "hub_subtitle": "बड़े ईमेल अनुलग्नकों से लेकर प्रारूप रूपांतरण तक, व्यावहारिक सुझावों के साथ अपने काम को दोगुना तेज़ करें।",
+    "hub_view_all": "सभी गाइड देखें",
+    "hub_read_btn": "गाइड पढ़ें",
+    "why_security_title": "100% क्लाइंट-साइड स्थानीय सुरक्षा",
+    "why_security_desc": "pdfpick वेबअसेंबली के माध्यम से सीधे ब्राउज़र मेमोरी में काम करता है। फ़ाइलें कभी भी बाहरी सर्वर पर अपलोड नहीं होती हैं।",
+    "why_speed_title": "बिना प्रतीक्षा के तत्काल प्रसंस्करण",
+    "why_speed_desc": "नेटवर्क अपलोड देरी के बिना, आपके अपने डिवाइस की शक्ति 1–2 सेकंड में दर्जनों पृष्ठों को संसाधित करती है।",
+    "items": [
+      {
+        "question": "क्या pdfpick बिना लॉगिन या साइन-अप के वाकई 100% मुफ़्त है?",
+        "answer": "हाँ! pdfpick हमेशा के लिए 100% मुफ़्त है। कोई साइन-अप, क्रेडिट कार्ड या छिपा हुआ शुल्क नहीं है। सभी PDF टूल्स का असीमित उपयोग करें।"
+      },
+      {
+        "question": "क्या मेरी फ़ाइलें बाहरी सर्वर पर अपलोड होती हैं? (100% डिवाइस गोपनीयता)",
+        "answer": "बिल्कुल नहीं। pdfpick आधुनिक WebAssembly (Wasm) तकनीक से आपके ब्राउज़र मेमोरी में 100% स्थानीय रूप से काम करता है। आपका डेटा कभी भी आपके डिवाइस से बाहर नहीं जाता।"
+      },
+      {
+        "question": "क्या बदले गए Office दस्तावेज़ (Word, Excel, PPT) संपादन योग्य हैं?",
+        "answer": "हाँ! PDF से निकाले गए Word (.docx), Excel (.xlsx), PowerPoint (.pptx) फ़ाइलें सामान्य सॉफ़्टवेयर में खुलती हैं और उनके टेक्स्ट व टेबल पूरी तरह संपादन योग्य होते हैं।"
+      },
+      {
+        "question": "क्या PDF कंप्रेस करने से अक्षरों या टेबल की गुणवत्ता कम होती है?",
+        "answer": "नहीं। वेक्टर टेक्स्ट और टेबल 100% स्पष्ट रहते हैं। केवल अनावश्यक मेटाडेटा और बड़ी छवियों का आकार घटाया जाता है, जिससे प्रिंटिंग भी बिल्कुल साफ़ रहती है।"
+      },
+      {
+        "question": "क्या यह आधिकारिक और शैक्षणिक मानकों के दस्तावेज़ रूपांतरण का समर्थन करता है?",
+        "answer": "हाँ! pdfpick में आधुनिक रूपांतरण इंजन है जो किसी भी अतिरिक्त सॉफ़्टवेयर के बिना सीधे आपके ब्राउज़र में काम करता है।"
+      },
+      {
+        "question": "वीडियो कंप्रेस करने पर फ़ाइल का आकार कितना कम हो सकता है?",
+        "answer": "हार्डवेयर-त्वरित Wasm कोडेक से MP4 और MOV वीडियो की गुणवत्ता बनाए रखते हुए उनका आकार 60% से 80% तक कम किया जा सकता है।"
+      }
+    ]
+  },
+  "ar": {
+    "title": "الأسئلة الشائعة (FAQ)",
+    "subtitle": "تعرف على أدوات pdfpick وسياسات الأمان والخصوصية المتبعة.",
+    "hub_tag": "المجلة العملية ومركز المعرفة",
+    "hub_title": "أسرار وإرشادات PDF العملية يقدمها الخبراء",
+    "hub_subtitle": "من مرفقات البريد الإلكتروني الكبيرة إلى تحويل التنسيقات الإدارية، ضاعف إنتاجيتك في العمل والدراسة.",
+    "hub_view_all": "عرض جميع الأدلة",
+    "hub_read_btn": "قراءة الدليل",
+    "why_security_title": "100% أمان محلي من جانب العميل",
+    "why_security_desc": "يعالج pdfpick المستندات مباشرة داخل ذاكرة المتصفح باستخدام WebAssembly. لا يتم إرسال أي ملفات إلى خوادم خارجية إطلاقاً.",
+    "why_speed_title": "معالجة فورية فائقة السرعة بدون انتظار",
+    "why_speed_desc": "بدون أي تأخير في رفع الملفات عبر الشبكة، تعالج قدرة جهازك الذاتية عشرات الصفحات في ثانية إلى ثانيتين فقط.",
+    "items": [
+      {
+        "question": "هل pdfpick مجاني حقاً بنسبة 100% دون الحاجة إلى تسجيل الدخول؟",
+        "answer": "نعم! pdfpick مجاني تماماً بنسبة 100% مدى الحياة، دون تسجيل حساب أو بطاقة ائتمان أو رسوم مخفية، مع إمكانية استخدام غير محدودة لجميع أدوات PDF."
+      },
+      {
+        "question": "هل يتم رفع ملفاتي إلى خوادم خارجية؟ (خصوصية محلية بنسبة 100%)",
+        "answer": "على الإطلاق. يعمل pdfpick محلياً بالكامل داخل ذاكرة متصفحك عبر تقنية WebAssembly (Wasm). مستنداتك السرية وبياناتك الشخصية لا تغادر جهازك أبداً."
+      },
+      {
+        "question": "هل يمكن تعديل مستندات Office المحولة (Word, Excel, PPT)؟",
+        "answer": "نعم! تفتح ملفات Word (.docx) و Excel (.xlsx) و PowerPoint (.pptx) المستخرجة في برامج أوفيس المعتادة مع إمكانية تحرير النصوص والجداول بحرية تامة."
+      },
+      {
+        "question": "هل يؤدي ضغط ملفات PDF إلى تقليل وضوح الخطوط أو جودة الطباعة؟",
+        "answer": "كلا. تظل نصوص المتجهات والجداول واضحة بنسبة 100%. يتم فقط تحسين البيانات الوصفية الزائدة ودقة الصور الكبيرة لضمان طباعة نقية وعالية الجودة."
+      },
+      {
+        "question": "هل تدعمون تحويل المستندات وفق المعايير الرسمية والتعليمية؟",
+        "answer": "نعم! يوفر pdfpick محركات تحويل متوافقة مع المعايير الإدارية والأكاديمية، لتعمل مباشرة على المتصفح دون الحاجة لتثبيت برامج."
+      },
+      {
+        "question": "ما مقدار تقليل حجم الفيديو عند الضغط؟",
+        "answer": "بفضل ترميز Wasm المسرع عتادياً، يمكن تقليل حجم فيديوهات MP4 و MOV بنسبة 60% إلى 80% مع الحفاظ على وضوح الصورة، لتسهيل مشاركتها عبر البريد والتطبيقات."
+      }
+    ]
+  },
+  "tr": {
+    "title": "Sıkça Sorulan Sorular (SSS)",
+    "subtitle": "pdfpick araçları, güvenlik ve gizlilik politikaları hakkında merak edilenler.",
+    "hub_tag": "Pratik Dergi & Bilgi Merkezi",
+    "hub_title": "Uzmanlardan Pratik PDF İpuçları ve Rehberler",
+    "hub_subtitle": "Büyük e-posta eklerinden resmi format dönüşümlerine, pratik ipuçlarıyla iş ve eğitim veriminizi ikiye katlayın.",
+    "hub_view_all": "Tüm Rehberleri Gör",
+    "hub_read_btn": "Rehberi Oku",
+    "why_security_title": "%100 İstemci Tarafı Yerel Güvenlik",
+    "why_security_desc": "pdfpick, WebAssembly ile belgeleri doğrudan tarayıcı belleğinde işler. Dosyalar asla harici sunuculara yüklenmez.",
+    "why_speed_title": "Beklemeden Anında Hızlı İşlem",
+    "why_speed_desc": "Ağ yükleme gecikmesi olmadan, cihazınızın kendi işlem gücü onlarca sayfayı 1-2 saniye içinde işler.",
+    "items": [
+      {
+        "question": "pdfpick gerçekten kayıt veya giriş yapmadan %100 ücretsiz mi?",
+        "answer": "Evet! pdfpick ömür boyu %100 ücretsizdir. Kayıt olma, kredi kartı girme veya abonelik zorunluluğu yoktur. Tüm PDF dönüştürme ve düzenleme araçlarını sınırsızca kullanabilirsiniz."
+      },
+      {
+        "question": "Dosyalarım harici bir sunucuya yükleniyor mu? (%100 Yerel Gizlilik)",
+        "answer": "Kesinlikle hayır. pdfpick, modern WebAssembly (Wasm) teknolojisi ile tarayıcı belleğinizde %100 yerel olarak çalışır. Gizli sözleşmeleriniz ve verileriniz cihazınızdan asla dışarı çıkmaz."
+      },
+      {
+        "question": "Dönüştürülen Office belgeleri (Word, Excel, PPT) düzenlenebilir mi?",
+        "answer": "Evet! PDF'ten aktarılan Word (.docx), Excel (.xlsx) ve PowerPoint (.pptx) dosyaları standart ofis programlarında sorunsuz açılır, metin ve tablolar özgürce düzenlenebilir."
+      },
+      {
+        "question": "PDF sıkıştırma metin netliğini veya baskı kalitesini düşürür mü?",
+        "answer": "Hayır. Vektör metinler ve tablolar %100 netliğini korur. Yalnızca gereksiz meta veriler ve yüksek görsel DPI optimize edilerek baskıda kusursuz kalite sunulur."
+      },
+      {
+        "question": "Resmi kurum ve okul standartlarında belge dönüşümlerini destekliyor musunuz?",
+        "answer": "Evet! pdfpick, idari ve akademik standartlara uygun dönüştürme motorlarıyla ek bir yazılım kurmadan doğrudan tarayıcınızda çalışır."
+      },
+      {
+        "question": "Video sıkıştırma dosya boyutunu ne kadar düşürür?",
+        "answer": "Donanım hızlandırmalı Wasm kodekleri sayesinde MP4 ve MOV videoları yüksek görüntü kalitesiyle %60 ila %80 oranında küçülterek e-posta ve mesajlaşma limitlerini kolayca aşabilirsiniz."
+      }
+    ]
+  },
+  "nl": {
+    "title": "Veelgestelde Vragen (FAQ)",
+    "subtitle": "Alles over het gebruik van pdfpick, gegevensbeveiliging en privacy.",
+    "hub_tag": "Praktisch Magazine & Kenniscentrum",
+    "hub_title": "Praktische PDF-tips en gidsen van experts",
+    "hub_subtitle": "Van grote e-mailbijlagen tot documentconversies: verdubbel uw efficiëntie met praktische tips.",
+    "hub_view_all": "Alle Gidsen Bekijken",
+    "hub_read_btn": "Gids Lezen",
+    "why_security_title": "100% Lokale Beveiliging aan Clientzijde",
+    "why_security_desc": "pdfpick verwerkt documenten rechtstreeks in het browsergeheugen via WebAssembly. Bestanden worden nooit naar externe servers gestuurd.",
+    "why_speed_title": "Directe Verwerking Zonder Wachttijd",
+    "why_speed_desc": "Zonder wachttijd voor netwerkuploads verwerkt de rekenkracht van uw eigen apparaat tientallen pagina's in 1 tot 2 seconden.",
+    "items": [
+      {
+        "question": "Is pdfpick echt 100% gratis zonder registratie of inloggen?",
+        "answer": "Ja! pdfpick is voor altijd 100% gratis. Geen accountregistratie, geen creditcard en geen verborgen kosten. U heeft onbeperkt toegang tot alle PDF-conversie- en bewerkingstools."
+      },
+      {
+        "question": "Worden mijn bestanden geüpload naar een externe server? (100% Lokale Privacy)",
+        "answer": "Absoluut niet. pdfpick verwerkt bestanden 100% lokaal in het geheugen van uw browser met behulp van WebAssembly (Wasm). Vertrouwelijke documenten verlaten uw apparaat nooit."
+      },
+      {
+        "question": "Kunnen geconverteerde Office-documenten (Word, Excel, PPT) worden bewerkt?",
+        "answer": "Ja! Geëxtraheerde Word (.docx)-, Excel (.xlsx)- en PowerPoint (.pptx)-bestanden openen naadloos in standaard kantoorpakketten en kunnen volledig worden bewerkt."
+      },
+      {
+        "question": "Vermindert PDF-compressie de tekstscherpte of afdrukkwaliteit?",
+        "answer": "Nee. Vectorteksten en tabellen blijven 100% scherp. Alleen overbodige metadata en te hoge beeldresoluties worden geoptimaliseerd, zodat afdrukken perfect blijven."
+      },
+      {
+        "question": "Ondersteunt pdfpick conversies voor officiële en educatieve standaarden?",
+        "answer": "Ja! Wij bieden compatibele conversiemodules voor zakelijke en academische standaarden, direct in uw browser zonder software-installatie."
+      },
+      {
+        "question": "Hoeveel kleiner wordt een videobestand na compressie?",
+        "answer": "Met hardware-versnelde Wasm-codecs kunnen MP4- en MOV-video's met 60% tot 80% worden verkleind met behoud van hoge beeldkwaliteit, ideaal voor e-mail of chat."
+      }
+    ]
+  }
+}

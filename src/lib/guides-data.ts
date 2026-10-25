@@ -1,3360 +1,1436 @@
-export interface GuideSection {
-  heading: string;
-  body: string[];
-  tip?: string;
-}
+import type { Language } from "./i18n";
+import guidesTranslationsRaw from "./guides-translations.json";
 
 export interface GuideArticle {
-  id: number;
   slug: string;
-  category: "edit" | "convert" | "security" | "media" | "mobile";
-  categoryLabel: { [lang: string]: string };
-  toolHref: string;
-  toolName: { [lang: string]: string };
-  date: string;
-  readTime: { [lang: string]: string };
-  mascotMood: "welcome" | "cheering" | "idea" | "ready" | "success";
-  keywords: string[];
-  translations: {
-    [lang: string]: {
-      title: string;
-      summary: string;
-      sections: GuideSection[];
-      ctaText: string;
-    };
-  };
+  title: string;
+  summary: string;
+  category: string;
+  readTime: string;
+  publishedAt: string;
+  updatedAt: string;
+  tags: string[];
+  relatedToolHref: string;
+  relatedToolName: string;
+  content: string;
+  faqList: { question: string; answer: string }[];
 }
 
 export const GUIDE_ARTICLES: GuideArticle[] = [
-  // 1. PDF 합치기
   {
-    id: 1,
+    slug: "email-attachment-pdf-compression",
+    title: "이메일 대용량 첨부 한계 극복: PDF 용량 80% 줄이는 완벽 압축 가이드",
+    summary: "네이버(10MB), 다음/한메일, 구글 지메일(25MB) 첨부 용량 제한을 우회하지 않고, 텍스트 가독성을 100% 보존하면서 PDF 용량만 최대 80% 스마트하게 줄이는 핵심 압축 기술과 팁을 공개합니다.",
+    category: "압축·최적화",
+    readTime: "4분",
+    publishedAt: "2026-09-28",
+    updatedAt: "2026-10-03",
+    tags: ["PDF압축", "이메일첨부", "용량줄이기", "취업서류", "네이버메일"],
+    relatedToolHref: "/compress-pdf",
+    relatedToolName: "PDF 용량 줄이기 (압축) 바로가기",
+    content: `
+## 1. 이메일 전송 실패의 주범, 'PDF 대용량 첨부 한계'
+회사 업무나 채용 서류 지원, 관공서 민원 접수 시 가장 자주 겪는 난감한 순간은 바로 **"첨부파일 용량 초과로 전송할 수 없습니다"**라는 에러 메시지입니다.
+
+주요 플랫폼별 일반 첨부 용량 제한은 다음과 같습니다:
+- **네이버 메일 (Naver Mail):** 일반 파일 최대 10MB (대용량 첨부 시 30일 뒤 다운로드 링크 만료되어 수신자가 열람 불가)
+- **다음 / 카카오 메일:** 일반 파일 최대 25MB
+- **구글 지메일 (Gmail):** 기본 첨부 최대 25MB
+- **기업 채용 사이트 (사람인, 잡코리아, 공공기관 채용관):** 포트폴리오 및 증빙 서류 10MB~20MB 이하 엄격 제한
+
+대용량 파일 링크로 보내면 열람 기한이 지나 인사 담당자가 포트폴리오를 확인하지 못하거나, 회사 보안 방화벽에 걸려 다운로드가 차단되는 치명적인 문제가 발생할 수 있습니다. 따라서 **일반 파일로 첨부 가능한 안전한 크기(5MB~8MB 이하)**로 PDF 자체를 최적화 압축하는 것이 필수입니다.
+
+---
+
+## 2. PDF 용량이 기형적으로 커지는 3가지 원인
+단순한 10장짜리 문서인데도 용량이 50MB, 100MB를 넘나드는 이유는 크게 세 가지입니다:
+
+1. **고해상도 원본 이미지의 무압축 삽입:** 스마트폰 카메라(4800만 화소 이상)나 DSLR로 찍은 5MB~10MB짜리 원본 사진이 문서 곳곳에 그대로 임베드되어 있는 경우
+2. **불필요한 폰트 글꼴 데이터의 전체 포함:** 문서에 쓰이지도 않은 한자/특수문자까지 포함된 폰트 파일 전체(Full Font Set)가 PDF 내부에 통째로 내장된 경우
+3. **문서 수정 이력과 메타데이터 누적:** 한글, 워드, 파워포인트에서 수차례 저장과 수정을 거치며 쌓인 백업 캐시 데이터
+
+---
+
+## 3. 화질 손상 없이 용량만 80% 감량하는 스마트 압축 기술
+단순히 이미지 화질을 뭉개는 구식 압축 방식을 사용하면 인쇄 시 글자가 깨지거나 표의 선이 흐려집니다. 현대적인 PDF 최적화는 다음과 같은 고도화된 방식을 따릅니다:
+
+- **벡터 텍스트 및 폰트 데이터 100% 보존:** 본문의 글자(폰트)와 표(선)는 벡터 데이터이므로 해상도를 줄이지 않고 그대로 유지합니다. 확대해도 폰트가 흐려지지 않습니다.
+- **이미지 다운샘플링(DPI 최적화):** 인쇄소 인쇄용(300~600 DPI)으로 삽입된 초고해상도 이미지를 모니터 및 일반 프린터에 최적화된 150 DPI 수준으로 재조정하여 용량의 80%를 절감합니다.
+- **메타데이터 정밀 제거:** 문서 작성 프로그램의 임시 작업 로그, 미리보기 섬네일 캐시 등 불필요한 메타데이터만 핀포인트로 삭제합니다.
+
+---
+
+## 4. 실전! 용도별 권장 압축 수준 가이드
+
+| 제출 목적 | 권장 압축 모드 | 목표 파일 크기 | 기대 효과 |
+| :--- | :--- | :--- | :--- |
+| **대기업 / 공공기관 채용 서류** | **권장 압축 (Balanced)** | 3MB ~ 5MB | 화면 가독성과 인쇄 품질 완벽 균형, 서류 탈락 리스크 제로 |
+| **이메일 일반 업무 보고서** | **강력 압축 (Extreme)** | 1MB ~ 2MB | 네이버/Gmail 일반 첨부 즉시 통과, 스마트폰 1초 로딩 |
+| **디자인 포트폴리오 / 도면** | **가벼운 압축 (High Quality)** | 8MB ~ 15MB | 고화질 색감과 그래픽 디테일 99% 유지 |
+
+---
+
+## 5. 결론 및 실전 꿀팁
+pdfpick의 [PDF 압축 도구](/compress-pdf)를 이용하시면, 서버로 문서를 전송하지 않고 사용자의 브라우저 메모리 안에서 WebAssembly 기술로 즉각 압축을 수행합니다. 회사 대외비 문서나 개인정보가 담긴 이력서도 정보 유출 걱정 없이 안심하고 용량을 줄이실 수 있습니다.
+`,
+    faqList: [
+      {
+        question: "PDF 압축을 진행하면 텍스트 글자가 깨지거나 흐려지나요?",
+        answer: "아닙니다. 텍스트는 폰트 벡터 데이터이므로 압축 과정에서 전혀 손상되지 않으며, 문서 내에 포함된 대용량 이미지의 해상도만 화면 열람 및 일반 출력에 최적화된 수준으로 지능형 경량화됩니다."
+      },
+      {
+        question: "압축된 파일은 영구적으로 보관 가능한가요?",
+        answer: "네, 압축된 결과물은 국제 표준 PDF 규격(ISO 32000)을 완벽히 준수하므로 어도비 아크로뱃, 크롬 브라우저, 스마트폰 등 모든 환경에서 영구적으로 열람 가능합니다."
+      },
+      {
+        question: "용량이 이미 1MB 미만인 파일도 더 줄어드나요?",
+        answer: "이미 최적화가 완료된 텍스트 위주의 문서는 메타데이터 제거를 통한 약간의 감량만 이루어지며, 추가 압축 여지가 적을 수 있습니다."
+      }
+    ]
+  },
+  {
+    slug: "public-institution-hwp-pdf-guide",
+    title: "공공기관 제출용 HWP·HWPX 한글 파일과 PDF 완벽 변환 및 깨짐 방지 팁",
+    summary: "정부24, 조달청 나라장터, 국세청 홈택스 등 공공기관에 서류를 제출할 때 발생하는 HWP 서식 깨짐, 표 뒤틀림, 폰트 대체 현상을 방지하고 완벽한 호환성을 확보하는 실무 노하우를 정리했습니다.",
+    category: "공공기관·서식",
+    readTime: "5분",
+    publishedAt: "2026-09-29",
+    updatedAt: "2026-10-03",
+    tags: ["HWP변환", "HWPX", "공공기관", "나라장터", "정부24", "한글파일"],
+    relatedToolHref: "/pdf-to-hwp",
+    relatedToolName: "PDF to HWP/HWPX 변환기 바로가기",
+    content: `
+## 1. 대한민국 공공기관의 독특한 문서 생태계: HWP와 PDF
+전 세계적으로는 MS 워드(.docx)가 표준이지만, 대한민국 정부 부처, 지방자치단체, 교육청, 공기업은 여전히 **한글(.hwp, .hwpx)** 양식을 주력으로 사용합니다.
+
+반면, 입찰 제안서나 최종 증빙 서류를 업로드할 때는 위·변조 방지를 위해 **PDF 형식**으로 제출하도록 요구하는 경우가 많습니다. 이 과정에서 한글과 PDF 간 상호 변환이 빈번하게 발생하며, 서식 깨짐이나 여백 어긋남으로 인한 불이익이 발생할 수 있습니다.
+
+---
+
+## 2. HWP와 HWPX의 차이점 이해하기
+최근 한글과컴퓨터는 보안성과 개방성을 높이기 위해 차세대 표준 형식인 **HWPX(OWPML)**를 기본 저장 포맷으로 채택했습니다:
+- **HWP (바이너리 포맷):** 1990년대부터 쓰이던 전통적인 형식으로, 독점 바이너리 구조라 웹 뷰어나 외부 프로그램에서 편집 시 표 깨짐이 잦음
+- **HWPX (XML 기반 개방형 포맷):** MS 워드의 docx처럼 XML 데이터를 압축한 오픈 표준 구조로, 웹 브라우저 및 클라우드 환경에서 훨씬 안정적으로 텍스트와 서식을 보존함
+
+공공기관에 문서를 보낼 때는 기관의 시스템 사양에 따라 최신 HWPX와 레거시 HWP를 적절히 구분하여 변환해야 합니다.
+
+---
+
+## 3. PDF를 HWP/HWPX로 변환할 때 글자가 깨지는 핵심 원인
+1. **외곽선 폰트 대체 현상:** 원본 PDF에 사용된 폰트(예: 나눔고딕, KoPub바탕)가 한글 프로그램에 설치되어 있지 않으면 기본 바탕체로 강제 치환되면서 줄바꿈이 밀림
+2. **다단(Column) 및 복잡한 표(Table) 구조:** 공공기관 입찰서식 특유의 3~4단 표 구조가 텍스트 상자(Text Box)로 조각나면서 편집이 불가능해지는 문제
+3. **스캔된 이미지형 PDF:** 공문서를 스캐너로 복사한 이미지 PDF는 글자 데이터가 전혀 없으므로 일반 변환 시 빈 페이지만 나오거나 거대한 통이미지로 삽입됨
+
+---
+
+## 4. 공공기관 제출 성공을 위한 4단계 완벽 프로세스
+- **1단계 (문서 속성 확인):** 변환하려는 PDF에서 마우스로 글자가 드래그되는지 확인합니다. 드래그가 안 된다면 먼저 [OCR 텍스트 추출 도구](/ocr-pdf)를 거쳐야 합니다.
+- **2단계 (고화질 클라이언트 변환):** pdfpick의 [PDF to HWP 변환 도구](/pdf-to-hwp)를 통해 문서의 문단 구조와 표 그리드를 인식하여 한글 문서 양식으로 전환합니다.
+- **3단계 (한글 뷰어 검수):** 변환된 파일을 열어 표 여백, 쪽번호, 직인 이미지 배치가 어긋나지 않았는지 검수합니다.
+- **4단계 (최종 PDF 규격 변환):** 최종 완성본을 기관 시스템에 업로드할 때는 장기 보관 국제 규격인 [PDF/A 변환](/pdf-to-pdfa)을 적용하면 공공기관 문서고에 10년 이상 안전하게 보관됩니다.
+
+---
+
+## 5. 결론
+공공기관 문서는 단 한 글자의 오탈자나 표 깨짐으로도 심사 감점을 받을 수 있습니다. 무료 클라이언트 사이드 변환기를 적극 활용하여 제출 전 반드시 최종 서식을 확인하시기 바랍니다.
+`,
+    faqList: [
+      {
+        question: "변환된 HWP 파일에서 한글 폰트가 다르게 보이면 어떻게 하나요?",
+        answer: "한컴오피스 프로그램에서 [서식 > 글자 모양] 또는 [찾아 바꾸기 > 글꼴 바꾸기]를 통해 사용자 PC에 설치된 맑은 고딕, 함초롬바탕 등 표준 시스템 폰트로 일괄 변경해 주시면 깔끔하게 정돈됩니다."
+      },
+      {
+        question: "공공기관 입찰 시 HWP와 PDF 중 무엇으로 제출해야 하나요?",
+        answer: "공고문 규정을 우선 확인해야 합니다. 통상적으로 작성 가능한 원본 서식은 HWP로 요구하고, 최종 입찰 제안서 및 발표 자료는 위변조 방지를 위해 PDF로 제출하는 것이 원칙입니다."
+      }
+    ]
+  },
+  {
+    slug: "browser-local-pdf-security",
+    title: "사내 기밀 문서, 무료 온라인 PDF 툴에 업로드해도 안전할까? (로컬 브라우저 보안 기술의 비밀)",
+    summary: "인터넷에 수많은 무료 PDF 변환 사이트가 있지만, 회사 기밀 보고서나 주민등록번호가 적힌 계약서를 올려도 정말 안전할까요? 서버 업로드 방식의 치명적 위험성과 WebAssembly 기반 100% 로컬 보안 기술의 차이를 상세히 분석합니다.",
+    category: "보안·기술",
+    readTime: "6분",
+    publishedAt: "2026-09-30",
+    updatedAt: "2026-10-03",
+    tags: ["보안", "WebAssembly", "로컬처리", "개인정보보호", "DLP"],
+    relatedToolHref: "/compress-pdf",
+    relatedToolName: "100% 로컬 보안 PDF 처리기 체험하기",
+    content: `
+## 1. 무료 온라인 PDF 변환 사이트의 보이지 않는 이면
+구글이나 네이버에서 'PDF 변환'을 검색하면 수십 개의 무료 웹사이트가 나타납니다. 대부분 "업로드 후 1~2시간 뒤 서버에서 영구 삭제됩니다"라고 안내하지만, 과연 기업 보안 담당자나 개인 사용자가 이를 100% 신뢰할 수 있을까요?
+
+실제로 많은 글로벌 무료 툴들은 사용자가 업로드한 문서를 **해외 원격 서버(AWS, GCP 등)로 전송**하여 서버 내부의 백엔드 프로세스로 처리합니다. 이 과정에서 다음과 같은 위험이 실존합니다:
+- **전송 구간 및 서버 저장 취약점:** 네트워크 전송 패킷 탈취 및 서버 임시 디렉터리 해킹 시 사내 대외비 문서가 유출될 가능성
+- **기업 보안 규정(DLP) 위반:** 대기업, 금융권, 관공서는 비인가 외부 클라우드로 사내 파일 업로드를 엄격히 차단(차단 소프트웨어 가동)
+- **개인정보보호법(PIPA) 위반 위험:** 주민등록번호, 계좌번호, 건강 정보 등이 포함된 계약서가 외부 서버에 머무르는 것 자체로 법적 리스크 초래
+
+---
+
+## 2. 기술의 혁신: WebAssembly(Wasm)와 클라이언트 사이드 프로세싱
+이러한 치명적인 프라이버시 문제를 원천 차단하기 위해 탄생한 기술이 바로 **WebAssembly(웹어셈블리, Wasm)** 기반의 **'클라이언트 사이드 로컬 처리'**입니다.
+
+과거에는 PDF 병합, 압축, 변환 같은 무거운 연산을 웹 브라우저 혼자 처리할 수 없어 고성능 서버로 파일을 전송해야만 했습니다. 하지만 최신 웹 기술인 WebAssembly는 C/C++ 및 Rust로 작성된 고성능 엔진을 사용자의 웹 브라우저(크롬, 사파리, 엣지 등) 내부 메모리에서 직접 구동할 수 있게 해줍니다.
+
+### 서버 업로드 방식 vs 로컬 브라우저 처리 방식 비교
+
+| 비교 항목 | 기존 서버 업로드형 사이트 | pdfpick (로컬 Wasm 처리) |
+| :--- | :--- | :--- |
+| **파일 전송 여부** | 사용자의 문서 파일이 원격 서버로 전송됨 | **파일이 컴퓨터/폰 밖으로 1바이트도 나가지 않음** |
+| **서버 저장 가능성** | 서버 디스크 임시 저장 후 삭제 (유출 위험 잔존) | **서버 저장 0% (저장할 서버 자체가 물리적으로 없음)** |
+| **오프라인 동작 여부** | 인터넷이 끊기면 작업 불가 | **페이지 접속 후 인터넷선을 뽑아도 정상 작동** |
+| **처리 속도** | 대용량 파일 업로드/다운로드 시간 소요 | **내 컴퓨터 CPU/RAM 메모리에서 즉각 처리** |
+| **사내 보안(DLP) 통과** | 사내 보안망에서 파일 업로드 차단됨 | **외부 파일 전송이 없으므로 안전하게 사용 가능** |
+
+---
+
+## 3. 내 문서가 정말 외부로 안 나가는지 직접 검증하는 방법
+웹 브라우저의 강력한 개발자 도구를 이용하면 일반 사용자도 3초 만에 검증할 수 있습니다:
+1. 키보드의 **F12** 버튼을 눌러 크롬 개발자 도구(Developer Tools)를 엽니다.
+2. 상단 탭에서 **[Network(네트워크)]** 탭을 클릭합니다.
+3. pdfpick에서 50MB짜리 PDF를 선택하고 압축 또는 병합을 실행합니다.
+4. **네트워크 탭을 확인해 보세요:** 외부 서버로 수십 메가바이트의 파일이 전송(POST/PUT Request)되는 기록이 단 1건도 없음을 직접 두 눈으로 확인하실 수 있습니다.
+
+---
+
+## 4. 안전한 PDF 웹 서비스 선택 체크리스트
+- [x] 개인정보를 요구하는 로그인이나 회원가입 절차가 일체 없는가?
+- [x] 파일 처리 과정에서 파일이 외부 API 서버로 전송되지 않고 브라우저 로컬에서 연산되는가?
+- [x] 작업 완료 후 다운로드 링크가 외부 URL이 아니라 'blob:' 또는 브라우저 로컬 메모리 주소인가?
+- [x] 투명한 개인정보처리방침과 보안 책임자 연락망이 명시되어 있는가?
+
+pdfpick는 위의 4가지 보안 원칙을 100% 준수하여 개발된 신뢰할 수 있는 오픈 웹 유틸리티입니다.
+`,
+    faqList: [
+      {
+        question: "파일이 서버로 전송되지 않는다면 pdfpick는 어떻게 파일을 변환하나요?",
+        answer: "pdfpick는 최신 WebAssembly(Wasm) 가상 머신 기술을 통해 변환 연산 소프트웨어를 사용자의 브라우저 메모리에 가상으로 탑재합니다. 따라서 서버가 아니라 고객님의 컴퓨터나 스마트폰의 프로세서가 직접 연산을 수행합니다."
+      },
+      {
+        question: "회사 내부 인트라넷이나 망분리 PC에서도 사용 가능한가요?",
+        answer: "네! 브라우저 캐시에 한 번 로드되면 외부와 데이터를 주고받지 않으므로, 보안 정책상 외부 파일 반출이 엄격히 금지된 환경에서도 안전하게 이용하실 수 있습니다."
+      }
+    ]
+  },
+  {
+    slug: "smartphone-photo-to-clean-pdf",
+    title: "스마트폰으로 찍은 서류·영수증 사진을 깨끗한 고화질 PDF로 10초 만에 묶기",
+    summary: "연말정산 영수증, 계약서, 신분증 사본을 스마트폰으로 촬영했을 때 그림자나 여백 왜곡 없이 깔끔한 A4 규격의 단일 PDF 문서로 묶는 가장 쉽고 빠른 방법을 소개합니다.",
+    category: "변환·스캔",
+    readTime: "3분",
+    publishedAt: "2026-10-01",
+    updatedAt: "2026-10-03",
+    tags: ["이미지PDF변환", "JPGtoPDF", "영수증정리", "스마트폰스캔", "연말정산"],
+    relatedToolHref: "/image-to-pdf",
+    relatedToolName: "JPG/PNG 이미지 to PDF 변환기 바로가기",
+    content: `
+## 1. 스마트폰으로 찍은 사진, 왜 카톡이나 이메일로 그냥 보내면 안 될까?
+세무사 사무실에 증빙 영수증을 보내거나 은행 대출 신청 서류, 입사 서류를 제출할 때 스마트폰 카메라로 찍은 JPG 사진들을 그대로 10장~20장씩 전송하는 경우가 많습니다.
+
+하지만 받는 사람 입장에서는 다음과 같은 큰 불편을 겪게 됩니다:
+- **순서가 뒤죽박죽 섞임:** 이미지 파일명이 달라지거나 전송 순서가 꼬여 1페이지와 3페이지가 뒤바뀜
+- **용량 폭탄:** 최신 스마트폰 사진 1장당 5MB~10MB에 달해 10장만 보내도 100MB에 육박하여 수신 거부됨
+- **인쇄 시 여백 깨짐:** 사진의 가로세로 비율이 달라 A4 종이로 출력했을 때 내용이 잘리거나 여백이 과도하게 남음
+
+이 모든 문제는 여러 장의 사진을 **하나의 단일 A4 PDF 파일**로 깔끔하게 묶어서 전송하면 완벽히 해결됩니다.
+
+---
+
+## 2. 스마트폰 사진 촬영 시 3가지 황금 수칙
+1. **정면 수직(90도) 촬영:** 비스듬히 찍으면 사다리꼴 왜곡이 생깁니다. 카메라 렌즈를 서류 정중앙 수직 위에서 내려다보며 촬영하세요.
+2. **그림자 회피 조명:** 스마트폰을 든 손이나 머리 그림자가 서류를 가리지 않도록 측면 조명이나 스탠드를 켜고 촬영합니다.
+3. **가로세로 통일:** 세로 문서라면 모든 페이지를 반드시 세로 방향으로 통일하여 촬영해야 받는 사람이 고개를 돌리지 않고 읽을 수 있습니다.
+
+---
+
+## 3. pdfpick로 10초 만에 이미지 PDF 묶기
+1. 스마트폰이나 PC에서 [JPG PDF 변환기](/image-to-pdf)에 접속합니다.
+2. 변환할 사진들을 드래그하거나 [파일 선택]으로 한 번에 불러옵니다.
+3. **순서 정렬:** 썸네일 미리보기를 보며 마우스나 터치로 드래그하여 1페이지부터 마지막 페이지까지 순서를 맞춥니다.
+4. **[PDF로 변환하기]** 버튼을 누르면 1~2초 만에 단일 PDF로 완성되어 자동 저장됩니다.
+
+---
+
+## 4. 주요 제출처별 권장 세팅
+- **세무 증빙 / 영수증:** 흑백 또는 기본 화질로 충분하므로 압축을 병행하여 2MB 이하로 제출
+- **서명 계약서 / 부동산 서류:** 도장 및 자필 서명의 선명도가 중요하므로 300 DPI 원본 화질 유지
+- **신분증 사본:** 주민등록번호 뒷자리를 가린 후 A4 상단 중앙에 보기 좋게 배치
+
+스마트폰 갤러리에 흩어져 있는 사진들을 지금 바로 깔끔한 PDF로 정리해 보세요!
+`,
+    faqList: [
+      {
+        question: "아이폰 HEIC 사진 포맷도 지원하나요?",
+        answer: "네! 아이폰 기본 사진 형식인 HEIC 및 표준 JPG, PNG, WebP 포맷 모두 지원하며 자동으로 최적화된 고화질 PDF로 변환됩니다."
+      },
+      {
+        question: "사진들의 크기가 각각 달라도 하나의 규격으로 맞춰지나요?",
+        answer: "네, 각 이미지의 원본 비율을 존중하면서 표준 A4 페이지 중앙에 가장 보기 좋은 마진(여백)으로 자동 레이아웃 정렬됩니다."
+      }
+    ]
+  },
+  {
+    slug: "scanned-pdf-ocr-text-extraction",
+    title: "스캔된 이미지 PDF에서 글자 복사 및 검색(OCR) 가능하게 만드는 방법",
+    summary: "드래그나 글자 복사가 되지 않는 그림 형태의 스캔 PDF를 인공지능 OCR(광학 문자 인식) 기술로 텍스트 레이어로 전환하여 검색, 복사, 편집이 가능하도록 만드는 방법을 알아봅니다.",
+    category: "변환·스캔",
+    readTime: "5분",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-03",
+    tags: ["OCR", "텍스트추출", "스캔문서", "글자복사", "PDF텍스트"],
+    relatedToolHref: "/ocr-pdf",
+    relatedToolName: "PDF 텍스트 OCR 추출기 바로가기",
+    content: `
+## 1. 왜 어떤 PDF는 글자가 긁히고, 어떤 PDF는 안 긁힐까?
+도서관에서 복사한 논문, 관공서에서 받은 공문서, 복합기에서 스캔한 문서를 열었을 때 마우스로 글자를 드래그해도 아무 반응이 없거나 문서 전체가 통째로 선택되는 경험이 있으실 것입니다.
+
+그 이유는 문서의 생성 방식 때문입니다:
+- **디지털 네이티브 PDF (True PDF):** 워드나 한글에서 'PDF로 저장'한 문서로, 글자 하나하나가 텍스트 코드와 폰트 좌표로 살아있어 즉시 드래그 및 복사(Ctrl+C)가 가능합니다.
+- **래스터 이미지 PDF (Scanned PDF):** 복합기나 카메라가 종이 문서를 사진 찍듯 캡처한 이미지 덩어리입니다. 눈에는 글자로 보이지만 컴퓨터의 눈에는 그저 '점(픽셀)들의 모임'일 뿐입니다.
+
+이러한 이미지 PDF에서 글자를 살려내려면 **OCR (Optical Character Recognition, 광학 문자 인식)** 기술이 필수적입니다.
+
+---
+
+## 2. OCR 기술의 동작 원리
+OCR 엔진은 이미지 속 글자들을 다음과 같은 3단계 과정을 거쳐 판독합니다:
+1. **전처리 (Pre-processing):** 이미지의 기울기를 바로잡고 명암 대비(Contrast)를 극대화하여 글자와 배경을 선명하게 분리합니다.
+2. **패턴 매칭 및 특징 추출 (Feature Extraction):** 'ㄱ', 'ㄴ', 'A', 'B' 등 글자의 획과 곡률을 인공지능 신경망 알고리즘으로 대조 분석합니다.
+3. **텍스트 레이어 합성:** 분석된 텍스트 데이터를 원본 이미지의 정확한 위치 뒤편에 투명한 텍스트 레이어로 얹어, 사용자가 마우스로 드래그하고 키워드로 검색(Ctrl+F)할 수 있게 만듭니다.
+
+---
+
+## 3. 한국어 OCR 인식 정확도를 99%까지 끌어올리는 팁
+- **원본 해상도 유지:** 스캔 시 최소 300 DPI 이상으로 스캔된 문서여야 자음과 모음이 뭉개지지 않습니다.
+- **기울기 보정:** 문서가 5도 이상 기울어져 있으면 문자 인식률이 급격히 떨어집니다. 스캔 시 똑바로 정렬하세요.
+- **특수 폰트 주의:** 필기체나 캘리그래피 글꼴보다는 고딕체, 명조체 계열의 인쇄용 활자체에서 가장 높은 정확도를 보입니다.
+
+---
+
+## 4. 실전 활용 시나리오
+- **논문 및 서적 연구:** 수백 페이지 스캔 도서에서 필요한 키워드(Ctrl+F)를 즉시 검색하여 인용구 복사
+- **회계 장부 및 세금계산서:** 종이 영수증의 금액과 사업자등록번호를 텍스트로 추출하여 엑셀 장부에 붙여넣기
+- **외국어 문서 번역:** 번역기에 직접 칠 수 없는 스캔본 계약서 텍스트를 OCR로 추출 후 구글/파파고 번역기로 전송
+
+pdfpick의 [PDF OCR 텍스트 추출 도구](/ocr-pdf)를 활용하시면 설치 없이 즉시 이미지 속 글자를 텍스트로 복원하실 수 있습니다.
+`,
+    faqList: [
+      {
+        question: "손글씨(필기체)도 OCR로 인식이 가능한가요?",
+        answer: "인쇄 활자체에 비해 손글씨는 개인 필체에 따라 인식률 편차가 큽니다. 또박또박 작성된 정자체는 인식 가능하지만 흘려 쓴 필기체는 일부 오탈자가 발생할 수 있어 검수가 필요합니다."
+      },
+      {
+        question: "영문과 한글이 섞여 있는 혼합 문서도 인식되나요?",
+        answer: "네! 다국어 딥러닝 모델이 적용되어 있어 한글과 영문, 숫자, 특수기호가 복합적으로 구성된 계약서나 논문도 매끄럽게 판독합니다."
+      }
+    ]
+  },
+  {
+    slug: "portfolio-merge-and-page-numbering",
+    title: "포트폴리오와 보고서의 완성도를 높이는 PDF 병합 및 일괄 쪽번호(페이지 번호) 매기기",
+    summary: "표지, 이력서, 프로젝트 작업물 등 서로 다른 프로그램에서 작성된 PDF들을 하나의 단일 문서로 합치고, 표지를 제외한 본문부터 일괄 쪽번호를 매겨 전문적인 제본 보고서로 만드는 노하우입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-03",
+    tags: ["PDF합치기", "페이지번호", "쪽번호", "포트폴리오", "보고서제작"],
+    relatedToolHref: "/add-page-numbers",
+    relatedToolName: "PDF 페이지 번호 일괄 삽입 도구 바로가기",
+    content: `
+## 1. 전문적인 보고서와 아마추어 문서의 결정적 차이: '쪽번호'
+대학생 과제 제출, 대학원 학위 논문, 기업 제안서, 취업 포트폴리오를 검토하는 심사관들이 가장 먼저 보는 문서의 기본 완성도는 **"체계적인 페이지 넘버링(쪽번호)"**입니다.
+
+페이지 번호가 없으면 다음과 같은 치명적인 문제가 발생합니다:
+- 회의나 면접에서 "15페이지 3번째 단락을 봐주세요"라는 소통이 불가능해짐
+- 인쇄소에서 출력 및 중철 제본 시 문서 순서가 뒤섞일 위험
+- 문서의 전체 분량과 구조를 파악하기 어려워 프로페셔널한 인상을 주지 못함
+
+---
+
+## 2. 서로 다른 툴에서 만든 문서 합치기 (PDF Merge)
+보통 포트폴리오는 표지는 포토샵이나 피그마에서 만들고, 본문은 워드나 노션에서 작성하며, 통계 차트는 엑셀에서 뽑아냅니다. 제각기 다른 프로그램에서 출력된 PDF들을 취합할 때는:
+
+1. [PDF 합치기 도구](/merge-pdf)에서 파일들을 불러옵니다.
+2. 마우스 드래그 앤 드롭으로 **표지 ➔ 목차 ➔ 이력서 ➔ 프로젝트 본문 ➔ 부록** 순서로 순서를 맞춥니다.
+3. [하나로 합치기]를 눌러 단일 PDF 마스터본을 생성합니다.
+
+---
+
+## 3. 스마트 쪽번호 매기기 규칙과 팁
+합쳐진 마스터 문서에 페이지 번호를 삽입할 때 꼭 지켜야 할 3대 원칙:
+
+- **원칙 1: 표지와 목차는 번호에서 제외할 것**  
+  가장 흔히 하는 실수가 맨 앞 표지(Cover Page)에 '1'이라는 번호가 찍히는 것입니다. 전문 서적처럼 표지와 목차는 번호를 비워두고, **실제 본문(3~4페이지)부터 '1'로 시작**하도록 시작 페이지를 설정해야 합니다.
+- **원칙 2: 위치는 하단 중앙(Bottom Center) 또는 우측 하단(Bottom Right)**  
+  양면 인쇄(책자 제본)가 필요한 문서는 펼쳤을 때 바깥쪽 모서리인 우측 하단이 좋으며, 일반적인 단면 출력 및 모니터 열람용은 하단 중앙이 가장 안정적입니다.
+- **원칙 3: 포맷 통일 ('- 1 -' 또는 'Page 1 of 20')**  
+  전체 분량이 정해진 제안서는 'Page 1 of 25' 형식을 사용하면 검토자가 전체 분량 대비 진행도를 쉽게 파악할 수 있습니다.
+
+---
+
+## 4. 실전 가이드 요약
+pdfpick의 [PDF 페이지 번호 매기기](/add-page-numbers) 도구를 이용하면 폰트 크기, 여백, 시작 번호, 제외 페이지를 손쉽게 커스터마이징하여 단 몇 초 만에 출판물 수준의 완성도 높은 문서를 완성할 수 있습니다.
+`,
+    faqList: [
+      {
+        question: "표지에 페이지 번호가 찍히지 않게 할 수 있나요?",
+        answer: "네! pdfpick 페이지 번호 삽입기에서는 '시작 페이지'를 자유롭게 지정할 수 있어, 1~2페이지(표지 및 목차)를 건너뛰고 본문부터 1번으로 시작하도록 세팅할 수 있습니다."
+      },
+      {
+        question: "기존에 문서에 적혀 있던 페이지 번호 위에 겹쳐서 인쇄되지는 않나요?",
+        answer: "기존 번호가 있는 경우 상단 또는 하단 여백의 위치를 조절하거나, 폰트 스타일을 조정하여 기존 텍스트와 겹치지 않는 최적의 위치를 선택하실 수 있습니다."
+      }
+    ]
+  },
+  {
     slug: "how-to-merge-pdf-free",
-    category: "edit",
-    categoryLabel: { ko: "PDF 편집 팁", en: "PDF Tips", es: "Consejos PDF", ja: "PDFヒント", "zh-CN": "PDF技巧" },
-    toolHref: "/merge-pdf",
-    toolName: { ko: "PDF 합치기", en: "Merge PDF", es: "Unir PDF", ja: "PDF結合", "zh-CN": "合并PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "cheering",
-    keywords: [
-      "PDF 합치기",
-      "무료 PDF 병합",
-      "프로그램 없이 PDF 합치기",
-      "merge pdf free online",
-      "combine pdf files",
-      "PDF 結合 無料",
-      "unir pdf gratis online",
-      "PDF合并 免费"
-    ],
-    translations: {
-      ko: {
-        title: "프로그램 설치 없이 여러 PDF 하나로 합치는 가장 쉬운 방법",
-        summary: "비싼 유료 프로그램이나 무거운 소프트웨어 설치 없이 웹 브라우저에서 1초 만에 여러 개의 PDF 파일을 순서대로 병합하는 꿀팁을 소개합니다.",
-        sections: [
-          {
-            heading: "왜 PDF 합치기 프로그램 설치가 번거로울까요?",
-            body: [
-              "회사나 학교에서 과제물, 보고서, 계약서 등을 취합할 때 여러 장의 PDF를 하나의 파일로 합쳐야 하는 경우가 많습니다.",
-              "하지만 어도비 애크로뱃(Adobe Acrobat)이나 알PDF 등은 설치 과정이 번거롭고, 최근에는 유료 결제를 유도하는 경우가 대부분입니다.",
-              "mypickpdf는 별도의 프로그램 설치나 회원가입 없이 브라우저에서 드래그 앤 드롭만으로 즉시 PDF를 합칠 수 있습니다."
-            ],
-            tip: "래서팬더 꿀팁: 파일 순서를 마우스로 끌어서 원하는 대로 자유롭게 변경할 수 있어요!"
-          },
-          {
-            heading: "mypickpdf로 3단계 만에 PDF 합치는 방법",
-            body: [
-              "1단계: mypickpdf의 [PDF 합치기] 도구 페이지로 이동합니다.",
-              "2단계: 합치고 싶은 여러 개의 PDF 파일을 끌어다 놓거나 [파일 선택하기]를 클릭하여 등록합니다.",
-              "3단계: 문서 순서를 확인한 뒤 [PDF 합치기] 버튼을 누르면 즉시 하나로 합쳐진 완성본이 다운로드됩니다."
-            ]
-          }
-        ],
-        ctaText: "지금 바로 무료로 PDF 합치기"
-      },
-      en: {
-        title: "How to Merge Multiple PDF Files into One for Free Without Installing Software",
-        summary: "Learn how to combine multiple PDF documents into a single organized file in seconds directly in your web browser—100% free and private.",
-        sections: [
-          {
-            heading: "Why Installing Desktop PDF Software is Outdated",
-            body: [
-              "Combining contracts, school reports, or research papers is a daily necessity for professionals and students.",
-              "Traditional desktop software often requires costly monthly subscriptions or complex installation procedures.",
-              "mypickpdf runs entirely inside your browser using client-side WebAssembly, merging documents instantly without sending any data to external servers."
-            ],
-            tip: "Panda Tip: You can drag and drop file cards to rearrange the merge order anytime!"
-          },
-          {
-            heading: "3 Simple Steps to Merge Your PDFs",
-            body: [
-              "Step 1: Open the mypickpdf [Merge PDF] tool.",
-              "Step 2: Drag and drop all PDF files you want to combine.",
-              "Step 3: Arrange their sequence and click [Merge PDF] to download your combined document instantly."
-            ]
-          }
-        ],
-        ctaText: "Merge PDFs for Free Now"
-      },
-      ja: {
-        title: "インストール不要で複数のPDFをひとつに結合する最も簡単な方法",
-        summary: "高価な有料ソフトのインストール不要で、ブラウザ上でドラッグ＆ドロップするだけで複数のPDFファイルを順番通りに無料結合する裏技を解説します。",
-        sections: [
-          {
-            heading: "なぜデスクトップ専用PDFソフトの導入は不要なのか？",
-            body: [
-              "契約書やレポート、申請書類などをまとめる際、複数のPDFを1つのファイルに統合する機会は非常に多くあります。",
-              "従来のAdobe Acrobatなどは導入手順が複雑で月額費用もかかりますが、mypickpdfなら完全無料でブラウザから即座に結合できます。",
-              "ファイルは外部サーバーへ送信されず、端末内ローカルで暗号化処理されるため機密文書も安心です。"
-            ],
-            tip: "レッサーパンダの小ワザ: マウス操作でカードをドラッグして結合順序を自由に入れ替えられます！"
-          },
-          {
-            heading: "3ステップで完了するPDF結合手順",
-            body: [
-              "ステップ1: mypickpdfの「PDF結合」ツールページを開きます。",
-              "ステップ2: 結合したい複数のPDFファイルを画面にドラッグ＆ドロップします。",
-              "ステップ3: ページの並び順を確認して「PDFを結合」をクリックすれば即座にダウンロードできます。"
-            ]
-          }
-        ],
-        ctaText: "今すぐ無料でPDFを結合する"
-      },
-      es: {
-        title: "Cómo unir varios archivos PDF en uno gratis sin instalar programas",
-        summary: "Descubre el método más rápido y seguro para combinar documentos PDF en el orden deseado directamente desde tu navegador, 100% privado y sin límites.",
-        sections: [
-          {
-            heading: "¿Por qué ya no necesitas software pesado de pago?",
-            body: [
-              "Unir contratos, facturas o tareas académicas es una necesidad habitual en el trabajo y los estudios.",
-              "mypickpdf funciona íntegramente en tu navegador sin enviar datos a servidores externos, garantizando privacidad total y máxima rapidez."
-            ],
-            tip: "Consejo Panda: ¡Arrastra y suelta las tarjetas de archivos para ordenar la secuencia exacta!"
-          },
-          {
-            heading: "Pasos sencillos para unir tus PDFs",
-            body: [
-              "Paso 1: Entra en la herramienta [Unir PDF] de mypickpdf.",
-              "Paso 2: Arrastra y suelta todos los archivos PDF que deseas juntar.",
-              "Paso 3: Organiza el orden y pulsa [Unir PDF] para descargarlo al instante."
-            ]
-          }
-        ],
-        ctaText: "Unir PDFs gratis ahora"
-      }
-    }
-  },
+    title: "프로그램 설치 없이 여러 PDF 하나로 합치는 가장 쉬운 방법 (무료 병합 가이드)",
+    summary: "비싼 유료 프로그램이나 무거운 소프트웨어 설치 없이 웹 브라우저에서 1초 만에 여러 개의 PDF 파일을 원하는 순서대로 병합하는 실무 꿀팁을 안내합니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-04",
+    updatedAt: "2026-10-21",
+    tags: ["PDF합치기", "PDF병합", "무료PDF", "포트폴리오합치기", "이력서병합"],
+    relatedToolHref: "/merge-pdf",
+    relatedToolName: "무료 PDF 합치기 도구 바로가기",
+    content: `
+## 1. 여러 개의 PDF 파일, 왜 하나로 합쳐야 할까요?
+입사 지원 서류(이력서 + 자기소개서 + 경력증명서 + 자격증 사본), 관공서 입찰 제안서, 부동산 계약 증빙 자료를 제출할 때 파일을 5~6개로 낱개 첨부하면 담당자가 문서를 열람하다가 누락하거나 순서가 뒤섞이는 사고가 발생하기 쉽습니다.
 
-  // 2. PDF 용량 줄이기
+하나의 단일 PDF로 병합하면 다음과 같은 장점이 있습니다:
+- **누락 방지:** 인사 담당자나 심사위원이 스크롤만 내리면 모든 증빙 서류를 순서대로 검토 가능
+- **인쇄 편의성:** 여러 파일을 일일이 열어 인쇄 버튼을 누를 필요 없이 한 번에 양면/단면 일괄 출력
+- **깔끔한 파일 관리:** 프로젝트별·날짜별로 단일 마스터 파일로 아카이빙 가능
+
+---
+
+## 2. 기존 유료 프로그램(알PDF, 애크로뱃)의 단점
+단순히 PDF 두세 개를 합치려고 수백 메가바이트짜리 설치형 프로그램을 깔면:
+- 무료 체험판 기간이 끝나며 결제를 유도하거나 워터마크가 박힘
+- 하루 1~2회로 작업 횟수를 제한함
+- 사내 보안 PC에서는 관리자 권한이 없어 프로그램 설치 자체가 불가능함
+
+---
+
+## 3. 설치 없이 웹에서 3초 만에 합치는 방법
+1. [무료 PDF 합치기 도구](/merge-pdf) 페이지에 접속합니다.
+2. 합치고 싶은 PDF 파일들을 마우스로 한꺼번에 끌어다 놓습니다(Drag & Drop).
+3. 화살표 버튼(↑/↓)을 눌러 **표지 ➔ 본문 ➔ 첨부서류** 순서로 정렬합니다.
+4. **[하나로 합치기 시작]** 버튼을 누르면 서버 전송 없이 내 브라우저에서 1초 만에 합쳐진 PDF가 다운로드됩니다.
+`,
+    faqList: [
+      {
+        question: "합칠 수 있는 PDF 파일 개수나 페이지 수 제한이 있나요?",
+        answer: "아니요, 개수 제한 없이 2개부터 수십 개의 PDF 파일까지 한 번에 무료로 병합할 수 있습니다."
+      },
+      {
+        question: "합치기 과정에서 화질이 떨어지거나 글꼴이 바뀌나요?",
+        answer: "전혀 바뀌지 않습니다. 원본 PDF의 페이지 스트림을 재인코딩 없이 그대로 결합(Lossless Merge)하므로 원본 화질과 텍스트 벡터가 100% 보존됩니다."
+      }
+    ]
+  },
   {
-    id: 2,
     slug: "how-to-compress-pdf-80-percent",
-    category: "edit",
-    categoryLabel: { ko: "PDF 편집 팁", en: "PDF Tips", es: "Consejos PDF", ja: "PDFヒント", "zh-CN": "PDF技巧" },
-    toolHref: "/compress-pdf",
-    toolName: { ko: "PDF 압축", en: "Compress PDF", es: "Comprimir PDF", ja: "PDF圧縮", "zh-CN": "压缩PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "idea",
-    keywords: [
-      "PDF 용량 줄이기",
-      "PDF 압축",
-      "대용량 PDF 줄이기",
-      "compress pdf online",
-      "reduce pdf file size",
-      "PDF 圧縮 容量 軽くする",
-      "comprimir pdf gratis sin perder calidad",
-      "PDF压缩 减小文件大小"
-    ],
-    translations: {
-      ko: {
-        title: "화질 저하 없이 PDF 용량 80% 줄이는 초고속 압축법",
-        summary: "이메일 첨부 용량 초과나 공공기관 웹사이트 업로드 제한(10MB 등)에 걸렸을 때, 텍스트와 이미지 선명도를 유지하며 용량을 대폭 줄이는 방법입니다.",
-        sections: [
-          {
-            heading: "이메일 첨부 불가! PDF 용량 초과의 해결책",
-            body: [
-              "고해상도 이미지나 도표가 많이 포함된 PDF는 파일 크기가 수십 메가바이트(MB)에 달해 이메일 발송이나 전자결재 첨부가 불가능한 경우가 많습니다.",
-              "단순히 이미지 화질을 뭉개는 구형 방식과 달리, mypickpdf는 스마트 압축 알고리즘을 통해 폰트와 벡터 그래픽을 최적화하여 글씨는 또렷하게 유지하면서 불필요한 메타데이터만 쏙 빼냅니다."
-            ],
-            tip: "래서팬더 꿀팁: 30MB가 넘는 무거운 제안서도 단 2초 만에 5MB 이하로 다이어트할 수 있어요!"
-          },
-          {
-            heading: "누구나 할 수 있는 초간단 PDF 압축 순서",
-            body: [
-              "1단계: mypickpdf [PDF 압축] 페이지에 접속합니다.",
-              "2단계: 용량을 줄이고 싶은 대용량 PDF 파일을 끌어다 놓습니다.",
-              "3단계: [PDF 압축하기] 버튼을 누르면 즉시 용량이 최대 80% 절감된 최적화 파일이 저장됩니다."
-            ]
-          }
-        ],
-        ctaText: "지금 바로 PDF 용량 줄이기"
-      },
-      en: {
-        title: "How to Reduce PDF File Size by up to 80% Without Losing Quality",
-        summary: "Overcome email attachment limits and web upload quotas with our lightning-fast browser-based PDF compression tool.",
-        sections: [
-          {
-            heading: "Beat Email Attachment Limits with Smart PDF Compression",
-            body: [
-              "High-resolution graphics and scans often inflate PDF documents beyond 25MB, blocking them from email gateways and portals.",
-              "mypickpdf employs intelligent stream optimization, removing redundant data while preserving razor-sharp text and crisp illustrations."
-            ],
-            tip: "Panda Tip: Experience lightning compression with zero upload waiting times!"
-          },
-          {
-            heading: "How to Compress in 3 Easy Steps",
-            body: [
-              "Step 1: Navigate to the [Compress PDF] tool on mypickpdf.",
-              "Step 2: Upload your large PDF file by dragging it into the dropzone.",
-              "Step 3: Click [Compress PDF] and download your compact, high-quality document."
-            ]
-          }
-        ],
-        ctaText: "Compress PDF Online Now"
-      },
-      ja: {
-        title: "画質を落とさずにPDF容量を最大80%軽量化する圧縮テクニック",
-        summary: "メール添付の容量オーバーやWeb申請の上限をクリア！テキストや画像の鮮明さを保ちながら超高速でPDFファイルサイズを削減する方法です。",
-        sections: [
-          {
-            heading: "メール添付制限を瞬時にクリアするスマート圧縮",
-            body: [
-              "高解像度画像が含まれたPDFは数十メガバイトになりがちで、メール送信エラーの原因になります。",
-              "mypickpdfは文字や図形のクリアさを維持したまま、余計な内部データのみを効率的に圧縮最適化します。"
-            ],
-            tip: "レッサーパンダの小ワザ: 30MB超の重いファイルも数秒で5MB以下にスリム化できます！"
-          },
-          {
-            heading: "簡単3ステップの圧縮手順",
-            body: [
-              "ステップ1: 「PDF圧縮」ツールページにアクセスします。",
-              "ステップ2: 圧縮したいファイルをドロップします。",
-              "ステップ3: 「PDFを圧縮」をクリックして軽量化されたファイルを保存します。"
-            ]
-          }
-        ],
-        ctaText: "今すぐPDF容量を圧縮する"
-      },
-      es: {
-        title: "Cómo reducir el tamaño de un PDF hasta un 80% sin perder calidad",
-        summary: "Supera los límites de subida y envío por correo electrónico comprimiendo tus documentos PDF con la máxima nitidez directamente en tu navegador.",
-        sections: [
-          {
-            heading: "Solución definitiva para PDFs demasiado pesados",
-            body: [
-              "Los documentos escaneados o con fotos suelen superar los 25MB permitidos por el correo.",
-              "mypickpdf optimiza los flujos de datos internos sin emborronar el texto ni las ilustraciones clave."
-            ],
-            tip: "Consejo Panda: ¡Comprime archivos pesados en pocos segundos con total seguridad!"
-          },
-          {
-            heading: "Pasos para comprimir en 3 clics",
-            body: [
-              "Paso 1: Abre la herramienta [Comprimir PDF] en mypickpdf.",
-              "Paso 2: Arrastra tu documento PDF al área de trabajo.",
-              "Paso 3: Haz clic en [Comprimir PDF] y guarda tu archivo optimizado."
-            ]
-          }
-        ],
-        ctaText: "Comprimir PDF gratis ahora"
-      }
-    }
-  },
+    title: "PDF 파일 용량 80% 줄이는 꿀팁: 화질 깨짐 없이 초고속 압축하기",
+    summary: "이메일 첨부나 공공기관·채용 사이트 제출 시 용량 초과 오류를 완벽하게 해결하는 화질 보존 PDF 압축 노하우를 상세히 소개합니다.",
+    category: "압축·최적화",
+    readTime: "4분",
+    publishedAt: "2026-10-05",
+    updatedAt: "2026-10-21",
+    tags: ["PDF압축", "PDF용량줄이기", "대용량PDF", "화질유지압축", "이메일용량초과"],
+    relatedToolHref: "/compress-pdf",
+    relatedToolName: "PDF 용량 줄이기 도구 바로가기",
+    content: `
+## 1. 글자는 선명하게, 용량만 가볍게 줄이는 핵심 원리
+많은 분들이 "PDF를 압축하면 글자까지 뿌옇게 깨지지 않을까?" 걱정합니다. 하지만 스마트 PDF 압축은 **텍스트(벡터 폰트)와 이미지(비트맵)**를 분리하여 처리합니다:
 
-  // 3. PDF 나누기 / 분할
+- **텍스트 & 도표 선:** 해상도 개념이 없는 수학적 벡터 데이터이므로 압축 후에도 400% 확대 시 완벽히 선명함 유지
+- **내부 고해상도 사진:** 문서 용량의 90% 이상을 차지하는 불필요한 4000px 이상 원본 사진을 화면/인쇄 최적 해상도(150~200 DPI)로 리샘플링
+- **숨겨진 더미 데이터 삭제:** 편집 기록, 미리보기 썸네일, 미사용 폰트 글리프 정리
+
+---
+
+## 2. 상황별 압축률 선택 가이드
+| 사용 상황 | 추천 압축 모드 | 예상 용량 감소율 |
+| :--- | :--- | :--- |
+| **채용 포트폴리오·입찰 제안서** | 권장 압축 (표준 화질) | **약 50% ~ 70% 감소** |
+| **이메일·메신저 빠른 공유** | 고압축 (최소 용량) | **약 70% ~ 85% 감소** |
+| **고화질 인쇄·출판 검수용** | 저압축 (고화질 보존) | **약 20% ~ 40% 감소** |
+
+---
+
+## 3. 100% 로컬 압축으로 개인정보 보호하기
+이력서, 성적증명서, 재무제표처럼 민감한 문서를 압축할 때는 외부 서버에 파일을 업로드하지 않는 [pdfpick PDF 압축기](/compress-pdf)를 사용하여 보안 사고를 원천 예방하세요.
+`,
+    faqList: [
+      {
+        question: "스캔한 이미지 PDF 파일도 용량이 많이 줄어드나요?",
+        answer: "네! 스캐너로 생성된 PDF는 전체가 고해상도 이미지로 이루어져 있어 압축 효과가 가장 뛰어나며, 보통 60~80% 이상 용량이 줄어듭니다."
+      },
+      {
+        question: "압축 후 다시 원래 용량으로 되돌릴 수 있나요?",
+        answer: "다운로드된 파일은 새로운 파일로 저장되므로 내 컴퓨터에 있는 원본 PDF 파일은 그대로 안전하게 유지됩니다."
+      }
+    ]
+  },
   {
-    id: 3,
     slug: "how-to-split-pdf-pages",
-    category: "edit",
-    categoryLabel: { ko: "PDF 편집 팁", en: "PDF Tips", es: "Consejos PDF", ja: "PDFヒント", "zh-CN": "PDF技巧" },
-    toolHref: "/split-pdf",
-    toolName: { ko: "PDF 나누기", en: "Split PDF", es: "Dividir PDF", ja: "PDF分割", "zh-CN": "拆分PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "PDF 나누기",
-      "PDF 분할",
-      "PDF 페이지만 추출",
-      "split pdf free",
-      "extract pdf pages",
-      "PDF 分割 ページ抽出",
-      "dividir pdf gratis",
-      "PDF拆分"
-    ],
-    translations: {
-      ko: {
-        title: "100페이지 대용량 PDF에서 원하는 페이지만 쏙 뽑아내는 방법",
-        summary: "수십~수백 장의 방대한 문서 중 필요한 페이지만 낱장으로 분할하거나 특정 구간(예: 3~7페이지)만 추출하여 새 파일로 만드는 팁입니다.",
-        sections: [
-          {
-            heading: "불필요한 페이지는 버리고 필요한 내용만 깔끔하게!",
-            body: [
-              "논문, 매뉴얼, 계약서 전체를 다 공유할 필요 없이 특정 조항이나 요약 페이지만 따로 떼어내어 전송해야 할 때가 있습니다.",
-              "mypickpdf의 [PDF 나누기] 도구는 원하는 페이지 번호를 입력하거나 범위를 지정하여 몇 초 만에 분리해 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 낱장 분할 모드를 선택하면 모든 페이지가 개별 파일로 분할되어 압축파일(ZIP)로 한 번에 다운로드됩니다."
-          }
-        ],
-        ctaText: "지금 바로 PDF 페이지 추출하기"
-      },
-      en: {
-        title: "How to Extract Specific Pages or Split Large PDF Documents",
-        summary: "Extract select pages or split multi-page reports into individual standalone files quickly and securely in your browser.",
-        sections: [
-          {
-            heading: "Extract Only What You Need",
-            body: [
-              "Sharing a 200-page manual when your client only needs pages 5 through 10 is inefficient and cluttered.",
-              "With mypickpdf Split PDF, you can type precise page ranges or split every single page into distinct documents."
-            ],
-            tip: "Panda Tip: Choose batch split to get all pages cleanly packed into a convenient ZIP archive!"
-          }
-        ],
-        ctaText: "Split PDF for Free Now"
-      }
-    }
-  },
+    title: "대용량 PDF에서 원하는 페이지만 쏙쏙 골라 나누고 추출하기 (PDF 분할)",
+    summary: "수백 장짜리 PDF에서 필요한 몇 페이지만 개별 문서로 분리하거나, 불필요한 빈 페이지를 삭제하고 낱장으로 쪼개는 3초 꿀팁입니다.",
+    category: "문서편집",
+    readTime: "3분",
+    publishedAt: "2026-10-06",
+    updatedAt: "2026-10-21",
+    tags: ["PDF분할", "PDF나누기", "페이지추출", "PDF페이지삭제", "PDF자르기"],
+    relatedToolHref: "/split-pdf",
+    relatedToolName: "무료 PDF 나누기·추출 도구 바로가기",
+    content: `
+## 1. 전체 문서를 다 보낼 필요 없을 때: '부분 페이지 추출'
+300페이지짜리 전자책, 전체 회의록, 종합 계약서 중에서 거래처나 동료에게 **딱 3~5페이지만 발췌해서 보내야 할 때**가 많습니다. 전체 파일을 그대로 보내면 용량도 크고, 보지 말아야 할 대외비 페이지까지 노출될 위험이 있습니다.
 
-  // 4. PDF 한글(HWPX) 변환
+---
+
+## 2. 가장 많이 쓰는 3가지 PDF 분할 방식
+1. **특정 범위 추출 (예: 3-7):** 3페이지부터 7페이지까지만 잘라내어 5장짜리 새 PDF로 저장
+2. **불연속 페이지 핀포인트 선택 (예: 1, 4, 8-10):** 표지(1p)와 핵심 요약(4p), 결론(8~10p)만 골라 하나로 묶어 추출
+3. **전체 페이지 낱장 분할:** 10장짜리 PDF를 1장씩 총 10개의 개별 PDF 파일(ZIP 압축)로 분리
+
+---
+
+## 3. 실전 활용 팁
+[PDF 나누기 도구](/split-pdf)에 파일을 올리면 각 페이지의 썸네일 미리보기가 즉시 표시됩니다. 페이지 번호를 직접 외울 필요 없이 화면에서 원하는 페이지를 눈으로 보고 클릭만 하면 즉시 추출됩니다.
+`,
+    faqList: [
+      {
+        question: "중간에 잘못 스캔된 빈 페이지 1장만 삭제할 수도 있나요?",
+        answer: "네! 전체 페이지 중 삭제할 페이지만 체크 해제한 뒤 추출 버튼을 누르면 불필요한 페이지가 완벽히 제거된 새 PDF가 만들어집니다."
+      }
+    ]
+  },
   {
-    id: 4,
     slug: "how-to-convert-pdf-to-hwp",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/pdf-to-hwp",
-    toolName: { ko: "PDF 한글 변환", en: "PDF to HWP", es: "PDF a HWP", ja: "PDFからHWPへ", "zh-CN": "PDF转HWP" },
-    date: "2026-09-28",
-    readTime: { ko: "4분 읽기", en: "4 min read", es: "Lectura de 4 min", ja: "4分で読める", "zh-CN": "4分钟阅读" },
-    mascotMood: "success",
-    keywords: [
-      "PDF HWP 변환",
-      "PDF HWPX 변환",
-      "공공기관 한글 서식",
-      "알PDF 한글 변환 대체",
-      "pdf to hwp free",
-      "convert pdf to hwpx",
-      "PDFからHWPへ"
-    ],
-    translations: {
-      ko: {
-        title: "공공기관 제출용 서식 완벽 호환! PDF 문서를 한글(HWPX)로 변환하는 법",
-        summary: "정부24, 학교, 공공기관 서식 파일이 PDF로 되어 있어 편집하기 곤란하셨나요? 표 서식과 텍스트를 그대로 유지하며 한컴오피스(.hwpx) 파일로 즉시 변환하는 솔루션입니다.",
-        sections: [
-          {
-            heading: "국내 공공기관 및 교육계 필수: PDF를 HWP로 변환하기",
-            body: [
-              "국내 공공기관, 초중고교, 대학교에서는 여전히 한컴오피스(.hwp / .hwpx) 포맷이 표준입니다.",
-              "하지만 배포되는 양식은 PDF인 경우가 많아 일일이 타이핑하거나 표를 다시 그리는 불편함이 있었습니다.",
-              "mypickpdf는 최신 개방형 표준 규격인 HWPX 구조 분석 엔진을 내장하여, 문서 내 표와 텍스트를 한컴오피스에서 바로 타이핑하고 수정할 수 있도록 정밀 변환합니다."
-            ],
-            tip: "래서팬더 꿀팁: 변환된 HWPX 파일은 한컴오피스 2014 이상 모든 버전과 폴라리스 오피스, 한컴 웹 한글에서 완벽히 열립니다!"
-          }
-        ],
-        ctaText: "지금 바로 PDF를 한글로 변환하기"
-      },
-      en: {
-        title: "How to Convert PDF Documents to Editable Korean Hangul (HWP/HWPX) Format",
-        summary: "Essential guide for Korean government agencies, schools, and business forms: convert read-only PDFs into editable HWPX documents.",
-        sections: [
-          {
-            heading: "Bridge the Gap Between PDF and Korean Hangul Documents",
-            body: [
-              "The Hangul Word Processor format (.hwp/.hwpx) is the official documentation standard across Korean administrative organizations.",
-              "mypickpdf converts PDF tables and typography directly into editable HWPX components without formatting distortion."
-            ],
-            tip: "Panda Tip: Enjoy native HWPX files compatible with Hancom Office and Hancom Docs web suite!"
-          }
-        ],
-        ctaText: "Convert PDF to HWP Now"
-      }
-    }
-  },
+    title: "PDF를 아래아한글(HWP·HWPX)로 변환하여 바로 편집하는 무료 방법",
+    summary: "대한민국 공공기관, 관공서 공문서나 학교 가정통신문·보고서 PDF를 한글(HWP·HWPX) 문서로 즉시 변환하여 텍스트와 표를 깨짐 없이 수정하는 실무 가이드입니다.",
+    category: "공공기관·서식",
+    readTime: "5분",
+    publishedAt: "2026-10-07",
+    updatedAt: "2026-10-25",
+    tags: ["PDF한글변환", "PDFHWP변환", "HWPX변환", "관공서서식", "공문서편집", "정부24"],
+    relatedToolHref: "/pdf-to-hwp",
+    relatedToolName: "PDF 한글(HWP/HWPX) 변환기 바로가기",
+    content: `
+## 1. 공공기관 공고문 PDF, 한글로 다시 타이핑하지 마세요!
+지자체 지원사업 신청서, 조달청 나라장터 입찰 서식, 학교 가정통신문 양식이 PDF로만 배포되었을 때, 내용을 채워 넣기 위해 아래아한글(HWP)을 켜고 처음부터 표를 그리고 글자를 일일이 따라 치는 것은 엄청난 시간 낭비입니다.
 
-  // 5. JPG 이미지 PDF 변환
+특히 PDF에서 글자를 그냥 드래그하여 복사(Ctrl+C)한 뒤 한글에 붙여넣으면 다음과 같은 문제가 발생합니다:
+- 매 줄 끝에 강제 줄바꿈(엔터)이 들어가 문단 정렬이 완전히 깨짐
+- 표(Table) 안의 항목들이 표 밖으로 흩어지거나 한 칸에 뭉쳐버림
+- 글머리 기호(ㅇ, -, □)와 들여쓰기 여백이 모두 사라짐
+
+---
+
+## 2. PDF ➔ HWP·HWPX 하이브리드 변환의 3대 핵심 장점
+pdfpick의 [PDF 한글 변환기](/pdf-to-hwp)는 국가기술표준원(KS X 6101) 표준 개방형 한글 포맷인 **OWPML(.hwpx / .hwp)** 엔진을 사용하여 공문서 구조를 정밀하게 복원합니다:
+
+- **문단 및 텍스트 자동 복원:** 제목, 본문, 글머리 기호 좌표를 분석하여 한글 프로그램에서 즉시 오탈자를 고치고 내용을 기입할 수 있습니다.
+- **표(Table) 셀 데이터 및 레이아웃 보존:** 복잡한 예산표나 추진 일정표의 행·열 구조를 인식하고 원본 시각 스냅샷을 함께 제공하여 재작성 시간을 90% 이상 단축합니다.
+- **한컴오피스 2014~2024 및 온-나라 시스템 100% 호환:** 별도 플러그인 없이 한컴오피스 한글, 한컴독스, 폴라리스 오피스에서 더블클릭만으로 즉시 열립니다.
+
+---
+
+## 3. 제출처별 권장 한글 변환 모드 비교
+
+| 문서 종류 | 추천 변환 옵션 | 권장 확장자 | 실무 활용 팁 |
+| :--- | :--- | :--- | :--- |
+| **지자체·부처 지원사업 신청서** | 하이브리드 모드 (서식+텍스트) | `.hwpx` 또는 `.hwp` | 원본 양식과 직인을 보존하면서 본문 텍스트 즉시 수정 |
+| **연구 보고서·논문 초안 발췌** | 텍스트 전용 편집 모드 | `.hwpx` | 순수 문단 텍스트만 추출하여 자유롭게 줄글 재편집 |
+| **스캔된 옛날 공문서 PDF** | [OCR 텍스트 추출](/ocr-pdf) 선행 | `.hwp` | 스캔 이미지 속 글자를 먼저 복원한 뒤 한글로 변환 |
+
+---
+
+## 4. 3단계 변환 및 한글 편집 꿀팁
+1. [PDF 한글 변환기](/pdf-to-hwp) 페이지에 공문서 PDF 파일을 끌어다 놓습니다.
+2. 제출 기관의 요구 규격에 맞춰 **`.hwpx` (국가표준 권장)** 또는 **`.hwp` (호환 포맷)** 확장자를 선택합니다.
+3. **[한글 문서로 변환하기]** 버튼을 클릭하여 다운로드한 뒤, 한글 프로그램에서 `[서식 > 글꼴 바꾸기]`로 `맑은 고딕`이나 `함초롬바탕`을 지정하면 줄간격이 더욱 깔끔하게 정렬됩니다.
+`,
+    faqList: [
+      {
+        question: "HWPX 파일은 기존 아래아한글 프로그램에서 바로 열리나요?",
+        answer: "네! 한글 2014 패치 버전 이후 및 한글 2018, 2020, 2022, 2024 등 모든 한컴오피스에서 더블클릭만으로 즉시 열리며, 편집 후 [다른 이름으로 저장]을 눌러 .hwp로 저장할 수도 있습니다."
+      },
+      {
+        question: "변환 과정에서 공문서나 사업계획서가 외부 서버에 남지 않나요?",
+        answer: "절대 남지 않습니다. 모든 변환 작업은 사용자의 웹 브라우저 메모리(WebAssembly) 내부에서 100% 로컬 처리되므로 대외비 사업계획서나 개인정보 서류도 외부 유출이 원천 차단됩니다."
+      },
+      {
+        question: "스캐너로 스캔한 이미지 PDF도 글자 수정이 가능한 한글로 변환되나요?",
+        answer: "스캔본 PDF는 글자가 사진으로 찍힌 상태이므로, 먼저 [PDF OCR 글자 추출](/ocr-pdf) 도구로 텍스트를 인식하거나 하이브리드 모드를 통해 배경 서식 위에 텍스트를 기입하실 수 있습니다."
+      }
+    ]
+  },
   {
-    id: 5,
     slug: "how-to-convert-jpg-to-pdf",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/image-to-pdf",
-    toolName: { ko: "JPG PDF 변환", en: "JPG to PDF", es: "JPG a PDF", ja: "JPGからPDFへ", "zh-CN": "JPG转PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "JPG PDF 변환",
-      "사진 PDF 변환",
-      "이미지 PDF 묶기",
-      "image to pdf converter",
-      "jpg to pdf free",
-      "画像 PDF 変換",
-      "pasar fotos a pdf",
-      "图片转PDF"
-    ],
-    translations: {
-      ko: {
-        title: "스마트폰 사진(JPG/PNG)을 깔끔한 단일 PDF 문서로 묶는 방법",
-        summary: "영수증, 신분증, 강의 필기 등 스마트폰으로 찍은 여러 장의 사진을 순서대로 깔끔하게 정리된 고화질 PDF 전자문서로 만드는 방법입니다.",
-        sections: [
-          {
-            heading: "사진 여러 장을 한 번에 정돈된 보고서 PDF로!",
-            body: [
-              "회사 경비 처리용 영수증 사진 여러 장이나 강의 필기 사진들을 카톡이나 메일로 하나하나 보내면 정리하기 어렵습니다.",
-              "mypickpdf [JPG PDF 변환]을 이용하면 여러 장의 사진을 한 번에 드래그하여 A4 규격의 깔끔한 하나의 PDF 책으로 묶을 수 있습니다."
-            ],
-            tip: "래서팬더 꿀팁: 가로 사진과 세로 사진이 섞여 있어도 자동으로 보기 좋게 비율을 맞춰줍니다!"
-          }
-        ],
-        ctaText: "지금 바로 사진을 PDF로 묶기"
-      },
-      en: {
-        title: "How to Convert Smartphone Photos (JPG/PNG) into Clean Single PDF Documents",
-        summary: "Combine receipts, lecture notes, and ID scans into a professional PDF portfolio in seconds right on your phone or laptop.",
-        sections: [
-          {
-            heading: "Turn Cluttered Photos into Clean Electronic Documents",
-            body: [
-              "Sending multiple individual photo files via messaging apps creates disorganization for recipients.",
-              "With mypickpdf Image to PDF, select as many JPGs or PNGs as you like and compile them into a paginated PDF document instantly."
-            ],
-            tip: "Panda Tip: Both portrait and landscape images are automatically aligned for optimal readability!"
-          }
-        ],
-        ctaText: "Convert Images to PDF Now"
-      }
-    }
-  },
+    title: "스마트폰 사진(JPG, PNG) 여러 장을 고화질 PDF 하나로 묶는 방법",
+    summary: "영수증, 신분증, 계약서 촬영본, 강의 필기 캡처 사진들을 순서대로 깔끔하게 하나의 A4 PDF 전자문서로 만드는 실전 가이드입니다.",
+    category: "변환·스캔",
+    readTime: "4분",
+    publishedAt: "2026-10-08",
+    updatedAt: "2026-10-25",
+    tags: ["JPGPDF변환", "이미지PDF변환", "사진PDF만들기", "PNGPDF변환", "영수증PDF"],
+    relatedToolHref: "/image-to-pdf",
+    relatedToolName: "JPG/PNG 이미지 PDF 변환기 바로가기",
+    content: `
+## 1. 낱장 이미지(JPG) 대신 단일 PDF로 묶어야 하는 이유
+연말정산 증빙 영수증, 은행 대출 서류, 학교 과제 제출 시 스마트폰으로 촬영한 JPG 사진 10장을 메일에 낱개로 첨부하면 담당자가 파일을 하나씩 열어야 하고 순서가 뒤섞여 서류 누락이 발생하기 쉽습니다.
 
-  // 6. PDF 워드(DOCX) 변환
+[JPG PDF 변환기](/image-to-pdf)를 활용하면 다음과 같은 효과를 얻을 수 있습니다:
+- **여러 장의 사진을 단 1개의 PDF로 통합:** JPG, PNG, WebP 사진을 페이지 순서대로 깔끔하게 결합
+- **A4 인쇄 규격 자동 최적화:** 제각각인 사진 해상도와 비율을 A4 용지 중앙에 여백 깨짐 없이 자동 배치
+- **무료 순서 재배치:** 썸네일을 눈으로 확인하며 드래그 앤 드롭으로 1페이지부터 순서 조정
+
+---
+
+## 2. 사진 종류별 최적 변환 세팅 표
+
+| 사진 종류 | 권장 촬영 방향 | 변환 후 추천 후속 작업 |
+| :--- | :--- | :--- |
+| **연말정산·경비 영수증 여러 장** | 세로 방향 통일 촬영 | 변환 후 [PDF 용량 줄이기](/compress-pdf)로 2MB 이하 경량화 |
+| **신분증·통장 사본 제출** | 정면 수평 촬영 | 변환 후 [PDF 편집기](/edit-pdf)에서 주민번호 뒷자리 마스킹 |
+| **종이 계약서·동의서** | 그림자 없이 밝은 곳 촬영 | 변환 후 [PDF 쪽번호 매기기](/add-page-numbers)로 페이지 표시 |
+
+---
+
+## 3. 스마트폰·PC에서 10초 만에 JPG를 PDF로 변환하는 순서
+1. [JPG PDF 변환 도구](/image-to-pdf) 페이지에 접속하여 사진 파일들을 한꺼번에 선택합니다.
+2. 화면에 표시된 이미지 카드 순서를 확인하고 화살표 또는 드래그로 페이지 순서를 맞춥니다.
+3. **[PDF로 변환하기]** 버튼을 클릭하면 서버 업로드 없이 즉시 고화질 단일 PDF가 다운로드됩니다.
+`,
+    faqList: [
+      {
+        question: "세로 사진과 가로 사진을 섞어서 넣어도 잘 변환되나요?",
+        answer: "네, 각 사진의 가로·세로 비율을 자동으로 계산하여 이미지가 잘리거나 찌그러지지 않게 페이지에 맞춰 깔끔하게 배치합니다."
+      },
+      {
+        question: "신분증이나 통장 사본 사진을 올려도 개인정보 유출 위험이 없나요?",
+        answer: "네! 사진 파일이 외부 서버로 전송되지 않고 사용자의 스마트폰·PC 브라우저 안에서만 PDF로 묶이므로 100% 안전합니다."
+      }
+    ]
+  },
   {
-    id: 6,
     slug: "how-to-convert-pdf-to-word",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/pdf-to-word",
-    toolName: { ko: "PDF 워드 변환", en: "PDF to Word", es: "PDF a Word", ja: "PDFからWordへ", "zh-CN": "PDF转Word" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "idea",
-    keywords: [
-      "PDF 워드 변환",
-      "PDF docx 변환",
-      "PDF 수정하는 법",
-      "pdf to word editable free",
-      "convert pdf to word docx",
-      "PDF ワード 変換",
-      "convertir pdf a word",
-      "PDF转Word"
-    ],
-    translations: {
-      ko: {
-        title: "PDF 글자 수정이 필요할 때! 편집 가능한 Word(.docx)로 변환하는 법",
-        summary: "원본 워드 파일이 유실되었거나 오타를 수정해야 할 때, PDF 내 서식과 문단을 그대로 보존하며 마이크로소프트 워드 문서로 바꾸는 비결을 공유합니다.",
-        sections: [
-          {
-            heading: "PDF는 수정할 수 없다? Word로 바꾸면 1초 만에 해결!",
-            body: [
-              "PDF 문서는 원래 출력을 목적으로 설계되어 텍스트 직접 수정이 매우 까다롭습니다.",
-              "mypickpdf [PDF 워드 변환]은 문서의 제목, 본문, 글꼴 크기, 여백 구조를 분석하여 MS Word(.docx) 형식으로 재구성해 주므로 바로 워드에서 글자를 고치고 서식을 변경할 수 있습니다."
-            ],
-            tip: "래서팬더 꿀팁: 변환 후 Word, 한컴오피스, Google Docs 모두에서 자유롭게 편집 가능합니다."
-          }
-        ],
-        ctaText: "지금 바로 PDF를 워드로 변환하기"
-      },
-      en: {
-        title: "How to Convert PDF Files into Fully Editable Microsoft Word Documents",
-        summary: "Recover lost source files and fix typos by converting read-only PDFs into editable Microsoft Word (.docx) files without retyping.",
-        sections: [
-          {
-            heading: "Edit Any PDF by Converting to DOCX",
-            body: [
-              "PDFs are built for visual consistency rather than editing, making quick corrections frustrating without source documents.",
-              "mypickpdf reconstructs paragraphs, fonts, and tables into genuine Microsoft Word structures for seamless editing."
-            ],
-            tip: "Panda Tip: Open the resulting DOCX seamlessly in MS Word, Google Docs, or LibreOffice!"
-          }
-        ],
-        ctaText: "Convert PDF to Word Now"
-      }
-    }
-  },
+    title: "PDF 문서를 워드(DOCX)로 변환하여 서식 깨짐 없이 텍스트 수정하기",
+    summary: "원본 레이아웃과 문단 구조를 최대한 보존하며 PDF 문서를 마이크로소프트 워드(.docx) 파일로 즉각 변환하여 자유롭게 편집하는 방법입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-09",
+    updatedAt: "2026-10-25",
+    tags: ["PDF워드변환", "PDFtoWord", "DOCX변환", "PDF문서수정", "워드변환무료"],
+    relatedToolHref: "/pdf-to-word",
+    relatedToolName: "PDF 워드(DOCX) 변환기 바로가기",
+    content: `
+## 1. 원본 워드 파일이 없을 때 가장 빠른 복원법
+최종본 PDF만 남아있고 원본 \`.docx\` 파일이 유실되었을 때, PDF의 텍스트를 마우스로 드래그해서 워드에 붙여넣으면 매 줄마다 줄바꿈(엔터)이 들어가고 글자 크기와 문단 간격이 완전히 망가집니다.
 
-  // 7. PDF 엑셀(XLSX) 변환
+[PDF 워드 변환기](/pdf-to-word)는 PDF 내부의 텍스트 좌표와 폰트 크기, 줄간격을 지능적으로 분석하여 자연스러운 문단 구조가 살아있는 Microsoft Word(\`.docx\`) 문서로 복원해 줍니다.
+
+---
+
+## 2. 단순 복사 붙여넣기 vs PDF 워드 변환기 비교
+
+| 비교 항목 | PDF에서 직접 복사(Ctrl+C) 후 붙여넣기 | pdfpick [PDF 워드 변환기](/pdf-to-word) |
+| :--- | :--- | :--- |
+| **문단 줄바꿈 유지** | 줄 끝마다 엔터가 들어가 문장이 끊김 | **문단 단위 자동 병합으로 자연스러운 줄글 유지** |
+| **제목·본문 계층 구조** | 모든 글자가 동일한 크기로 평면화됨 | **제목(Heading)과 본문 폰트 크기 차이 보존** |
+| **표 및 목록 구조** | 탭과 공백이 무너져 재작성 필요 | **표 셀 데이터 및 글머리 목록 구조 복원** |
+| **소요 시간 (10페이지 기준)** | 수동 줄바꿈 제거에 30분 이상 소요 | **단 2초 만에 변환 완료** |
+
+---
+
+## 3. 워드 변환 후 깔끔하게 편집하는 실무 팁
+1. [PDF 워드 변환 도구](/pdf-to-word)에 PDF를 업로드하고 변환된 \`.docx\` 파일을 다운로드합니다.
+2. MS 워드나 한컴오피스, 구글 문서(Google Docs)에서 파일을 엽니다.
+3. 만약 문서 일부만 간단히 오타를 고치거나 서명을 넣는 것이 목적이라면 워드 변환 없이 [무료 PDF 편집기](/edit-pdf)에서 직접 글자를 수정하는 것이 더 빠를 수 있습니다.
+`,
+    faqList: [
+      {
+        question: "구글 독스(Google Docs)나 맥 Pages에서도 변환된 파일이 열리나요?",
+        answer: "네! 국제 표준 OpenXML(.docx) 규격으로 생성되므로 MS Word뿐만 아니라 구글 문서, 한컴오피스, 맥 Pages에서 모두 완벽하게 열립니다."
+      },
+      {
+        question: "영문 계약서나 다국어 PDF도 워드로 변환할 수 있나요?",
+        answer: "네, 한국어·영어·일본어·중국어 등 유니코드 전체 언어를 완벽 지원하며, 번역이 필요한 경우 [PDF 번역기](/translate-pdf)에서 번역된 워드 파일로 바로 다운로드하실 수도 있습니다."
+      }
+    ]
+  },
   {
-    id: 7,
     slug: "how-to-convert-pdf-to-excel",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/pdf-to-excel",
-    toolName: { ko: "PDF 엑셀 변환", en: "PDF to Excel", es: "PDF a Excel", ja: "PDFからExcelへ", "zh-CN": "PDF转Excel" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "PDF 엑셀 변환",
-      "PDF 표 추출",
-      "재무제표 PDF 엑셀",
-      "pdf to excel table extractor",
-      "convert pdf to xlsx",
-      "PDF エクセル 変換",
-      "convertir pdf a excel",
-      "PDF转Excel"
-    ],
-    translations: {
-      ko: {
-        title: "복잡한 표와 수치 데이터도 한 번에! PDF를 엑셀(XLSX)로 추출하는 법",
-        summary: "재무제표, 통계 자료, 견적서 PDF에 담긴 수많은 행과 열 데이터를 하나하나 복사-붙여넣기 하지 않고 즉시 엑셀 스프레드시트로 옮기는 법을 알아봅니다.",
-        sections: [
-          {
-            heading: "일일이 복사해서 붙여넣던 노가다는 이제 그만!",
-            body: [
-              "PDF 문서 속 표를 일반 복사해서 엑셀에 붙여넣으면 행과 열이 뒤엉켜 엉망이 되기 일쑤입니다.",
-              "mypickpdf [PDF 엑셀 변환]은 표의 테두리와 셀 좌표를 지능적으로 감지하여 온전한 엑셀 그리드 셀 구조로 정확히 배치해 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 변환 즉시 SUM, AVERAGE 등 엑셀 함수를 바로 적용할 수 있습니다!"
-          }
-        ],
-        ctaText: "지금 바로 PDF 표 엑셀로 추출하기"
-      },
-      en: {
-        title: "How to Extract Tables and Financial Data from PDF into Excel (XLSX)",
-        summary: "Stop manual retyping: convert complex tabular reports, balance sheets, and receipts into accurate Excel spreadsheets with one click.",
-        sections: [
-          {
-            heading: "No More Broken Paste Formatting in Excel",
-            body: [
-              "Standard copy-and-paste from PDF tables splits data across awkward rows and corrupts cell alignment.",
-              "mypickpdf identifies table borders and column delimiters, restoring data into clean, calculate-ready Excel spreadsheets."
-            ],
-            tip: "Panda Tip: Calculate formulas like SUM and VLOOKUP right away on the extracted tables!"
-          }
-        ],
-        ctaText: "Extract PDF to Excel Now"
-      }
-    }
-  },
+    title: "PDF 속 복잡한 표와 숫자를 엑셀(XLSX) 시트로 깔끔하게 추출하기",
+    summary: "일일이 계산기를 두드리며 타이핑할 필요 없이 재무제표, 견적서, 단가표 등 PDF 표 데이터를 엑셀 행/열 셀로 자동 정렬하여 추출하는 방법입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-10",
+    updatedAt: "2026-10-25",
+    tags: ["PDF엑셀변환", "PDF표추출", "PDFtoExcel", "XLSX변환", "재무제표추출", "PDF표복사"],
+    relatedToolHref: "/pdf-to-excel",
+    relatedToolName: "PDF 엑셀(XLSX) 변환기 바로가기",
+    content: `
+## 1. PDF 표를 복사해서 엑셀에 붙여넣으면 한 셀에 다 뭉치는 이유
+거래처에서 받은 PDF 견적서, 금융기관 거래내역서, 기업 감사보고서의 재무제표 표를 마우스로 드래그해서 엑셀에 붙여넣기(Ctrl+V) 해보면, 모든 항목과 숫자가 **A1 셀 하나에 한 줄로 길게 뭉쳐버리는 현상**을 겪게 됩니다.
 
-  // 8. PDF 파워포인트(PPTX) 변환
+이는 PDF 파일이 엑셀처럼 '행(Row)과 열(Column)' 구조로 저장된 것이 아니라, 종이 위의 X/Y 좌표 위치에 글자만 배치해 놓은 포맷이기 때문입니다.
+
+---
+
+## 2. X/Y 좌표 기반 열·행 자동 매핑 기술
+[PDF 엑셀 변환 도구](/pdf-to-excel)는 페이지 내 모든 텍스트 객체의 가로(X축) 및 세로(Y축) 정렬 좌표를 정밀 계산하여 실제 엑셀 스프레드시트의 행과 열 셀에 데이터를 정확히 분배합니다:
+- **숫자 및 금액 데이터 보존:** 천 단위 콤마(\`,\`)와 소수점 데이터를 인식하여 추출 후 즉시 \`SUM\`, \`AVERAGE\`, \`VLOOKUP\` 수식 연산 가능
+- **다중 페이지 표 연속 추출:** 수십 페이지에 걸친 품목 단가표나 재무제표도 하나의 \`.xlsx\` 파일로 일괄 변환
+- **100% 로컬 처리로 회계 기밀 보호:** 매출 내역서, 급여 대장, 세금계산서 데이터가 외부 서버로 유출되지 않음
+
+---
+
+## 3. 3초 만에 PDF 표를 엑셀로 가져오는 방법
+1. [PDF 엑셀 변환기](/pdf-to-excel)에 표가 포함된 PDF 문서를 업로드합니다.
+2. **[Excel(XLSX)로 변환하기]** 버튼을 클릭하여 파일을 다운로드합니다.
+3. 만약 100페이지짜리 보고서 중 단 2페이지의 표만 필요하다면 먼저 [PDF 나누기 도구](/split-pdf)로 해당 페이지만 추출한 뒤 엑셀로 변환하면 더욱 깔끔한 시트를 얻을 수 있습니다.
+`,
+    faqList: [
+      {
+        question: "여러 페이지에 걸친 긴 표도 하나의 엑셀 파일로 변환되나요?",
+        answer: "네, 모든 페이지의 표 데이터를 순차적으로 분석하여 엑셀 통합 문서(.xlsx) 시트로 깔끔하게 정리해 줍니다."
+      },
+      {
+        question: "스캔한 종이 영수증이나 이미지 표도 엑셀로 변환되나요?",
+        answer: "마우스로 글자 드래그가 안 되는 스캔 이미지 PDF는 먼저 [PDF OCR 글자 추출](/ocr-pdf) 도구로 텍스트를 추출한 뒤 활용하시는 것을 권장합니다."
+      }
+    ]
+  },
   {
-    id: 8,
     slug: "how-to-convert-pdf-to-powerpoint",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/pdf-to-powerpoint",
-    toolName: { ko: "PDF PPT 변환", en: "PDF to PPT", es: "PDF a PPT", ja: "PDFからPPTへ", "zh-CN": "PDF转PPT" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "cheering",
-    keywords: [
-      "PDF PPT 변환",
-      "PDF 파워포인트 변환",
-      "발표자료 PDF 슬라이드",
-      "pdf to powerpoint slides",
-      "convert pdf to pptx",
-      "PDF パワーポイント 変換",
-      "convertir pdf a powerpoint",
-      "PDF转PPT"
-    ],
-    translations: {
-      ko: {
-        title: "발표 자료 재활용: PDF 문서를 파워포인트(PPTX) 슬라이드로 변환하기",
-        summary: "이전에 발표했던 자료나 외부에서 받은 PDF 강연 슬라이드를 다시 프레젠테이션용 PPTX 슬라이드로 되살리는 노하우입니다.",
-        sections: [
-          {
-            heading: "PDF 발표 자료를 다시 살아있는 프레젠테이션으로!",
-            body: [
-              "PDF로 저장된 멋진 슬라이드를 다음 발표에서 일부만 수정하여 다시 사용하고 싶을 때가 많습니다.",
-              "mypickpdf [PDF PPT 변환]은 각 페이지를 파워포인트 개별 슬라이드로 정확히 매핑하여 새 발표 자료 제작 시간을 대폭 단축시켜 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 16:9 와이드 슬라이드와 4:3 표준 슬라이드 비율을 모두 깔끔하게 유지합니다."
-          }
-        ],
-        ctaText: "지금 바로 PDF를 PPT로 변환하기"
-      },
-      en: {
-        title: "How to Convert PDF Presentations Back into PowerPoint (PPTX) Slides",
-        summary: "Turn static slide decks and seminar handouts back into dynamic PowerPoint presentations ready for your next big meeting.",
-        sections: [
-          {
-            heading: "Reuse and Refresh Slide Content with Ease",
-            body: [
-              "When you need to update an archived PDF slide deck, recreating every slide from scratch wastes hours.",
-              "mypickpdf converts every PDF page into a designated PowerPoint slide with native presentation aspect ratios."
-            ],
-            tip: "Panda Tip: Works smoothly with Microsoft PowerPoint, Apple Keynote, and Google Slides!"
-          }
-        ],
-        ctaText: "Convert PDF to PPT Now"
-      }
-    }
-  },
+    title: "PDF 발표자료를 파워포인트(PPTX) 슬라이드로 1초 만에 복원하기",
+    summary: "발표용 PPT 원본이 분실되었거나 강연 자료 PDF를 수정해야 할 때, 고화질 슬라이드 규격의 파워포인트(.pptx) 파일로 변환하는 방법입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-11",
+    updatedAt: "2026-10-25",
+    tags: ["PDFPPT변환", "PDF파워포인트변환", "PPTX변환", "발표자료복원"],
+    relatedToolHref: "/pdf-to-powerpoint",
+    relatedToolName: "PDF 파워포인트(PPTX) 변환기 바로가기",
+    content: `
+## 1. 급한 프레젠테이션 수정, PDF에서 바로 PPTX로!
+학회 발표, 영업 미팅, 대학 강의 직전에 PDF로만 배포된 발표 자료를 급히 수정하거나 다른 PPT 슬라이드와 합쳐야 할 때 화면을 일일이 캡처해서 파워포인트에 붙여넣으면 화질이 심하게 저하되고 여백이 맞지 않습니다.
 
-  // 9. 동영상 압축 (카카오톡/이메일용)
+[PDF PPT 변환기](/pdf-to-powerpoint)를 사용하면 단 몇 초 만에 전체 PDF 페이지를 파워포인트(\`.pptx\`) 슬라이드 파일로 변환할 수 있습니다:
+- **16:9 와이드스크린 & 4:3 비율 자동 매칭:** 원본 PDF의 가로·세로 비율을 유지하여 슬라이드 왜곡 원천 방지
+- **고해상도 그래픽 유지:** 차트, 다이어그램, 폰트 깨짐 없이 대형 빔프로젝터 화면에서도 선명한 화질 보장
+- **자유로운 슬라이드 재구성:** 파워포인트에서 열어 슬라이드 순서를 바꾸거나 발표자 노트를 추가하고 도형·텍스트 상자를 덧입혀 즉시 발표 진행 가능
+
+---
+
+## 2. 발표자료 작업 시 함께 쓰면 좋은 추천 도구
+- 두 개의 PDF 발표 자료를 하나로 먼저 합치고 싶다면: [PDF 합치기](/merge-pdf)
+- 발표 자료 중 불필요한 부록 슬라이드를 빼고 싶다면: [PDF 나누기·삭제](/split-pdf)
+- PDF 발표 자료에 있는 오타나 날짜만 바로 고치고 싶다면: [무료 PDF 편집기](/edit-pdf)
+`,
+    faqList: [
+      {
+        question: "변환된 PPTX 파일에 새 슬라이드를 추가하거나 도형을 얹을 수 있나요?",
+        answer: "네, 표준 마이크로소프트 파워포인트(.pptx) 파일로 저장되므로 슬라이드 순서를 바꾸거나 텍스트 상자·도형·애니메이션을 자유롭게 추가할 수 있습니다."
+      },
+      {
+        question: "한쇼(Hanshow)나 구글 슬라이드에서도 열리나요?",
+        answer: "네! 국제 표준 PPTX 포맷이므로 MS PowerPoint, 한컴오피스 한쇼, 구글 프레젠테이션, 애플 Keynote에서 모두 완벽히 호환됩니다."
+      }
+    ]
+  },
   {
-    id: 9,
     slug: "how-to-compress-video-for-kakaotalk",
-    category: "media",
-    categoryLabel: { ko: "미디어 꿀팁", en: "Media Tips", es: "Consejos Multimedia", ja: "メディアヒント", "zh-CN": "媒体技巧" },
-    toolHref: "/compress-video",
-    toolName: { ko: "동영상 압축", en: "Compress Video", es: "Comprimir Video", ja: "動画圧縮", "zh-CN": "视频压缩" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "idea",
-    keywords: [
-      "동영상 용량 줄이기",
-      "카카오톡 동영상 압축",
-      "MP4 용량 줄이기",
-      "compress video for email",
-      "reduce mp4 size online",
-      "動画 圧縮 無料",
-      "comprimir video mp4",
-      "视频压缩"
-    ],
-    translations: {
-      ko: {
-        title: "카카오톡·이메일 전송용 대용량 동영상 용량 80% 줄이는 꿀팁",
-        summary: "스마트폰으로 촬영한 4K·FHD 대용량 동영상이 카톡 전송 제한(300MB)이나 이메일 첨부 용량(25MB)을 넘을 때, 화질 손상 없이 가볍게 압축하는 방법입니다.",
-        sections: [
-          {
-            heading: "스마트폰 촬영 영상이 너무 커서 안 보내질 때!",
-            body: [
-              "요즘 스마트폰 카메라는 화질이 매우 뛰어나 몇 초만 찍어도 수백 메가바이트(MB)를 훌쩍 넘습니다.",
-              "mypickpdf [동영상 압축]은 최신 H.264/WebM 하드웨어 가속 비디오 인코딩 기술을 적용하여, 사람 눈에 보이는 화질 차이는 최소화하면서 데이터 용량은 최대 80%까지 시원하게 다이어트해 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 동영상이 외부 서버로 업로드되지 않고 내 기기 안에서 직접 압축되므로 데이터 요금이 들지 않고 사생활 유출 위험이 없습니다!"
-          }
-        ],
-        ctaText: "지금 바로 동영상 용량 줄이기"
-      },
-      en: {
-        title: "How to Compress Large MP4/MOV Videos for Messaging and Email Transfers",
-        summary: "Shrink heavy 4K and FHD phone recordings up to 80% smaller without noticeable blur or pixelation—all inside your browser.",
-        sections: [
-          {
-            heading: "Never Hit Video Transfer Size Limits Again",
-            body: [
-              "Modern mobile video files quickly exceed email attachment quotas and social chat file restrictions.",
-              "mypickpdf employs hardware-accelerated client-side encoding, reducing file sizes drastically while maintaining crisp visuals."
-            ],
-            tip: "Panda Tip: Your personal videos never leave your device, ensuring total privacy!"
-          }
-        ],
-        ctaText: "Compress Video Online Now"
-      }
-    }
-  },
+    title: "카카오톡·이메일 대용량 동영상 용량 줄이기: 화질 저하 없는 MP4 압축",
+    summary: "카카오톡 300MB 전송 제한, 네이버·지메일 25MB 첨부 불가 문제를 프로그램 설치 없이 브라우저에서 초고속으로 해결하는 동영상 압축 노하우입니다.",
+    category: "압축·최적화",
+    readTime: "4분",
+    publishedAt: "2026-10-12",
+    updatedAt: "2026-10-25",
+    tags: ["동영상압축", "동영상용량줄이기", "MP4압축", "카톡동영상전송", "MOV압축"],
+    relatedToolHref: "/compress-video",
+    relatedToolName: "무료 동영상 압축기 바로가기",
+    content: `
+## 1. 스마트폰으로 찍은 1분짜리 영상이 수백 MB인 이유
+최신 아이폰(MOV)과 갤럭시(MP4)는 기본 4K 60fps 고비트레이트로 영상을 촬영하기 때문에 1~2분만 찍어도 용량이 300MB~500MB를 훌쩍 넘깁니다. 이로 인해 메신저나 이메일로 영상을 보낼 때 항상 용량 제한 오류에 부딪히게 됩니다.
 
-  // 10. 동영상 GIF 움짤 변환
+### 주요 플랫폼별 동영상 첨부 최대 용량 제한
+
+| 전송 플랫폼 | 최대 허용 용량 | 초과 시 발생하는 문제 |
+| :--- | :--- | :--- |
+| **카카오톡 (KakaoTalk)** | 300MB 이하 | 전송 자체 불가 (파일 크기 초과 알림) |
+| **구글 지메일 (Gmail) / 다음 메일** | 25MB 이하 | 일반 첨부 불가, 외부 클라우드 링크 강제 전환 |
+| **네이버 메일 (일반 첨부)** | 10MB 이하 | 대용량 첨부 시 30일 후 링크 만료로 열람 불가 |
+| **디스코드 (Discord 무료)** | 10MB~25MB 이하 | 업로드 차단 |
+
+---
+
+## 2. 화질은 또렷하게 유지하면서 용량만 80% 줄이는 비결
+[동영상 용량 줄이기 도구](/compress-video)는 브라우저 하드웨어 가속 인코딩 기술을 통해 사람의 눈으로 식별하기 어려운 잉여 비트레이트(Bitrate)만 스마트하게 다이어트하여 파일 크기를 **60%~85%까지 대폭 축소**합니다:
+- **아이폰 MOV ➔ 표준 MP4 자동 변환:** 윈도우 PC에서 재생이 안 되는 아이폰 MOV 영상을 모든 기기에서 열리는 고효율 MP4로 자동 변환
+- **워터마크 0% & 무제한 무료:** 유료 인코딩 프로그램처럼 화면 구석에 로고가 찍히거나 길이 제한이 없음
+- **100% 로컬 처리:** 가족 영상, 사내 교육 영상, 블랙박스 영상이 외부 서버로 업로드되지 않아 사생활 유출 위험 제로
+`,
+    faqList: [
+      {
+        question: "아이폰으로 찍은 MOV 동영상도 MP4로 압축 변환되나요?",
+        answer: "네! 아이폰 MOV 파일을 넣으면 모든 PC와 스마트폰에서 호환성이 가장 높은 표준 MP4 포맷으로 자동 압축 저장됩니다."
+      },
+      {
+        question: "동영상 소리가 작아지거나 음성이 싱크가 밀리지 않나요?",
+        answer: "원본 오디오 트랙의 싱크와 음질을 그대로 유지하면서 비디오 스트림 비트레이트만 최적화하므로 음성 밀림 없이 깔끔하게 재생됩니다."
+      }
+    ]
+  },
   {
-    id: 10,
     slug: "how-to-make-gif-from-video",
-    category: "media",
-    categoryLabel: { ko: "미디어 꿀팁", en: "Media Tips", es: "Consejos Multimedia", ja: "メディアヒント", "zh-CN": "媒体技巧" },
-    toolHref: "/video-to-gif",
-    toolName: { ko: "동영상 GIF 변환", en: "Video to GIF", es: "Video a GIF", ja: "動画GIF変換", "zh-CN": "视频转GIF" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "cheering",
-    keywords: [
-      "동영상 GIF 변환",
-      "움짤 만들기",
-      "카톡 움짤",
-      "convert video to animated gif",
-      "make gif from video",
-      "動画 GIF 変換",
-      "crear gif de video",
-      "视频转GIF动图"
-    ],
-    translations: {
-      ko: {
-        title: "동영상 클립으로 1초 만에 고화질 움직이는 짤(GIF) 만들기",
-        summary: "반려동물 영상이나 재밌는 하이라이트 동영상을 블로그나 커뮤니티, 단톡방에 바로 재생되는 고화질 GIF 움짤로 변환하는 가장 빠른 방법입니다.",
-        sections: [
-          {
-            heading: "클릭 한 번으로 탄생하는 생생한 움짤!",
-            body: [
-              "동영상은 재생 버튼을 눌러야 하지만, GIF 움짤은 카톡이나 블로그에서 자동으로 움직여 시선을 사로잡습니다.",
-              "mypickpdf [동영상 GIF 변환]에 영상을 올리면 별도의 편집 프로그램(포토샵 등) 없이도 원하는 프레임 레이트와 화질의 부드러운 GIF를 즉시 만들어 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 반려동물의 귀여운 순간을 1초 만에 카톡용 짤로 만들어 친구들에게 자랑해보세요!"
-          }
-        ],
-        ctaText: "지금 바로 고화질 GIF 움짤 만들기"
-      },
-      en: {
-        title: "How to Turn Video Clips into Smooth Animated GIFs in Seconds",
-        summary: "Transform cute pet moments and highlight reels into high-framerate animated GIFs perfect for blog posts and social messaging.",
-        sections: [
-          {
-            heading: "Create Eye-Catching GIFs Without Complex Editing Suites",
-            body: [
-              "Animated GIFs play automatically across forums, social media feeds, and messengers without requiring video players.",
-              "mypickpdf converts your favorite video snippets into optimized, lightweight GIFs with balanced color palettes."
-            ],
-            tip: "Panda Tip: Share your animated memes and tutorials anywhere with zero compatibility issues!"
-          }
-        ],
-        ctaText: "Create Animated GIF Now"
-      }
-    }
-  },
+    title: "동영상 클립을 고화질 GIF 움짤로 변환하는 가장 빠른 방법 (워터마크 없음)",
+    summary: "포토샵이나 무거운 영상 편집 프로그램 없이 웹 브라우저에서 원하는 동영상 구간을 고화질 움직이는 GIF(움짤)로 1초 만에 추출하는 가이드입니다.",
+    category: "변환·스캔",
+    readTime: "4분",
+    publishedAt: "2026-10-13",
+    updatedAt: "2026-10-25",
+    tags: ["동영상GIF변환", "움짤만들기", "MP4toGIF", "고화질GIF", "블로그움짤"],
+    relatedToolHref: "/video-to-gif",
+    relatedToolName: "동영상 GIF 움짤 변환기 바로가기",
+    content: `
+## 1. 네이버 블로그·노션·상세페이지의 핵심, '움직이는 GIF'
+네이버 블로그 리뷰, 노션(Notion) 포트폴리오, 스마트스토어 상세페이지, 깃허브(GitHub) README에서 제품의 작동 모습이나 소프트웨어 시연 화면을 보여줄 때는 무거운 동영상보다 **클릭 없이 페이지가 열리자마자 자동 반복 재생되는 GIF 움짤**이 사용자 체류 시간과 구매 전환율을 3배 이상 높여줍니다.
 
-  // 11. 서버 저장 0% 보안 가이드
+---
+
+## 2. 용도별 최적의 GIF 프레임(FPS) 및 해상도 설정표
+
+| 활용처 | 권장 가로 크기 (Width) | 권장 프레임 (FPS) | 추천 구간 길이 |
+| :--- | :--- | :--- | :--- |
+| **네이버 블로그·티스토리 본문** | 480px ~ 600px | 10 ~ 15 FPS | 3초 ~ 6초 (모바일 로딩 최적화) |
+| **쇼핑몰 상세페이지·제품 시연** | 600px ~ 720px | 15 ~ 20 FPS | 3초 ~ 5초 (부드러운 움직임 강조) |
+| **커뮤니티·메신저 공유용 움짤** | 360px ~ 480px | 10 FPS | 2초 ~ 4초 (최소 용량) |
+
+---
+
+## 3. 워터마크 없는 고화질 GIF 3초 제작법
+1. [동영상 GIF 변환기](/video-to-gif)에 MP4, MOV, WebM 영상을 불러옵니다.
+2. 시작 시간(초)과 움짤로 만들 지속 시간, 해상도, FPS를 선택합니다.
+3. **[GIF 움짤 만들기]** 버튼을 누르면 사이트 로고(워터마크)가 전혀 없는 깨끗한 고화질 GIF가 즉시 다운로드됩니다.
+`,
+    faqList: [
+      {
+        question: "만들어진 GIF 파일에 사이트 로고(워터마크)가 찍히나요?",
+        answer: "전혀 찍히지 않습니다. 100% 깨끗한 무워터마크 원본 품질의 GIF 파일을 무료로 다운로드하실 수 있습니다."
+      },
+      {
+        question: "GIF 용량이 너무 커지지 않게 조절할 수 있나요?",
+        answer: "네, 해상도(예: 480p)와 프레임 레이트(예: 10fps) 옵션을 선택하여 블로그 업로드 제한 용량에 딱 맞게 가벼운 GIF를 생성할 수 있습니다."
+      }
+    ]
+  },
   {
-    id: 11,
     slug: "client-side-pdf-security",
-    category: "security",
-    categoryLabel: { ko: "보안 가이드", en: "Security Guide", es: "Guía de Seguridad", ja: "セキュリティガイド", "zh-CN": "安全指南" },
-    toolHref: "/compress-pdf",
-    toolName: { ko: "안심 보안 체험", en: "Experience Safe PDF", es: "PDF Seguro", ja: "安心セキュリティ体験", "zh-CN": "安全体验" },
-    date: "2026-09-28",
-    readTime: { ko: "4분 읽기", en: "4 min read", es: "Lectura de 4 min", ja: "4分で読める", "zh-CN": "4分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "PDF 보안",
-      "서버 전송 없는 PDF",
-      "회사 기밀 문서 PDF",
-      "secure client side pdf converter",
-      "private pdf tools no server",
-      "ローカル PDF 変換 安全",
-      "pdf privado sin servidor"
-    ],
-    translations: {
-      ko: {
-        title: "회사 기밀 문서도 안심! 서버 전송 0% 클라이언트 사이드 변환의 원리",
-        summary: "온라인 무료 PDF 사이트에 회계 자료나 개인정보 문서를 올리기 꺼려지셨나요? mypickpdf가 왜 해킹이나 유출 걱정 없이 100% 안전한지 기술적 원리를 밝힙니다.",
-        sections: [
-          {
-            heading: "기존 온라인 PDF 변환 사이트의 숨겨진 위험",
-            body: [
-              "일반적인 온라인 변환 사이트는 사용자가 올린 문서를 해외 클라우드 서버로 업로드한 뒤 서버에서 변환하여 다시 내려줍니다.",
-              "이 과정에서 회사의 재무 정보, 계약서, 신분증 사본 등이 제3자 서버에 저장되거나 유출될 위험이 존재합니다."
-            ],
-            tip: "래서팬더 꿀팁: mypickpdf는 비행기 모드나 인터넷을 끊은 상태에서도 문서 변환이 동작할 정도로 완벽한 로컬 환경을 제공합니다!"
-          },
-          {
-            heading: "mypickpdf의 100% Client-Side WebAssembly 기술",
-            body: [
-              "mypickpdf는 최신 WebAssembly 기술을 채택하여 모든 암호화, 파싱, 렌더링 엔진이 사용자의 PC/스마트폰 메모리 안에서만 구동됩니다.",
-              "귀하의 파일은 인터넷망을 단 1바이트도 통과하지 않으므로, 은행이나 대기업 보안 감사 규정에도 완벽히 부합합니다."
-            ]
-          }
-        ],
-        ctaText: "안전한 100% 로컬 PDF 도구 써보기"
-      },
-      en: {
-        title: "Why Zero-Server Transmission Matters: Complete Privacy for Confidential Documents",
-        summary: "Understand the technology behind 100% client-side WebAssembly processing and why your confidential enterprise documents never leak.",
-        sections: [
-          {
-            heading: "The Hidden Security Risks of Conventional Online PDF Converters",
-            body: [
-              "Most free web services silently transmit your uploaded files to third-party overseas cloud datacenters for remote conversion.",
-              "This workflow poses acute compliance liabilities for sensitive financial data, legal contracts, and personal identity records."
-            ],
-            tip: "Panda Tip: mypickpdf operates even in offline mode because all processing happens on your local device CPU/RAM!"
-          },
-          {
-            heading: "100% Client-Side Architecture Guarantee",
-            body: [
-              "mypickpdf utilizes cutting-edge WebAssembly binaries running inside your browser sandbox.",
-              "Not a single byte of your document is transferred over the wire, satisfying the strictest enterprise confidentiality policies."
-            ]
-          }
-        ],
-        ctaText: "Experience Zero-Leakage PDF Tools"
-      }
-    }
-  },
+    title: "회사 기밀 문서·개인정보 유출 제로! 로컬 브라우저 PDF 처리가 안전한 이유",
+    summary: "기존 온라인 PDF 변환 사이트의 클라우드 서버 저장 위험성과 pdfpick의 100% 클라이언트 사이드 WebAssembly 보안 메커니즘을 심층 비교합니다.",
+    category: "보안·기술",
+    readTime: "5분",
+    publishedAt: "2026-10-14",
+    updatedAt: "2026-10-25",
+    tags: ["PDF보안", "서버저장없음", "개인정보보호", "기업보안", "WebAssembly"],
+    relatedToolHref: "/edit-pdf",
+    relatedToolName: "100% 로컬 보안 PDF 편집기 바로가기",
+    content: `
+## 1. 계약서와 신분증 사본, 외부 서버에 올려도 괜찮을까요?
+일반적인 해외 무료 PDF 사이트들은 사용자가 파일을 선택하는 순간 **원격 클라우드 서버로 파일을 업로드(Upload)**하여 서버에서 변환한 뒤 다시 다운로드 링크를 생성합니다. 아무리 "1시간 뒤 자동 삭제"라고 적혀 있어도, 내 주민등록등본이나 사내 연봉계약서, 미공개 특허 도면이 외부 서버 디스크에 저장된다는 사실 자체만으로 큰 보안 리스크가 됩니다.
 
-  // 12. PDF 페이지 번호 매기기
+반면 **pdfpick(피디에프픽)**은 모든 파일 처리를 사용자의 PC 및 스마트폰 **웹 브라우저 메모리(RAM) 내부에서만 100% 로컬 완결**합니다:
+- **외부 서버 전송량 0 Byte:** 파일이 인터넷망을 타고 외부 서버로 절대 나가지 않음
+- **브라우저 탭 종료 시 즉시 완전 휘발:** 작업을 마치고 브라우저 탭을 닫는 순간 RAM 메모리에서 흔적 없이 소멸됨
+- **사내 보안망(DLP) 완벽 준수:** 외부 파일 반출(HTTP POST 업로드)을 감시하는 기업·금융권 보안 환경에서도 정책 위반 없이 안전하게 사용 가능
+
+---
+
+## 2. 부서별 안심 활용 가이드
+
+| 담당 부서 / 직무 | 주로 다루는 민감 문서 | pdfpick 추천 보안 도구 |
+| :--- | :--- | :--- |
+| **인사·총무·법무팀** | 근로계약서, 연봉계약서, 신분증 사본 | [PDF 편집기](/edit-pdf) (주민번호 마스킹 및 전자서명) |
+| **재무·회계·세무팀** | 재무제표, 세금계산서, 급여명세서 | [PDF 엑셀 변환](/pdf-to-excel) 및 [PDF 합치기](/merge-pdf) |
+| **공공입찰·기획팀** | 나라장터 입찰제안서, 대외비 기획안 | [PDF 한글 변환](/pdf-to-hwp) 및 [PDF 워터마크](/add-watermark) |
+`,
+    faqList: [
+      {
+        question: "금융권이나 공공기관 보안 PC에서도 차단되지 않고 쓸 수 있나요?",
+        answer: "외부 서버로 파일을 업로드(POST)하는 네트워크 트래픽 자체가 발생하지 않으므로 사내 보안 프로그램(DLP) 환경에서도 안심하고 사용하실 수 있습니다."
+      },
+      {
+        question: "작업 도중 인터넷 연결을 끊어도 동작하나요?",
+        answer: "네! 페이지를 한 번 열어둔 상태라면 랜선을 뽑거나 와이파이를 끈 오프라인 상태에서도 PDF 합치기, 분할, 압축, 편집이 모두 정상 작동합니다. 이것이 바로 100% 로컬 처리의 가장 확실한 증거입니다."
+      }
+    ]
+  },
   {
-    id: 12,
     slug: "how-to-add-page-numbers-to-pdf",
-    category: "edit",
-    categoryLabel: { ko: "PDF 편집 팁", en: "PDF Tips", es: "Consejos PDF", ja: "PDFヒント", "zh-CN": "PDF技巧" },
-    toolHref: "/add-page-numbers",
-    toolName: { ko: "페이지 번호", en: "Page Numbers", es: "Números de Página", ja: "ページ番号追加", "zh-CN": "添加页码" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "idea",
-    keywords: [
-      "PDF 페이지 번호",
-      "PDF 쪽번호",
-      "논문 쪽번호 매기기",
-      "add page numbers to pdf online",
-      "number pdf pages free",
-      "PDF ページ番号 追加",
-      "numerar paginas pdf online",
-      "PDF添加页码"
-    ],
-    translations: {
-      ko: {
-        title: "논문·보고서 제출 필수: PDF에 쪽번호/페이지 번호 일괄 삽입하기",
-        summary: "여러 문서를 합쳤거나 원본에 쪽번호가 누락되었을 때, 원하는 위치(하단 중앙, 우측 하단 등)에 깔끔하게 페이지 번호를 일괄 부여하는 방법입니다.",
-        sections: [
-          {
-            heading: "제출용 문서의 완성도를 높이는 페이지 번호 삽입",
-            body: [
-              "보고서나 과제물을 제출할 때 페이지 번호가 없으면 채점관이나 독자가 원하는 페이지를 찾기 어렵습니다.",
-              "mypickpdf [PDF 페이지 번호] 도구를 사용하면 1초 만에 하단 중앙, 우측 상단 등 원하는 위치와 폰트 스타일로 쪽번호를 매길 수 있습니다."
-            ],
-            tip: "래서팬더 꿀팁: 표지(1페이지)를 제외하고 2페이지부터 번호가 시작되도록 설정할 수도 있어요!"
-          }
-        ],
-        ctaText: "지금 바로 PDF 페이지 번호 매기기"
-      },
-      en: {
-        title: "How to Add Page Numbers to PDF Reports and Theses in Seconds",
-        summary: "Stamp clean, consistent pagination onto all pages of your merged reports, academic theses, and business presentations effortlessly.",
-        sections: [
-          {
-            heading: "Polish Your Documents with Proper Pagination",
-            body: [
-              "Submitting formal reports without page numbering complicates reviewing and referencing.",
-              "mypickpdf lets you specify numbering formats, font dimensions, and corner alignments with one click."
-            ],
-            tip: "Panda Tip: You can easily skip cover pages and start counting from page 2 onwards!"
-          }
-        ],
-        ctaText: "Add Page Numbers to PDF Now"
-      }
-    }
-  },
+    title: "인쇄 및 보고서 제출 전 필수! PDF에 쪽번호(페이지 번호) 일괄 삽입하기",
+    summary: "페이지 번호가 누락된 학위 논문, 제안서, 제본용 보고서에 표지를 제외하고 원하는 위치와 양식으로 쪽번호를 자동 매기는 방법입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-15",
+    updatedAt: "2026-10-25",
+    tags: ["PDF페이지번호", "PDF쪽번호", "쪽번호매기기", "논문쪽번호", "제본설정"],
+    relatedToolHref: "/add-page-numbers",
+    relatedToolName: "PDF 페이지 번호 추가 도구 바로가기",
+    content: `
+## 1. 여러 문서를 합친 뒤 제각각인 쪽번호를 3초 만에 통일하세요
+워드, 한글, 파워포인트, 엑셀 등 서로 다른 프로그램에서 만든 파일들을 [PDF 합치기](/merge-pdf)로 병합하고 나면 페이지 번호가 아예 없거나 앞뒤 문서의 번호가 맞지 않아 당황스러울 때가 많습니다.
 
-  // 13. PDF 워터마크 추가
+[PDF 페이지 번호 매기기 도구](/add-page-numbers)를 사용하면 원본 프로그램을 다시 열 필요 없이 완성된 PDF 위에 깔끔한 일련번호를 새길 수 있습니다:
+- **6가지 정밀 위치 지정:** 하단 중앙, 하단 우측, 하단 좌측, 상단 중앙/우측/좌측 선택 가능
+- **표지(첫 페이지) 제외 옵션:** 1페이지 표지에는 번호를 찍지 않고 본문 페이지부터 깔끔하게 넘버링
+- **다양한 번호 표시 양식:** \`1\`, \`- 1 -\`, \`1 / 25\`, \`Page 1 of 25\` 등 보고서 표준 서식 지원
+
+---
+
+## 2. 문서 종류별 권장 쪽번호 양식
+
+| 문서 유형 | 추천 위치 | 추천 표시 형식 | 표지 제외 여부 |
+| :--- | :--- | :--- | :--- |
+| **학위 논문·연구 보고서** | 하단 중앙 | `- 1 -` 또는 `1` | 표지·목차 제외 권장 |
+| **기업 입찰 제안서·PPT** | 하단 우측 | `1 / 전체페이지` | 표지 제외 |
+| **법원 제출 준비서면·증거** | 하단 중앙/우측 | `Page 1 of N` | 1페이지부터 포함 |
+`,
+    faqList: [
+      {
+        question: "글자 크기나 여백 간격도 조절할 수 있나요?",
+        answer: "네, 본문 글자나 바닥글 로고와 겹치지 않도록 폰트 크기와 상하좌우 여백을 세밀하게 설정할 수 있습니다."
+      },
+      {
+        question: "쪽번호를 넣은 뒤 바로 인쇄해도 번호가 잘리지 않나요?",
+        answer: "네, 일반 가정용·사무용 프린터의 비인쇄 영역(여백)을 고려한 안전 마진 위치에 쪽번호가 삽입되어 잘림 없이 깔끔하게 출력됩니다."
+      }
+    ]
+  },
   {
-    id: 13,
     slug: "how-to-add-watermark-to-pdf",
-    category: "security",
-    categoryLabel: { ko: "보안 가이드", en: "Security Guide", es: "Guía de Seguridad", ja: "セキュリティガイド", "zh-CN": "安全指南" },
-    toolHref: "/add-watermark",
-    toolName: { ko: "PDF 워터마크", en: "Add Watermark", es: "Marca de Agua", ja: "透かし追加", "zh-CN": "添加水印" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "PDF 워터마크",
-      "대외비 표시",
-      "PDF 기밀 워터마크",
-      "add watermark to pdf document",
-      "watermark pdf free online",
-      "PDF 透かし 追加",
-      "marca de agua pdf gratis",
-      "PDF添加水印"
-    ],
-    translations: {
-      ko: {
-        title: "대외비·기밀 문서 무단 유출 방지: PDF 반투명 워터마크 추가법",
-        summary: "견적서, 제안서, 사내 대외비 문서를 외부에 배포할 때 무단 복제와 도용을 방지하기 위해 'CONFIDENTIAL' 또는 회사 로고 워터마크를 삽입하는 가이드입니다.",
-        sections: [
-          {
-            heading: "문서 보안의 첫걸음, 워터마크 삽입",
-            body: [
-              "배포된 PDF 문서는 쉽게 스크린샷되거나 공유될 수 있어 지적재산권과 기밀 보호 장치가 필수적입니다.",
-              "mypickpdf [PDF 워터마크]를 이용하면 대각선 반투명 텍스트(예: 대외비, 복제금지)나 원하는 이미지를 전 페이지에 균일하게 스탬프할 수 있습니다."
-            ],
-            tip: "래서팬더 꿀팁: 투명도를 20~30%로 설정하면 본문 글씨를 가리지 않으면서도 보안 표시는 선명하게 남습니다!"
-          }
-        ],
-        ctaText: "지금 바로 PDF에 워터마크 넣기"
-      },
-      en: {
-        title: "How to Add Confidential Watermarks to Protect Sensitive PDF Files",
-        summary: "Stamp customizable 'CONFIDENTIAL', 'DRAFT', or company copyright watermarks diagonally across your PDFs to prevent unauthorized copying.",
-        sections: [
-          {
-            heading: "Safeguard Intellectual Property on Distributed Documents",
-            body: [
-              "Once shared, PDF documents can be reshared without credit unless watermarked with ownership identifiers.",
-              "mypickpdf allows you to customize opacity, rotation angle, and text sizing for elegant, non-intrusive document protection."
-            ],
-            tip: "Panda Tip: Setting 25% opacity ensures text remains legible while keeping security markings prominent!"
-          }
-        ],
-        ctaText: "Watermark PDF for Free Now"
-      }
-    }
-  },
+    title: "계약서·도면 무단 도용 방지! PDF에 대외비 워터마크 투명하게 넣는 법",
+    summary: "회사 보안 문서, 기획서, 견적서에 [대외비 / CONFIDENTIAL / 무단배포금지] 텍스트 워터마크를 투명도와 각도를 조절하여 깔끔하게 삽입하는 방법입니다.",
+    category: "보안·기술",
+    readTime: "4분",
+    publishedAt: "2026-10-16",
+    updatedAt: "2026-10-25",
+    tags: ["PDF워터마크", "대외비표시", "무단복제방지", "저작권보호", "문서보안"],
+    relatedToolHref: "/add-watermark",
+    relatedToolName: "PDF 워터마크 삽입 도구 바로가기",
+    content: `
+## 1. 외부로 나가는 제안서와 견적서, 워터마크로 저작권을 지키세요
+외부 협력사나 고객사에 제안서, 설계 도면, 단가표, 강의 교안 PDF를 전달할 때 아무런 표시 없이 원본을 그대로 보내면 경쟁사로 무단 유출되거나 도용될 위험이 큽니다.
 
-  // 14. PDF 회전
+[PDF 워터마크 추가 도구](/add-watermark)를 사용하면 문서 전 페이지 중앙에 반투명 보안 문구를 1초 만에 일괄 각인할 수 있습니다:
+- **가독성을 해치지 않는 투명도(Opacity) 조절:** 본문 텍스트와 표는 선명하게 읽히면서 배경에 은은하게 워터마크가 비치도록 설정 (권장 투명도 15%~25%)
+- **대각선(-45도) 및 수평 배치 지원:** A4 세로 및 가로 문서 모두에 어울리는 정중앙 대각선 스탬핑
+- **맞춤 문구 자유 입력:** \`대외비 (CONFIDENTIAL)\`, \`무단 복제 및 배포 금지\`, \`검토용 초안 (DRAFT)\`, \`○○주식회사 귀중\` 등 원하는 텍스트 즉시 적용
+
+---
+
+## 2. 실무 상황별 추천 워터마크 문구 및 설정
+
+| 문서 용도 | 추천 워터마크 문구 | 권장 색상 및 투명도 |
+| :--- | :--- | :--- |
+| **기업 입찰 제안서·사업계획서** | `대외비 / 무단 배포 금지` | 회색 또는 적색 / 투명도 20% |
+| **학원·대학 강의 교안 배포** | `저작권 보호 자료 - 무단 공유 금지` | 진회색 / 투명도 15% |
+| **계약 전 검토용 초안** | `검토용 초안 (DRAFT)` | 청색 또는 회색 / 투명도 25% |
+`,
+    faqList: [
+      {
+        question: "한글(대외비)과 영문(CONFIDENTIAL) 모두 깨짐 없이 들어가나요?",
+        answer: "네, 고해상도 한글·영문 유니코드 렌더링이 적용되어 있어 한글, 한자, 영문, 특수문자 모두 깨짐 없이 깔끔하게 삽입됩니다."
+      },
+      {
+        question: "100페이지가 넘는 문서도 한 번에 워터마크가 찍히나요?",
+        answer: "네, 페이지 수에 상관없이 버튼 한 번 클릭으로 전 페이지 동일한 위치에 1~2초 만에 일괄 적용됩니다."
+      }
+    ]
+  },
   {
-    id: 14,
     slug: "how-to-rotate-pdf-pages",
-    category: "edit",
-    categoryLabel: { ko: "PDF 편집 팁", en: "PDF Tips", es: "Consejos PDF", ja: "PDFヒント", "zh-CN": "PDF技巧" },
-    toolHref: "/rotate-pdf",
-    toolName: { ko: "PDF 회전", en: "Rotate PDF", es: "Rotar PDF", ja: "PDF回転", "zh-CN": "旋转PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "PDF 회전",
-      "거꾸로 스캔된 PDF",
-      "PDF 90도 회전",
-      "rotate pdf permanently",
-      "rotate pdf pages online free",
-      "PDF 回転 永久保存",
-      "rotar pdf online",
-      "旋转PDF页面"
-    ],
-    translations: {
-      ko: {
-        title: "거꾸로 스캔된 문서 바로잡기: PDF 90도/180도 회전 및 영구 저장법",
-        summary: "스캐너로 복사할 때 옆으로 눕거나 상하가 뒤집힌 채 생성된 PDF 페이지의 각도를 정방향으로 회전하여 깔끔하게 영구 저장하는 방법입니다.",
-        sections: [
-          {
-            heading: "목 아프게 고개 돌려 볼 필요 없이 클릭 한 번으로 회전!",
-            body: [
-              "가로 문서와 세로 문서가 뒤섞여 있거나 거꾸로 스캔된 문서는 PDF 뷰어에서 임시로 돌려도 저장하면 다시 원래대로 돌아가는 문제가 있습니다.",
-              "mypickpdf [PDF 회전]은 전체 페이지 혹은 특정 페이지만 시계 방향, 반시계 방향으로 돌려 파일 자체에 영구 반영해 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 특정 페이지만 선택해서 돌릴 수도 있어 표나 가로 차트만 똑바로 세우기에 안성맞춤입니다!"
-          }
-        ],
-        ctaText: "지금 바로 PDF 페이지 회전하기"
-      },
-      en: {
-        title: "How to Rotate Upside-Down or Sideways PDF Pages Permanently",
-        summary: "Fix inverted scanner pages and landscape charts by rotating pages 90 or 180 degrees with permanent file saving.",
-        sections: [
-          {
-            heading: "Fix Orientation Misalignment in Scanned Documents",
-            body: [
-              "Rotating pages in basic desktop readers often only changes view modes without updating the file itself.",
-              "mypickpdf permanently adjusts the internal orientation metadata so pages display upright across all PDF readers."
-            ],
-            tip: "Panda Tip: Rotate individual pages or all pages simultaneously with single-click ease!"
-          }
-        ],
-        ctaText: "Rotate PDF Pages Now"
-      }
-    }
-  },
+    title: "스캔 후 거꾸로 뒤집히거나 옆으로 누운 PDF 페이지 바르게 회전 저장하기",
+    summary: "복합기 스캐너로 입력받아 방향이 90도/180도 뒤죽박죽인 PDF 문서를 클릭 한 번으로 영구 회전하여 똑바로 저장하는 방법입니다.",
+    category: "문서편집",
+    readTime: "3분",
+    publishedAt: "2026-10-17",
+    updatedAt: "2026-10-25",
+    tags: ["PDF회전", "PDF방향바꾸기", "스캔문서회전", "90도회전", "180도회전"],
+    relatedToolHref: "/rotate-pdf",
+    relatedToolName: "PDF 회전 도구 바로가기",
+    content: `
+## 1. 뷰어에서 회전해도 다시 열면 원래대로 돌아가는 이유
+어도비 리더(Adobe Reader)나 크롬 브라우저에서 회전 아이콘을 누르는 것은 **현재 화면의 보기 방향만 임시로 돌리는 것**입니다. 따라서 파일을 저장해서 이메일로 보내거나 다른 PC에서 열면 여전히 거꾸로 뒤집혀 있거나 옆으로 누워 있습니다.
 
-  // 15. PDF OCR 텍스트 추출
+[PDF 회전 도구](/rotate-pdf)는 PDF 파일 내부의 페이지 방향 메타데이터를 **영구적으로 수정하여 새로운 파일로 저장**하므로, 상대방이 스마트폰이나 PC 어디에서 열어도 똑바른 방향으로 표시됩니다.
+
+---
+
+## 2. 부분 회전 vs 전체 일괄 회전 활용법
+1. **특정 페이지만 핀포인트 회전:** 세로 보고서 중간에 끼어 있는 가로형 재무제표 표(예: 5페이지만 옆으로 누운 경우)만 골라 시계 방향으로 90도 회전
+2. **전체 페이지 180도 일괄 회전:** 복합기 자동 급지장치(ADF)에 종이를 위아래 거꾸로 넣고 스캔하여 모든 페이지가 뒤집힌 경우 **[전체 180도 회전]** 버튼 한 번으로 1초 해결
+3. 회전 저장 후 필요 없는 빈 페이지가 있다면 [PDF 나누기·삭제](/split-pdf) 도구로 바로 정리하세요.
+`,
+    faqList: [
+      {
+        question: "세로 문서 중간에 끼어 있는 가로 표 1장만 회전시킬 수 있나요?",
+        answer: "네! 전체 회전뿐만 아니라 각 페이지 썸네일 위의 개별 회전 버튼을 눌러 원하는 페이지만 핀포인트로 90도·180도·270도 방향을 바꿀 수 있습니다."
+      },
+      {
+        question: "회전 저장하면 화질이 떨어지나요?",
+        answer: "전혀 떨어지지 않습니다. 이미지를 재압축하지 않고 페이지 회전 속성만 무손실로 변경하므로 원본 화질이 100% 그대로 유지됩니다."
+      }
+    ]
+  },
   {
-    id: 15,
     slug: "how-to-extract-text-ocr-pdf",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/ocr-pdf",
-    toolName: { ko: "PDF OCR", en: "PDF OCR", es: "OCR de PDF", ja: "PDF OCR", "zh-CN": "PDF OCR" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "idea",
-    keywords: [
-      "PDF OCR",
-      "스캔 문서 글자 복사",
-      "PDF 텍스트 추출",
-      "extract text from scanned pdf ocr",
-      "free online pdf ocr converter",
-      "PDF 文字認識 OCR 無料",
-      "reconocimiento ocr pdf gratis",
-      "PDF文字识别提取"
-    ],
-    translations: {
-      ko: {
-        title: "스캔 문서에서 글자 복사하기: 이미지형 PDF OCR 텍스트 추출 꿀팁",
-        summary: "책이나 서류를 스캔하여 이미지로 굳어진 PDF는 마우스로 드래그해도 글자가 선택되지 않습니다. 이를 복사 가능한 진짜 텍스트로 인식시키는 OCR 기술 사용법입니다.",
-        sections: [
-          {
-            heading: "드래그가 안 되는 먹통 PDF에서 글자만 쏙!",
-            body: [
-              "스캔 복사기로 만들어진 PDF는 컴퓨터 입장에서는 글자가 아니라 하나의 커다란 '사진'입니다.",
-              "mypickpdf [PDF OCR]은 최첨단 광학 문자 인식(OCR) 신경망 엔진을 통해 한글, 영어, 숫자를 실시간 판독하여 복사 가능한 텍스트 파일(.txt)로 추출해 줍니다."
-            ],
-            tip: "래서팬더 꿀팁: 서류 전체를 일일이 손으로 타이핑할 필요 없이 10초 만에 전문을 추출해 업무 효율을 10배 높이세요!"
-          }
-        ],
-        ctaText: "지금 바로 스캔 PDF 텍스트 추출하기"
-      },
-      en: {
-        title: "How to Extract Text from Scanned PDFs and Images with Online OCR",
-        summary: "Unlock unselectable text in scanned books, invoices, and image-based PDFs into copyable, searchable plain text.",
-        sections: [
-          {
-            heading: "Convert Flat Scanned Images into Searchable Characters",
-            body: [
-              "When you cannot select or copy text in a PDF, the document consists of flattened pixel scans rather than font streams.",
-              "mypickpdf OCR recognizes Latin and East Asian character glyphs in real-time, delivering clean editable text directly to your clipboard."
-            ],
-            tip: "Panda Tip: Save hours of tedious typing by extracting entire book chapters in a single run!"
-          }
-        ],
-        ctaText: "Extract Text with OCR Now"
-      }
-    }
-  },
+    title: "스캔된 이미지 PDF에서 글자 복사하는 AI OCR 텍스트 추출 실전 꿀팁",
+    summary: "마우스 드래그나 복사(Ctrl+C)가 안 되는 이미지 형태의 스캔 PDF 문서에서 한글과 영문 텍스트를 AI OCR로 빠르게 추출하는 방법입니다.",
+    category: "변환·스캔",
+    readTime: "4분",
+    publishedAt: "2026-10-18",
+    updatedAt: "2026-10-25",
+    tags: ["PDFOCR", "글자추출", "스캔PDF텍스트", "이미지글자복사", "OCR무료"],
+    relatedToolHref: "/ocr-pdf",
+    relatedToolName: "PDF OCR 텍스트 추출기 바로가기",
+    content: `
+## 1. 복사 방지가 걸렸거나 스캔된 문서에서 텍스트 살려내기
+종이 책을 스캔한 PDF, 관공서에서 이미지로 배포한 공고문, 또는 텍스트 선택이 안 되는 문서에서 문장을 인용해야 할 때 일일이 눈으로 보고 타이핑할 필요가 없습니다.
 
-  // 16. 알PDF/어도비 무료 대체
+[PDF OCR 텍스트 추출기](/ocr-pdf)를 사용하면:
+- **한국어·영어·일본어 다국어 정밀 판독:** 한글과 영문, 숫자가 혼합된 학술 논문 및 계약서 문자를 정확하게 인식
+- **원클릭 클립보드 복사 및 파일 저장:** 추출된 전체 텍스트를 버튼 하나로 복사하여 한글(HWP)이나 워드, 노션에 바로 붙여넣기 가능
+- **로컬 브라우저 OCR 엔진:** 기밀 스캔 문서를 외부 AI 서버에 업로드하지 않고 내 브라우저에서 안전하게 판독
+
+---
+
+## 2. 추출한 텍스트를 200% 활용하는 워크플로우
+- 스캔된 영문 논문의 텍스트를 추출한 뒤 바로 번역하고 싶다면: [AI 다국어 PDF 번역기](/translate-pdf)
+- 공문서 PDF를 한글 파일 양식 그대로 변환하고 싶다면: [PDF 한글(HWPX) 변환기](/pdf-to-hwp)
+`,
+    faqList: [
+      {
+        question: "OCR 처리 시 문서가 외부 클라우드로 전송되나요?",
+        answer: "아니요, 브라우저 내부 WebAssembly OCR 엔진이 로컬에서 직접 글자를 판독하므로 기밀 문서도 외부 유출 없이 안전하게 텍스트를 추출할 수 있습니다."
+      },
+      {
+        question: "여러 페이지로 된 스캔 PDF도 한 번에 텍스트 추출이 되나요?",
+        answer: "네, 업로드된 문서의 모든 페이지를 순차적으로 스캔하여 페이지별 텍스트를 한눈에 확인하고 일괄 복사할 수 있습니다."
+      }
+    ]
+  },
   {
-    id: 16,
     slug: "best-free-alternative-to-adobe-alpdf",
-    category: "security",
-    categoryLabel: { ko: "보안 가이드", en: "Security Guide", es: "Guía de Seguridad", ja: "セキュリティガイド", "zh-CN": "安全指南" },
-    toolHref: "/merge-pdf",
-    toolName: { ko: "무료 PDF 시작", en: "Start Free PDF", es: "PDF Gratis", ja: "無料PDFを体験", "zh-CN": "体验免费PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "4분 읽기", en: "4 min read", es: "Lectura de 4 min", ja: "4分で読める", "zh-CN": "4分钟阅读" },
-    mascotMood: "welcome",
-    keywords: [
-      "알PDF 무료 대체",
-      "어도비 애크로뱃 대체",
-      "무료 PDF 프로그램",
-      "free adobe acrobat alternative",
-      "best free pdf editor online no sign up",
-      "無料 PDF 編集 Adobe 代替",
-      "alternativa gratis a adobe acrobat",
-      "Adobe Acrobat免费替代工具"
-    ],
-    translations: {
-      ko: {
-        title: "어도비·알PDF 유료화 결제창 없이 평생 무료로 쓰는 최고의 대체재",
-        summary: "간단한 PDF 합치기나 변환 하나 하려고 할 때마다 결제창이 뜨거나 설치 시 제휴 프로그램이 깔려 불편하셨던 분들을 위한 100% 무설치 무료 웹 솔루션 추천입니다.",
-        sections: [
-          {
-            heading: "유료화와 광고에 지친 사용자들을 위한 완벽한 해답",
-            body: [
-              "기존 데스크톱 PDF 프로그램들은 매월 정기 결제를 요구하거나 설치 과정에서 불필요한 툴바와 광고 프로그램을 함께 설치하도록 유도합니다.",
-              "mypickpdf는 회원가입도 없고, 결제 유도도 없으며, 귀여운 래서팬더와 함께 브라우저에서 모든 핵심 기능을 평생 무제한 무료로 제공합니다."
-            ],
-            tip: "래서팬더 꿀팁: 회사 사내 PC에서 보안 정책상 프로그램 설치가 차단되어 있을 때 mypickpdf를 북마크해두고 쓰시면 최고예요!"
-          }
-        ],
-        ctaText: "결제 없이 평생 무료로 PDF 쓰기"
-      },
-      en: {
-        title: "The Best Free Alternative to Adobe Acrobat and Costly PDF Subscriptions",
-        summary: "Tired of recurring monthly fees and paywalls just to merge or compress a document? Discover mypickpdf—the 100% free web utility.",
-        sections: [
-          {
-            heading: "Say Goodbye to Heavy Software and Monthly Subscriptions",
-            body: [
-              "Everyday document tasks shouldn't require \$20/month enterprise subscription commitments.",
-              "mypickpdf brings you the core essential features of desktop PDF suites right in your web browser—free, fast, and completely safe."
-            ],
-            tip: "Panda Tip: Bookmark mypickpdf for instant access on any shared work computer or laptop!"
-          }
-        ],
-        ctaText: "Enjoy Unlimited Free PDF Tools"
-      }
-    }
-  },
+    title: "어도비 애크로뱃·알PDF 유료 결제 대체! 평생 무료로 쓰는 웹 표준 PDF 툴",
+    summary: "매달 청구되는 비싼 PDF 구독료를 아끼고, 무거운 설치 파일이나 광고 팝업 없이 브라우저에서 가볍고 빠르게 모든 PDF 작업을 끝내는 방법입니다.",
+    category: "보안·기술",
+    readTime: "5분",
+    publishedAt: "2026-10-19",
+    updatedAt: "2026-10-25",
+    tags: ["무료PDF편집기", "알PDF대체", "애크로뱃무료대체", "온라인PDF", "무설치PDF"],
+    relatedToolHref: "/edit-pdf",
+    relatedToolName: "무료 온라인 PDF 편집기 바로가기",
+    content: `
+## 1. 한 달에 몇 번 쓰는 PDF 편집 때문에 월 구독료를 내고 계신가요?
+계약서에 도장이나 서명 하나 넣거나, 오탈자 한 줄 수정하고 화이트아웃으로 주민번호 뒷자리를 가리는 작업 때문에 매달 2~3만 원에 달하는 유료 PDF 소프트웨어를 구독하거나 기업용 라이선스를 구매하는 것은 큰 부담입니다. 또한 무료 설치형 프로그램들은 원치 않는 제휴 프로그램 설치나 바탕화면 팝업 광고를 동반하는 경우가 많습니다.
 
-  // 17. HTML 웹페이지 PDF 변환
+---
+
+## 2. 유료 설치형 프로그램 vs 해외 웹 툴 vs pdfpick 비교
+
+| 비교 항목 | 유료 설치형 소프트웨어 | 해외 온라인 PDF 사이트 | **pdfpick (피디에프픽)** |
+| :--- | :--- | :--- | :--- |
+| **이용 요금** | 월 1.5만~3만 원 정기 구독 | 하루 1~2회만 무료 후 결제 유도 | **평생 100% 완전 무료·무제한** |
+| **프로그램 설치** | 수백 MB 설치 필수 (사내 PC 제한) | 불필요 (웹 브라우저) | **설치·로그인 일체 불필요** |
+| **문서 보안 방식** | 로컬 처리 | 해외 서버에 파일 업로드 저장 | **100% 브라우저 로컬 처리 (서버 저장 0%)** |
+| **한국형 HWPX 지원** | 미지원 또는 별도 변환 필요 | 한글(HWP/HWPX) 미지원 | **[PDF 한글(HWPX) 변환](/pdf-to-hwp) 기본 탑재** |
+
+---
+
+## 3. pdfpick 온라인 편집기로 바로 가능한 6대 핵심 작업
+1. **기존 텍스트 수정 및 새 글자 입력:** [PDF 편집기](/edit-pdf)에서 빈칸 양식 타이핑 및 오타 수정
+2. **투명 도장 날인 & 자필 전자서명:** 계약서·견적서에 인감도장 이미지 및 마우스/터치 서명 삽입
+3. **개인정보 가리기 (화이트아웃):** 주민등록번호, 계좌번호, 금액 등 민감 정보 완벽 마스킹
+4. **AI 다국어 대조본 번역:** [PDF 번역기](/translate-pdf)로 영어 논문·해외 문서를 원문+번역문 나란히 비교
+5. **초고속 병합·분할·압축:** [PDF 합치기](/merge-pdf), [PDF 나누기](/split-pdf), [PDF 용량 줄이기](/compress-pdf)
+6. **오피스 상호 변환:** [PDF 한글 변환](/pdf-to-hwp), [워드 변환](/pdf-to-word), [엑셀 표 추출](/pdf-to-excel)
+`,
+    faqList: [
+      {
+        question: "회사 업무용(상업적 용도)으로 무료로 계속 사용해도 라이선스 문제가 없나요?",
+        answer: "네! 개인 사용자는 물론 기업, 관공서, 학교, 법무·세무 사무소 누구나 라이선스 단속이나 비용 걱정 없이 100% 무료로 상업적 업무에 자유롭게 이용하실 수 있습니다."
+      },
+      {
+        question: "회원가입이나 이메일 입력을 요구하지 않나요?",
+        answer: "네, 이메일 수집이나 로그인 절차 없이 사이트 접속 즉시 모든 도구를 바로 사용하실 수 있습니다."
+      }
+    ]
+  },
   {
-    id: 17,
     slug: "how-to-convert-html-to-pdf",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/html-to-pdf",
-    toolName: { ko: "HTML PDF 변환", en: "HTML to PDF", es: "HTML a PDF", ja: "HTMLからPDFへ", "zh-CN": "HTML转PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "ready",
-    keywords: [
-      "HTML PDF 변환",
-      "웹페이지 PDF 저장",
-      "웹사이트 캡처 PDF",
-      "convert html to pdf web page",
-      "save webpage as pdf high quality",
-      "HTML PDF 変換 Webページ保存",
-      "convertir html a pdf gratis",
-      "网页转PDF"
-    ],
-    translations: {
-      ko: {
-        title: "웹페이지 전체 레이아웃을 깨짐 없이 깔끔한 PDF로 저장하기",
-        summary: "HTML 코드나 웹페이지 서식을 그대로 살려 문서 규격에 맞는 인쇄용 PDF 파일로 변환하는 실전 팁입니다.",
-        sections: [
-          {
-            heading: "웹페이지의 스타일과 폰트를 그대로 박제하여 보관하기",
-            body: [
-              "웹 브라우저의 일반 인쇄 기능으로 PDF를 만들면 여백이 잘리거나 배경 그래픽이 날아가는 경우가 빈번합니다.",
-              "mypickpdf [HTML PDF 변환]은 CSS 스타일시트와 글꼴을 정밀 렌더링하여 모니터에서 보던 웹페이지의 시각적 형태 그대로 고품질 PDF로 전환합니다."
-            ],
-            tip: "래서팬더 꿀팁: 온라인 영수증이나 기술 블로그 글을 아카이빙할 때 유용합니다!"
-          }
-        ],
-        ctaText: "지금 바로 HTML을 PDF로 변환하기"
-      },
-      en: {
-        title: "How to Save Complete HTML Web Pages into Polished PDF Documents",
-        summary: "Capture web layouts, CSS styles, and typography faithfully into print-ready PDF format for offline archiving and sharing.",
-        sections: [
-          {
-            heading: "Preserve Web Content with Exact Styling",
-            body: [
-              "Native browser print dialogs often break CSS grids and omit background colors when saving web pages.",
-              "mypickpdf renders HTML assets faithfully into standard A4 and Letter pages."
-            ],
-            tip: "Panda Tip: Great for archiving receipts, documentation guides, and project dashboards!"
-          }
-        ],
-        ctaText: "Convert HTML to PDF Now"
-      }
-    }
-  },
+    title: "웹페이지(HTML) 코드와 디자인 레이아웃 그대로 고화질 PDF로 저장하기",
+    summary: "온라인 전자영수증, 뉴스 기사, HTML 보고서 템플릿을 레이아웃 깨짐 없이 A4 PDF 전자문서로 깔끔하게 렌더링하여 보관하는 방법입니다.",
+    category: "변환·스캔",
+    readTime: "4분",
+    publishedAt: "2026-10-19",
+    updatedAt: "2026-10-25",
+    tags: ["HTMLPDF변환", "웹페이지PDF저장", "HTMLtoPDF", "전자영수증저장"],
+    relatedToolHref: "/html-to-pdf",
+    relatedToolName: "HTML to PDF 변환기 바로가기",
+    content: `
+## 1. HTML 코드와 CSS 스타일을 깨짐 없이 A4 PDF로!
+브라우저 기본 인쇄(Ctrl+P) 기능으로 웹페이지나 전자영수증을 저장하면 배경색이 빠지거나 표가 반으로 잘리고 불필요한 머리글·바닥글 URL이 함께 찍히는 경우가 많습니다.
 
-  // 18. PDF/A 장기 보관 규격
+[HTML PDF 변환기](/html-to-pdf)를 활용하면:
+- **CSS 인라인 및 스타일시트 완벽 렌더링:** 표 테두리, 배경 색상, 폰트 굵기를 그대로 유지하여 A4 규격 PDF로 생성
+- **파일 업로드 & 코드 직접 붙여넣기 동시 지원:** \`.html\` 파일을 드래그해서 올리거나 HTML 소스 코드를 에디터에 바로 붙여넣어 실시간 변환 가능
+- **전자세금계산서·온라인 영수증 증빙 보관:** 쇼핑몰 주문 내역서나 이메일 HTML 템플릿을 증빙용 PDF로 깔끔하게 저장 후 [PDF 합치기](/merge-pdf)로 월별 정리
+`,
+    faqList: [
+      {
+        question: "`.html` 파일을 직접 업로드해도 되고 코드를 붙여넣어도 되나요?",
+        answer: "네, HTML 파일을 드래그해서 올리거나 소스 코드를 직접 입력하여 즉시 렌더링 결과를 확인하고 PDF로 저장할 수 있습니다."
+      },
+      {
+        question: "한글 텍스트가 포함된 HTML도 글자 깨짐 없이 변환되나요?",
+        answer: "네, UTF-8 한글 폰트 렌더링을 기본 지원하므로 한글 보고서나 영수증 양식도 글자 깨짐 없이 선명하게 변환됩니다."
+      }
+    ]
+  },
   {
-    id: 18,
     slug: "how-to-convert-pdf-to-pdfa-archive",
-    category: "convert",
-    categoryLabel: { ko: "오피스 변환", en: "Office Convert", es: "Conversión Office", ja: "オフィス変換", "zh-CN": "文档转换" },
-    toolHref: "/pdf-to-pdfa",
-    toolName: { ko: "PDF/A 변환", en: "PDF to PDF/A", es: "PDF a PDF/A", ja: "PDF/A変換", "zh-CN": "PDF转PDF/A" },
-    date: "2026-09-28",
-    readTime: { ko: "3분 읽기", en: "3 min read", es: "Lectura de 3 min", ja: "3分で読める", "zh-CN": "3分钟阅读" },
-    mascotMood: "idea",
-    keywords: [
-      "PDF/A 변환",
-      "ISO 장기보관 PDF",
-      "공공기관 10년 보관 서식",
-      "convert pdf to pdfa iso compliance",
-      "pdf to pdfa converter free",
-      "PDF/A 変換 長期保存規格",
-      "convertir pdf a pdfa archivo",
-      "PDF转PDFA长期保存"
-    ],
-    translations: {
-      ko: {
-        title: "공공기관·연구소 10년 이상 장기 보관 필수: ISO 표준 PDF/A 규격 변환법",
-        summary: "세월이 지나 폰트가 유실되거나 소프트웨어가 변경되어도 10년, 20년 뒤 원본 그대로 열람할 수 있는 국제 표준 전자문서 장기 보관 규격(ISO 19005-1) 안내입니다.",
-        sections: [
-          {
-            heading: "일반 PDF와 장기 보관용 PDF/A의 차이점",
-            body: [
-              "일반 PDF는 컴퓨터에 해당 폰트가 설치되어 있지 않으면 글씨가 깨질 수 있습니다.",
-              "PDF/A 규격은 문서에 쓰인 모든 글꼴과 색상 프로필을 파일 내부에 100% 임베딩하여, 50년 후 미래의 기기에서도 정확하게 동일한 형태로 열람을 보장합니다."
-            ],
-            tip: "래서팬더 꿀팁: 국가기록원, 특허청, 법원 제출 문서의 필수 인증 규격입니다."
-          }
-        ],
-        ctaText: "지금 바로 PDF/A 보관 규격으로 변환하기"
-      },
-      en: {
-        title: "How to Convert PDF to ISO-Standard PDF/A for Long-Term Digital Archival",
-        summary: "Ensure your institutional reports, legal contracts, and historical research can be opened faithfully decades from now with ISO 19005-1.",
-        sections: [
-          {
-            heading: "Why Long-Term Archiving Requires PDF/A",
-            body: [
-              "Standard PDFs often link external font files that may vanish when opened on different operating systems years later.",
-              "PDF/A strictly embeds all font definitions and color profiles, guaranteeing identical visual rendering across decades."
-            ],
-            tip: "Panda Tip: Mandated by legal registries and government archives worldwide!"
-          }
-        ],
-        ctaText: "Convert to PDF/A Standard Now"
-      }
-    }
-  },
+    title: "공공기관 제출 및 영구 보관을 위한 ISO 국제표준 PDF/A 변환 가이드",
+    summary: "10년, 20년이 지나도 폰트가 깨지지 않고 영구 보존이 가능한 공인 전자문서 표준 규격(ISO 19005) PDF/A 변환 요령을 안내합니다.",
+    category: "공공기관·서식",
+    readTime: "4분",
+    publishedAt: "2026-10-20",
+    updatedAt: "2026-10-25",
+    tags: ["PDFA변환", "ISO19005", "장기보관PDF", "공공기관표준", "학위논문제출"],
+    relatedToolHref: "/pdf-to-pdfa",
+    relatedToolName: "PDF/A 표준 변환기 바로가기",
+    content: `
+## 1. 일반 PDF와 장기보관용 'PDF/A'는 무엇이 다를까요?
+국회도서관 및 대학 도서관 석·박사 학위논문 온라인 제출, 법원 전자소송 기록 보관, 국가기록원 및 공공기관 전자문서 아카이빙 시스템은 일반 PDF 대신 **PDF/A (ISO 19005 국제 표준)** 형식을 요구합니다.
 
-  // 19. 아이폰/아이패드 사파리 모바일 활용법
+| 구분 | 일반 PDF 문서 | **PDF/A (ISO 19005 장기보관 표준)** |
+| :--- | :--- | :--- |
+| **폰트 및 색상 관리** | 외부 시스템 폰트 참조 시 미래에 깨질 위험 | **문서 내부에 렌더링 요소 및 색상 프로파일 완전 고정** |
+| **보존 메타데이터** | 표준 규격 없음 | **XMP 국제 표준 아카이빙 메타데이터 탑재** |
+| **주요 필수 제출처** | 일반 이메일·업무 공유 | **학위논문 납본, 법원·특허청·공공기관 영구 문서고** |
+
+---
+
+## 2. 1초 만에 PDF/A 규격으로 변환하는 방법
+1. 학위논문이나 공문서의 최종 편집과 [쪽번호 매기기](/add-page-numbers)가 완료된 PDF를 준비합니다.
+2. [PDF/A 변환 도구](/pdf-to-pdfa)에 파일을 업로드하고 변환 버튼을 누르면 ISO 19005-1b 호환 메타데이터와 구조가 적용된 PDF/A 파일이 즉시 생성됩니다.
+`,
+    faqList: [
+      {
+        question: "도서관 학위논문 온라인 제출 시 PDF/A 변환본을 내면 통과되나요?",
+        answer: "네, ISO 19005-1b 표준 메타데이터 규격을 준수하여 생성되므로 학위논문 및 공공기관 아카이빙 시스템에 적합합니다."
+      },
+      {
+        question: "PDF/A로 변환한 파일도 일반 PDF 뷰어에서 똑같이 열리나요?",
+        answer: "네, 크롬, 엣지, 어도비 리더, 모바일 뷰어 등 모든 일반 PDF 리더에서 100% 동일하게 열람 및 인쇄할 수 있습니다."
+      }
+    ]
+  },
   {
-    id: 19,
     slug: "how-to-manage-pdf-on-iphone-ipad",
-    category: "mobile",
-    categoryLabel: { ko: "모바일 활용", en: "Mobile Tips", es: "Consejos Móvil", ja: "モバイルヒント", "zh-CN": "移动技巧" },
-    toolHref: "/merge-pdf",
-    toolName: { ko: "모바일 PDF 체험", en: "Mobile PDF Tool", es: "PDF en Móvil", ja: "モバイルPDF体験", "zh-CN": "手机体验PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "welcome",
-    keywords: [
-      "아이폰 PDF 합치기",
-      "아이패드 PDF 변환",
-      "사파리 PDF 합치기",
-      "iphone merge pdf safari free",
-      "combine pdfs on ipad no app",
-      "iPhone PDF 結合 アプリ不要",
-      "unir pdf iphone sin app",
-      "苹果手机合并PDF"
-    ],
-    translations: {
-      ko: {
-        title: "아이폰·아이패드 사파리에서 앱 설치 없이 PDF 합치고 용량 줄이기",
-        summary: "앱스토어에서 광고 가득한 유료 앱을 다운로드할 필요 없이, 아이폰 사파리(Safari) 브라우저에서 터치 몇 번으로 손쉽게 PDF를 편집하는 꿀팁입니다.",
-        sections: [
-          {
-            heading: "모바일 사파리에서도 PC처럼 완벽하게 동작!",
-            body: [
-              "이동 중에 급하게 계약서나 증명서 PDF를 합쳐서 제출해야 할 때가 많습니다.",
-              "mypickpdf는 모바일 터치 제스처에 최적화된 반응형 인터페이스를 지원하여, 아이폰 [파일] 앱에 저장된 문서를 불러와 손쉽게 합치고 즉시 다운로드할 수 있습니다."
-            ],
-            tip: "래서팬더 꿀팁: 아이폰 사파리 하단의 [공유] ➔ [홈 화면에 추가]를 눌러두시면 앱처럼 편리하게 실행됩니다!"
-          }
-        ],
-        ctaText: "아이폰에서 바로 PDF 다루기"
-      },
-      en: {
-        title: "How to Merge and Compress PDFs on iPhone & iPad Without App Store Downloads",
-        summary: "No need to download ad-filled subscription apps on iOS: use Safari to manage and combine PDF documents directly in touch mode.",
-        sections: [
-          {
-            heading: "Full PDF Desktop Power in Your iPhone Pocket",
-            body: [
-              "When you need to send an urgent application while commuting, finding a free iOS app without paywalls is stressful.",
-              "mypickpdf is fully touch-optimized, letting you select documents straight from the iOS Files app or camera roll."
-            ],
-            tip: "Panda Tip: Tap Safari's Share button and select 'Add to Home Screen' for one-tap app-like convenience!"
-          }
-        ],
-        ctaText: "Use Mobile PDF Tools on iOS"
-      }
-    }
-  },
+    title: "아이폰·아이패드 사파리(Safari)에서 유료 앱 없이 PDF 합치고 서명하기",
+    summary: "앱스토어에서 유료 결제 유도 앱을 깔지 않고도 iOS 사파리 브라우저와 기본 파일 앱만으로 초고속으로 PDF를 편집·병합·압축하는 꿀팁입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-20",
+    updatedAt: "2026-10-25",
+    tags: ["아이폰PDF합치기", "아이패드PDF편집", "iOS무료PDF", "사파리PDF", "모바일PDF"],
+    relatedToolHref: "/edit-pdf",
+    relatedToolName: "모바일 PDF 편집기 바로가기",
+    content: `
+## 1. 앱스토어 무료 PDF 앱의 '구독 결제 유도' 함정 피하기
+아이폰이나 아이패드에서 급하게 계약서에 전자서명을 넣거나 PDF 2개를 합치려고 앱스토어에서 무료 앱을 다운받으면, 막상 작업 후 저장 버튼을 누를 때 주당 수천 원의 유료 구독 결제를 요구하는 경우가 대부분입니다.
 
-  // 20. 갤럭시/안드로이드 모바일 활용법
+## 2. 사파리(Safari)에서 pdfpick 200% 무료 활용하기
+별도 앱을 설치할 필요 없이 아이폰·아이패드 기본 브라우저인 **Safari(사파리)**에서 모든 작업이 무료로 해결됩니다:
+1. 사파리에서 \`pdfpick.kr\`에 접속하여 [PDF 편집](/edit-pdf) 또는 [PDF 합치기](/merge-pdf)를 선택합니다.
+2. **[파일 선택]**을 누르고 iOS **[파일 앱(iCloud Drive / 나의 iPhone)]** 또는 **[사진 앨범]**에서 문서를 불러옵니다.
+3. 손가락이나 **애플펜슬(Apple Pencil)**로 자필 서명, 텍스트 입력, 형광펜 표시, 페이지 병합을 진행합니다.
+4. 다운로드 버튼을 누르면 **[파일 앱 > 다운로드]** 폴더에 즉시 저장되며, 우측 상단 공유 버튼으로 카카오톡이나 메일로 바로 전송할 수 있습니다.
+5. 사파리 하단 **[공유 버튼 ➔ 홈 화면에 추가]**를 해두시면 전용 네이티브 앱처럼 바탕화면 아이콘 터치 한 번으로 언제든 1초 만에 실행됩니다!
+`,
+    faqList: [
+      {
+        question: "애플펜슬로 아이패드에서 PDF에 직접 필기나 서명도 가능한가요?",
+        answer: "네! [PDF 편집] 도구의 펜/서명 기능과 형광펜 도구는 아이패드 터치 및 애플펜슬 필기 입력을 완벽하게 지원합니다."
+      },
+      {
+        question: "아이폰으로 찍은 HEIC 사진도 PDF로 바로 바꿀 수 있나요?",
+        answer: "네, [이미지 PDF 변환기](/image-to-pdf)에서 사진 보관함의 사진을 바로 선택하면 자동으로 표준 A4 PDF로 묶어줍니다."
+      }
+    ]
+  },
   {
-    id: 20,
     slug: "how-to-manage-pdf-on-galaxy-android",
-    category: "mobile",
-    categoryLabel: { ko: "모바일 활용", en: "Mobile Tips", es: "Consejos Móvil", ja: "モバイルヒント", "zh-CN": "移动技巧" },
-    toolHref: "/compress-pdf",
-    toolName: { ko: "갤럭시 PDF 체험", en: "Android PDF Tool", es: "PDF en Android", ja: "Android PDF体験", "zh-CN": "安卓体验PDF" },
-    date: "2026-09-28",
-    readTime: { ko: "2분 읽기", en: "2 min read", es: "Lectura de 2 min", ja: "2分で読める", "zh-CN": "2分钟阅读" },
-    mascotMood: "cheering",
-    keywords: [
-      "갤럭시 PDF 합치기",
-      "안드로이드 PDF 용량 줄이기",
-      "스마트폰 PDF 변환",
-      "android merge compress pdf free",
-      "samsung galaxy compress pdf chrome",
-      "Android PDF 圧縮 スマホ",
-      "comprimir pdf en celular android",
-      "安卓手机压缩PDF"
-    ],
-    translations: {
-      ko: {
-        title: "갤럭시 스마트폰에서 다운로드 없이 초고속으로 PDF 변환 및 압축하기",
-        summary: "삼성 인터넷, 크롬, 카카오톡 인앱 브라우저 어디서나 별도 어플 설치 없이 대용량 PDF를 가볍게 압축하고 즉시 카톡으로 전송하는 방법입니다.",
-        sections: [
-          {
-            heading: "삼성 내 파일(My Files)과 완벽 연동되는 초간편 웹 PDF",
-            body: [
-              "갤럭시 스마트폰의 [내 파일]이나 카카오톡 다운로드 폴더에 저장된 PDF 파일을 그대로 선택하여 몇 초 만에 용량을 줄이고 합칠 수 있습니다.",
-              "불필요한 스마트폰 저장 공간을 차지하는 앱 설치 없이 북마크 하나로 모든 문서 작업을 해결하세요."
-            ],
-            tip: "래서팬더 꿀팁: 카카오톡 단톡방에서 바로 링크를 눌러 들어와도 완벽하게 변환 및 다운로드가 지원됩니다!"
-          }
-        ],
-        ctaText: "갤럭시에서 지금 바로 PDF 변환하기"
+    title: "갤럭시 스마트폰에서 앱 설치 없이 카톡으로 받은 PDF 변환·압축·편집하기",
+    summary: "삼성 인터넷, 크롬, 카카오톡 인앱 브라우저 어디서나 별도 어플 설치 없이 대용량 PDF를 가볍게 압축하고 즉시 카톡으로 재전송하는 방법입니다.",
+    category: "문서편집",
+    readTime: "4분",
+    publishedAt: "2026-10-21",
+    updatedAt: "2026-10-25",
+    tags: ["갤럭시PDF", "안드로이드PDF합치기", "카톡PDF열기", "모바일PDF압축", "무설치PDF"],
+    relatedToolHref: "/compress-pdf",
+    relatedToolName: "모바일 PDF 압축기 바로가기",
+    content: `
+## 1. 외근 중 카톡으로 받은 PDF, 스마트폰으로 10초 만에 처리하기
+외근 중이거나 PC가 없는 상황에서 카카오톡으로 받은 PDF 계약서에 도장·서명을 찍어 회신해야 하거나, 관공서 공고문 PDF를 한글(HWPX)로 열어야 할 때 무거운 뷰어 앱을 깔 필요가 없습니다.
+
+## 2. 갤럭시 스마트폰 3단계 초간편 워크플로우
+1. 카카오톡 채팅방에서 받은 PDF 파일을 저장하면 갤럭시 **[내 파일 > 다운로드(Download)]** 폴더에 보관됩니다.
+2. 삼성 인터넷 또는 크롬(Chrome) 브라우저에서 \`pdfpick.kr\`에 접속해 필요한 도구를 선택합니다:
+   - 계약서 자필 서명 및 도장 날인: [PDF 편집기](/edit-pdf)
+   - 용량이 커서 전송이 안 될 때: [PDF 용량 줄이기](/compress-pdf)
+   - 공문서 PDF를 한글 파일로 수정할 때: [PDF 한글 변환](/pdf-to-hwp)
+3. 변환·편집 완료 후 다운로드된 파일을 카카오톡 채팅방 `+` 버튼 ➔ **[파일]** 메뉴에서 선택하여 즉시 상대방에게 전송합니다.
+`,
+    faqList: [
+      {
+        question: "카카오톡 채팅방 안에서 링크를 눌러 바로 사용해도 다운로드가 잘 되나요?",
+        answer: "네! pdfpick은 카카오톡 인앱 브라우저 감지 및 외부 브라우저(크롬·삼성인터넷) 원클릭 전환 배너를 제공하여 모바일에서도 막힘없이 파일 다운로드가 가능합니다."
       },
-      en: {
-        title: "How to Convert and Compress PDFs on Android and Samsung Galaxy Phones",
-        summary: "Work seamlessly with Samsung My Files and Google Chrome on Android to compress and convert PDFs on the go with zero storage waste.",
-        sections: [
-          {
-            heading: "Zero-Footprint Document Productivity on Android",
-            body: [
-              "Skip intrusive third-party APK installations that drain battery life and memory.",
-              "mypickpdf runs inside Chrome and Samsung Internet with full mobile touch responsiveness and instant file downloads."
-            ],
-            tip: "Panda Tip: Open PDFs directly from your downloads folder or WhatsApp/Telegram attachments!"
-          }
-        ],
-        ctaText: "Use Mobile PDF Tools on Android"
+      {
+        question: "모바일 데이터를 써서 변환하면 데이터가 많이 차감되나요?",
+        answer: "파일을 외부 서버로 업로드하거나 다시 내려받지 않고 갤럭시 스마트폰 자체 CPU에서 로컬로 처리하므로 데이터 소모가 거의 없습니다."
       }
-    }
+    ]
   },
-
-  // 21. 합격률을 높이는 이력서·자기소개서·포트폴리오 PDF 하나로 합치는 법
   {
-  "id": 21,
-  "slug": "how-to-merge-resume-portfolio-pdf",
-  "category": "edit",
-  "categoryLabel": {
-    "ko": "PDF 편집 팁",
-    "en": "PDF Tips",
-    "es": "Consejos PDF",
-    "ja": "PDFヒント",
-    "zh-CN": "PDF技巧"
-  },
-  "toolHref": "/merge-pdf",
-  "toolName": {
-    "ko": "PDF 합치기",
-    "en": "Merge PDF",
-    "es": "Unir PDF",
-    "ja": "PDF結合",
-    "zh-CN": "合并PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "cheering",
-  "keywords": [
-    "이력서 포트폴리오 PDF 합치기",
-    "입사지원서 PDF 묶기",
-    "자소서 자격증 PDF 병합",
-    "merge resume and portfolio pdf",
-    "combine job application pdf",
-    "履歴書 ポートフォリオ PDF 結合",
-    "unir curriculum y portafolio pdf"
-  ],
-  "translations": {
-    "ko": {
-      "title": "합격률을 높이는 이력서·자기소개서·포트폴리오 PDF 하나로 합치는 법",
-      "summary": "채용 담당자가 한눈에 보기 편하도록 낱개로 분리된 입사지원서, 포트폴리오, 자격증 사본을 단 1개의 고화질 PDF로 정돈하여 병합하는 실무 가이드입니다.",
-      "sections": [
-        {
-          "heading": "왜 지원 서류를 단일 PDF로 제출해야 할까요?",
-          "body": [
-            "인사담당자는 수백 통의 지원서를 검토하기 때문에 여러 개로 흩어진 첨부파일을 일일이 열어보는 것을 선호하지 않습니다.",
-            "특히 ZIP 압축 파일로 제출하면 모바일에서 열람하기 번거롭고 보안 필터에 걸릴 위험이 있습니다.",
-            "이력서, 자기소개서, 포트폴리오를 하나의 완성도 높은 PDF로 깔끔하게 묶어 전달하면 준비된 인재라는 전문적인 인상을 줄 수 있습니다."
-          ],
-          "tip": "래서팬더 꿀팁: 서류 순서는 [이력서 ➔ 자기소개서 ➔ 포트폴리오 ➔ 자격증 사본] 순으로 배치하는 것이 가장 표준적인 구성입니다!"
-        },
-        {
-          "heading": "mypickpdf로 순서 맞추고 3초 만에 병합하기",
-          "body": [
-            "1단계: mypickpdf [PDF 합치기] 도구에 준비된 PDF 서류들을 한 번에 드래그하여 등록합니다.",
-            "2단계: 목록에서 화살표를 눌러 이력서가 맨 위에 오도록 순서를 손쉽게 정렬합니다.",
-            "3단계: [PDF 합치기]를 클릭하면 서버 전송 없이 내 컴퓨터에서 1초 만에 깔끔한 단일 문서로 완성됩니다."
-          ]
-        }
-      ],
-      "ctaText": "지금 바로 취업 지원서 PDF 하나로 묶기"
-    },
-    "en": {
-      "title": "How to Merge Your Resume, Cover Letter, and Portfolio into One PDF",
-      "summary": "Make a powerful first impression on hiring managers by combining your resume, cover letter, and work samples into a single polished PDF.",
-      "sections": [
-        {
-          "heading": "Why Recruiters Prefer a Single Consolidated PDF",
-          "body": [
-            "Recruiters review hundreds of candidate submissions and strongly prefer reviewing a single continuous document rather than opening multiple scattered attachments.",
-            "Submitting multiple disjointed files or ZIP folders creates friction and risks important certificates being overlooked.",
-            "Consolidating your application into one coherent PDF demonstrates organizational diligence and attention to detail."
-          ],
-          "tip": "Panda Tip: The ideal document order is: Resume first, Cover Letter second, followed by Portfolio highlights and certificates!"
-        },
-        {
-          "heading": "How to Merge in 3 Simple Steps",
-          "body": [
-            "Step 1: Open the mypickpdf [Merge PDF] tool and drag your application files into the dropzone.",
-            "Step 2: Use the sequence arrows to order your resume, cover letter, and portfolio.",
-            "Step 3: Click [Merge PDF] to generate and download your finalized job application document instantly."
-          ]
-        }
-      ],
-      "ctaText": "Merge Your Resume & Portfolio Now"
-    }
-  }
-},
+    slug: "pdf-stamp-and-signature-free",
+    title: "PDF 도장 찍기 & 전자서명 넣기 무료 가이드: 계약서·견적서에 투명 도장 날인하는 법",
+    summary: "종이로 인쇄해서 도장을 찍고 다시 스캔할 필요 없이, 웹 브라우저에서 PDF 계약서·견적서·동의서에 투명 배경 도장(직인) 이미지나 자필 서명을 10초 만에 날인하는 방법입니다.",
+    category: "문서편집",
+    readTime: "5분",
+    publishedAt: "2026-10-22",
+    updatedAt: "2026-10-25",
+    tags: ["PDF도장찍기", "PDF서명넣기", "PDF전자서명", "계약서도장", "투명도장삽입", "무료PDF편집"],
+    relatedToolHref: "/edit-pdf",
+    relatedToolName: "PDF 도장·서명 편집기 바로가기",
+    content: `
+## 1. 아직도 계약서를 출력해서 도장 찍고 다시 스캔하시나요?
+거래처 견적서, 부동산·근로 계약서, 관공서 위임장, 학교 동의서 PDF 파일에 "(인)" 또는 "(서명)" 란이 있을 때, 이를 종이로 인쇄해 인주 도장을 찍고 다시 복합기로 스캔하면 **문서 화질이 흐려지고 파일 용량만 수십 배 커지는 문제**가 발생합니다.
 
-  // 22. 주민등록등본·신분증 PDF 개인정보 유출 방지 및 워터마크 보호법
-  {
-  "id": 22,
-  "slug": "how-to-mask-resident-number-pdf",
-  "category": "security",
-  "categoryLabel": {
-    "ko": "보안 & 프라이버시",
-    "en": "Security",
-    "es": "Seguridad",
-    "ja": "セキュリティ",
-    "zh-CN": "安全与隐私"
-  },
-  "toolHref": "/add-watermark",
-  "toolName": {
-    "ko": "워터마크 추가",
-    "en": "Add Watermark",
-    "es": "Marca de agua",
-    "ja": "透かし追加",
-    "zh-CN": "添加水印"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "ready",
-  "keywords": [
-    "주민등록등본 주민번호 가리기",
-    "신분증 사본 워터마크",
-    "신분증 도용 방지",
-    "대출 서류 개인정보 보호",
-    "mask ssn id card pdf watermark",
-    "protect id card scan pdf",
-    "身分証明書 透かし コピー防止"
-  ],
-  "translations": {
-    "ko": {
-      "title": "주민등록등본·신분증 PDF 개인정보 유출 방지 및 워터마크 보호법",
-      "summary": "은행 대출, 부동산 계약, 채용 서류 제출 시 주민등록번호 뒷자리 노출이나 신분증 사본 도용을 막기 위해 '제출용' 워터마크를 투명하게 삽입하는 필수 보안 팁입니다.",
-      "sections": [
-        {
-          "heading": "신분증 사본 무단 도용 및 보이스피싱 위험 차단",
-          "body": [
-            "부동산 계약이나 금융 기관에 제출한 신분증 사본이 유출되면 대포통장 개설이나 불법 대출 등 심각한 2차 피해로 이어질 수 있습니다.",
-            "이를 방지하기 위해 금융감독원과 경찰청은 서류 제출 시 'OO은행 제출용' 또는 '재사용 불가'라는 워터마크를 반드시 명시할 것을 권고합니다.",
-            "mypickpdf는 문서를 외부 서버로 전송하지 않고 사용자의 브라우저 내부에서만 워터마크를 각인하므로 주민등록번호 유출 위험이 0%입니다."
-          ],
-          "tip": "래서팬더 꿀팁: 워터마크 문구에 [2026.09 OO기관 제출용 / 타 용도 사용 금지]처럼 목적과 날짜를 구체적으로 적어두면 안전합니다!"
-        },
-        {
-          "heading": "가독성을 해치지 않는 워터마크 투명도 설정법",
-          "body": [
-            "1단계: [워터마크 추가] 페이지에서 등본이나 신분증 PDF 문서를 불러옵니다.",
-            "2단계: 워터마크 문구에 제출 목적을 입력하고, 투명도를 20~25% 수준의 차분한 회색으로 설정합니다.",
-            "3단계: 대각선 45도 회전 각도를 선택한 뒤 [워터마크 삽입하기]를 누르면 안전한 보안 사본이 완성됩니다."
-          ]
-        }
-      ],
-      "ctaText": "내 신분증 PDF에 도용 방지 워터마크 넣기"
-    },
-    "en": {
-      "title": "How to Protect Scanned ID Cards and Documents with Anti-Fraud Watermarks",
-      "summary": "Prevent identity theft and fraud when submitting government IDs or certificates by stamping custom submission-purpose watermarks.",
-      "sections": [
-        {
-          "heading": "Why Plain ID Scans Are Vulnerable to Fraud",
-          "body": [
-            "Submitting unwatermarked copies of your passport, driver's license, or national ID exposes you to risks of unauthorized reuse and identity fraud.",
-            "Security experts recommend overlaying a clear, semi-transparent watermark specifying the exact purpose and recipient institution.",
-            "mypickpdf processes your sensitive identity documents purely within local browser memory, ensuring zero cloud upload."
-          ],
-          "tip": "Panda Tip: Stamp 'FOR [BANK NAME] APPLICATION ONLY - NO REUSE' diagonally across the ID scan to deter fraudsters!"
-        },
-        {
-          "heading": "Creating a Protected Document in Seconds",
-          "body": [
-            "Step 1: Open [Add Watermark] and select your scanned ID or certificate PDF.",
-            "Step 2: Enter your purpose text and adjust opacity to 20-25% for subtle yet indelible protection.",
-            "Step 3: Click [Add Watermark] to download your secure, theft-proof verification file."
-          ]
-        }
-      ],
-      "ctaText": "Protect Your ID PDF with Watermark"
-    }
-  }
-},
+pdfpick의 [무료 PDF 편집기](/edit-pdf)를 사용하면 원본 PDF의 칼같은 텍스트 화질을 그대로 유지하면서 **투명 배경 도장(직인) 이미지**나 **자필 전자서명**을 원하는 위치에 정확히 날인할 수 있습니다.
 
-  // 23. 연말정산 간소화 PDF에서 민감 항목 제외하고 필요한 페이지만 쏙쏙 분할하기
-  {
-  "id": 23,
-  "slug": "how-to-split-tax-settlement-pdf",
-  "category": "edit",
-  "categoryLabel": {
-    "ko": "PDF 편집 팁",
-    "en": "PDF Tips",
-    "es": "Consejos PDF",
-    "ja": "PDFヒント",
-    "zh-CN": "PDF技巧"
-  },
-  "toolHref": "/split-pdf",
-  "toolName": {
-    "ko": "PDF 나누기",
-    "en": "Split PDF",
-    "es": "Dividir PDF",
-    "ja": "PDF分割",
-    "zh-CN": "拆分PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "idea",
-  "keywords": [
-    "연말정산 PDF 분할",
-    "홈택스 간소화 PDF 특정 페이지만",
-    "의료비 교육비 페이지만 추출",
-    "split tax return pdf pages",
-    "extract tax pdf pages",
-    "年末調整 PDF 分割 ページ抽出"
-  ],
-  "translations": {
-    "ko": {
-      "title": "연말정산 간소화 PDF에서 민감 항목 제외하고 필요한 페이지만 쏙쏙 분할하기",
-      "summary": "국세청 홈택스에서 내려받은 수십 페이지의 연말정산 간소화 PDF 중 회사에 제출할 의료비, 교육비, 기부금 등 특정 페이지만 골라서 새 파일로 추출하는 방법입니다.",
-      "sections": [
-        {
-          "heading": "전체 연말정산 서류 제출 시 불필요한 사생활 노출 방지",
-          "body": [
-            "홈택스 연말정산 간소화 PDF에는 본인의 질병 치료비 내역, 민감한 가족관계, 개인 신용카드 소비 항목 등 사생활 정보가 모두 들어있습니다.",
-            "회사 인사팀이나 세무 대리인에게 이 모든 페이지를 통째로 넘길 필요 없이, 실제 공제 신청에 필요한 증빙 페이지만 선별하여 제출하는 것이 안전합니다.",
-            "mypickpdf의 [PDF 나누기] 도구는 원하는 페이지 번호만 입력하면 원본의 전자서명과 바코드 손상 없이 1초 만에 분리 추출합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 페이지 입력창에 '1-3, 7, 12'처럼 콤마와 하이픈을 섞어 적으면 여러 구간을 한 번에 뽑아낼 수 있어요!"
-        },
-        {
-          "heading": "초간단 3단계 페이지 추출 절차",
-          "body": [
-            "1단계: 홈택스에서 내려받은 연말정산 간소화 PDF를 업로드합니다.",
-            "2단계: 화면에서 확인한 전체 페이지 중 제출하고 싶은 페이지 번호(예: 1, 4-6)를 적어 넣습니다.",
-            "3단계: [페이지 추출하기] 버튼을 누르면 민감 정보가 제외된 산뜻한 맞춤 PDF가 즉시 다운로드됩니다."
-          ]
-        }
-      ],
-      "ctaText": "연말정산 PDF에서 필요한 페이지만 추출하기"
-    },
-    "en": {
-      "title": "How to Split and Extract Only Necessary Pages from Tax Filing PDFs",
-      "summary": "Protect your personal financial privacy by extracting only the required deduction pages from lengthy annual tax documentation.",
-      "sections": [
-        {
-          "heading": "Keep Sensitive Personal Expenses Confidential",
-          "body": [
-            "Full annual tax reports often contain private medical records and personal transaction details irrelevant to your employer's tax deduction audit.",
-            "Instead of submitting a massive 40-page report, extract only the specific deduction pages requested by HR.",
-            "mypickpdf extracts chosen pages instantly without altering digital signatures or security barcodes."
-          ],
-          "tip": "Panda Tip: Use range notations like '1-4, 8, 15' to bundle non-contiguous pages into a clean new document!"
-        },
-        {
-          "heading": "Extracting Tax Pages in Seconds",
-          "body": [
-            "Step 1: Open [Split PDF] and upload your tax statement.",
-            "Step 2: Enter the exact page numbers you wish to preserve.",
-            "Step 3: Click [Extract Pages] to save your streamlined, privacy-protected submission PDF."
-          ]
-        }
-      ],
-      "ctaText": "Extract Tax Deduction Pages Now"
-    }
-  }
-},
+---
 
-  // 24. 공공기관 표준 HWPX 문서와 PDF 상호 변환 완벽 가이드
-  {
-  "id": 24,
-  "slug": "hwpx-to-pdf-best-conversion-guide",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/pdf-to-hwp",
-  "toolName": {
-    "ko": "PDF 한글(HWPX) 변환",
-    "en": "PDF to HWPX",
-    "es": "PDF a HWPX",
-    "ja": "PDF HWPX変換",
-    "zh-CN": "PDF转HWPX"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "4분 읽기",
-    "en": "4 min read",
-    "es": "Lectura de 4 min",
-    "ja": "4分で読める",
-    "zh-CN": "4分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "HWPX PDF 변환",
-    "한글 HWPX 변환 프로그램 없이",
-    "공공기관 공문서 HWPX 변환",
-    "convert hwpx to pdf free",
-    "korean hangul word processor hwpx converter",
-    "HWPX PDF 変換 オンライン"
-  ],
-  "translations": {
-    "ko": {
-      "title": "공공기관 표준 HWPX 문서와 PDF 상호 변환 완벽 가이드",
-      "summary": "정부 공문서, 조달청 나라장터 입찰, 학교 행정에서 쓰이는 최신 개방형 한글 포맷인 HWPX와 PDF 간의 손실 없는 상호 변환 노하우를 안내합니다.",
-      "sections": [
-        {
-          "heading": "구형 HWP와 차세대 개방형 표준 HWPX의 차이",
-          "body": [
-            "HWPX는 2021년부터 정부 및 공공기관의 공식 기본 문서 형식으로 지정된 XML 기반의 개방형 표준 규격입니다.",
-            "구형 바이너리 .hwp 형식과 달리 웹 호환성과 데이터 파싱 능력이 월등하여 최신 행정 업무의 표준으로 자리잡았습니다.",
-            "mypickpdf는 별도의 한컴오피스 프로그램 구매나 무거운 뷰어 설치 없이 맥(Mac), 윈도우, 모바일 어디서나 HWPX를 지원합니다."
-          ],
-          "tip": "래서팬더 꿀팁: mypickpdf는 한글 문서의 문단 스타일과 텍스트 레이어를 정밀하게 분석하여 깨짐 없는 양방향 변환을 제공합니다!"
-        },
-        {
-          "heading": "누구나 쉬운 HWPX/PDF 변환 절차",
-          "body": [
-            "1단계: mypickpdf [PDF 한글(HWP/HWPX) 변환] 메뉴로 들어갑니다.",
-            "2단계: 변환할 문서를 드롭존에 업로드하고 원하는 변환 모드를 선택합니다.",
-            "3단계: 변환 시작을 클릭하면 브라우저 가속으로 빠르게 완성되어 다운로드됩니다."
-          ]
-        }
-      ],
-      "ctaText": "한글 HWPX ➔ PDF 도구 바로가기"
-    },
-    "en": {
-      "title": "Comprehensive Guide to Converting Korean HWPX Documents and PDF",
-      "summary": "Master bidirectional conversion between Korean Standard HWPX files and universal PDF without purchasing Hangul Word Processor software.",
-      "sections": [
-        {
-          "heading": "Understanding the Modern HWPX Standard",
-          "body": [
-            "HWPX is an open XML-based document standard adopted by Korean governmental agencies and educational institutions since 2021.",
-            "Unlike legacy proprietary .hwp binaries, HWPX offers superior web interoperability and data extraction capabilities.",
-            "mypickpdf enables macOS and international users without Korean word processor software to seamlessly convert documents."
-          ],
-          "tip": "Panda Tip: You can convert government notices, tenders, and official forms right inside Google Chrome!"
-        },
-        {
-          "heading": "Simple Conversion Without Software Installation",
-          "body": [
-            "Step 1: Open [PDF to HWP/HWPX] and upload your document.",
-            "Step 2: Choose your desired conversion output format.",
-            "Step 3: Click convert to retrieve your fully formatted document instantly."
-          ]
-        }
-      ],
-      "ctaText": "Convert HWPX Documents Now"
-    }
-  }
-},
+## 2. PDF에 서명·도장을 넣는 2가지 방법 비교
 
-  // 25. 비즈니스 계약서 및 견적서에 대외비(CONFIDENTIAL) 워터마크 넣는 법
-  {
-  "id": 25,
-  "slug": "how-to-watermark-business-contract",
-  "category": "security",
-  "categoryLabel": {
-    "ko": "보안 & 프라이버시",
-    "en": "Security",
-    "es": "Seguridad",
-    "ja": "セキュリティ",
-    "zh-CN": "安全与隐私"
-  },
-  "toolHref": "/add-watermark",
-  "toolName": {
-    "ko": "워터마크 추가",
-    "en": "Add Watermark",
-    "es": "Marca de agua",
-    "ja": "透かし追加",
-    "zh-CN": "添加水印"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "success",
-  "keywords": [
-    "계약서 대외비 워터마크",
-    "견적서 CONFIDENTIAL 워터마크",
-    "비즈니스 PDF 워터마크 넣기",
-    "add confidential watermark to contract pdf",
-    "business pdf watermark protection",
-    "契約書 機密 透かし 追加"
-  ],
-  "translations": {
-    "ko": {
-      "title": "비즈니스 계약서 및 견적서에 대외비(CONFIDENTIAL) 워터마크 넣는 법",
-      "summary": "외주 계약, 기업 간 비밀유지계약서(NDA), 단가 견적서 배포 시 무단 외부 유출 및 복제를 방지하는 워터마크 각인 실무 팁을 정리했습니다.",
-      "sections": [
-        {
-          "heading": "문서 유출 분쟁 시 강력한 법적·심리적 보호 장치",
-          "body": [
-            "협력사나 외부 파트너에게 미공개 사업계획서나 단가표를 전송할 때 워터마크가 없으면 캡처 후 무단 유포될 위험이 상존합니다.",
-            "대각선 45도로 [대외비 / CONFIDENTIAL] 문구가 각인되어 있으면 상대방에게 고도의 주의 의무를 부여하며 고의 유출 시 명백한 증거가 됩니다.",
-            "mypickpdf는 100% 브라우저 메모리 안에서만 워터마크를 굽기 때문에 계약서 단가나 내부 기밀이 외부 서버로 새어나갈 염려가 전혀 없습니다."
-          ],
-          "tip": "래서팬더 꿀팁: 견적서 초안을 전송할 때는 [초안 (DRAFT)] 워터마크 프리셋을 선택하여 최종 확정본과의 혼선을 방지하세요!"
-        },
-        {
-          "heading": "본문 글자를 가리지 않는 황금 투명도 세팅",
-          "body": [
-            "1단계: [워터마크 추가]에서 계약서나 견적서 PDF를 첨부합니다.",
-            "2단계: 빠른 프리셋에서 '대외비' 또는 'CONFIDENTIAL'을 클릭합니다.",
-            "3단계: 투명도 25%, 그레이 색상을 선택하여 본문 글자를 가리지 않으면서도 인쇄 시 선명하게 복사 방지가 되도록 적용합니다."
-          ]
-        }
-      ],
-      "ctaText": "계약서에 대외비 워터마크 즉시 적용하기"
-    },
-    "en": {
-      "title": "How to Add Confidential Watermarks to Business Contracts and Quotes",
-      "summary": "Safeguard NDAs, commercial proposals, and proprietary pricing sheets by stamping legal confidentiality watermarks across every page.",
-      "sections": [
-        {
-          "heading": "Deter Leaks and Establish Document Ownership",
-          "body": [
-            "Distributing unprotected draft proposals or confidential contracts carries significant operational and legal risks.",
-            "A crisp diagonal 'CONFIDENTIAL' watermark immediately reminds recipients of non-disclosure agreements and deters unauthorized sharing.",
-            "mypickpdf isolates all processing within your browser, ensuring trade secrets never touch cloud infrastructure."
-          ],
-          "tip": "Panda Tip: Use the 'DRAFT' watermark preset when distributing preliminary quotes to prevent premature contractual commitments!"
-        },
-        {
-          "heading": "Applying the Watermark in 3 Steps",
-          "body": [
-            "Step 1: Upload your agreement or proposal to the [Add Watermark] tool.",
-            "Step 2: Select 'CONFIDENTIAL' or enter a bespoke security notice.",
-            "Step 3: Keep opacity around 25% for unobtrusive text readability and click download."
-          ]
-        }
-      ],
-      "ctaText": "Add Confidential Watermark Now"
-    }
-  }
-},
+| 방식 | 추천 사용 상황 | 핵심 특징 |
+| :--- | :--- | :--- |
+| **① 자필 전자서명 그리기** | 근로계약서, 개인 동의서, 카드 신청서 | 마우스, 스마트폰 터치, 애플펜슬·S펜으로 직접 싸인하여 즉시 배치 |
+| **② 도장·법인 직인 이미지 삽입** | 거래처 견적서, 세금·납품 계약서, 공문서 | 배경이 투명한 도장 PNG 또는 흰 배경 도장 사진을 `(인)` 글자 위에 자연스럽게 날인 |
 
-  // 26. 폰 카메라로 찍은 영수증 여러 장을 한 번에 정돈된 A4 PDF로 만드는 법
-  {
-  "id": 26,
-  "slug": "how-to-convert-receipts-to-pdf",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/image-to-pdf",
-  "toolName": {
-    "ko": "JPG PDF 변환",
-    "en": "Image to PDF",
-    "es": "JPG a PDF",
-    "ja": "JPG PDF変換",
-    "zh-CN": "图片转PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "idea",
-  "keywords": [
-    "영수증 사진 PDF 합치기",
-    "법인카드 영수증 모아서 PDF",
-    "출장 영수증 A4 정리",
-    "convert receipts photos to single pdf",
-    "combine expense receipts pdf",
-    "領収書 写真 PDF まとめる"
-  ],
-  "translations": {
-    "ko": {
-      "title": "폰 카메라로 찍은 영수증 여러 장을 한 번에 정돈된 A4 PDF로 만드는 법",
-      "summary": "법인카드 정산이나 출장비 청구 시 스마트폰으로 낱낱이 촬영한 영수증 사진들을 날짜순으로 묶어 깔끔한 단일 A4 PDF로 생성하는 꿀팁입니다.",
-      "sections": [
-        {
-          "heading": "흩어진 사진 20장 대신 1개의 PDF 보고서가 주는 편리함",
-          "body": [
-            "경리부서나 회계팀에 낱개 JPG 사진을 카톡이나 메일로 쏟아부으면 누락되거나 순서가 뒤섞여 결재가 반려되기 십상입니다.",
-            "영수증 사진들을 시간 순서대로 정렬해 단 1개의 A4 규격 PDF로 묶어 제출하면 검토 시간이 단축되고 비용 승인이 즉시 이루어집니다.",
-            "mypickpdf는 스마트폰으로 촬영한 고화질 사진들도 용량 낭비 없이 완벽하게 A4 전자문서 규격으로 레이아웃합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 영수증 사진을 올린 뒤 드래그하여 날짜순으로 순서를 정렬하고 [세로(Portrait)] 방향을 선택하세요!"
-        },
-        {
-          "heading": "영수증 PDF 리포트 완성 절차",
-          "body": [
-            "1단계: [JPG PDF 변환] 페이지에 촬영한 영수증 사진들을 모두 선택해 올립니다.",
-            "2단계: 위/아래 화살표를 눌러 결제 일자 순서대로 사진 위치를 맞춥니다.",
-            "3단계: [PDF로 변환하기]를 누르면 깨끗한 영수증 정산 리포트 PDF가 완성됩니다."
-          ]
-        }
-      ],
-      "ctaText": "영수증 사진들 A4 PDF로 묶기"
-    },
-    "en": {
-      "title": "How to Combine Multiple Receipt Photos into a Single A4 Expense PDF",
-      "summary": "Effortlessly bundle scattered smartphone receipt snapshots into one organized, chronologically sorted A4 PDF for corporate expense reimbursements.",
-      "sections": [
-        {
-          "heading": "Simplify Accounting Approvals with One Unified Report",
-          "body": [
-            "Submitting a flurry of loose JPEG images to accounting creates administrative delays and leads to lost expense claims.",
-            "Consolidating all receipt snapshots into a single chronological PDF accelerates review times and guarantees quick reimbursements.",
-            "mypickpdf standardizes varied camera dimensions into uniform high-resolution A4 portrait sheets."
-          ],
-          "tip": "Panda Tip: Arrange receipts by purchase date and export in portrait orientation for standard accounting binder printing!"
-        },
-        {
-          "heading": "3 Steps to Create Your Expense PDF",
-          "body": [
-            "Step 1: Drop all your camera receipts into [Image to PDF].",
-            "Step 2: Rearrange their sequence to match your corporate expense form.",
-            "Step 3: Click [Convert to PDF] to download your ready-to-submit expense report."
-          ]
-        }
-      ],
-      "ctaText": "Bundle Receipts into PDF Now"
-    }
-  }
-},
+---
 
-  // 27. 전자세금계산서 PDF 표 데이터를 엑셀(XLSX)로 추출해 회계 장부 자동화하기
-  {
-  "id": 27,
-  "slug": "convert-tax-invoice-pdf-to-excel",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/pdf-to-excel",
-  "toolName": {
-    "ko": "PDF 엑셀 변환",
-    "en": "PDF to Excel",
-    "es": "PDF a Excel",
-    "ja": "PDF Excel変換",
-    "zh-CN": "PDF转Excel"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "세금계산서 PDF 엑셀 변환",
-    "견적서 표 엑셀로 추출",
-    "PDF 표 데이터 엑셀 시트",
-    "convert tax invoice pdf to excel xlsx",
-    "extract table from invoice pdf",
-    "請求書 PDF Excel 抽出 変換"
-  ],
-  "translations": {
-    "ko": {
-      "title": "전자세금계산서 PDF 표 데이터를 엑셀(XLSX)로 추출해 회계 장부 자동화하기",
-      "summary": "수십 장의 거래처 세금계산서나 견적서 PDF 속 품목, 단가, 공급가액, 부가세 테이블을 일일이 타이핑하지 않고 엑셀 시트로 자동 변환하는 방법입니다.",
-      "sections": [
-        {
-          "heading": "수기 입력 오타와 야근을 없애는 스마트 테이블 추출",
-          "body": [
-            "거래처에서 받은 전자세금계산서의 숫자 데이터를 엑셀에 손으로 옮겨 적다 보면 '0' 하나를 잘못 입력해 결산 오차가 발생하곤 합니다.",
-            "mypickpdf의 엑셀 변환 엔진은 PDF 내부의 테이블 그리드와 셀 데이터를 정밀 분석하여 계산 가능한 엑셀 셀로 고스란히 복원합니다.",
-            "회사 재무제표나 매출 매입 장부 정리 시간이 90% 이상 단축됩니다."
-          ],
-          "tip": "래서팬더 꿀팁: 엑셀 파일로 추출된 후 =SUM() 함수를 적용해 공급가액 합계를 바로 검산할 수 있습니다!"
-        },
-        {
-          "heading": "PDF 표를 엑셀 파일로 추출하는 3단계",
-          "body": [
-            "1단계: [PDF 엑셀 변환] 도구에 세금계산서나 견적서 PDF를 등록합니다.",
-            "2단계: [Excel (.xlsx)로 변환 시작] 버튼을 누르면 브라우저 파서가 표 구조를 자동 인식합니다.",
-            "3단계: 완성된 .xlsx 엑셀 파일을 다운로드하여 사내 회계 서식에 복사 붙여넣기합니다."
-          ]
-        }
-      ],
-      "ctaText": "세금계산서 PDF 엑셀로 추출하기"
-    },
-    "en": {
-      "title": "How to Extract Tables from Tax Invoices and Quotes into Excel (XLSX)",
-      "summary": "Eliminate manual data entry errors by parsing PDF invoices and purchase orders directly into editable Microsoft Excel spreadsheets.",
-      "sections": [
-        {
-          "heading": "Automate Financial Bookkeeping Without Typo Risks",
-          "body": [
-            "Manually re-typing invoice figures, tax amounts, and line items into accounting software is tedious and error-prone.",
-            "mypickpdf identifies table cell coordinates inside the PDF stream and maps text and numerical values directly into genuine Excel spreadsheet columns.",
-            "Reconcile monthly vendor bills and purchase ledgers in a fraction of the usual time."
-          ],
-          "tip": "Panda Tip: Once extracted into .xlsx, standard Excel functions like SUM and VLOOKUP work instantly across all data rows!"
-        },
-        {
-          "heading": "Extracting Tables in 3 Quick Steps",
-          "body": [
-            "Step 1: Upload your digital invoice or quotation PDF to [PDF to Excel].",
-            "Step 2: Let the browser engine parse line items and cost columns.",
-            "Step 3: Download the clean .xlsx file ready for spreadsheet integration."
-          ]
-        }
-      ],
-      "ctaText": "Extract PDF Tables to Excel Now"
-    }
-  }
-},
+## 3. 실전! 10초 만에 PDF에 도장 찍고 서명 넣는 단계별 방법
+1. [무료 PDF 편집기](/edit-pdf)에 날인할 계약서나 견적서 PDF 파일을 불러옵니다.
+2. 상단 툴바에서 **[서명 / 도장]** 또는 **[펜 그리기]** 도구를 선택합니다:
+   - **자필 사인:** 서명 패드에 마우스나 손가락으로 이름을 서명한 뒤 색상(검정·빨강·파랑)과 굵기를 조절합니다.
+   - **도장 이미지:** 가지고 계신 법인 인감이나 개인 도장 이미지 파일을 불러와 `(인)` 위치에 맞춰 크기를 조절합니다.
+3. 날짜나 이름 빈칸이 비어 있다면 **[텍스트 추가]** 버튼을 눌러 오늘 날짜와 성명을 깔끔하게 타이핑합니다.
+4. 우측 상단 **[PDF 저장하기]**를 누르면 도장과 서명이 원본 페이지에 완벽히 합성된 PDF가 즉시 다운로드됩니다.
 
-  // 28. IR 발표 및 회사소개서 PPT를 폰트 깨짐 없는 고화질 PDF로 변환하기
-  {
-  "id": 28,
-  "slug": "powerpoint-to-pdf-presentation-tips",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/powerpoint-to-pdf",
-  "toolName": {
-    "ko": "파워포인트 PDF 변환",
-    "en": "PowerPoint to PDF",
-    "es": "PowerPoint a PDF",
-    "ja": "PPT PDF変換",
-    "zh-CN": "PPT转PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "cheering",
-  "keywords": [
-    "PPT PDF 변환 폰트 깨짐 방지",
-    "발표자료 PDF 슬라이드 와이드",
-    "파워포인트 PDF 변환 무료",
-    "convert powerpoint pptx to pdf free",
-    "presentation slides to pdf wide",
-    "パワーポイント PDF 変換 フォント崩れ防止"
-  ],
-  "translations": {
-    "ko": {
-      "title": "IR 발표 및 회사소개서 PPT를 폰트 깨짐 없는 고화질 PDF로 변환하기",
-      "summary": "발표 현장 빔프로젝터 컴퓨터에 전용 폰트가 설치되어 있지 않아 슬라이드 줄바꿈이 엉망이 되는 대참사를 막는 필수 사전 준비법입니다.",
-      "sections": [
-        {
-          "heading": "발표 당일 슬라이드 서식이 망가지는 이유",
-          "body": [
-            "파워포인트(.pptx) 파일은 열람하는 컴퓨터에 설치된 폰트에 의존하므로, 다른 컴퓨터에서 열면 대체 폰트가 적용되어 텍스트 상자가 삐져나오는 참사가 흔히 발생합니다.",
-            "반면 PDF는 디자인과 문자 배치를 고정하여 렌더링하므로 윈도우, 맥북, 스마트폰, 빔프로젝터 어디서 열어도 원작자의 화면 그대로 완벽하게 투사됩니다.",
-            "투자사나 클라이언트에게 소개서를 메일로 전달할 때도 수정 불가능한 고화질 PDF로 전송하는 것이 신뢰도를 높여줍니다."
-          ],
-          "tip": "래서팬더 꿀팁: mypickpdf의 PPT 변환 엔진은 16:9 와이드 비율을 완벽 보존하여 프로젝터 화면에 꽉 찬 고화질을 선사합니다!"
-        },
-        {
-          "heading": "PPT 슬라이드 PDF 변환 단계",
-          "body": [
-            "1단계: [파워포인트 PDF 변환] 메뉴로 이동하여 작성한 .pptx 파일을 추가합니다.",
-            "2단계: [PDF로 변환 시작]을 누르면 슬라이드 구성 요소를 가로형 PDF로 깨끗하게 레이아웃합니다.",
-            "3단계: 완성된 PDF 파일을 USB에 담거나 메일로 첨부하여 안심하고 발표장에 들어서세요."
-          ]
-        }
-      ],
-      "ctaText": "PPT 슬라이드 고화질 PDF로 변환하기"
-    },
-    "en": {
-      "title": "How to Convert PowerPoint Presentations to PDF Without Font Issues",
-      "summary": "Eliminate presentation anxiety by locking in typography, margins, and 16:9 widescreen layout into universal, unalterable PDF slides.",
-      "sections": [
-        {
-          "heading": "Why Native PPT Files Fail on External Projector PCs",
-          "body": [
-            "Original .pptx files depend on host system font libraries. Opening them on podium PCs often causes ugly font substitutions and broken text wraps.",
-            "Converting your slides to PDF guarantees that your visual hierarchy, embedded graphics, and slide margins render identically on any hardware.",
-            "Sending company pitch decks as PDFs also prevents accidental client edits or formatting disruptions."
-          ],
-          "tip": "Panda Tip: PDF slides open in full screen on Mac Keynote, Adobe Acrobat, and Chrome with instantaneous slide switching!"
-        },
-        {
-          "heading": "Fast 3-Step Presentation Conversion",
-          "body": [
-            "Step 1: Upload your .pptx presentation to [PowerPoint to PDF].",
-            "Step 2: Let the engine render each slide into widescreen high-res PDF pages.",
-            "Step 3: Download your foolproof presentation file."
-          ]
-        }
-      ],
-      "ctaText": "Convert Slides to PDF Now"
-    }
-  }
-},
+---
 
-  // 29. 대학 과제 리포트 및 학위 논문 PDF에 규격 페이지 번호 깔끔하게 넣기
+## 4. 계약서 발송 전 보안 체크리스트
+- 계약서에 주민등록번호나 계좌번호 일부를 가려야 한다면 같은 편집기 화면에서 **[화이트아웃(가리기)]** 도구로 마스킹하세요.
+- 무단 수정을 방지하려면 [PDF 워터마크 추가](/add-watermark) 또는 장기보관용 [PDF/A 변환](/pdf-to-pdfa)을 함께 활용하면 더욱 안전합니다.
+`,
+    faqList: [
+      {
+        question: "도장을 찍으면 뒤에 있는 '(인)' 글자가 가려지지 않나요?",
+        answer: "투명 배경(PNG) 도장 이미지를 사용하시거나 직접 서명 패드로 도장/사인을 그리시면 실제 종이에 인주를 찍은 것처럼 뒤쪽의 '(인)' 글자와 자연스럽게 겹쳐 표현됩니다."
+      },
+      {
+        question: "중요한 계약서에 서명할 때 파일이 외부 서버에 남지 않나요?",
+        answer: "100% 안심하셔도 됩니다! 업로드하신 계약서와 도장·서명 데이터는 외부 서버로 절대 전송되지 않고 오직 사용자의 브라우저 메모리 안에서만 합성된 후 즉시 사라집니다."
+      },
+      {
+        question: "스마트폰(아이폰·갤럭시)에서도 손가락으로 서명할 수 있나요?",
+        answer: "네, 별도 앱 설치 없이 모바일 브라우저에서 계약서를 열고 손가락 터치로 매끄럽게 자필 서명을 넣어 카카오톡이나 이메일로 바로 회신할 수 있습니다."
+      }
+    ]
+  },
   {
-  "id": 29,
-  "slug": "how-to-number-academic-thesis-pdf",
-  "category": "edit",
-  "categoryLabel": {
-    "ko": "PDF 편집 팁",
-    "en": "PDF Tips",
-    "es": "Consejos PDF",
-    "ja": "PDFヒント",
-    "zh-CN": "PDF技巧"
-  },
-  "toolHref": "/add-page-numbers",
-  "toolName": {
-    "ko": "페이지 번호 추가",
-    "en": "Add Page Numbers",
-    "es": "Número de página",
-    "ja": "ページ番号追加",
-    "zh-CN": "添加页码"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で读める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "ready",
-  "keywords": [
-    "논문 PDF 페이지 번호 매기기",
-    "대학 과제 리포트 쪽번호",
-    "PDF 하단 중앙 페이지 번호",
-    "add page numbers to academic thesis pdf",
-    "number thesis research paper pdf",
-    "論文 PDF ページ番号 下部中央"
-  ],
-  "translations": {
-    "ko": {
-      "title": "대학 과제 리포트 및 학위 논문 PDF에 규격 페이지 번호 깔끔하게 넣기",
-      "summary": "서론, 본론, 결론, 참고문헌이 합쳐지면서 꼬여버린 페이지 번호를 규격 가이드라인에 맞추어 하단 중앙에 일괄 번호 매기기 하는 팁입니다.",
-      "sections": [
-        {
-          "heading": "교수님과 심사위원이 가장 먼저 확인하는 문서 기본기",
-          "body": [
-            "학술 리포트나 졸업 논문 심사에서 페이지 번호 누락이나 불일치는 가장 빈번하게 지적받는 감점 사유입니다.",
-            "여러 소스에서 발췌한 PDF 자료를 하나로 합치면 페이지 번호가 제각각이거나 아예 사라지는 문제가 생깁니다.",
-            "mypickpdf는 문서 전체를 일괄 재스캔하여 모든 페이지 하단에 일정한 폰트 크기와 정렬로 규격 쪽번호를 새겨 넣습니다."
-          ],
-          "tip": "래서팬더 꿀팁: '1 / 30' 형태의 전체 페이지 병기 옵션(n / total)을 선택하면 심사위원이 전체 분량을 가늠하기 훨씬 좋습니다!"
-        },
-        {
-          "heading": "페이지 번호 맞춤 설정 및 적용법",
-          "body": [
-            "1단계: [페이지 번호 추가] 도구에 합쳐진 논문이나 리포트 PDF를 업로드합니다.",
-            "2단계: 위치를 '하단 중앙(Bottom Center)'으로 선택하고, 선호하는 번호 양식을 고릅니다.",
-            "3단계: [페이지 번호 삽입하기]를 누르면 논문 제출 규격에 완벽히 부합하는 새 PDF가 생성됩니다."
-          ]
-        }
-      ],
-      "ctaText": "논문 PDF에 페이지 번호 일괄 삽입하기"
-    },
-    "en": {
-      "title": "How to Add Standard Page Numbers to Academic Dissertations and Reports",
-      "summary": "Ensure full compliance with university thesis submission guidelines by stamping clean, uniform bottom-center pagination across all pages.",
-      "sections": [
-        {
-          "heading": "Avoid Critical Submission Penalties for Broken Pagination",
-          "body": [
-            "Academic evaluation boards and journal reviewers strictly mandate coherent sequential page numbering throughout submitted manuscripts.",
-            "When merging diverse research drafts and bibliography appendices, native page numbers frequently desynchronize.",
-            "mypickpdf recalibrates pagination across the entire document, placing crisp numbers with proportional margins."
-          ],
-          "tip": "Panda Tip: The 'Page N of Total' format (e.g. 'Page 5 of 30') provides clear structural context for academic committee reviews!"
-        },
-        {
-          "heading": "Adding Page Numbers in 3 Steps",
-          "body": [
-            "Step 1: Open [Add Page Numbers] and drop in your academic paper.",
-            "Step 2: Choose 'Bottom Center' alignment and select your preferred numbering format.",
-            "Step 3: Click [Add Page Numbers] to download your ready-to-submit dissertation."
-          ]
-        }
-      ],
-      "ctaText": "Add Page Numbers to Thesis Now"
-    }
-  }
-},
+    slug: "pdf-redact-personal-info-whiteout",
+    title: "PDF 주민등록번호·계좌번호 가리기: 화이트아웃으로 개인정보 완벽 마스킹하는 방법",
+    summary: "관공서, 은행, 채용 서류 제출 시 PDF에 포함된 주민등록번호 뒷자리, 주소, 계좌번호, 금액 등 민감한 개인정보를 복원 불가능하게 깔끔히 가리는(화이트아웃) 실무 가이드입니다.",
+    category: "보안·기술",
+    readTime: "4분",
+    publishedAt: "2026-10-23",
+    updatedAt: "2026-10-25",
+    tags: ["PDF주민번호가리기", "PDF개인정보가리기", "PDF화이트아웃", "PDF마스킹", "PDF글자지우기"],
+    relatedToolHref: "/edit-pdf",
+    relatedToolName: "PDF 화이트아웃(개인정보 가리기) 바로가기",
+    content: `
+## 1. 주민등록번호 뒷자리, 대충 가리면 큰일 나는 이유
+경력증명서, 가족관계증명서, 등기부등본, 통장 사본 등을 제출할 때 개인정보보호법에 따라 **주민등록번호 뒷 7자리**나 **상세 주소·계좌번호**를 가려야 하는 경우가 많습니다.
 
-  // 30. 아이패드 굿노트·갤럭시탭 노타빌리티 필기용 PDF 용량 최적화 노하우
-  {
-  "id": 30,
-  "slug": "optimize-pdf-for-goodnotes-notability",
-  "category": "mobile",
-  "categoryLabel": {
-    "ko": "모바일 활용",
-    "en": "Mobile Tips",
-    "es": "Consejos Móvil",
-    "ja": "モバイルヒント",
-    "zh-CN": "移动技巧"
-  },
-  "toolHref": "/compress-pdf",
-  "toolName": {
-    "ko": "PDF 압축",
-    "en": "Compress PDF",
-    "es": "Comprimir PDF",
-    "ja": "PDF圧縮",
-    "zh-CN": "压缩PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "2분 읽기",
-    "en": "2 min read",
-    "es": "Lectura de 2 min",
-    "ja": "2分で読める",
-    "zh-CN": "2分钟阅读"
-  },
-  "mascotMood": "cheering",
-  "keywords": [
-    "굿노트 PDF 용량 줄이기",
-    "노타빌리티 튕김 방지",
-    "아이패드 전공서적 PDF 최적화",
-    "optimize pdf for goodnotes notability",
-    "compress textbook pdf ipad",
-    "GoodNotes PDF 圧縮 動作軽量化"
-  ],
-  "translations": {
-    "ko": {
-      "title": "아이패드 굿노트·갤럭시탭 노타빌리티 필기용 PDF 용량 최적화 노하우",
-      "summary": "수백 페이지짜리 전공 원서나 스터디 플래너 서식이 태블릿 필기 앱에서 버벅거리거나 튕길 때, 텍스트 선명도는 유지하며 용량을 가볍게 만드는 법입니다.",
-      "sections": [
-        {
-          "heading": "태블릿 필기 앱이 렉 걸리거나 종료되는 원인",
-          "body": [
-            "두꺼운 수험서나 전공 스캔본 PDF는 300MB~500MB에 달해 아이패드나 갤럭시탭의 작업 메모리(RAM)를 순식간에 고갈시킵니다.",
-            "필기 앱에서 펜슬을 그을 때 반응 속도가 느려지거나 화면이 멈추는 현상은 과도한 파일 용량 때문입니다.",
-            "mypickpdf의 스마트 벡터 압축 기술은 글자와 수식의 선명함을 온전히 유지하면서 불필요한 고해상도 메타데이터를 제거하여 용량을 70% 이상 줄여줍니다."
-          ],
-          "tip": "래서팬더 꿀팁: 300MB 파일을 [권장 압축]으로 변환하면 약 40MB로 가벼워져 필기 딜레이가 완전히 사라집니다!"
-        },
-        {
-          "heading": "태블릿 쾌속 필기를 위한 압축 적용법",
-          "body": [
-            "1단계: 태블릿 브라우저(사파리 또는 크롬)에서 [PDF 압축] 도구로 이동합니다.",
-            "2단계: 전공 서적이나 필기용 PDF 파일을 첨부하고 '권장 압축' 옵션을 선택합니다.",
-            "3단계: 압축 완료된 파일을 굿노트나 노타빌리티로 [공유 ➔ 열기]하면 쾌적한 필기가 가능해집니다."
-          ]
-        }
-      ],
-      "ctaText": "태블릿 필기용 PDF 가볍게 다이어트하기"
-    },
-    "en": {
-      "title": "How to Optimize Heavy Textbook PDFs for iPad GoodNotes & Notability",
-      "summary": "Prevent tablet app crashes and stylus input lag by slimming down massive PDF textbooks without losing sharp vector typography.",
-      "sections": [
-        {
-          "heading": "Why Bulky PDFs Cause Apple Pencil Lag and App Crashes",
-          "body": [
-            "Massive 400MB+ scanned textbook PDFs overwhelm tablet RAM, resulting in sluggish page turns and abrupt app terminations.",
-            "Active stylus handwriting demands responsive rendering buffers that heavy PDF background streams choke.",
-            "mypickpdf strips invisible bloated redundancies while preserving crisp text contrast for effortless tablet note-taking."
-          ],
-          "tip": "Panda Tip: A 300MB medical or engineering textbook easily compresses to ~45MB with zero noticeable degradation under high zoom!"
-        },
-        {
-          "heading": "Streamline Your Study PDFs in Seconds",
-          "body": [
-            "Step 1: Open [Compress PDF] directly in iPad Safari or Galaxy Chrome.",
-            "Step 2: Select 'Recommended Compression' for the optimal balance of resolution and speed.",
-            "Step 3: Import the trimmed file into GoodNotes or Notability for buttery-smooth writing."
-          ]
-        }
-      ],
-      "ctaText": "Compress Textbook for GoodNotes Now"
-    }
-  }
-},
+이때 흔히 하는 위험한 실수들이 있습니다:
+- 반투명 형광펜이나 흐린 도형으로 덮어 밝기를 조절하면 뒤쪽 숫자가 그대로 비쳐 보이는 경우
+- 외부 서버 업로드형 사이트에 신분증/증명서 원본을 올려 개인정보가 해외 서버에 저장되는 경우
 
-  // 31. 두꺼운 수험서·시험 족보 PDF에서 필요한 챕터 페이지만 쏙 뽑아내기
-  {
-  "id": 31,
-  "slug": "how-to-extract-exam-chapters-pdf",
-  "category": "edit",
-  "categoryLabel": {
-    "ko": "PDF 편집 팁",
-    "en": "PDF Tips",
-    "es": "Consejos PDF",
-    "ja": "PDFヒント",
-    "zh-CN": "PDF技巧"
-  },
-  "toolHref": "/split-pdf",
-  "toolName": {
-    "ko": "PDF 나누기",
-    "en": "Split PDF",
-    "es": "Dividir PDF",
-    "ja": "PDF分割",
-    "zh-CN": "拆分PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "시험 족보 PDF 챕터 분할",
-    "공무원 수험서 단원별 나누기",
-    "전공 서적 범위별 분할 저장",
-    "split exam book chapters pdf",
-    "extract study chapters pdf",
-    "試験問題集 PDF 単元別 分割"
-  ],
-  "translations": {
-    "ko": {
-      "title": "두꺼운 수험서·시험 족보 PDF에서 필요한 챕터 페이지만 쏙 뽑아내기",
-      "summary": "공무원 시험, 자격증, 중간고사 대비 1,000페이지가 넘는 방대한 PDF 수험서에서 이번 주 공부할 핵심 단원 페이지만 스마트하게 분할 저장하는 방법입니다.",
-      "sections": [
-        {
-          "heading": "매번 무거운 전체 파일을 스크롤하는 시간 낭비 해결",
-          "body": [
-            "1,000페이지가 넘는 두꺼운 수험서 PDF를 태블릿에서 매번 열면 로딩도 오래 걸리고 원하는 페이지를 찾느라 스크롤에 시간을 허비하게 됩니다.",
-            "이번 주 진도에 해당하는 단원(예: 3단원 120~165페이지)만 쏙 뽑아 별도 파일로 분리해 두면 집중력이 배가됩니다.",
-            "mypickpdf는 페이지 범위를 콤마나 하이픈으로 입력하기만 하면 1초 만에 깔끔한 전용 서브 노트를 만들어 줍니다."
-          ],
-          "tip": "래서팬더 꿀팁: 시험 직전 오답 노트 페이지만 따로 추출하여 [PDF 합치기]로 묶으면 세상에 하나뿐인 나만의 파이널 단권화 요약집이 완성됩니다!"
-        },
-        {
-          "heading": "단원별 챕터 추출 3단계",
-          "body": [
-            "1단계: [PDF 나누기] 도구에 방대한 수험서 PDF를 등록합니다.",
-            "2단계: 페이지 범위에 '120-165'처럼 이번 주 공부할 단원 페이지를 입력합니다.",
-            "3단계: [페이지 추출하기]를 누르면 가벼운 단원별 PDF가 생성되어 즉시 공부를 시작할 수 있습니다."
-          ]
-        }
-      ],
-      "ctaText": "수험서 PDF에서 핵심 챕터 추출하기"
-    },
-    "en": {
-      "title": "How to Split Heavy Exam Prep Books and Study Guides by Chapter",
-      "summary": "Extract specific weekly study chapters from 1,000-page prep books into handy, lightweight PDFs for focused test preparation.",
-      "sections": [
-        {
-          "heading": "Stop Scrolling Through Endless 1,000-Page Documents",
-          "body": [
-            "Navigating colossal certification study guides on mobile devices drains battery life and distracts your study flow.",
-            "Segmenting massive prep manuals into dedicated chapter modules keeps your weekly learning milestones clean and organized.",
-            "mypickpdf extracts precise page slices in milliseconds without corrupting text bookmarks."
-          ],
-          "tip": "Panda Tip: Extract your incorrectly answered quiz pages and merge them into a dedicated 'Final Review Cram Booklet'!"
-        },
-        {
-          "heading": "Extracting Chapters in Seconds",
-          "body": [
-            "Step 1: Upload your heavy study guide to [Split PDF].",
-            "Step 2: Type in your chapter page ranges (e.g. '120-165').",
-            "Step 3: Click [Extract Pages] to produce your focused weekly module."
-          ]
-        }
-      ],
-      "ctaText": "Extract Study Chapters Now"
-    }
-  }
-},
+---
 
-  // 32. 영문 논문·해외 원서 PDF에서 글자만 긁어모아 파파고·DeepL 번역기 돌리는 법
-  {
-  "id": 32,
-  "slug": "extract-foreign-paper-text-for-translation",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/ocr-pdf",
-  "toolName": {
-    "ko": "PDF 텍스트 추출 (OCR)",
-    "en": "PDF Text OCR",
-    "es": "OCR de PDF",
-    "ja": "PDFテキスト抽出",
-    "zh-CN": "PDF文字识别"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "idea",
-  "keywords": [
-    "영문 논문 텍스트 추출 번역",
-    "스캔 논문 글자 복사",
-    "PDF 텍스트 파파고 DeepL",
-    "extract research paper text for translation",
-    "copy text from scanned pdf for deepl",
-    "論文 テキスト 抽出 翻訳"
-  ],
-  "translations": {
-    "ko": {
-      "title": "영문 논문·해외 원서 PDF에서 글자만 긁어모아 파파고·DeepL 번역기 돌리는 법",
-      "summary": "드래그가 안 되거나 스캔되어 마우스 복사가 막힌 해외 학술지 논문 PDF에서 완벽하게 텍스트를 추출하여 번역기에 붙여넣는 비법입니다.",
-      "sections": [
-        {
-          "heading": "복사 방지 및 스캔 논문의 텍스트 장벽 극복하기",
-          "body": [
-            "해외 학술 데이터베이스에서 다운로드한 오래된 논문이나 이미지 스캔 PDF는 마우스 드래그가 먹히지 않아 번역기를 돌리기 어렵습니다.",
-            "일일이 손으로 키보드를 타이핑하면 전문 용어 철자가 틀리기 쉽고 시간이 턱없이 부족해집니다.",
-            "mypickpdf [텍스트 추출 (OCR)] 도구는 문서 전체의 텍스트 레이어를 순서대로 디코딩하여 원클릭 복사 가능한 텍스트로 전환합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 추출된 텍스트를 DeepL이나 ChatGPT에 넣고 [자연스러운 한국어 논문체로 번역해줘]라고 요청하면 번역 품질이 극대화됩니다!"
-        },
-        {
-          "heading": "원클릭 논문 텍스트 추출 방법",
-          "body": [
-            "1단계: [PDF 텍스트 추출 (OCR)] 도구에 영문 논문 PDF를 업로드합니다.",
-            "2단계: [텍스트 추출 시작]을 누르면 모든 페이지의 글자가 문맥 순서대로 정리됩니다.",
-            "3단계: [전체 복사] 버튼을 눌러 번역기나 메모장에 바로 붙여넣어 활용하세요."
-          ]
-        }
-      ],
-      "ctaText": "영문 논문 PDF 텍스트 추출하기"
-    },
-    "en": {
-      "title": "How to Extract Text from Foreign Academic Papers for DeepL & ChatGPT Translation",
-      "summary": "Unlock non-selectable, scanned foreign journal PDFs by extracting clean text streams ready for instant AI and machine translation.",
-      "sections": [
-        {
-          "heading": "Overcoming Text Selection Blocks on Scanned Research Papers",
-          "body": [
-            "Legacy academic papers from JSTOR or research repositories often exist purely as flat bitmap scans where text selection is impossible.",
-            "Re-typing complex mathematical and scientific terminology by hand is impractical and error-prone.",
-            "mypickpdf decodes document text blocks sequentially into formatted plain text ready for clipboard copy."
-          ],
-          "tip": "Panda Tip: Paste extracted text straight into DeepL or ChatGPT with the prompt: 'Translate this academic passage into fluent prose'!"
-        },
-        {
-          "heading": "Extracting Paper Text in 3 Steps",
-          "body": [
-            "Step 1: Upload your academic paper to [PDF Text OCR].",
-            "Step 2: Run the extraction engine to gather clean sentence structures.",
-            "Step 3: Click [Copy All] to paste immediately into your translation workflow."
-          ]
-        }
-      ],
-      "ctaText": "Extract Paper Text Now"
-    }
-  }
-},
+## 2. pdfpick 화이트아웃(Whiteout) & 마스킹 기능의 장점
+[무료 PDF 편집기](/edit-pdf)에 탑재된 **화이트아웃(가리기)** 도구는 불투명도 100%의 마스킹 레이어로 민감 영역을 완벽하게 차단합니다:
+- **흰색 수정테이프 모드 (Whiteout):** 흰색 종이 배경 문서에서 특정 글자나 주민번호 뒷자리를 흔적 없이 깨끗하게 지우고 그 위에 새 글자(\`*******\`) 입력 가능
+- **검은색 블랙아웃 마스킹 (Redaction):** 법원 기록이나 정보공개 청구 문서처럼 개인정보를 가렸다는 사실을 명확히 표시할 때 불투명 검정 박스로 완벽 차단
+- **서버 전송 0% 로컬 보안:** 주민등록등본, 신분증 사본이 내 컴퓨터/스마트폰 밖으로 단 1바이트도 나가지 않음
 
-  // 33. 이메일 첨부 파일 용량 초과(10MB/25MB) 해결: PDF 고화질 다이어트
-  {
-  "id": 33,
-  "slug": "fix-email-attachment-size-limit-pdf",
-  "category": "security",
-  "categoryLabel": {
-    "ko": "보안 & 프라이버시",
-    "en": "Security",
-    "es": "Seguridad",
-    "ja": "セキュリティ",
-    "zh-CN": "安全与隐私"
-  },
-  "toolHref": "/compress-pdf",
-  "toolName": {
-    "ko": "PDF 압축",
-    "en": "Compress PDF",
-    "es": "Comprimir PDF",
-    "ja": "PDF圧縮",
-    "zh-CN": "压缩PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "ready",
-  "keywords": [
-    "이메일 첨부파일 용량 초과 해결",
-    "지메일 25MB 제한 PDF 압축",
-    "네이버 메일 대용량 다운로드 만료 방지",
-    "bypass email attachment limit 25mb pdf",
-    "compress pdf for email attachment",
-    "メール 添付 容量オーバー PDF 圧縮"
-  ],
-  "translations": {
-    "ko": {
-      "title": "이메일 첨부 파일 용량 초과(10MB/25MB) 해결: PDF 고화질 다이어트",
-      "summary": "네이버 메일, 지메일(Gmail), 아웃룩(Outlook)으로 대용량 PDF를 보낼 때 '용량 한도 초과' 에러가 뜰 때 화질 손상 없이 즉시 용량을 줄이는 해결책입니다.",
-      "sections": [
-        {
-          "heading": "대용량 다운로드 링크 대신 '직접 첨부'를 고집해야 하는 이유",
-          "body": [
-            "네이버나 다음 메일의 '대용량 첨부 링크'는 30일이 지나면 파일이 자동 삭제되어 상대방이 나중에 열어보지 못하는 업무 사고가 발생합니다.",
-            "지메일(25MB)이나 사내 인트라넷 메일(10MB)의 수신 제한을 통과하도록 영구 보존 가능한 일반 첨부 파일로 다이어트하는 것이 중요합니다.",
-            "mypickpdf의 클라이언트 로컬 압축 기술은 문서 속 폰트와 표의 선명도를 100% 유지하면서 무거운 이미지 스트림을 똑똑하게 다듬어 줍니다."
-          ],
-          "tip": "래서팬더 꿀팁: 서버에 파일이 업로드되지 않으므로 사내 기밀 보고서도 회사 감사팀 지적 없이 안심하고 압축할 수 있습니다!"
-        },
-        {
-          "heading": "메일 전송 통과를 위한 초고속 압축법",
-          "body": [
-            "1단계: [PDF 압축] 도구에 용량이 큰 PDF 문서를 끌어다 놓습니다.",
-            "2단계: '권장 압축' 또는 '초강력 압축'을 선택해 용량을 50~80% 대폭 줄입니다.",
-            "3단계: 25MB 이하로 슬림해진 완성본을 다운로드하여 이메일에 일반 첨부로 발송합니다."
-          ]
-        }
-      ],
-      "ctaText": "이메일 전송용 PDF 용량 줄이기"
-    },
-    "en": {
-      "title": "How to Bypass 25MB Email Attachment Limits for PDF Documents",
-      "summary": "Send heavy PDF reports via Gmail, Outlook, or Apple Mail without encountering bounced messages or relying on temporary cloud drive links.",
-      "sections": [
-        {
-          "heading": "Why Direct Attachments Beat Expiring Cloud Links",
-          "body": [
-            "Temporary download links often expire within 14-30 days, causing embarrassing follow-ups from clients and colleagues.",
-            "Enterprise mail servers typically bounce incoming attachments over 20-25MB, halting urgent deal closings.",
-            "mypickpdf optimizes redundant color profiles and downsamples oversized DPIs directly inside your browser."
-          ],
-          "tip": "Panda Tip: Local browser execution means sensitive internal quarterly reports are never uploaded to unknown servers!"
-        },
-        {
-          "heading": "Slashing File Size in 3 Steps",
-          "body": [
-            "Step 1: Drag your oversized PDF into [Compress PDF].",
-            "Step 2: Choose 'Recommended Compression' to preserve pristine typography.",
-            "Step 3: Attach the newly slimmed (<10MB) PDF directly to your email."
-          ]
-        }
-      ],
-      "ctaText": "Compress PDF for Email Now"
-    }
-  }
-},
+---
 
-  // 34. 스캐너나 폰으로 거꾸로 찍힌 PDF 문서 90도 회전하여 영구 저장하기
+## 3. 3단계로 끝내는 PDF 개인정보 마스킹 방법
+1. [PDF 편집기](/edit-pdf) 페이지에 증명서나 계약서 PDF를 불러옵니다.
+2. 상단 툴바에서 **[화이트아웃 (가리기)]** 또는 **[도형 박스]** 도구를 클릭합니다.
+3. 가리고 싶은 주민등록번호 뒷자리나 금액 영역을 마우스로 드래그하여 덮은 뒤 **[PDF 저장]**을 누르면 완료됩니다.
+`,
+    faqList: [
+      {
+        question: "화이트아웃으로 지운 자리에 새로운 글자나 '*******' 표시를 넣을 수 있나요?",
+        answer: "네! 화이트아웃으로 기존 글자를 깨끗하게 덮은 뒤 바로 옆의 [텍스트 추가] 도구를 눌러 원하는 문구나 별표(*******)를 깔끔하게 입력할 수 있습니다."
+      },
+      {
+        question: "스캔한 신분증이나 사진 PDF에서도 개인정보 가리기가 가능한가요?",
+        answer: "네, 디지털 텍스트 PDF뿐만 아니라 스캐너나 스마트폰으로 찍은 이미지형 PDF 위에서도 동일하게 작동합니다."
+      }
+    ]
+  },
   {
-  "id": 34,
-  "slug": "how-to-fix-upside-down-scanned-pdf",
-  "category": "edit",
-  "categoryLabel": {
-    "ko": "PDF 편집 팁",
-    "en": "PDF Tips",
-    "es": "Consejos PDF",
-    "ja": "PDFヒント",
-    "zh-CN": "PDF技巧"
-  },
-  "toolHref": "/rotate-pdf",
-  "toolName": {
-    "ko": "PDF 회전",
-    "en": "Rotate PDF",
-    "es": "Rotar PDF",
-    "ja": "PDF回転",
-    "zh-CN": "旋转PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "2분 읽기",
-    "en": "2 min read",
-    "es": "Lectura de 2 min",
-    "ja": "2分で読める",
-    "zh-CN": "2分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "스캔 PDF 거꾸로 회전",
-    "PDF 90도 회전 저장",
-    "뒤집힌 문서 바로잡기",
-    "rotate upside down scanned pdf 90 degrees",
-    "permanently rotate pdf pages",
-    "スキャン PDF 上下反転 90度回転 保存"
-  ],
-  "translations": {
-    "ko": {
-      "title": "스캐너나 폰으로 거꾸로 찍힌 PDF 문서 90도 회전하여 영구 저장하기",
-      "summary": "복합기 양면 스캔 실수로 거꾸로 뒤집히거나 옆으로 누워버린 PDF 문서를 영구적으로 90도/180도 회전시켜 똑바로 바로잡는 방법입니다.",
-      "sections": [
-        {
-          "heading": "단순 뷰어 화면 회전과 '영구 파일 회전 저장'의 차이점",
-          "body": [
-            "아크로뱃 리더 뷰어에서 마우스 우클릭으로 회전시키면 내 화면에서만 잠깐 돌아갈 뿐, 파일을 저장해서 다른 사람에게 보내면 여전히 거꾸로 열립니다.",
-            "상대방 컴퓨터나 모바일에서도 올바르게 보이게 하려면 PDF 내부의 페이지 회전 좌표 메타데이터 자체를 영구 갱신해야 합니다.",
-            "mypickpdf는 시계 방향 90도, 180도, 270도 회전 각도를 파일 구조에 완벽하게 각인하여 저장합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 회전 버튼을 누르면 즉시 미리보기로 올바른 각도를 확인하고 1초 만에 저장할 수 있어요!"
-        },
-        {
-          "heading": "누구나 쉬운 PDF 각도 바로잡기",
-          "body": [
-            "1단계: [PDF 회전] 도구에 뒤집힌 문서를 끌어다 놓습니다.",
-            "2단계: [오른쪽 90° 회전] 또는 [180° 회전] 버튼을 눌러 글자가 똑바로 서도록 맞춥니다.",
-            "3단계: [회전된 PDF 저장하기]를 클릭하면 영구적으로 바로잡힌 완성 파일이 다운로드됩니다."
-          ]
-        }
-      ],
-      "ctaText": "거꾸로 된 PDF 문서 바로잡기"
-    },
-    "en": {
-      "title": "How to Permanently Rotate Upside-Down Scanned PDF Pages",
-      "summary": "Fix inverted and sideways scanned pages once and for all by embedding permanent 90-degree and 180-degree rotation tags into the PDF file.",
-      "sections": [
-        {
-          "heading": "Temporary Viewer Rotation vs. Permanent File Encoding",
-          "body": [
-            "Simply rotating the display view in Acrobat Reader only alters your local screen session—recipients will still open an inverted document.",
-            "Permanent fixes require altering the PDF's internal page dictionary `/Rotate` parameter.",
-            "mypickpdf instantly updates the internal orientation tags in milliseconds."
-          ],
-          "tip": "Panda Tip: Rotate all pages clockwise or counterclockwise with a single tap!"
-        },
-        {
-          "heading": "Correcting Page Orientation in 3 Steps",
-          "body": [
-            "Step 1: Upload your sideways document to [Rotate PDF].",
-            "Step 2: Click the 90° or 180° rotation button until text aligns upright.",
-            "Step 3: Click [Save Rotated PDF] to download your permanently corrected document."
-          ]
-        }
-      ],
-      "ctaText": "Rotate PDF Pages Now"
-    }
-  }
-},
+    slug: "translate-english-paper-pdf-korean",
+    title: "영어 논문·해외 원서 PDF 번역 무료 가이드: 서식 유지 좌우 대조본 PDF 만들기",
+    summary: "영문 학술 논문(IEEE, Nature, ArXiv), 해외 계약서, 영문 매뉴얼 PDF를 문단 깨짐 없이 한국어로 번역하고, 원문과 번역문을 나란히 비교하는 좌우 대조본 PDF로 저장하는 방법입니다.",
+    category: "문서편집",
+    readTime: "5분",
+    publishedAt: "2026-10-24",
+    updatedAt: "2026-10-25",
+    tags: ["PDF번역", "영어논문번역", "PDF대조본번역", "무료PDF번역기", "영문계약서번역"],
+    relatedToolHref: "/translate-pdf",
+    relatedToolName: "AI 다국어 PDF 번역기 바로가기",
+    content: `
+## 1. 영어 논문 PDF를 파파고·번역기에 복사해 넣으면 생기는 문제
+대학원생, 연구원, 직장인이 해외 영어 논문이나 영문 기술 매뉴얼 PDF를 읽을 때 텍스트를 드래그해서 일반 번역기에 붙여넣으면:
+- PDF 특유의 **강제 줄바꿈(Line break)** 때문에 한 문장이 3~4문장으로 쪼개져 엉터리 오역이 발생합니다.
+- 2단(Two-column) 학술 논문 구조가 뒤섞여 왼쪽 단과 오른쪽 단의 문장이 합쳐집니다.
+- 몇 페이지를 읽고 있는지 원문 도표(Figure, Table)와 대조하며 읽기가 불가능합니다.
 
-  // 35. 공채 채용 포털 업로드 제한(5MB/10MB) 맞춤 PDF 초고속 다이어트
-  {
-  "id": 35,
-  "slug": "reduce-job-application-pdf-under-5mb",
-  "category": "mobile",
-  "categoryLabel": {
-    "ko": "모바일 활용",
-    "en": "Mobile Tips",
-    "es": "Consejos Móvil",
-    "ja": "モバイルヒント",
-    "zh-CN": "移动技巧"
-  },
-  "toolHref": "/compress-pdf",
-  "toolName": {
-    "ko": "PDF 압축",
-    "en": "Compress PDF",
-    "es": "Comprimir PDF",
-    "ja": "PDF圧縮",
-    "zh-CN": "压缩PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "2분 읽기",
-    "en": "2 min read",
-    "es": "Lectura de 2 min",
-    "ja": "2分で読める",
-    "zh-CN": "2分钟阅读"
-  },
-  "mascotMood": "cheering",
-  "keywords": [
-    "채용 사이트 5MB 이하 PDF 압축",
-    "사람인 잡코리아 지원서 용량 초과",
-    "포트폴리오 10MB 줄이기",
-    "compress job application pdf under 5mb",
-    "shrink portfolio pdf for career portal",
-    "採用エントリー PDF 容量削減 5MB以下"
-  ],
-  "translations": {
-    "ko": {
-      "title": "공채 채용 포털 업로드 제한(5MB/10MB) 맞춤 PDF 초고속 다이어트",
-      "summary": "사람인, 잡코리아, 공기업 채용 홈페이지에서 '첨부파일 크기는 5MB를 초과할 수 없습니다' 에러가 떴을 때 마감 5분 전 초고속으로 통과하는 비법입니다.",
-      "sections": [
-        {
-          "heading": "마감 직전 입사지원자를 당황시키는 '용량 초과' 에러",
-          "body": [
-            "포토샵이나 일러스트레이터에서 정성껏 제작한 포트폴리오 PDF는 고화질 비트맵 이미지로 인해 파일 크기가 30MB~50MB에 달하기 일쑤입니다.",
-            "하지만 대기업 및 공기업 채용 시스템은 서버 부하 방지를 위해 첨부파일 용량을 5MB나 10MB로 엄격히 제한하고 있습니다.",
-            "mypickpdf는 마감 직전 로그인이나 회원가입 절차 없이, 브라우저에서 즉시 80% 이상 용량을 깎아내어 합격 제출을 보장합니다."
-          ],
-          "tip": "래서팬더 꿀팁: [초강력 압축] 옵션을 적용하면 25MB 포트폴리오가 3.8MB로 슬림해지면서도 면접관 모니터에서 글자와 디자인이 선명하게 유지됩니다!"
-        },
-        {
-          "heading": "5MB 통과를 위한 초고속 압축",
-          "body": [
-            "1단계: [PDF 압축] 도구에 대용량 입사지원 포트폴리오를 드롭합니다.",
-            "2단계: '초강력 압축(용량 최소화)'을 선택합니다.",
-            "3단계: 5MB 미만으로 줄어든 완성본을 받아 채용 포털에 성공적으로 접수하세요."
-          ]
-        }
-      ],
-      "ctaText": "입사지원서 PDF 5MB 이하로 줄이기"
-    },
-    "en": {
-      "title": "How to Shrink Your Job Application & Portfolio PDF Under 5MB Fast",
-      "summary": "Beat strict recruitment portal upload size limits (5MB / 10MB) minutes before the deadline without compromising visual portfolio clarity.",
-      "sections": [
-        {
-          "heading": "Overcoming Career Portal Upload File Size Errors",
-          "body": [
-            "Portfolios designed in InDesign or Illustrator often balloon to 40MB+ due to uncompressed assets.",
-            "Corporate HR portals strictly enforce 5MB or 10MB ceiling limits to prevent server bottlenecks, blocking panicked applicants at the deadline.",
-            "mypickpdf resamples oversized imagery to optimal web display DPIs instantly inside your browser without login barriers."
-          ],
-          "tip": "Panda Tip: The 'Extreme Compression' mode easily trims a 30MB portfolio down to 3.5MB while maintaining flawless typography!"
-        },
-        {
-          "heading": "Sub-5MB Compression in 3 Steps",
-          "body": [
-            "Step 1: Drop your heavy portfolio into [Compress PDF].",
-            "Step 2: Choose 'Extreme Compression' for maximum size reduction.",
-            "Step 3: Download the sub-5MB PDF and submit your application with confidence."
-          ]
-        }
-      ],
-      "ctaText": "Shrink Application PDF Now"
-    }
-  }
-},
+---
 
-  // 36. 스캔본 PDF의 인쇄 글자를 복사 가능한 텍스트로 추출하는 완벽 가이드
-  {
-  "id": 36,
-  "slug": "free-scanned-pdf-to-text-guide",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/ocr-pdf",
-  "toolName": {
-    "ko": "PDF 텍스트 추출 (OCR)",
-    "en": "PDF Text OCR",
-    "es": "OCR de PDF",
-    "ja": "PDFテキスト抽出",
-    "zh-CN": "PDF文字识别"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "스캔 PDF 텍스트 추출",
-    "문서 사진 글자 복사 OCR",
-    "PDF 한글 워드 텍스트 추출",
-    "extract text from scanned pdf free",
-    "scanned document to editable text",
-    "スキャン PDF テキスト 抽出 無料"
-  ],
-  "translations": {
-    "ko": {
-      "title": "스캔본 PDF의 인쇄 글자를 복사 가능한 텍스트로 추출하는 완벽 가이드",
-      "summary": "책, 신문 기사, 영수증, 계약서를 복합기 스캔한 이미지 PDF에서 원하는 문단을 긁어내 워드나 한글 문서로 옮겨 적는 가장 간편한 테크닉입니다.",
-      "sections": [
-        {
-          "heading": "스캔 이미지 PDF와 텍스트 PDF의 구조적 차이점",
-          "body": [
-            "복합기로 스캔한 PDF는 컴퓨터 입장에서 글자가 아니라 하나의 거대한 '사진'에 불과합니다.",
-            "따라서 마우스로 글자를 긁을 수도 없고, Ctrl+F 단어 검색도 되지 않아 문서 재활용에 큰 제약이 따릅니다.",
-            "mypickpdf의 텍스트 추출 엔진은 문서 내부의 텍스트 스트림과 활자 블록을 정밀하게 추출하여 편집 가능한 디지털 텍스트로 복원합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 표 형식으로 이루어진 데이터는 [PDF ➔ Excel] 도구를 활용하면 표 구조까지 완벽하게 추출할 수 있습니다!"
-        },
-        {
-          "heading": "스캔 문서 텍스트 추출 실무 절차",
-          "body": [
-            "1단계: [PDF 텍스트 추출 (OCR)] 도구에 스캔된 문서를 추가합니다.",
-            "2단계: [텍스트 추출 시작] 버튼을 누르면 브라우저가 각 페이지를 판독합니다.",
-            "3단계: 추출된 결과를 [복사]하거나 [.txt 파일로 다운로드]하여 워드나 한글에 붙여넣습니다."
-          ]
-        }
-      ],
-      "ctaText": "스캔 PDF에서 글자 추출하기"
-    },
-    "en": {
-      "title": "The Complete Guide to Extracting Editable Text from Scanned PDFs",
-      "summary": "Turn unselectable scanned book pages, legal papers, and receipts into copyable, searchable text streams in seconds.",
-      "sections": [
-        {
-          "heading": "Why Scanned Documents Block Text Selection",
-          "body": [
-            "Scanners create graphic image containers rather than indexed typographic characters.",
-            "This prevents keyword searching (Ctrl+F), content copying, and easy quote referencing.",
-            "mypickpdf extracts underlying text characters and organizes them chronologically for instant copying into Word or Google Docs."
-          ],
-          "tip": "Panda Tip: If your scanned document contains tables, use [PDF to Excel] instead to retain perfect grid formatting!"
-        },
-        {
-          "heading": "Extracting Content in 3 Easy Steps",
-          "body": [
-            "Step 1: Upload your scanned PDF to [PDF Text OCR].",
-            "Step 2: Let the client parser decode text characters.",
-            "Step 3: Click [Copy to Clipboard] or download the formatted .txt file."
-          ]
-        }
-      ],
-      "ctaText": "Extract Scanned Text Now"
-    }
-  }
-},
+## 2. pdfpick AI PDF 번역기의 핵심 기능: '문단 지능형 결합 & 좌우 대조본'
+[무료 PDF 번역기](/translate-pdf)는 학술 논문과 비즈니스 문서를 위해 설계된 전용 레이아웃 엔진을 탑재하고 있습니다:
 
-  // 37. 법률 계약서·전자등기 10년 이상 변형 없이 보관하는 PDF/A 표준 규격의 모든 것
-  {
-  "id": 37,
-  "slug": "why-use-pdfa-for-legal-archives",
-  "category": "security",
-  "categoryLabel": {
-    "ko": "보안 & 프라이버시",
-    "en": "Security",
-    "es": "Seguridad",
-    "ja": "セキュリティ",
-    "zh-CN": "安全与隐私"
-  },
-  "toolHref": "/pdf-to-pdfa",
-  "toolName": {
-    "ko": "PDF/A 변환",
-    "en": "PDF to PDF/A",
-    "es": "PDF a PDF/A",
-    "ja": "PDF/A変換",
-    "zh-CN": "转换为PDF/A"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "ready",
-  "keywords": [
-    "PDF/A 규격 변환",
-    "법률 전자등기 장기 보관 PDF",
-    "ISO 19005-1 표준 문서",
-    "why use pdf/a for legal archives",
-    "iso standard long term document preservation",
-    "PDF/A 規格 変換 長期保存"
-  ],
-  "translations": {
-    "ko": {
-      "title": "법률 계약서·전자등기 10년 이상 변형 없이 보관하는 PDF/A 표준 규격의 모든 것",
-      "summary": "ISO 19005-1 국제 표준인 PDF/A 규격이 왜 장기 보관용 문서의 필수 조건인지, 일반 PDF와 무엇이 다른지 법률·기업 실무 관점에서 살펴봅니다.",
-      "sections": [
-        {
-          "heading": "일반 PDF가 수년 뒤 열리지 않거나 폰트가 깨지는 이유",
-          "body": [
-            "일반 PDF 문서는 컴퓨터 시스템 외부의 폰트나 자바스크립트 등 동적 요소에 의존하는 경우가 많습니다.",
-            "이로 인해 5년, 10년 뒤 뷰어 소프트웨어가 업데이트되거나 운영체제가 바뀌면 글자가 깨지거나 서식이 틀어지는 문제가 발생합니다.",
-            "국제 표준인 PDF/A(PDF for Archiving)는 폰트, 색상 프로파일, 이미지 데이터를 문서 파일 내부에 100% 영구 임베딩하여 50년 후에도 완벽히 동일한 출력을 보장합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 법원 전자소송, 특허청 출원, 공공기관 기록물 관리 규정은 PDF/A 준수 문서를 공식 권장하고 있습니다!"
-        },
-        {
-          "heading": "간편한 PDF/A 보관용 규격 변환법",
-          "body": [
-            "1단계: [PDF PDF/A로 변환] 도구에 장기 보관할 계약서나 문서를 첨부합니다.",
-            "2단계: [PDF/A 규격으로 변환 시작]을 누르면 메타데이터와 폰트 스트림이 표준화됩니다.",
-            "3단계: 변환된 영구 보관용 PDF를 다운로드하여 사내 아카이브나 클라우드 스토리지에 안전하게 보관하세요."
-          ]
-        }
-      ],
-      "ctaText": "장기 보관용 PDF/A 규격으로 변환하기"
-    },
-    "en": {
-      "title": "Why Legal and Archival Documents Require the ISO PDF/A Standard",
-      "summary": "Discover why courts, patent offices, and compliance auditors mandate ISO 19005-1 PDF/A for permanent, 100% reproducible document preservation.",
-      "sections": [
-        {
-          "heading": "Why Standard PDFs Can Break Over Decades",
-          "body": [
-            "Regular PDFs often rely on system font references and external script dependencies.",
-            "As operating systems and PDF readers evolve over 10-20 years, missing fonts result in corrupted glyphs and altered layout structures.",
-            "The ISO PDF/A standard strictly mandates self-contained font embedding, standardized device-independent color spaces, and zero dynamic scripts."
-          ],
-          "tip": "Panda Tip: Courts, archival registries, and patent offices around the globe require PDF/A compliance for permanent electronic filings!"
-        },
-        {
-          "heading": "Converting to PDF/A in 3 Steps",
-          "body": [
-            "Step 1: Open [PDF to PDF/A] and upload your target document.",
-            "Step 2: Initiate archival normalization to embed required color profiles and tags.",
-            "Step 3: Save your compliant archive file for worry-free decadal storage."
-          ]
-        }
-      ],
-      "ctaText": "Convert to Archival PDF/A Now"
-    }
-  }
-},
+| 출력 포맷 | 주요 특징 | 추천 활용 대상 |
+| :--- | :--- | :--- |
+| **좌우 대조본 PDF (Dual View)** | 왼쪽에는 영어 원문, 오른쪽에는 한국어 번역문을 문단별로 1:1 매칭 배치 | **대학원 세미나 발제, 영문 계약서 정밀 검토** |
+| **단독 번역본 PDF (Single View)** | 한국어로 번역된 깔끔한 보고서 형태의 단일 PDF 생성 | **해외 시장조사 보고서·매뉴얼 빠른 독해** |
+| **Word (.docx) & 텍스트 내보내기** | 번역 결과를 편집 가능한 워드 문서로 즉시 저장 | **논문 요약본 작성 및 인용구 정리** |
 
-  // 38. 광고 많은 웹페이지 뉴스 기사를 깨끗한 인쇄용 PDF로 소장하는 방법
-  {
-  "id": 38,
-  "slug": "webpage-article-to-clean-pdf",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/html-to-pdf",
-  "toolName": {
-    "ko": "HTML PDF 변환",
-    "en": "HTML to PDF",
-    "es": "HTML a PDF",
-    "ja": "HTML PDF変換",
-    "zh-CN": "HTML转PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "웹페이지 PDF 저장 광고 없이",
-    "인터넷 기사 PDF 소장",
-    "HTML 코드 PDF 변환",
-    "convert webpage article to clean pdf",
-    "save web page without ads to pdf",
-    "ウェブ記事 広告なし PDF 保存"
-  ],
-  "translations": {
-    "ko": {
-      "title": "광고 많은 웹페이지 뉴스 기사를 깨끗한 인쇄용 PDF로 소장하는 방법",
-      "summary": "인터넷 기사나 기술 블로그의 유용한 정보를 열람할 때 화면을 어지럽히는 광고 팝업과 배너를 걷어내고 본문 텍스트와 핵심 이미지만 A4 PDF로 영구 저장하는 노하우입니다.",
-      "sections": [
-        {
-          "heading": "인터넷 링크는 언젠가 사라지지만 PDF는 평생 남습니다",
-          "body": [
-            "북마크해 둔 뉴스 기사나 기술 튜토리얼 웹페이지는 사이트 개편이나 서비스 종료로 어느 날 갑자기 사라질 수 있습니다.",
-            "웹 브라우저의 일반 인쇄 기능은 사이드바 광고, 댓글창, 쿠키 배너까지 덕지덕지 인쇄되어 가독성이 떨어집니다.",
-            "mypickpdf [HTML PDF 변환]을 이용하면 핵심 HTML 본문만 깔끔한 A4 규격 레이아웃으로 렌더링하여 영구 소장할 수 있습니다."
-          ],
-          "tip": "래서팬더 꿀팁: 코딩 튜토리얼이나 요리 레시피도 PDF로 저장해 두면 비행기 안이나 오프라인에서도 언제든 읽을 수 있어요!"
-        },
-        {
-          "heading": "웹페이지 PDF 변환 실천 가이드",
-          "body": [
-            "1단계: 저장하고 싶은 기사나 웹페이지의 HTML 코드 또는 본문 텍스트를 복사합니다.",
-            "2단계: [HTML PDF 변환] 편집창에 붙여넣고 서식을 정돈합니다.",
-            "3단계: [PDF로 변환 시작]을 클릭하면 책처럼 깔끔한 고화질 A4 전자문서가 완성됩니다."
-          ]
-        }
-      ],
-      "ctaText": "웹페이지 HTML 코드로 PDF 만들기"
-    },
-    "en": {
-      "title": "How to Save Online Articles and Webpages as Clean, Ad-Free PDFs",
-      "summary": "Archive valuable online tutorials and news stories without annoying ad banners, popups, or tracking cookies into neat reading PDFs.",
-      "sections": [
-        {
-          "heading": "Web Links Break, but Archived PDFs Last Forever",
-          "body": [
-            "Bookmarks often lead to 404 dead links when web domains expire or restructure article directories.",
-            "Standard browser printing typically captures bloated sidebars, invasive banner advertisements, and cluttered comment widgets.",
-            "mypickpdf renders crisp HTML structures directly into clean, proportional A4 reading sheets."
-          ],
-          "tip": "Panda Tip: Great for building your own offline library of coding documentation and technical research papers!"
-        },
-        {
-          "heading": "Converting Web Content in 3 Steps",
-          "body": [
-            "Step 1: Copy your desired HTML article snippet or upload your .html file.",
-            "Step 2: Paste it into the [HTML to PDF] text editor.",
-            "Step 3: Click convert to download a beautiful, ad-free reader PDF."
-          ]
-        }
-      ],
-      "ctaText": "Convert HTML to Clean PDF Now"
-    }
-  }
-},
+---
 
-  // 39. 5월 종합소득세 및 부가세 신고용 지출 증빙 PDF 깔끔하게 묶는 법
+## 3. 18개 언어 PDF 3초 번역 사용법
+1. [AI 다국어 PDF 번역기](/translate-pdf)에 영어, 일본어, 중국어, 독일어 등 원문 PDF를 업로드합니다.
+2. 원문 언어(자동 감지)와 번역할 목표 언어(**한국어**, 영어 등 18개 국어 지원)를 선택합니다.
+3. **[번역 시작]**을 누르면 문단 줄바꿈이 자동으로 교정되어 번역되며, 완료 후 **[대조본 PDF 다운로드]** 또는 **[번역본 PDF 다운로드]**를 선택해 저장하실 수 있습니다.
+`,
+    faqList: [
+      {
+        question: "번역할 수 있는 페이지 수나 글자 수 제한이 있나요?",
+        answer: "로그인이나 유료 결제 없이 긴 분량의 학술 논문과 보고서도 무료로 번역하고 대조본 PDF로 다운로드할 수 있습니다."
+      },
+      {
+        question: "한국어 문서를 영어, 일본어, 중국어 PDF로 역번역할 수도 있나요?",
+        answer: "네! 한국어 제안서나 회사 소개서 PDF를 올리고 목표 언어를 영어(English), 일본어(日本語), 중국어(中文), 스페인어 등으로 선택하면 해외 바이어 전달용 다국어 PDF를 즉시 제작할 수 있습니다."
+      }
+    ]
+  },
   {
-  "id": 39,
-  "slug": "combine-receipts-invoices-tax-filing",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/merge-pdf",
-  "toolName": {
-    "ko": "PDF 합치기",
-    "en": "Merge PDF",
-    "es": "Unir PDF",
-    "ja": "PDF結合",
-    "zh-CN": "合并PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "cheering",
-  "keywords": [
-    "종합소득세 증빙서류 PDF 합치기",
-    "부가세 매입 세금계산서 병합",
-    "세무사 제출 서류 PDF 정리",
-    "combine tax deduction receipts into single pdf",
-    "merge business tax filing documents",
-    "確定申告 領収書 PDF まとめて提出"
-  ],
-  "translations": {
-    "ko": {
-      "title": "5월 종합소득세 및 부가세 신고용 지출 증빙 PDF 깔끔하게 묶는 법",
-      "summary": "개인사업자, 프리랜서, 법인 담당자가 세무사 사무실에 제출할 수십 개의 전자계산서, 카드 영수증, 이체확인증 PDF를 일자별로 가지런히 병합하는 노하우입니다.",
-      "sections": [
-        {
-          "heading": "세무 대리인이 가장 환영하는 증빙 서류 정리법",
-          "body": [
-            "종합소득세 신고철마다 수십 통의 이메일과 메신저로 증빙 서류를 낱개로 보내면 세무사가 누락하여 절세 혜택을 놓칠 위험이 있습니다.",
-            "카드 영수증, 은행 송금 확인증, 매입 계산서를 월별/일자별로 순서대로 정렬해 단 1개의 단일 PDF로 묶어 제출하면 세무 검토가 즉각 완료됩니다.",
-            "mypickpdf는 금융 거래 내역이 외부 서버로 전송되지 않으므로 회사 계좌 정보나 매출 내역 유출 걱정 없이 안전합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 파일명을 '2026_1분기_지출증빙_홍길동.pdf'처럼 명확하게 작성하면 세무사 사무실과의 소통이 10배 수월해집니다!"
-        },
-        {
-          "heading": "세무 증빙 서류 원스톱 병합 3단계",
-          "body": [
-            "1단계: [PDF 합치기] 도구에 준비된 지출 증빙 PDF들을 한꺼번에 드래그하여 올립니다.",
-            "2단계: 위/아래 순서 조정 화살표를 눌러 1월부터 12월까지 일자순으로 정렬합니다.",
-            "3단계: [PDF 합치기]를 클릭하면 세무사 제출용 단일 증빙 패키지가 완성됩니다."
-          ]
-        }
-      ],
-      "ctaText": "세무 증빙 PDF 파일 하나로 합치기"
-    },
-    "en": {
-      "title": "How to Merge All Tax Deduction Receipts & Invoices for Annual Filing",
-      "summary": "Help your accountant maximize your tax returns by combining diverse vendor invoices, card receipts, and bank slips into a unified audit-ready PDF.",
-      "sections": [
-        {
-          "heading": "Why Accountants Love Single Consolidated Tax Packages",
-          "body": [
-            "Sending dozens of individual image attachments during tax season causes friction and risks missed deductions.",
-            "Submitting a neatly organized, chronologically stacked PDF package ensures every business expense is properly categorized.",
-            "Client-side processing guarantees your private financial ledger stays strictly confidential."
-          ],
-          "tip": "Panda Tip: Rename your merged file with your name and tax year (e.g. '2026_Tax_Deductions_JohnDoe.pdf')!"
-        },
-        {
-          "heading": "Consolidating Tax Papers in 3 Steps",
-          "body": [
-            "Step 1: Drag all your expense PDFs into [Merge PDF].",
-            "Step 2: Align them chronologically from January to December.",
-            "Step 3: Click [Merge PDF] to generate your accountant-ready tax filing package."
-          ]
-        }
-      ],
-      "ctaText": "Merge Tax Documents Now"
-    }
-  }
-},
+    slug: "gov24-nara-pdf-size-and-hwp-tips",
+    title: "정부24·나라장터·홈택스 제출용 PDF 용량 줄이기 및 한글(HWPX) 변환 실무 총정리",
+    summary: "공공기관 민원 신청 및 조달청 입찰 시 자주 발생하는 첨부파일 용량 초과 오류 해결법, 여러 증빙서류 PDF 하나로 합치기, 공고문 HWPX 변환 노하우를 한곳에 정리했습니다.",
+    category: "공공기관·서식",
+    readTime: "5분",
+    publishedAt: "2026-10-25",
+    updatedAt: "2026-10-25",
+    tags: ["정부24PDF", "나라장터PDF", "홈택스증빙서류", "공공기관서류제출", "PDF용량줄이기", "HWPX변환"],
+    relatedToolHref: "/compress-pdf",
+    relatedToolName: "공공기관 제출용 PDF 압축기 바로가기",
+    content: `
+## 1. 관공서·공공기관 온라인 서류 제출 시 가장 많이 막히는 4가지 문제
+정부24, 조달청 나라장터, 국세청 홈택스, 중소벤처기업부 지원사업 포털(SMTECH, K-Startup)에 서류를 제출할 때 마감 시간 직전에 가장 많이 겪는 오류와 즉시 해결법입니다.
 
-  // 40. 내 지적재산권 지키기: 무단 배포 방지용 투명 워터마크 삽입 완벽 가이드
-  {
-  "id": 40,
-  "slug": "complete-guide-watermarking-confidential-pdf",
-  "category": "security",
-  "categoryLabel": {
-    "ko": "보안 & 프라이버시",
-    "en": "Security",
-    "es": "Seguridad",
-    "ja": "セキュリティ",
-    "zh-CN": "安全与隐私"
-  },
-  "toolHref": "/add-watermark",
-  "toolName": {
-    "ko": "워터마크 추가",
-    "en": "Add Watermark",
-    "es": "Marca de agua",
-    "ja": "透かし追加",
-    "zh-CN": "添加水印"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "ready",
-  "keywords": [
-    "전자책 무단 배포 방지 워터마크",
-    "지적재산권 PDF 복사금지",
-    "제안서 워터마크 삽입 팁",
-    "protect intellectual property pdf watermark",
-    "anti piracy ebook watermark",
-    "電子書籍 無断転載防止 透かし"
-  ],
-  "translations": {
-    "ko": {
-      "title": "내 지적재산권 지키기: 무단 배포 방지용 투명 워터마크 삽입 완벽 가이드",
-      "summary": "내가 직접 작성한 전자책, 디자인 도면, 사업계획서, 기획 제안서가 인터넷에 무단 유포되는 것을 방지하기 위해 보이지 않는 방패인 워터마크를 심는 방법입니다.",
-      "sections": [
-        {
-          "heading": "디지털 워터마크가 불법 공유를 막는 심리적·법적 원리",
-          "body": [
-            "정성껏 만든 유료 전자책이나 기업 기획서가 단톡방이나 웹 커뮤니티에 불법 업로드되는 사례가 빈번합니다.",
-            "문서의 모든 페이지 중앙에 [무단 전재 및 재배포 금지] 또는 구매자 이메일 주소를 연하게 박아두면, 유출자가 신원 노출을 두려워해 공유를 단념하게 됩니다.",
-            "mypickpdf는 벡터 그래픽 렌더링으로 워터마크를 텍스트 레이어 아래에 완벽 결합하여 캡처나 재편집을 어렵게 만듭니다."
-          ],
-          "tip": "래서팬더 꿀팁: 워터마크 폰트 크기를 48pt 전후, 투명도를 20%로 세팅하면 본문을 편안하게 읽으면서도 유출 방지 효과는 극대화됩니다!"
-        },
-        {
-          "heading": "지적재산권 보호 워터마크 세팅 순서",
-          "body": [
-            "1단계: [워터마크 추가] 도구에 전자책이나 기획서 PDF를 등록합니다.",
-            "2단계: 워터마크 텍스트에 '무단 복제 금지' 또는 'SAMPLE' 문구를 입력합니다.",
-            "3단계: 45도 회전 각도와 적절한 투명도를 확인한 뒤 완성본을 안전하게 다운로드합니다."
-          ]
-        }
-      ],
-      "ctaText": "내 창작물 PDF에 복제 방지 워터마크 심기"
-    },
-    "en": {
-      "title": "How to Protect Your E-books and Intellectual Property with Watermarks",
-      "summary": "Prevent unauthorized distribution and piracy of your digital books, design blueprints, and pitch proposals with smart semi-transparent watermarks.",
-      "sections": [
-        {
-          "heading": "Psychological and Legal Deterrence Against Digital Piracy",
-          "body": [
-            "Valuable digital products like training manuals, whitepapers, and e-books are vulnerable to unauthorized re-sharing across forums.",
-            "Embedding subtle diagonal watermarks such as 'UNAUTHORIZED REPRODUCTION PROHIBITED' drastically discourages illegal leaks.",
-            "mypickpdf embeds the watermark vector deeply into the PDF page stream without uploading your valuable content to remote servers."
-          ],
-          "tip": "Panda Tip: A 48pt font size at 20% opacity ensures reader comfort while rendering screenshots unmistakably watermarked!"
-        },
-        {
-          "heading": "Securing Your Creations in 3 Steps",
-          "body": [
-            "Step 1: Open [Add Watermark] and upload your creative PDF.",
-            "Step 2: Enter your copyright notice or recipient identity tag.",
-            "Step 3: Preview the 45-degree angle and save your protected publication."
-          ]
-        }
-      ],
-      "ctaText": "Protect Your Intellectual Property Now"
-    }
-  }
-},
+### 문제별 1초 해결 도구 매칭표
 
-  // 41. 회의 녹화 영상이나 프로그램 사용법을 5초 만에 설명용 움직이는 짤(GIF)로 만들기
-  {
-  "id": 41,
-  "slug": "convert-meeting-video-to-gif-guide",
-  "category": "media",
-  "categoryLabel": {
-    "ko": "미디어 툴",
-    "en": "Media Tools",
-    "es": "Medios",
-    "ja": "メディアツール",
-    "zh-CN": "多媒体工具"
-  },
-  "toolHref": "/video-to-gif",
-  "toolName": {
-    "ko": "동영상 GIF 변환",
-    "en": "Video to GIF",
-    "es": "Video a GIF",
-    "ja": "動画GIF変換",
-    "zh-CN": "视频转GIF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "idea",
-  "keywords": [
-    "동영상 GIF 변환 프로그램 없이",
-    "회의 녹화 움짤 만들기",
-    "노션 슬랙용 설명 GIF",
-    "convert meeting video to gif loop",
-    "make gif from screen recording notion slack",
-    "動画 GIF 変換 ノーション スラック"
-  ],
-  "translations": {
-    "ko": {
-      "title": "회의 녹화 영상이나 프로그램 사용법을 5초 만에 설명용 움직이는 짤(GIF)로 만들기",
-      "summary": "노션(Notion), 슬랙(Slack), 잔디, 사내 위키에 첨부할 무거운 동영상 대신 재생 버튼 없이도 즉시 보이는 고화질 루프 GIF 움짤을 브라우저에서 만드는 법입니다.",
-      "sections": [
-        {
-          "heading": "동영상 대신 움직이는 GIF가 협업 도구에서 사랑받는 이유",
-          "body": [
-            "업무 매뉴얼이나 버그 리포트에 동영상을 첨부하면 수신자가 재생 버튼을 누르고 플레이어가 로딩될 때까지 기다려야 합니다.",
-            "반면 움직이는 짤(GIF)은 노션이나 슬랙 문서 안에서 무한 반복 재생되어 핵심 동작을 단 3초 만에 직관적으로 이해시킵니다.",
-            "mypickpdf의 브라우저 비디오 인코더는 무거운 외부 프로그램 없이 스마트폰이나 PC 화면 녹화 영상을 고화질 GIF로 즉시 렌더링합니다."
-          ],
-          "tip": "래서팬더 꿀팁: 프레임 레이트(FPS)를 15FPS 수준으로 맞추면 용량은 가벼우면서도 마우스 커서 움직임이 아주 부드럽습니다!"
-        },
-        {
-          "heading": "초간단 3단계 GIF 생성법",
-          "body": [
-            "1단계: [동영상 GIF 변환] 메뉴에 MP4, MOV 화면 녹화 영상을 추가합니다.",
-            "2단계: 원하는 영상 구간과 화질 옵션을 지정합니다.",
-            "3단계: [GIF로 변환하기]를 누르면 노션이나 슬랙에 바로 붙여넣을 수 있는 고화질 움짤이 다운로드됩니다."
-          ]
-        }
-      ],
-      "ctaText": "화면 녹화 영상 GIF 움짤로 변환하기"
-    },
-    "en": {
-      "title": "How to Turn Video Screen Recordings into Smooth GIFs for Notion & Slack",
-      "summary": "Replace bulky video files in your company knowledge base with lightweight, auto-playing looping GIFs that explain features in seconds.",
-      "sections": [
-        {
-          "heading": "Why Looping GIFs Beat Video Players in Documentation",
-          "body": [
-            "Embedding raw MP4 videos in Notion or Slack documentation requires viewers to manually click play and wait for buffering.",
-            "Looping GIFs instantly illustrate UI workflows, software bug reproductions, and visual walkthroughs without any interaction.",
-            "mypickpdf renders smooth GIFs directly in your browser using hardware acceleration."
-          ],
-          "tip": "Panda Tip: Setting 15 FPS delivers a silky smooth mouse cursor animation while keeping file size well under 3MB!"
-        },
-        {
-          "heading": "Generating GIFs in 3 Simple Steps",
-          "body": [
-            "Step 1: Upload your MP4 or MOV screen recording to [Video to GIF].",
-            "Step 2: Adjust your duration and resolution preferences.",
-            "Step 3: Click convert to retrieve your auto-playing documentation GIF."
-          ]
-        }
-      ],
-      "ctaText": "Convert Video to GIF Now"
-    }
-  }
-},
+| 자주 겪는 민원·입찰 오류 상황 | 원인 | 즉시 해결하는 pdfpick 도구 |
+| :--- | :--- | :--- |
+| **"첨부파일 용량(5MB/10MB)을 초과했습니다"** | 고해상도 스캔본·도장 이미지 때문 | [PDF 용량 줄이기](/compress-pdf) (화질 유지 70~80% 압축) |
+| **"첨부파일 칸이 1개뿐인데 서류는 5개예요"** | 사업자등록증·등본·납세증명서 낱개 보유 | [PDF 합치기](/merge-pdf) (순서대로 1개 파일로 통합) |
+| **"공고문 파일이 PDF라 신청서 작성이 안 돼요"** | 한글 원본 양식 미첨부 | [PDF 한글(HWPX) 변환](/pdf-to-hwp) |
+| **"등본에 주민번호 뒷자리를 가리고 내래요"** | 개인정보 마스킹 미처리 | [PDF 편집기 (화이트아웃)](/edit-pdf) |
 
-  // 42. 워드(Word .docx) 문서의 줄바꿈과 표 서식을 100% 유지하며 PDF로 변환하기
-  {
-  "id": 42,
-  "slug": "word-docx-to-pdf-formatting-guide",
-  "category": "convert",
-  "categoryLabel": {
-    "ko": "파일 변환 노하우",
-    "en": "Conversion",
-    "es": "Conversión",
-    "ja": "変換ノウハウ",
-    "zh-CN": "格式转换"
-  },
-  "toolHref": "/word-to-pdf",
-  "toolName": {
-    "ko": "워드 PDF 변환",
-    "en": "Word to PDF",
-    "es": "Word a PDF",
-    "ja": "Word PDF変換",
-    "zh-CN": "Word转PDF"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "3분 읽기",
-    "en": "3 min read",
-    "es": "Lectura de 3 min",
-    "ja": "3分で読める",
-    "zh-CN": "3分钟阅读"
-  },
-  "mascotMood": "welcome",
-  "keywords": [
-    "워드 PDF 변환 서식 유지",
-    "DOCX PDF 줄바꿈 깨짐 방지",
-    "워드 문서 무료 PDF 변환",
-    "convert word docx to pdf keep formatting",
-    "ms word to pdf font preserve",
-    "Word PDF 変換 書式崩れなし"
-  ],
-  "translations": {
-    "ko": {
-      "title": "워드(Word .docx) 문서의 줄바꿈과 표 서식을 100% 유지하며 PDF로 변환하기",
-      "summary": "마이크로소프트 워드로 정성껏 작성한 제안서나 기안문을 PDF로 변환할 때 폰트가 깨지거나 표 테두리가 어긋나는 현상을 방지하는 최적의 변환 가이드입니다.",
-      "sections": [
-        {
-          "heading": "워드 변환 시 서식이 깨지는 이유와 최신 해결책",
-          "body": [
-            "기존 구형 변환 엔진은 한글이나 특수 문자셋의 2바이트 인코딩을 제대로 처리하지 못해 글자가 물음표(???)로 변하거나 표 간격이 어긋나곤 했습니다.",
-            "mypickpdf는 2D Canvas 고해상도 벡터 렌더링 파이프라인을 도입하여 원본 .docx 문서의 단락 구조, 글자 크기, 여백을 픽셀 단위로 정확하게 재현합니다.",
-            "윈도우나 맥북 어디서 만든 워드 문서든 A4 인쇄 규격에 맞춰 단정한 전자문서로 즉시 변환됩니다."
-          ],
-          "tip": "래서팬더 꿀팁: 변환된 PDF의 용량이 크다면 바로 [PDF 압축] 도구와 연계해 이메일 전송에 최적화된 크기로 줄여보세요!"
-        },
-        {
-          "heading": "워드 문서 3단계 무손실 PDF 변환",
-          "body": [
-            "1단계: [워드 PDF 변환] 메뉴에 .docx 문서를 끌어다 놓습니다.",
-            "2단계: [PDF로 변환 시작] 버튼을 누르면 1초 만에 A4 규격 레이아웃으로 렌더링됩니다.",
-            "3단계: 완성된 고화질 PDF를 다운로드하여 상대방에게 깔끔하게 전달하세요."
-          ]
-        }
-      ],
-      "ctaText": "워드 문서 손실 없이 PDF로 변환하기"
-    },
-    "en": {
-      "title": "How to Convert Word (.docx) to PDF While Preserving Exact Formatting",
-      "summary": "Prevent font corruption, broken tables, and scrambled line breaks by using high-fidelity Canvas vector rendering for your Word documents.",
-      "sections": [
-        {
-          "heading": "Why Outdated Converters Mangle Word Typography",
-          "body": [
-            "Older conversion engines struggle with modern OpenXML styles, resulting in missing international characters and misaligned tables.",
-            "mypickpdf leverages modern 2D Canvas typography rendering, preserving font weights, line heights, and margins with pixel-level precision.",
-            "Documents created across Windows and macOS convert identically into standardized A4 publication PDFs."
-          ],
-          "tip": "Panda Tip: If your Word file contains high-res photography, pair it with our [Compress PDF] tool for fast email delivery!"
-        },
-        {
-          "heading": "Lossless Conversion in 3 Steps",
-          "body": [
-            "Step 1: Upload your .docx document to [Word to PDF].",
-            "Step 2: Let the client engine map paragraphs and formatting styles.",
-            "Step 3: Download your publication-ready A4 PDF document."
-          ]
-        }
-      ],
-      "ctaText": "Convert Word to PDF Now"
-    }
-  }
-},
+---
 
-  // 43. 기업 비밀 문서 유출 걱정 끝: 서버 저장 0% 브라우저 격리 기술의 원리와 안전성
-  {
-  "id": 43,
-  "slug": "zero-server-storage-privacy-faq",
-  "category": "security",
-  "categoryLabel": {
-    "ko": "보안 & 프라이버시",
-    "en": "Security",
-    "es": "Seguridad",
-    "ja": "セキュリティ",
-    "zh-CN": "安全与隐私"
-  },
-  "toolHref": "/",
-  "toolName": {
-    "ko": "마이픽 홈",
-    "en": "mypickpdf Home",
-    "es": "Inicio",
-    "ja": "ホーム",
-    "zh-CN": "首页"
-  },
-  "date": "2026-09-28",
-  "readTime": {
-    "ko": "4분 읽기",
-    "en": "4 min read",
-    "es": "Lectura de 4 min",
-    "ja": "4分で読める",
-    "zh-CN": "4分钟阅读"
-  },
-  "mascotMood": "idea",
-  "keywords": [
-    "PDF 서버 저장 없는 사이트",
-    "100% 브라우저 로컬 PDF 변환",
-    "문서 보안 유출 0% 원리",
-    "zero server upload pdf editor private",
-    "client side webassembly pdf security",
-    "サーバー保存なし PDF 変換 安全性"
-  ],
-  "translations": {
-    "ko": {
-      "title": "기업 비밀 문서 유출 걱정 끝: 서버 저장 0% 브라우저 격리 기술의 원리와 안전성",
-      "summary": "기존 해외 유명 PDF 사이트들의 서버 파일 저장 논란과 대조적으로, mypickpdf가 어떻게 단 1바이트의 문서도 외부 서버로 전송하지 않고 모든 작업을 처리하는지 상세히 밝힙니다.",
-      "sections": [
-        {
-          "heading": "기존 무료 PDF 사이트들의 충격적인 데이터 저장 실태",
-          "body": [
-            "대부분의 무료 온라인 PDF 편집 사이트는 사용자가 올린 문서를 원격 해외 클라우드 서버에 업로드한 뒤 변환 작업을 처리합니다.",
-            "이 과정에서 계약서, 주민등록등본, 재무제표와 같은 민감한 사내 비밀 문서가 외부 서버 임시 폴더에 저장되어 보안 감사 지적이나 유출 사고로 이어질 위험이 큽니다.",
-            "mypickpdf는 발상의 전환을 통해, 모든 PDF 연산 엔진을 사용자의 웹 브라우저 안에서 직접 구동하도록 설계했습니다."
-          ],
-          "tip": "래서팬더 꿀팁: 개발자 도구(F12)의 네트워크 탭을 확인해 보세요. 파일을 변환하고 합치는 동안 외부 서버로 파일이 단 1바이트도 업로드되지 않는 것을 눈으로 직접 확인할 수 있습니다!"
-        },
-        {
-          "heading": "WebAssembly와 오프스크린 캔버스가 이뤄낸 혁신",
-          "body": [
-            "1. 브라우저 메모리 격리: 문서 파일은 사용자의 개인 컴퓨터 RAM 메모리 상에서만 즉시 처리됩니다.",
-            "2. 영구 삭제 불필요: 브라우저 탭을 닫는 순간 처리되던 모든 메모리 데이터는 흔적도 없이 완전히 휘발되어 증발합니다.",
-            "3. 비행기 모드에서도 작동: 핵심 엔진이 로컬에서 구동되므로 비행기 안이나 보안 격리망(망분리 PC) 환경에서도 안전하게 사용할 수 있습니다."
-          ]
-        }
-      ],
-      "ctaText": "100% 안심 로컬 PDF 도구 체험하기"
-    },
-    "en": {
-      "title": "Zero-Server Storage: How Client-Side Browser Sandboxing Eliminates Data Leaks",
-      "summary": "Understand the revolutionary WebAssembly architecture behind mypickpdf that guarantees zero byte upload to external servers for sensitive enterprise files.",
-      "sections": [
-        {
-          "heading": "The Latent Security Risks of Traditional Cloud PDF Services",
-          "body": [
-            "Conventional online PDF converters require transferring your sensitive files to remote third-party cloud servers.",
-            "This pipeline creates serious compliance vulnerabilities for enterprise NDAs, financial audits, and personal identity documents.",
-            "mypickpdf executes 100% of PDF rendering, merging, and compression directly within your local browser execution sandbox."
-          ],
-          "tip": "Panda Tip: Open your browser's Developer Tools (F12) Network tab to verify that zero file payloads leave your machine during conversion!"
-        },
-        {
-          "heading": "How Browser-Side WebAssembly Protects Your Confidentiality",
-          "body": [
-            "1. RAM-Only Processing: Your files are parsed strictly inside your workstation's local memory buffer.",
-            "2. Instant Ephemerality: The moment you close or refresh the browser tab, all residual memory states evaporate completely.",
-            "3. Offline Air-Gap Capability: Because the engine runs locally, once cached, tools function even under strict air-gapped networks."
-          ]
-        }
-      ],
-      "ctaText": "Experience True Local Privacy at mypickpdf"
-    }
+## 2. 정부지원사업·입찰 서류 제출 완벽 순서 (실무 표준)
+1. **서식 변환 및 작성:** PDF로 배포된 공고문 내 신청 양식을 [PDF 나누기](/split-pdf)로 추출한 뒤 [PDF 한글 변환기](/pdf-to-hwp)로 변환하여 내용을 작성합니다.
+2. **개인정보 마스킹 & 직인 날인:** 증빙 서류의 주민등록번호 뒷자리는 [PDF 편집기](/edit-pdf)의 화이트아웃으로 가리고, 서명란에 법인 도장 또는 대표자 서명을 날인합니다.
+3. **단일 마스터 PDF 병합:** [PDF 합치기](/merge-pdf)에서 **[신청서 ➔ 사업계획서 ➔ 사업자등록증 ➔ 국세·지방세 완납증명서]** 순서로 합친 뒤 [쪽번호 매기기](/add-page-numbers)로 하단 페이지 번호를 삽입합니다.
+4. **최종 용량 최적화:** 업로드 전 [PDF 압축 도구](/compress-pdf)를 거쳐 5MB 이하로 경량화하면 어떤 공공기관 시스템에서도 오류 없이 1초 만에 업로드가 완료됩니다.
+`,
+    faqList: [
+      {
+        question: "정부24에서 발급받은 전자문서 PDF도 다른 서류와 합칠 수 있나요?",
+        answer: "네, 일반 출력용 PDF나 스마트폰으로 촬영·변환한 증빙 PDF들을 [PDF 합치기] 도구에서 순서대로 하나의 파일로 병합할 수 있습니다."
+      },
+      {
+        question: "법인 인감증명서나 사업자등록증을 올려도 보안상 안전한가요?",
+        answer: "네, pdfpick은 모든 작업을 외부 서버 전송 없이 사용자 PC 브라우저 메모리 안에서 100% 로컬 처리하므로 기업의 중요 증명서가 외부에 절대 유출되지 않습니다."
+      }
+    ]
   }
-}
 ];
 
-export function getGuideBySlug(slug: string): GuideArticle | undefined {
-  return GUIDE_ARTICLES.find((a) => a.slug === slug);
+
+const guidesTranslations: Record<string, Record<string, any>> = guidesTranslationsRaw as any;
+
+export function getLocalizedArticle(slugOrArticle: string | GuideArticle, lang: Language): GuideArticle {
+  const original = typeof slugOrArticle === "string"
+    ? GUIDE_ARTICLES.find((a) => a.slug === slugOrArticle) || GUIDE_ARTICLES[0]
+    : slugOrArticle;
+
+  if (lang === "ko") return original;
+
+  const langDict = guidesTranslations[lang] || guidesTranslations["en"];
+  const trans = langDict?.[original.slug];
+
+  if (!trans) return original;
+
+  return {
+    ...original,
+    title: trans.title || original.title,
+    summary: trans.summary || original.summary,
+    category: trans.category || original.category,
+    readTime: trans.readTime || original.readTime,
+    tags: trans.tags || original.tags,
+    relatedToolName: trans.relatedToolName || original.relatedToolName,
+    content: trans.content || original.content,
+    faqList: trans.faqList || original.faqList,
+  };
 }
 
-export function getAllGuideSlugs(): string[] {
-  return GUIDE_ARTICLES.map((a) => a.slug);
+export function getLocalizedArticles(lang: Language): GuideArticle[] {
+  return GUIDE_ARTICLES.map((article) => getLocalizedArticle(article, lang));
 }
 
-export function getArticleTranslation(article: GuideArticle, lang: string) {
-  if (article.translations[lang]) {
-    return article.translations[lang];
-  }
-  const base = lang.split("-")[0];
-  if (article.translations[base]) {
-    return article.translations[base];
-  }
-  if (lang === "ko") {
-    return article.translations.ko;
-  }
-  return article.translations.en || article.translations.ko;
-}
-
-export function getArticleCategory(article: GuideArticle, lang: string): string {
-  if (article.categoryLabel[lang]) return article.categoryLabel[lang];
-  const base = lang.split("-")[0];
-  if (article.categoryLabel[base]) return article.categoryLabel[base];
-  return article.categoryLabel.ko || article.categoryLabel.en || "PDF 팁";
-}
-
-export function getArticleToolName(article: GuideArticle, lang: string): string {
-  if (article.toolName[lang]) return article.toolName[lang];
-  const base = lang.split("-")[0];
-  if (article.toolName[base]) return article.toolName[base];
-  return article.toolName.ko || article.toolName.en || "도구 열기";
-}
-
-export function getArticleReadTime(article: GuideArticle, lang: string): string {
-  if (article.readTime[lang]) return article.readTime[lang];
-  const base = lang.split("-")[0];
-  if (article.readTime[base]) return article.readTime[base];
-  return article.readTime.ko || article.readTime.en || "3분 읽기";
-}

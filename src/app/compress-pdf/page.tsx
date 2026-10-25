@@ -5,6 +5,7 @@ import ToolHeader from "@/components/ToolHeader";
 import FileDropzone from "@/components/FileDropzone";
 import HowToSection from "@/components/HowToSection";
 import FaqSection from "@/components/FaqSection";
+import DeepGuideSection from "@/components/DeepGuideSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import { compressPdf, downloadBlob, CompressionLevel, CompressionResult } from "@/lib/pdf-utils";
@@ -23,6 +24,7 @@ import {
   Globe
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { getToolContent } from "@/lib/tool-content-data";
 import RedPanda from "@/components/RedPanda";
 import MascotActionNotice from "@/components/MascotActionNotice";
 import UploadedFileCard from "@/components/UploadedFileCard";
@@ -30,7 +32,9 @@ import StepBadge from "@/components/StepBadge";
 import { reportAppError } from "@/lib/app-events";
 
 export default function CompressPdfPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const toolContent = getToolContent("compress-pdf", lang);
+  const ui = toolContent.ui || {};
   const [file, setFile] = useState<File | null>(null);
   const [level, setLevel] = useState<CompressionLevel>("recommended");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -80,42 +84,7 @@ export default function CompressPdfPage() {
     }
   };
 
-  const howToSteps = [
-    {
-      step: 1,
-      title: "PDF 파일 선택",
-      desc: "용량을 줄이고 싶은 PDF 문서를 화면에 끌어다 놓거나 파일 선택 버튼으로 추가합니다.",
-    },
-    {
-      step: 2,
-      title: "압축 강도 선택",
-      desc: "강력 압축(최소 크기), 권장 압축(최적 균형), 가벼운 압축(최고 화질) 중 원하는 수준을 선택합니다.",
-    },
-    {
-      step: 3,
-      title: "압축 & 다운로드",
-      desc: "[PDF 압축하기]를 누르면 브라우저에서 초고속으로 용량이 줄어들며 완성된 파일이 자동 저장됩니다.",
-    },
-  ];
 
-  const faqItems = [
-    {
-      question: "PDF 압축 후 글자나 그림이 흐려지지 않나요?",
-      answer: "권장 압축 모드를 사용하시면 일반 화면 읽기 및 인쇄에서 차이를 느끼기 어려운 높은 가독성을 유지하면서 불필요한 메타데이터와 고해상도 이미지를 지능적으로 최적화합니다.",
-    },
-    {
-      question: "업로드한 중요 문서가 서버에 저장되거나 유출되지 않나요?",
-      answer: "절대 아닙니다. mypickpdf는 고도의 WebAssembly 클라이언트 엔진을 사용하여 100% 사용자의 컴퓨터 브라우저 안에서만 압축을 수행합니다. 파일이 외부 서버로 전송되지 않으므로 회사 기밀이나 개인정보 문서도 완벽하게 안전합니다.",
-    },
-    {
-      question: "이메일 첨부파일 용량 제한을 통과할 수 있나요?",
-      answer: "네! '강력 압축' 옵션을 선택하시면 최대 70~80%까지 용량을 줄여 10MB~20MB 용량 제한이 있는 네이버, 다음, Gmail 등 각종 이메일에 손쉽게 첨부할 수 있습니다.",
-    },
-    {
-      question: "스마트폰이나 태블릿에서도 사용 가능한가요?",
-      answer: "네! 아이폰(Safari), 안드로이드 갤럭시(Chrome) 등 모든 모바일 기기 브라우저에서 별도 앱 설치 없이 동일하게 무료로 이용하실 수 있습니다.",
-    },
-  ];
 
   const compressionOptions = [
     {
@@ -156,7 +125,7 @@ export default function CompressPdfPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            name: "mypickpdf PDF 압축기",
+            name: "pdfpick PDF 압축기",
             applicationCategory: "BusinessApplication",
             operatingSystem: "All",
             offers: {
@@ -193,7 +162,7 @@ export default function CompressPdfPage() {
                 setResult(null);
               }}
               nextStepTitle="PDF 문서가 안전하게 등록되었습니다!"
-              nextStepHint="압축 모드를 선택하신 후 아래 [PDF 압축하기] 버튼을 눌러주세요."
+              nextStepHint={`압축 모드를 선택하신 후 아래 [${ui.btn_compress || "PDF 압축하기"}] 버튼을 눌러주세요.`}
             />
 
             {/* Mascot Action Guide */}
@@ -201,8 +170,8 @@ export default function CompressPdfPage() {
               <MascotActionNotice
                 mood="ready"
                 title="PDF 파일이 정상적으로 첨부되었어요!"
-                description="원하시는 압축 강도를 선택하신 후, 아래 [PDF 압축하기] 버튼을 눌러 다음 단계로 진행하세요."
-                actionHint="압축 모드 선택 후 [PDF 압축하기] 버튼을 클릭하세요"
+                description={`원하시는 압축 강도를 선택하신 후, 아래 [${ui.btn_compress || "PDF 압축하기"}] 버튼을 눌러 다음 단계로 진행하세요.`}
+                actionHint={`압축 모드 선택 후 [${ui.btn_compress || "PDF 압축하기"}] 버튼을 클릭하세요`}
               />
             )}
 
@@ -344,16 +313,11 @@ export default function CompressPdfPage() {
 
       <AdBanner format="horizontal" />
 
-      <HowToSection
-        toolName={t("tool_compress")}
-        steps={howToSteps}
-      />
+      <HowToSection toolSlug="compress-pdf" />
 
-      <FaqSection
-        title="PDF 압축 관련 자주 묻는 질문"
-        subtitle="압축 화질, 보안, 지원 용량에 대한 모든 것"
-        items={faqItems}
-      />
+      <DeepGuideSection toolSlug="compress-pdf" />
+
+      <FaqSection toolSlug="compress-pdf" />
     </div>
   );
 }
