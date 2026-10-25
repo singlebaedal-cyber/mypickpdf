@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { getFaqMeta } from "@/lib/faqs-data";
@@ -39,16 +40,63 @@ export default function FaqSection({
     : (subtitle || content?.faqSubtitle || defaultMeta.subtitle);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const stripMarkdown = (text: string) =>
+    text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1").replace(/`/g, "");
+
+  const renderAnswerText = (text: string): React.ReactNode[] => {
+    const nodes: React.ReactNode[] = [];
+    const regex = /(\[[^\]]+\]\([^)]+\)|`[^`]+`)/g;
+    let lastIdx = 0;
+    let match: RegExpExecArray | null;
+    let k = 0;
+
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > lastIdx) {
+        nodes.push(text.slice(lastIdx, match.index));
+      }
+      const token = match[0];
+      if (token.startsWith("[")) {
+        const lm = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (lm) {
+          nodes.push(
+            <Link
+              key={`faq-link-${k++}`}
+              href={lm[2]}
+              className="text-rose-600 font-bold underline decoration-rose-300 underline-offset-4 hover:text-rose-700"
+            >
+              {lm[1]}
+            </Link>
+          );
+        } else {
+          nodes.push(token);
+        }
+      } else if (token.startsWith("`") && token.endsWith("`")) {
+        nodes.push(
+          <code key={`faq-code-${k++}`} className="px-1.5 py-0.5 rounded bg-slate-100 text-rose-600 font-mono text-xs">
+            {token.slice(1, -1)}
+          </code>
+        );
+      } else {
+        nodes.push(token);
+      }
+      lastIdx = regex.lastIndex;
+    }
+    if (lastIdx < text.length) {
+      nodes.push(text.slice(lastIdx));
+    }
+    return nodes;
+  };
+
   // Schema.org FAQPage for AEO (Answer Engine Optimization)
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: resolvedItems.map((item) => ({
       "@type": "Question",
-      name: item.question,
+      name: stripMarkdown(item.question),
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: stripMarkdown(item.answer),
       },
     })),
   };
@@ -84,7 +132,7 @@ export default function FaqSection({
                 onClick={() => setOpenIndex(isOpen ? null : idx)}
                 className="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-rose-600 transition-colors"
               >
-                <span className="text-base leading-snug">{item.question}</span>
+                <span className="text-base leading-snug">{stripMarkdown(item.question)}</span>
                 <ChevronDown
                   className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
                     isOpen ? "rotate-180 text-rose-600" : ""
@@ -94,7 +142,7 @@ export default function FaqSection({
 
               {isOpen && (
                 <div className="px-5 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100 animate-in fade-in duration-200">
-                  {item.answer}
+                  {renderAnswerText(item.answer)}
                 </div>
               )}
             </div>

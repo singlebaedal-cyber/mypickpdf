@@ -5064,11 +5064,6 @@ const SUPPORTED_CODES = LANGUAGES.map((l) => l.code);
 export const getResolvedInitialLang = (): Language => {
   if (typeof window === "undefined") return "ko";
   try {
-    // 0. Check window global set by <head> inline script
-    if ((window as any).__INITIAL_LANG__ && (SUPPORTED_CODES as string[]).includes((window as any).__INITIAL_LANG__)) {
-      return (window as any).__INITIAL_LANG__ as Language;
-    }
-
     // 1. Check URL query parameter (e.g. ?lang=ja, ?lang=en)
     if (window.location.search) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -5078,50 +5073,29 @@ export const getResolvedInitialLang = (): Language => {
       }
     }
 
-    // 2. Check localStorage
+    // 2. Check explicit user selection in localStorage
     const saved = (localStorage.getItem("pdfpick_lang") || localStorage.getItem("mypickpdf_lang")) as Language;
     if (saved && (SUPPORTED_CODES as string[]).includes(saved)) {
       return saved;
     }
 
-    // 3. Browser language auto-detection
-    const nav = ((navigator.languages && navigator.languages[0]) || navigator.language || "").toLowerCase();
-    if (nav.startsWith("ko")) return "ko";
-    if (nav.startsWith("ja")) return "ja";
-    if (nav === "zh-tw" || nav === "zh-hk") return "zh-TW";
-    if (nav.startsWith("zh")) return "zh";
-    if (nav.startsWith("es")) return "es";
-    if (nav.startsWith("fr")) return "fr";
-    if (nav.startsWith("de")) return "de";
-    if (nav.startsWith("it")) return "it";
-    if (nav.startsWith("pt")) return "pt";
-    if (nav.startsWith("ru")) return "ru";
-    if (nav.startsWith("vi")) return "vi";
-    if (nav.startsWith("th")) return "th";
-    if (nav.startsWith("id")) return "id";
-    if (nav.startsWith("hi")) return "hi";
-    if (nav.startsWith("ar")) return "ar";
-    if (nav.startsWith("tr")) return "tr";
-    if (nav.startsWith("nl")) return "nl";
-
-    // For any international visitor whose language is not Korean, default to English
-    return "en";
+    // Default to Korean ('ko') so search engine crawlers (Googlebot US WRS with navigator.language='en-US')
+    // and Korean users always see Korean content matching SSR metadata.
+    return "ko";
   } catch (e) {
     return "ko";
   }
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLangState] = useState<Language>(() => {
-    if (typeof window !== "undefined") {
-      return getResolvedInitialLang();
-    }
-    return "ko";
-  });
+  // Always initialize with 'ko' to match Server-Side Rendering (SSR) and prevent React Hydration Errors (#418/#425)
+  const [lang, setLangState] = useState<Language>("ko");
 
   useEffect(() => {
     const initial = getResolvedInitialLang();
-    setLangState(initial);
+    if (initial !== "ko") {
+      setLangState(initial);
+    }
     if (typeof document !== "undefined") {
       document.documentElement.lang = initial;
     }

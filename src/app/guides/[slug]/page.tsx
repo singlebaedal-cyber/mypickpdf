@@ -25,6 +25,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: [...article.tags, "pdfpick", "PDF 팁", "PDF 가이드"],
     alternates: {
       canonical: `https://pdfpick.kr/guides/${article.slug}`,
+      languages: {
+        "ko-KR": `https://pdfpick.kr/guides/${article.slug}`,
+        "x-default": `https://pdfpick.kr/guides/${article.slug}`,
+      },
     },
     openGraph: {
       title: `${article.title} - 실무 가이드 | pdfpick`,

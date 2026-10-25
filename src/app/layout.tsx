@@ -109,7 +109,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Instant zero-latency language detector to eliminate FOUC for global visitors */}
+        {/* Language detector: defaults to Korean ('ko') for SEO & Googlebot WRS consistency unless explicitly set via ?lang= or localStorage */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -122,25 +122,7 @@ export default function RootLayout({
                     lang = localStorage.getItem('pdfpick_lang') || localStorage.getItem('mypickpdf_lang');
                   }
                   if (!lang || supported.indexOf(lang) === -1) {
-                    var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
-                    if (nav.startsWith('ko')) lang = 'ko';
-                    else if (nav.startsWith('ja')) lang = 'ja';
-                    else if (nav === 'zh-tw' || nav === 'zh-hk') lang = 'zh-TW';
-                    else if (nav.startsWith('zh')) lang = 'zh';
-                    else if (nav.startsWith('es')) lang = 'es';
-                    else if (nav.startsWith('fr')) lang = 'fr';
-                    else if (nav.startsWith('de')) lang = 'de';
-                    else if (nav.startsWith('it')) lang = 'it';
-                    else if (nav.startsWith('pt')) lang = 'pt';
-                    else if (nav.startsWith('ru')) lang = 'ru';
-                    else if (nav.startsWith('vi')) lang = 'vi';
-                    else if (nav.startsWith('th')) lang = 'th';
-                    else if (nav.startsWith('id')) lang = 'id';
-                    else if (nav.startsWith('hi')) lang = 'hi';
-                    else if (nav.startsWith('ar')) lang = 'ar';
-                    else if (nav.startsWith('tr')) lang = 'tr';
-                    else if (nav.startsWith('nl')) lang = 'nl';
-                    else lang = 'en';
+                    lang = 'ko';
                   }
                   window.__INITIAL_LANG__ = lang;
                   document.documentElement.lang = lang;

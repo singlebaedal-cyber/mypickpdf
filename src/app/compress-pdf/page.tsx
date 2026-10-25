@@ -118,26 +118,6 @@ export default function CompressPdfPage() {
 
   return (
     <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      {/* Search Engine & GEO Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            name: "pdfpick PDF 압축기",
-            applicationCategory: "BusinessApplication",
-            operatingSystem: "All",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "KRW",
-            },
-            description: "웹 브라우저에서 서버 전송 없이 100% 무료로 PDF 파일 크기를 줄여주는 안전한 온라인 PDF 압축 도구",
-          }),
-        }}
-      />
-
       <ToolHeader
         toolKey="compress"
       />
