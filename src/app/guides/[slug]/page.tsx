@@ -118,6 +118,19 @@ export default function GuideDetailPage({ params }: PageProps) {
     ],
   };
 
+  const faqSchema = (article.faqList && article.faqList.length > 0) ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: article.faqList.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.answer,
+      },
+    })),
+  } : null;
+
   return (
     <>
       <script
@@ -128,6 +141,12 @@ export default function GuideDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <GuideDetailClientView slug={params.slug} />
     </>
   );

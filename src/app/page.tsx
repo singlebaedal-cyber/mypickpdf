@@ -44,11 +44,12 @@ export default function HomePage() {
   const localizedArticles = getLocalizedArticles(lang);
 
   const coreTools = [
+    { title: t("tool_pdf_to_hwp"), desc: t("tool_pdf_to_hwp_desc"), href: "/pdf-to-hwp", icon: FileText, color: "from-blue-600 to-cyan-600", badge: lang === "ko" ? "한글/HWP" : "HWPX" },
     { title: t("tool_edit"), desc: t("tool_edit_desc"), href: "/edit-pdf", icon: PenTool, color: "from-rose-500 to-pink-600", badge: "NEW" },
-    { title: t("tool_translate"), desc: t("tool_translate_desc"), href: "/translate-pdf", icon: Languages, color: "from-blue-600 to-indigo-600", badge: lang === "ko" ? "AI 번역" : "AI" },
     { title: t("tool_merge"), desc: t("tool_merge_desc"), href: "/merge-pdf", icon: Files, color: "from-rose-500 to-red-600", badge: "BEST" },
-    { title: t("tool_split"), desc: t("tool_split_desc"), href: "/split-pdf", icon: Split, color: "from-amber-500 to-orange-600", badge: "POPULAR" },
     { title: t("tool_compress"), desc: t("tool_compress_desc"), href: "/compress-pdf", icon: Minimize2, color: "from-emerald-500 to-teal-600", badge: "HOT" },
+    { title: t("tool_translate"), desc: t("tool_translate_desc"), href: "/translate-pdf", icon: Languages, color: "from-blue-600 to-indigo-600", badge: lang === "ko" ? "AI 번역" : "AI" },
+    { title: t("tool_split"), desc: t("tool_split_desc"), href: "/split-pdf", icon: Split, color: "from-amber-500 to-orange-600", badge: "POPULAR" },
     { title: t("tool_page_numbers"), desc: t("tool_page_numbers_desc"), href: "/add-page-numbers", icon: Hash, color: "from-blue-600 to-indigo-600", badge: "NEW" },
     { title: t("tool_watermark"), desc: t("tool_watermark_desc"), href: "/add-watermark", icon: Shield, color: "from-rose-600 to-pink-600", badge: lang === "ko" ? "보안" : "SECURE" },
     { title: t("tool_rotate"), desc: t("tool_rotate_desc"), href: "/rotate-pdf", icon: RotateCw, color: "from-purple-500 to-violet-600", badge: "FAST" },
@@ -77,12 +78,31 @@ export default function HomePage() {
     { title: t("tool_pdf_to_pdfa"), desc: t("tool_pdf_to_pdfa_desc"), href: "/pdf-to-pdfa", icon: Archive, color: "from-indigo-600 to-purple-600", badge: "PDF/A" },
   ];
 
+  const homepageFaqSchema = globalFaqs && globalFaqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: globalFaqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.a,
+      },
+    })),
+  } : null;
+
   return (
     <div className="py-8 sm:py-12 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(HOWTO_SCHEMA) }}
       />
+      {homepageFaqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
+        />
+      )}
       {/* Universal Desktop/Mobile Drag & Drop Zone */}
       <UniversalDragDrop />
 

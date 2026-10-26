@@ -7,13 +7,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const coreRoutes = [
     { url: "", priority: 1.0, changeFrequency: "daily" as const },
+    { url: "/pdf-to-hwp", priority: 1.0, changeFrequency: "daily" as const },
     { url: "/edit-pdf", priority: 1.0, changeFrequency: "daily" as const },
+    { url: "/merge-pdf", priority: 1.0, changeFrequency: "daily" as const },
+    { url: "/compress-pdf", priority: 1.0, changeFrequency: "daily" as const },
+    { url: "/split-pdf", priority: 1.0, changeFrequency: "daily" as const },
     { url: "/translate-pdf", priority: 1.0, changeFrequency: "daily" as const },
-    { url: "/merge-pdf", priority: 0.9, changeFrequency: "weekly" as const },
-    { url: "/split-pdf", priority: 0.9, changeFrequency: "weekly" as const },
-    { url: "/compress-pdf", priority: 0.9, changeFrequency: "weekly" as const },
-    { url: "/rotate-pdf", priority: 0.8, changeFrequency: "weekly" as const },
-    { url: "/ocr-pdf", priority: 0.8, changeFrequency: "weekly" as const },
+    { url: "/rotate-pdf", priority: 0.9, changeFrequency: "weekly" as const },
+    { url: "/ocr-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/add-page-numbers", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/add-watermark", priority: 0.9, changeFrequency: "weekly" as const },
     
@@ -26,15 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/word-to-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/powerpoint-to-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/excel-to-pdf", priority: 0.9, changeFrequency: "weekly" as const },
-    { url: "/html-to-pdf", priority: 0.8, changeFrequency: "weekly" as const },
+    { url: "/html-to-pdf", priority: 0.85, changeFrequency: "weekly" as const },
 
     // From PDF
-    { url: "/pdf-to-hwp", priority: 0.95, changeFrequency: "weekly" as const },
     { url: "/pdf-to-image", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/pdf-to-word", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/pdf-to-powerpoint", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/pdf-to-excel", priority: 0.9, changeFrequency: "weekly" as const },
-    { url: "/pdf-to-pdfa", priority: 0.8, changeFrequency: "weekly" as const },
+    { url: "/pdf-to-pdfa", priority: 0.85, changeFrequency: "weekly" as const },
 
     // Guides & Knowledge Hub
     { url: "/guides", priority: 0.95, changeFrequency: "daily" as const },

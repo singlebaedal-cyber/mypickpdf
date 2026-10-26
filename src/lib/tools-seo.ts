@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getToolContent, GENERIC_FAQS } from "./tool-content-data";
 
 export interface ToolSeoData {
   title: string;
@@ -95,6 +96,9 @@ export const TOOLS_SEO_MAP: Record<string, ToolSeoData> = {
       "PDF HWP 변환",
       "PDF HWPX 변환",
       "PDF 한글파일 변환 무료",
+      "알PDF 대체",
+      "알PDF 없이 한글 변환",
+      "무료 PDF 한글 변환 사이트",
       "공공기관 PDF 한글 변환",
       "정부24 PDF 한글 변환",
       "나라장터 공고문 한글 변환",
@@ -407,5 +411,27 @@ export function constructToolSchemas(toolKey: string) {
     },
   };
 
-  return [breadcrumbSchema, softwareAppSchema];
+  const content = getToolContent(toolKey, "ko");
+  const faqs = (content.faqItems && content.faqItems.length > 0)
+    ? content.faqItems
+    : (GENERIC_FAQS["ko"] || []);
+
+  const faqSchema = faqs && faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer,
+      },
+    })),
+  } : null;
+
+  const result: any[] = [breadcrumbSchema, softwareAppSchema];
+  if (faqSchema) {
+    result.push(faqSchema);
+  }
+  return result;
 }

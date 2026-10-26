@@ -17,7 +17,7 @@ import RecentToolTracker from "@/components/RecentToolTracker";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.domain),
   title: {
-    default: `${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
+    default: `${SITE_CONFIG.brandName} - ${SITE_CONFIG.title}`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
