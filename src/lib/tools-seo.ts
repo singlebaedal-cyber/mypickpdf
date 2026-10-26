@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { getToolContent, GENERIC_FAQS } from "./tool-content-data";
 
 export interface ToolSeoData {
   title: string;
@@ -411,12 +410,10 @@ export function constructToolSchemas(toolKey: string) {
     },
   };
 
-  const content = getToolContent(toolKey, "ko");
-  const faqs = (content.faqItems && content.faqItems.length > 0)
-    ? content.faqItems
-    : (GENERIC_FAQS["ko"] || []);
+  const specificFaqs = DEFAULT_TOOL_FAQS[toolKey] || [];
+  const faqs = [...specificFaqs, ...COMMON_TOOL_FAQS];
 
-  const faqSchema = faqs && faqs.length > 0 ? {
+  const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map((f) => ({
@@ -427,11 +424,36 @@ export function constructToolSchemas(toolKey: string) {
         "text": f.answer,
       },
     })),
-  } : null;
+  };
 
-  const result: any[] = [breadcrumbSchema, softwareAppSchema];
-  if (faqSchema) {
-    result.push(faqSchema);
-  }
-  return result;
+  return [breadcrumbSchema, softwareAppSchema, faqSchema];
 }
+
+const DEFAULT_TOOL_FAQS: Record<string, { question: string; answer: string }[]> = {
+  "pdf-to-hwp": [
+    { question: "PDF를 HWP로 변환할 때 표나 글꼴 서식이 깨지지 않나요?", answer: "pdfpick는 원본 문서의 표 레이아웃과 텍스트 서식을 최대한 살려 아래아한글(HWP/HWPX)에서 바로 편집 가능하도록 최적화 변환합니다." },
+    { question: "변환 시 문서가 외부 서버에 저장되거나 유출되지 않나요?", answer: "아닙니다. 100% 브라우저 메모리 안에서 로컬 처리되므로 공공기관/회사 기밀 문서도 안심하고 변환하실 수 있습니다." },
+    { question: "알PDF나 한컴오피스 프로그램 설치가 필요한가요?", answer: "아닙니다. 별도 프로그램 설치나 회원가입 없이 웹 브라우저에서 1초 만에 무료로 변환됩니다." },
+  ],
+  "merge-pdf": [
+    { question: "여러 개의 PDF를 원하는 순서대로 합칠 수 있나요?", answer: "네! 마우스 드래그 앤 드롭으로 파일 순서를 자유롭게 변경한 후 하나로 병합할 수 있습니다." },
+    { question: "PDF 합치기 파일 용량이나 개수 제한이 있나요?", answer: "브라우저 로컬 메모리가 허용하는 한 무제한으로 대용량 PDF들을 안전하게 합칠 수 있습니다." },
+  ],
+  "compress-pdf": [
+    { question: "PDF 용량을 줄이면 글자나 인쇄 화질이 흐려지나요?", answer: "텍스트는 벡터 데이터로 100% 보존되며, 불필요한 고해상도 이미지와 메타데이터만 최적화 압축하여 글자 깨짐 없이 용량을 최대 80% 줄입니다." },
+    { question: "정부24나 채용 사이트 제출용으로 사용 가능한가요?", answer: "네, 일반 첨부 용량(10MB/20MB) 이하로 축소되어 관공서 및 취업 포털 제출에 최적화됩니다." },
+  ],
+  "edit-pdf": [
+    { question: "PDF에 도장이나 서명을 투명하게 넣을 수 있나요?", answer: "네! 도장 이미지의 흰색 배경을 자동으로 투명화하거나 전자서명을 직접 마우스/터치로 그려서 삽입할 수 있습니다." },
+    { question: "주민등록번호나 개인정보를 안전하게 가릴 수 있나요?", answer: "화이트아웃 및 마스킹 도구로 민감한 개인정보를 완전히 가려 안전하게 출력하거나 저장할 수 있습니다." },
+  ],
+  "translate-pdf": [
+    { question: "영어 논문 PDF를 원문과 함께 대조하면서 번역할 수 있나요?", answer: "네! 좌측 원문과 우측 번역본을 나란히 배치한 대조본 PDF로 다운로드하실 수 있습니다." },
+  ],
+};
+
+const COMMON_TOOL_FAQS = [
+  { question: "업로드한 문서가 외부 서버로 유출될 위험은 없나요?", answer: "pdfpick는 100% 브라우저 로컬 메모리(WebAssembly) 안에서만 처리하므로 파일이 외부 서버로 전송되지 않아 완벽하게 안전합니다." },
+  { question: "회원가입이나 유료 결제가 필요한가요?", answer: "아니요, 로그인이나 결제 없이 100% 무제한 무료로 모든 기능을 이용하실 수 있습니다." },
+  { question: "스마트폰이나 태블릿에서도 사용할 수 있나요?", answer: "네! iOS, Android, 태블릿, PC 등 모든 최신 웹 브라우저에서 별도 프로그램 설치 없이 즉시 실행됩니다." },
+];
