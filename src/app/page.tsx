@@ -83,10 +83,10 @@ export default function HomePage() {
     "@type": "FAQPage",
     mainEntity: globalFaqs.map((f) => ({
       "@type": "Question",
-      name: f.q,
+      name: f.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: f.a,
+        text: f.answer,
       },
     })),
   } : null;
