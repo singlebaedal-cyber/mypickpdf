@@ -10,6 +10,7 @@ import {
 } from "@/lib/seo-config";
 import { LanguageProvider } from "@/lib/i18n";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import MicrosoftClarity from "@/components/MicrosoftClarity";
 import GlobalWelcomeBanner from "@/components/GlobalWelcomeBanner";
 import BackToTopButton from "@/components/BackToTopButton";
 import RecentToolTracker from "@/components/RecentToolTracker";
@@ -160,6 +161,7 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-rose-500 selection:text-white">
         <GoogleAnalytics />
+        <MicrosoftClarity />
         <LanguageProvider>
           <GlobalWelcomeBanner />
           <KakaoInAppBanner />

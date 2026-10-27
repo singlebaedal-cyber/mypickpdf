@@ -27,13 +27,18 @@ import { parsePdfPageLayout, PdfBlock } from "./pdf-layout-engine";
  * - 셀룰러/무선 데이터 경고 팝업 없이 OS 네이티브 저장 창으로 다이렉트 연결
  */
 export async function downloadBlob(data: Uint8Array | Blob, filename: string, mimeType = "application/pdf"): Promise<void> {
-  // Google Analytics download event tracking
-  if (typeof window !== "undefined" && (window as any).gtag) {
+  // Google Analytics & Clarity download event tracking
+  if (typeof window !== "undefined") {
     try {
-      (window as any).gtag("event", "file_download", {
-        file_name: filename,
-        file_extension: filename.split(".").pop() || "",
-      });
+      if ((window as any).gtag) {
+        (window as any).gtag("event", "file_download", {
+          file_name: filename,
+          file_extension: filename.split(".").pop() || "",
+        });
+      }
+      if ((window as any).clarity) {
+        (window as any).clarity("event", "file_download");
+      }
     } catch {
       // ignore
     }
