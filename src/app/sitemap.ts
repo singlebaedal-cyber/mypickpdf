@@ -53,10 +53,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const allRoutes = [...coreRoutes, ...guideRoutes];
 
-  return allRoutes.map((route) => ({
-    url: `${baseUrl}${route.url}`,
-    lastModified: new Date(),
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
+  const languagesList = [
+    "en", "ko", "ja", "zh", "zh-TW", "es", "fr", "de", "it", "pt", "ru", "vi", "th", "id", "hi", "ar", "tr", "nl"
+  ];
+
+  return allRoutes.map((route) => {
+    const routeUrl = `${baseUrl}${route.url}`;
+    const alternatesLanguages: Record<string, string> = {
+      "x-default": routeUrl,
+    };
+    languagesList.forEach((lang) => {
+      alternatesLanguages[lang] = `${routeUrl}?lang=${lang}`;
+    });
+
+    return {
+      url: routeUrl,
+      lastModified: new Date(),
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+      alternates: {
+        languages: alternatesLanguages,
+      },
+    };
+  });
 }

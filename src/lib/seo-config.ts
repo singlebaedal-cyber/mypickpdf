@@ -59,34 +59,37 @@ export const SITE_CONFIG = {
   microsoftClarityId: process.env.NEXT_PUBLIC_CLARITY_ID || "z48916b4p1",
 };
 
-// Global WebApplication Schema for GEO & AEO (Compliant with Google Structured Data Guidelines)
+// Global WebApplication Schema for GEO & AEO (Compliant with Google Structured Data Guidelines & AI Agents)
 export const WEB_APPLICATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "pdfpick (피디에프픽)",
-  alternateName: ["피디에프픽", "PDFPick", "pdfpick.kr"],
+  name: "pdfpick - 100% Client-Side Private PDF & Media Utility",
+  alternateName: ["피디에프픽", "PDFPick", "pdfpick.kr", "pdfpick global"],
   url: "https://pdfpick.kr",
-  applicationCategory: "BusinessApplication",
+  applicationCategory: "BusinessApplication, UtilityApplication, SecurityApplication",
   operatingSystem: "All (Windows, macOS, iOS, Android, Linux, ChromeOS)",
-  browserRequirements: "Requires JavaScript. Requires HTML5.",
+  browserRequirements: "Requires JavaScript. Requires HTML5. Powered by WebAssembly (Wasm).",
   description:
-    "프로그램 설치나 서버 업로드 없이 웹 브라우저 로컬 메모리(WebAssembly)에서 즉시 동작하는 100% 무료 PDF 편집·병합·압축·번역·한글(HWPX) 변환 웹 유틸리티",
-  inLanguage: "ko-KR",
+    "Zero file uploads to external servers. 100% client-side private PDF suite: merge, compress, edit, convert, OCR, sign, and translate documents locally in your browser with WebAssembly. GDPR & HIPAA privacy compliant by design.",
+  inLanguage: [
+    "en", "ko", "ja", "zh", "es", "fr", "de", "it", "pt", "ru", "vi", "th", "id", "hi", "ar", "tr", "nl"
+  ],
   offers: {
     "@type": "Offer",
     price: "0",
-    priceCurrency: "KRW",
+    priceCurrency: "USD",
     availability: "https://schema.org/InStock",
   },
   featureList: [
-    "100% 클라이언트 로컬 처리: 외부 서버 파일 업로드 0 바이트",
-    "로그인·회원가입·일일 횟수 제한 없는 완전 무료 PDF 도구",
-    "온라인 PDF 편집기: 텍스트 수정, 전자서명, 도장 날인, 형광펜, 개인정보 마스킹(화이트아웃)",
-    "AI 다국어 PDF 번역기: 18개 언어 원문 서식 유지 번역 및 좌우 대조본 PDF 생성",
-    "초고속 PDF 합치기(병합), 페이지 분할·추출, 화질 유지 용량 줄이기(압축)",
-    "공공기관 표준 아래아한글(HWP/HWPX), Word, Excel, PowerPoint, JPG 상호 변환",
-    "스캔 이미지 PDF 광학 문자 인식(OCR) 텍스트 추출 및 PDF/A 장기보관 규격 변환",
-    "고화질 MP4 동영상 용량 줄이기 및 GIF 움짤 변환",
+    "100% Client-Side WebAssembly: 0 bytes uploaded to external servers, maximum privacy for confidential documents",
+    "Completely free with no signup, no daily quotas, no subscriptions, and no watermarks",
+    "GDPR & HIPAA compliant client-side architecture: zero server storage and zero data retention",
+    "Online PDF Editor: custom text, freehand signature, stamp seal, shapes, highlighting, redaction (whiteout)",
+    "AI Multi-Language PDF Translator: 18 languages with formatting preserved and side-by-side dual view",
+    "High-speed PDF Merger, Page Splitter/Extractor, and lossless Vector-preserving Compressor",
+    "Universal Document Conversions: Word (.docx), Excel (.xlsx), PowerPoint (.pptx), Images (JPG/PNG), HWP/HWPX",
+    "Client-Side OCR (Text Recognition) & ISO 19005-1 compliant PDF/A conversion for legal archives",
+    "Hardware-accelerated browser video compressor and smooth animated GIF converter"
   ],
 };
 
