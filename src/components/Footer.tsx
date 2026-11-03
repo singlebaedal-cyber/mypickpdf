@@ -6,6 +6,7 @@ import { ShieldCheck, Sparkles, Coffee } from "lucide-react";
 import RedPanda from "./RedPanda";
 import SponsorModal from "./SponsorModal";
 import { useLanguage } from "@/lib/i18n";
+import { SITE_CONFIG } from "@/lib/seo-config";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -140,6 +141,17 @@ export default function Footer() {
               {t("footer_col_legal")}
             </h5>
             <ul className="space-y-2 text-xs">
+              <li>
+                <a
+                  href={SITE_CONFIG.chromeWebstoreUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-400 transition-colors font-bold text-blue-300 flex items-center gap-1.5"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                  <span>공식 크롬 확장앱 (Chrome Web Store)</span>
+                </a>
+              </li>
               <li>
                 <Link href="/guides" className="hover:text-rose-400 transition-colors font-bold text-orange-400">
                   PDF 실무 가이드 & 꿀팁

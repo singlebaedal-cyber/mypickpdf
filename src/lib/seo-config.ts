@@ -57,6 +57,7 @@ export const SITE_CONFIG = {
   naverSiteVerification: "e39cf0c295093069a2d67e000797b3275af45d86",
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "G-C5NS93KXLR",
   microsoftClarityId: process.env.NEXT_PUBLIC_CLARITY_ID || "z48916b4p1",
+  chromeWebstoreUrl: "https://chromewebstore.google.com/detail/plofbieppkkommehffgpgbgdbpnicbme",
 };
 
 // Global WebApplication Schema for GEO & AEO (Compliant with Google Structured Data Guidelines & AI Agents)

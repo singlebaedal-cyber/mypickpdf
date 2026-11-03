@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "pdfpick - Free & Private Client-Side PDF Tools",
+    "description": "The name of the extension in English"
+  },
+  "appShortName": {
+    "message": "pdfpick",
+    "description": "Short name"
+  },
+  "appDesc": {
+    "message": "100% private in-browser PDF suite. Merge, compress, edit, convert to Word/Office, OCR and e-sign without server uploads.",
+    "description": "Extension description in English"
+  },
+  "contextMenuTitle": {
+    "message": "Open pdfpick Private PDF Tools",
+    "description": "Context menu title"
+  }
+}

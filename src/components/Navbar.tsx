@@ -33,6 +33,7 @@ import {
   Command
 } from "lucide-react";
 import { useLanguage, LANGUAGES } from "@/lib/i18n";
+import { SITE_CONFIG } from "@/lib/seo-config";
 import RedPanda from "@/components/RedPanda";
 import QuickSearchModal from "@/components/QuickSearchModal";
 
@@ -408,6 +409,18 @@ export default function Navbar() {
 
           {/* Right Actions: Search & Language Switcher */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Chrome Webstore Extension Link */}
+            <a
+              href={SITE_CONFIG.chromeWebstoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs hover:shadow-md hover:scale-[1.02]"
+              title={lang === "ko" ? "공식 크롬 확장앱 설치하기" : "Add to Chrome (Free Extension)"}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>{lang === "ko" ? "Chrome에 추가" : "Add to Chrome"}</span>
+            </a>
+
             {/* Quick Tool Search Button (Ctrl+K) */}
             <button
               onClick={() => setSearchModalOpen(true)}
@@ -542,6 +555,20 @@ export default function Navbar() {
               </div>
               <ArrowRight className="w-3.5 h-3.5 text-orange-600" />
             </Link>
+
+            <a
+              href={SITE_CONFIG.chromeWebstoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-2 flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold shadow-xs hover:from-blue-700 hover:to-indigo-700"
+            >
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-300" />
+                <span>{lang === "ko" ? "공식 크롬 확장프로그램 설치" : "Install Chrome Extension"}</span>
+              </div>
+              <ArrowRight className="w-3.5 h-3.5 text-white/80" />
+            </a>
           </div>
         </div>
       )}

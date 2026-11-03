@@ -1,7 +1,8 @@
 chrome.runtime.onInstalled.addListener(() => {
+  const title = chrome.i18n.getMessage("contextMenuTitle") || "Open pdfpick Private PDF Tools";
   chrome.contextMenus.create({
     id: "pdfpick-open",
-    title: "pdfpick에서 무료 PDF 편집·합치기·압축·한글변환 열기",
+    title: title,
     contexts: ["page", "link", "selection"]
   });
 });
