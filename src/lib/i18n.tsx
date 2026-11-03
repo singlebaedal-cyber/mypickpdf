@@ -5064,6 +5064,11 @@ const SUPPORTED_CODES = LANGUAGES.map((l) => l.code);
 export const getResolvedInitialLang = (): Language => {
   if (typeof window === "undefined") return "ko";
   try {
+    // 0. Check pre-injected __INITIAL_LANG__ from head script
+    if ((window as any).__INITIAL_LANG__ && (SUPPORTED_CODES as string[]).includes((window as any).__INITIAL_LANG__)) {
+      return (window as any).__INITIAL_LANG__;
+    }
+
     // 1. Check URL query parameter (e.g. ?lang=ja, ?lang=en)
     if (window.location.search) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -5079,8 +5084,24 @@ export const getResolvedInitialLang = (): Language => {
       return saved;
     }
 
-    // Default to Korean ('ko') so search engine crawlers (Googlebot US WRS with navigator.language='en-US')
-    // and Korean users always see Korean content matching SSR metadata.
+    // 3. Auto-detect browser language for first-time global visitors
+    const isBot = /bot|crawler|spider|googlebot|bingbot|yeti/i.test(navigator.userAgent || "");
+    if (!isBot && typeof navigator !== "undefined") {
+      const navLang = (navigator.language || (navigator.languages && navigator.languages[0]) || "").toLowerCase();
+      if (navLang.includes("ko")) {
+        return "ko";
+      }
+      if (navLang.includes("zh-tw") || navLang.includes("zh-hk") || navLang.includes("zh-hant")) {
+        return "zh-TW";
+      }
+      const base = navLang.split("-")[0] as Language;
+      if ((SUPPORTED_CODES as string[]).includes(base)) {
+        return base;
+      }
+      // Non-Korean global international users default to English ('en')
+      return "en";
+    }
+
     return "ko";
   } catch (e) {
     return "ko";

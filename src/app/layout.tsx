@@ -127,7 +127,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Language detector: defaults to Korean ('ko') for SEO & Googlebot WRS consistency unless explicitly set via ?lang= or localStorage */}
+        {/* Smart Global Language Detector: Auto-detects foreign browser locale (e.g. en, ja, es) for 0% bounce rate while preserving SEO bot parity */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -136,12 +136,40 @@ export default function RootLayout({
                   var supported = ['ko','en','ja','zh','zh-TW','es','fr','de','it','pt','ru','vi','th','id','hi','ar','tr','nl'];
                   var params = new URLSearchParams(window.location.search);
                   var lang = params.get('lang');
+                  
+                  // 1. URL Query Parameter explicitly set
                   if (!lang || supported.indexOf(lang) === -1) {
+                    // 2. User previous preference in localStorage
                     lang = localStorage.getItem('pdfpick_lang') || localStorage.getItem('mypickpdf_lang');
                   }
+                  
+                  // 3. First-time Global Visitor: Auto-detect Browser Language
+                  if (!lang || supported.indexOf(lang) === -1) {
+                    var isBot = /bot|crawler|spider|googlebot|bingbot|yeti/i.test(navigator.userAgent || '');
+                    if (!isBot) {
+                      var navLang = (navigator.language || (navigator.languages && navigator.languages[0]) || '').toLowerCase();
+                      if (navLang.indexOf('ko') !== -1) {
+                        lang = 'ko';
+                      } else if (navLang.indexOf('zh-tw') !== -1 || navLang.indexOf('zh-hk') !== -1 || navLang.indexOf('zh-hant') !== -1) {
+                        lang = 'zh-TW';
+                      } else {
+                        var base = navLang.split('-')[0];
+                        if (supported.indexOf(base) !== -1) {
+                          lang = base;
+                        } else {
+                          // Default all non-Korean international users to English
+                          lang = 'en';
+                        }
+                      }
+                    } else {
+                      lang = 'ko';
+                    }
+                  }
+
                   if (!lang || supported.indexOf(lang) === -1) {
                     lang = 'ko';
                   }
+
                   window.__INITIAL_LANG__ = lang;
                   document.documentElement.lang = lang;
                 } catch(e) {}
