@@ -5064,6 +5064,11 @@ const SUPPORTED_CODES = LANGUAGES.map((l) => l.code);
 export const getResolvedInitialLang = (): Language => {
   if (typeof window === "undefined") return "ko";
   try {
+    // 0. Check pre-injected __INITIAL_LANG__ from head script
+    if ((window as any).__INITIAL_LANG__ && (SUPPORTED_CODES as string[]).includes((window as any).__INITIAL_LANG__)) {
+      return (window as any).__INITIAL_LANG__;
+    }
+
     // 1. URL query parameter has top priority (?lang=ko, ?lang=en, etc.)
     if (window.location.search) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -5073,46 +5078,38 @@ export const getResolvedInitialLang = (): Language => {
       }
     }
 
-    // 2. Strict Korean Environment Check:
-    // If the browser language or any item in languages contains Korean ('ko'), ALWAYS return 'ko'
-    const navLangs = navigator.languages ? Array.from(navigator.languages) : [navigator.language || ""];
-    const hasKorean = navLangs.some((l) => typeof l === "string" && l.toLowerCase().includes("ko"));
-    if (hasKorean) {
+    // 2. User manually selected from dropdown in the past
+    const manual = localStorage.getItem("pdfpick_manual_lang") as Language;
+    if (manual && (SUPPORTED_CODES as string[]).includes(manual)) {
+      return manual;
+    }
+
+    // 3. Real-time Browser Language Detection
+    const nav = (navigator.language || (navigator.languages && navigator.languages[0]) || "en").toLowerCase();
+    if (nav.includes("ko")) {
       return "ko";
     }
-
-    // 3. Check explicit user selection in localStorage (Only for non-Korean environments)
-    const saved = localStorage.getItem("pdfpick_lang") as Language;
-    if (saved && (SUPPORTED_CODES as string[]).includes(saved)) {
-      return saved;
-    }
-
-    // 4. Pure Global Visitor (No Korean found): auto-detect foreign language
-    const primary = (navigator.language || navLangs[0] || "").toLowerCase();
-    if (primary.includes("zh-tw") || primary.includes("zh-hk") || primary.includes("zh-hant")) {
+    if (nav.includes("zh-tw") || nav.includes("zh-hk") || nav.includes("zh-hant")) {
       return "zh-TW";
     }
-    const base = primary.split("-")[0] as Language;
+    const base = nav.split("-")[0] as Language;
     if ((SUPPORTED_CODES as string[]).includes(base)) {
       return base;
     }
 
-    // Default global visitors to English ('en')
+    // Default other international browsers to English ('en')
     return "en";
   } catch (e) {
-    return "ko";
+    return "en";
   }
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Always initialize with 'ko' to match Server-Side Rendering (SSR) and prevent React Hydration Errors (#418/#425)
-  const [lang, setLangState] = useState<Language>("ko");
+  const [lang, setLangState] = useState<Language>("en");
 
   useEffect(() => {
     const initial = getResolvedInitialLang();
-    if (initial !== "ko") {
-      setLangState(initial);
-    }
+    setLangState(initial);
     if (typeof document !== "undefined") {
       document.documentElement.lang = initial;
     }
@@ -5120,6 +5117,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const setLang = (newLang: Language) => {
     setLangState(newLang);
+    // User explicitly clicked the dropdown: store manual preference
+    localStorage.setItem("pdfpick_manual_lang", newLang);
     localStorage.setItem("pdfpick_lang", newLang);
     if (typeof window !== "undefined") {
       (window as any).__INITIAL_LANG__ = newLang;

@@ -127,7 +127,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Bulletproof Korean-First & Global Locale Detector */}
+        {/* Pure Real-time Browser Language Auto-Detection */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -137,57 +137,43 @@ export default function RootLayout({
                   var params = new URLSearchParams(window.location.search);
                   var urlLang = params.get('lang');
                   
-                  // 1. URL query parameter has top priority (?lang=en, ?lang=ja)
+                  // 1. Explicit URL parameter (?lang=en, ?lang=ko, etc.)
                   if (urlLang && supported.indexOf(urlLang) !== -1) {
                     window.__INITIAL_LANG__ = urlLang;
                     document.documentElement.lang = urlLang;
-                    localStorage.setItem('pdfpick_lang', urlLang);
                     return;
                   }
 
-                  // 2. Strict Korean Environment Check:
-                  // Check navigator.language AND navigator.languages array.
-                  // If ANY language is Korean ('ko', 'ko-KR'), ALWAYS force Korean ('ko')!
-                  var navLangs = navigator.languages ? Array.from(navigator.languages) : [navigator.language || ''];
-                  var hasKorean = navLangs.some(function(l) {
-                    return typeof l === 'string' && l.toLowerCase().indexOf('ko') !== -1;
-                  });
-
-                  if (hasKorean) {
-                    window.__INITIAL_LANG__ = 'ko';
-                    document.documentElement.lang = 'ko';
-                    localStorage.setItem('pdfpick_lang', 'ko');
+                  // 2. User manually selected from dropdown in the past
+                  var manual = localStorage.getItem('pdfpick_manual_lang');
+                  if (manual && supported.indexOf(manual) !== -1) {
+                    window.__INITIAL_LANG__ = manual;
+                    document.documentElement.lang = manual;
                     return;
                   }
 
-                  // 3. Check explicit user selection in localStorage (Only for purely non-Korean visitors)
-                  var saved = localStorage.getItem('pdfpick_lang');
-                  if (saved && supported.indexOf(saved) !== -1 && saved !== 'en-auto') {
-                    window.__INITIAL_LANG__ = saved;
-                    document.documentElement.lang = saved;
-                    return;
-                  }
+                  // 3. Real-time Browser Language Detection
+                  var nav = (navigator.language || (navigator.languages && navigator.languages[0]) || 'en').toLowerCase();
+                  var detected = 'en';
 
-                  // 4. Pure Foreign Visitor (Zero Korean in browser):
-                  var primary = (navigator.language || navLangs[0] || '').toLowerCase();
-                  var matched = 'en';
-
-                  if (primary.indexOf('zh-tw') !== -1 || primary.indexOf('zh-hk') !== -1 || primary.indexOf('zh-hant') !== -1) {
-                    matched = 'zh-TW';
+                  if (nav.indexOf('ko') !== -1) {
+                    detected = 'ko';
+                  } else if (nav.indexOf('zh-tw') !== -1 || nav.indexOf('zh-hk') !== -1 || nav.indexOf('zh-hant') !== -1) {
+                    detected = 'zh-TW';
                   } else {
-                    var base = primary.split('-')[0];
+                    var base = nav.split('-')[0];
                     if (supported.indexOf(base) !== -1) {
-                      matched = base;
+                      detected = base;
                     } else {
-                      matched = 'en';
+                      detected = 'en';
                     }
                   }
 
-                  window.__INITIAL_LANG__ = matched;
-                  document.documentElement.lang = matched;
+                  window.__INITIAL_LANG__ = detected;
+                  document.documentElement.lang = detected;
                 } catch(e) {
-                  window.__INITIAL_LANG__ = 'ko';
-                  document.documentElement.lang = 'ko';
+                  window.__INITIAL_LANG__ = 'en';
+                  document.documentElement.lang = 'en';
                 }
               })();
             `,
