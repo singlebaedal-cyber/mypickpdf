@@ -5064,12 +5064,7 @@ const SUPPORTED_CODES = LANGUAGES.map((l) => l.code);
 export const getResolvedInitialLang = (): Language => {
   if (typeof window === "undefined") return "ko";
   try {
-    // 0. Check pre-injected __INITIAL_LANG__ from head script
-    if ((window as any).__INITIAL_LANG__ && (SUPPORTED_CODES as string[]).includes((window as any).__INITIAL_LANG__)) {
-      return (window as any).__INITIAL_LANG__;
-    }
-
-    // 1. Check URL query parameter (e.g. ?lang=ja, ?lang=en)
+    // 1. URL query parameter has top priority (?lang=ko, ?lang=en, etc.)
     if (window.location.search) {
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get("lang") as Language;
@@ -5078,31 +5073,32 @@ export const getResolvedInitialLang = (): Language => {
       }
     }
 
-    // 2. Check explicit user selection in localStorage
-    const saved = (localStorage.getItem("pdfpick_lang") || localStorage.getItem("mypickpdf_lang")) as Language;
+    // 2. Strict Korean Environment Check:
+    // If the browser language or any item in languages contains Korean ('ko'), ALWAYS return 'ko'
+    const navLangs = navigator.languages ? Array.from(navigator.languages) : [navigator.language || ""];
+    const hasKorean = navLangs.some((l) => typeof l === "string" && l.toLowerCase().includes("ko"));
+    if (hasKorean) {
+      return "ko";
+    }
+
+    // 3. Check explicit user selection in localStorage (Only for non-Korean environments)
+    const saved = localStorage.getItem("pdfpick_lang") as Language;
     if (saved && (SUPPORTED_CODES as string[]).includes(saved)) {
       return saved;
     }
 
-    // 3. Auto-detect browser language for first-time global visitors
-    const isBot = /bot|crawler|spider|googlebot|bingbot|yeti/i.test(navigator.userAgent || "");
-    if (!isBot && typeof navigator !== "undefined") {
-      const navLang = (navigator.language || (navigator.languages && navigator.languages[0]) || "").toLowerCase();
-      if (navLang.includes("ko")) {
-        return "ko";
-      }
-      if (navLang.includes("zh-tw") || navLang.includes("zh-hk") || navLang.includes("zh-hant")) {
-        return "zh-TW";
-      }
-      const base = navLang.split("-")[0] as Language;
-      if ((SUPPORTED_CODES as string[]).includes(base)) {
-        return base;
-      }
-      // Non-Korean global international users default to English ('en')
-      return "en";
+    // 4. Pure Global Visitor (No Korean found): auto-detect foreign language
+    const primary = (navigator.language || navLangs[0] || "").toLowerCase();
+    if (primary.includes("zh-tw") || primary.includes("zh-hk") || primary.includes("zh-hant")) {
+      return "zh-TW";
+    }
+    const base = primary.split("-")[0] as Language;
+    if ((SUPPORTED_CODES as string[]).includes(base)) {
+      return base;
     }
 
-    return "ko";
+    // Default global visitors to English ('en')
+    return "en";
   } catch (e) {
     return "ko";
   }

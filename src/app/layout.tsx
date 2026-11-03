@@ -127,7 +127,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Smart Global Language Detector: Auto-detects foreign browser locale (e.g. en, ja, es) for 0% bounce rate while preserving SEO bot parity */}
+        {/* Bulletproof Korean-First & Global Locale Detector */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -135,44 +135,60 @@ export default function RootLayout({
                 try {
                   var supported = ['ko','en','ja','zh','zh-TW','es','fr','de','it','pt','ru','vi','th','id','hi','ar','tr','nl'];
                   var params = new URLSearchParams(window.location.search);
-                  var lang = params.get('lang');
+                  var urlLang = params.get('lang');
                   
-                  // 1. URL Query Parameter explicitly set
-                  if (!lang || supported.indexOf(lang) === -1) {
-                    // 2. User previous preference in localStorage
-                    lang = localStorage.getItem('pdfpick_lang') || localStorage.getItem('mypickpdf_lang');
+                  // 1. URL query parameter has top priority (?lang=en, ?lang=ja)
+                  if (urlLang && supported.indexOf(urlLang) !== -1) {
+                    window.__INITIAL_LANG__ = urlLang;
+                    document.documentElement.lang = urlLang;
+                    localStorage.setItem('pdfpick_lang', urlLang);
+                    return;
                   }
-                  
-                  // 3. First-time Global Visitor: Auto-detect Browser Language
-                  if (!lang || supported.indexOf(lang) === -1) {
-                    var isBot = /bot|crawler|spider|googlebot|bingbot|yeti/i.test(navigator.userAgent || '');
-                    if (!isBot) {
-                      var navLang = (navigator.language || (navigator.languages && navigator.languages[0]) || '').toLowerCase();
-                      if (navLang.indexOf('ko') !== -1) {
-                        lang = 'ko';
-                      } else if (navLang.indexOf('zh-tw') !== -1 || navLang.indexOf('zh-hk') !== -1 || navLang.indexOf('zh-hant') !== -1) {
-                        lang = 'zh-TW';
-                      } else {
-                        var base = navLang.split('-')[0];
-                        if (supported.indexOf(base) !== -1) {
-                          lang = base;
-                        } else {
-                          // Default all non-Korean international users to English
-                          lang = 'en';
-                        }
-                      }
+
+                  // 2. Strict Korean Environment Check:
+                  // Check navigator.language AND navigator.languages array.
+                  // If ANY language is Korean ('ko', 'ko-KR'), ALWAYS force Korean ('ko')!
+                  var navLangs = navigator.languages ? Array.from(navigator.languages) : [navigator.language || ''];
+                  var hasKorean = navLangs.some(function(l) {
+                    return typeof l === 'string' && l.toLowerCase().indexOf('ko') !== -1;
+                  });
+
+                  if (hasKorean) {
+                    window.__INITIAL_LANG__ = 'ko';
+                    document.documentElement.lang = 'ko';
+                    localStorage.setItem('pdfpick_lang', 'ko');
+                    return;
+                  }
+
+                  // 3. Check explicit user selection in localStorage (Only for purely non-Korean visitors)
+                  var saved = localStorage.getItem('pdfpick_lang');
+                  if (saved && supported.indexOf(saved) !== -1 && saved !== 'en-auto') {
+                    window.__INITIAL_LANG__ = saved;
+                    document.documentElement.lang = saved;
+                    return;
+                  }
+
+                  // 4. Pure Foreign Visitor (Zero Korean in browser):
+                  var primary = (navigator.language || navLangs[0] || '').toLowerCase();
+                  var matched = 'en';
+
+                  if (primary.indexOf('zh-tw') !== -1 || primary.indexOf('zh-hk') !== -1 || primary.indexOf('zh-hant') !== -1) {
+                    matched = 'zh-TW';
+                  } else {
+                    var base = primary.split('-')[0];
+                    if (supported.indexOf(base) !== -1) {
+                      matched = base;
                     } else {
-                      lang = 'ko';
+                      matched = 'en';
                     }
                   }
 
-                  if (!lang || supported.indexOf(lang) === -1) {
-                    lang = 'ko';
-                  }
-
-                  window.__INITIAL_LANG__ = lang;
-                  document.documentElement.lang = lang;
-                } catch(e) {}
+                  window.__INITIAL_LANG__ = matched;
+                  document.documentElement.lang = matched;
+                } catch(e) {
+                  window.__INITIAL_LANG__ = 'ko';
+                  document.documentElement.lang = 'ko';
+                }
               })();
             `,
           }}
