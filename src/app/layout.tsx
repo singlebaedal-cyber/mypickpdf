@@ -110,7 +110,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Pure Real-time Browser Language Auto-Detection */}
+        {/* Language detector: defaults to Korean ('ko') for SEO & Googlebot WRS consistency unless explicitly set via ?lang= or manual selection */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -119,7 +119,7 @@ export default function RootLayout({
                   var supported = ['ko','en','ja','zh','zh-TW','es','fr','de','it','pt','ru','vi','th','id','hi','ar','tr','nl'];
                   var params = new URLSearchParams(window.location.search);
                   var urlLang = params.get('lang');
-                  
+
                   // 1. Explicit URL parameter (?lang=en, ?lang=ko, etc.)
                   if (urlLang && supported.indexOf(urlLang) !== -1) {
                     window.__INITIAL_LANG__ = urlLang;
@@ -128,35 +128,19 @@ export default function RootLayout({
                   }
 
                   // 2. User manually selected from dropdown in the past
-                  var manual = localStorage.getItem('pdfpick_manual_lang');
-                  if (manual && supported.indexOf(manual) !== -1) {
-                    window.__INITIAL_LANG__ = manual;
-                    document.documentElement.lang = manual;
+                  var saved = localStorage.getItem('pdfpick_manual_lang') || localStorage.getItem('pdfpick_lang') || localStorage.getItem('mypickpdf_lang');
+                  if (saved && supported.indexOf(saved) !== -1) {
+                    window.__INITIAL_LANG__ = saved;
+                    document.documentElement.lang = saved;
                     return;
                   }
 
-                  // 3. Real-time Browser Language Detection
-                  var nav = (navigator.language || (navigator.languages && navigator.languages[0]) || 'en').toLowerCase();
-                  var detected = 'en';
-
-                  if (nav.indexOf('ko') !== -1) {
-                    detected = 'ko';
-                  } else if (nav.indexOf('zh-tw') !== -1 || nav.indexOf('zh-hk') !== -1 || nav.indexOf('zh-hant') !== -1) {
-                    detected = 'zh-TW';
-                  } else {
-                    var base = nav.split('-')[0];
-                    if (supported.indexOf(base) !== -1) {
-                      detected = base;
-                    } else {
-                      detected = 'en';
-                    }
-                  }
-
-                  window.__INITIAL_LANG__ = detected;
-                  document.documentElement.lang = detected;
+                  // 3. Default to Korean ('ko') so search crawlers (Googlebot US WRS) and Korean visitors always see Korean matching SSR metadata
+                  window.__INITIAL_LANG__ = 'ko';
+                  document.documentElement.lang = 'ko';
                 } catch(e) {
-                  window.__INITIAL_LANG__ = 'en';
-                  document.documentElement.lang = 'en';
+                  window.__INITIAL_LANG__ = 'ko';
+                  document.documentElement.lang = 'ko';
                 }
               })();
             `,

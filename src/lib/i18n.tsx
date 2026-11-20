@@ -5079,28 +5079,16 @@ export const getResolvedInitialLang = (): Language => {
     }
 
     // 2. User manually selected from dropdown in the past
-    const manual = localStorage.getItem("pdfpick_manual_lang") as Language;
-    if (manual && (SUPPORTED_CODES as string[]).includes(manual)) {
-      return manual;
+    const saved = (localStorage.getItem("pdfpick_manual_lang") || localStorage.getItem("pdfpick_lang") || localStorage.getItem("mypickpdf_lang")) as Language;
+    if (saved && (SUPPORTED_CODES as string[]).includes(saved)) {
+      return saved;
     }
 
-    // 3. Real-time Browser Language Detection
-    const nav = (navigator.language || (navigator.languages && navigator.languages[0]) || "en").toLowerCase();
-    if (nav.includes("ko")) {
-      return "ko";
-    }
-    if (nav.includes("zh-tw") || nav.includes("zh-hk") || nav.includes("zh-hant")) {
-      return "zh-TW";
-    }
-    const base = nav.split("-")[0] as Language;
-    if ((SUPPORTED_CODES as string[]).includes(base)) {
-      return base;
-    }
-
-    // Default other international browsers to English ('en')
-    return "en";
+    // Default to Korean ('ko') so search engine crawlers (Googlebot US WRS with navigator.language='en-US')
+    // and Korean visitors always see Korean content matching SSR metadata.
+    return "ko";
   } catch (e) {
-    return "en";
+    return "ko";
   }
 };
 
@@ -5109,7 +5097,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const initial = getResolvedInitialLang();
-    setLangState(initial);
+    if (initial !== "ko") {
+      setLangState(initial);
+    }
     if (typeof document !== "undefined") {
       document.documentElement.lang = initial;
     }
