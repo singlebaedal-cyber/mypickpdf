@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PDF & 문서 활용 완벽 가이드 27선 - 실무 꿀팁 매거진",
-  description: "프로그램 설치 없는 무료 PDF 합치기, 용량 80% 압축, 공공기관·정부24 HWPX 변환, PDF 도장 찍기·전자서명, 주민번호 가리기(화이트아웃), 영어 논문 번역까지! 실무에 바로 쓰는 27가지 심층 가이드.",
+  title: "PDF & 문서 활용 완벽 가이드 34선 - 실무 꿀팁 매거진",
+  description: "프로그램 설치 없는 무료 PDF 합치기, 용량 80% 압축, 공공기관·정부24 HWPX 변환, PDF 도장 찍기·전자서명, 주민번호 가리기(화이트아웃), 영어 논문 번역까지! 실무에 바로 쓰는 34가지 심층 가이드.",
   keywords: [
     "PDF 가이드",
     "PDF 도장 찍기",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "PDF & 문서 활용 완벽 가이드 27선 - 실무 꿀팁 매거진 | pdfpick",
+    title: "PDF & 문서 활용 완벽 가이드 34선 - 실무 꿀팁 매거진 | pdfpick",
     description: "PDF 도장·서명, 개인정보 마스킹, 합치기, 용량 줄이기, 한글 HWPX 변환, 논문 번역 팁까지 총망라한 무료 실무 가이드북",
     url: "https://pdfpick.kr/guides",
     siteName: "pdfpick",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: "https://pdfpick.kr/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "pdfpick 공식 실무 가이드북 27선",
+        alt: "pdfpick 공식 실무 가이드북 34선",
       },
     ],
     locale: "ko_KR",
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF & 문서 활용 완벽 가이드 27선 - 실무 꿀팁 매거진 | pdfpick",
-    description: "PDF 도장·서명, 합치기, 용량 줄이기, 한글 HWPX 변환 등 실무 팁 27가지",
+    title: "PDF & 문서 활용 완벽 가이드 34선 - 실무 꿀팁 매거진 | pdfpick",
+    description: "PDF 도장·서명, 합치기, 용량 줄이기, 한글 HWPX 변환 등 실무 팁 34가지",
     images: ["https://pdfpick.kr/opengraph-image"],
   },
 };

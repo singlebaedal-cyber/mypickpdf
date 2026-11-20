@@ -45,35 +45,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/contact", priority: 0.5, changeFrequency: "monthly" as const },
   ];
 
-  const guideRoutes = GUIDE_ARTICLES.map((article) => ({
-    url: `/guides/${article.slug}`,
-    priority: 0.85,
-    changeFrequency: "weekly" as const,
+  const CORE_LAST_MODIFIED = new Date("2026-11-20");
+
+  const coreEntries: MetadataRoute.Sitemap = coreRoutes.map((route) => ({
+    url: `${baseUrl}${route.url}`,
+    lastModified: CORE_LAST_MODIFIED,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 
-  const allRoutes = [...coreRoutes, ...guideRoutes];
+  const guideEntries: MetadataRoute.Sitemap = GUIDE_ARTICLES.map((article) => ({
+    url: `${baseUrl}/guides/${article.slug}`,
+    lastModified: new Date(article.updatedAt || article.publishedAt),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
 
-  const languagesList = [
-    "en", "ko", "ja", "zh", "zh-TW", "es", "fr", "de", "it", "pt", "ru", "vi", "th", "id", "hi", "ar", "tr", "nl"
-  ];
-
-  return allRoutes.map((route) => {
-    const routeUrl = `${baseUrl}${route.url}`;
-    const alternatesLanguages: Record<string, string> = {
-      "x-default": routeUrl,
-    };
-    languagesList.forEach((lang) => {
-      alternatesLanguages[lang] = `${routeUrl}?lang=${lang}`;
-    });
-
-    return {
-      url: routeUrl,
-      lastModified: new Date(),
-      changeFrequency: route.changeFrequency,
-      priority: route.priority,
-      alternates: {
-        languages: alternatesLanguages,
-      },
-    };
-  });
+  return [...coreEntries, ...guideEntries];
 }

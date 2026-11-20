@@ -5105,7 +5105,7 @@ export const getResolvedInitialLang = (): Language => {
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLangState] = useState<Language>("en");
+  const [lang, setLangState] = useState<Language>("ko");
 
   useEffect(() => {
     const initial = getResolvedInitialLang();
