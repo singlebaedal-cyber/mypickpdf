@@ -885,7 +885,7 @@ export async function convertExcelToPdfWithMeta(
 
   for (const name of sheetNames) {
     const ws = workbook.Sheets[name];
-    const rawRows: any[][] = XLSX.utils.sheet_to_json(ws, { header: 1, defval: "" });
+    const rawRows: any[][] = XLSX.utils.sheet_to_json(ws, { header: 1, defval: "", raw: false });
     const nonEmptyRows = rawRows
       .filter((r) => Array.isArray(r) && r.some((cell) => String(cell ?? "").trim() !== ""))
       .map((r) => r.map((cell) => (cell !== undefined && cell !== null ? String(cell) : "")));

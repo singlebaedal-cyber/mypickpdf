@@ -33,7 +33,7 @@ export function getSupportedVideoMimeType(): { mimeType: string; ext: string } {
     { mime: "video/mp4;codecs=avc1.42E01E,mp4a.40.2", ext: "mp4" },
     { mime: "video/mp4;codecs=h264", ext: "mp4" },
     { mime: "video/mp4", ext: "mp4" },
-    { mime: "video/webm;codecs=h264", ext: "mp4" },
+    { mime: "video/webm;codecs=h264", ext: "webm" },
     { mime: "video/webm;codecs=vp9,opus", ext: "webm" },
     { mime: "video/webm;codecs=vp8,opus", ext: "webm" },
     { mime: "video/webm", ext: "webm" },
@@ -80,7 +80,24 @@ export async function compressVideo(
 
     video.onloadedmetadata = async () => {
       try {
-        const duration = video.duration;
+        let duration = video.duration;
+        // Chrome WebM workaround: resolve Infinity duration by seeking to end once
+        if (!isFinite(duration)) {
+          await new Promise<void>((res) => {
+            const onTime = () => {
+              video.removeEventListener("timeupdate", onTime);
+              video.currentTime = 0;
+              res();
+            };
+            video.addEventListener("timeupdate", onTime);
+            video.currentTime = 1e101;
+            setTimeout(() => {
+              video.removeEventListener("timeupdate", onTime);
+              res();
+            }, 1500);
+          });
+          duration = video.duration;
+        }
         if (!duration || !isFinite(duration)) {
           cleanup();
           reject(new Error("동영상 재생 시간을 확인할 수 없습니다."));
@@ -135,13 +152,16 @@ export async function compressVideo(
         // Capture stream from canvas
         const stream = canvas.captureStream ? canvas.captureStream(fps) : (canvas as any).mozCaptureStream(fps);
 
-        // Attempt audio capture via AudioContext
+        // Attempt audio capture via AudioContext (resume safely inside gesture)
         let audioCtx: AudioContext | null = null;
         try {
           const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
           if (AudioContextClass) {
             audioCtx = new AudioContextClass();
-            video.muted = false; // unmute internally for AudioContext source
+            if (audioCtx.state === "suspended") {
+              await audioCtx.resume().catch(() => {});
+            }
+            video.muted = false;
             video.volume = 1.0;
             const source = audioCtx.createMediaElementSource(video);
             const dest = audioCtx.createMediaStreamDestination();
@@ -228,13 +248,18 @@ export async function compressVideo(
           requestAnimationFrame(renderFrame);
         };
 
-        // Start playing video
+        // Start playing video (fallback to muted if browser autoplay policy blocks unmuted playback)
         video.play().then(() => {
           requestAnimationFrame(renderFrame);
-        }).catch((err) => {
-          isCancelled = true;
-          cleanup();
-          reject(new Error("동영상 인코딩 재생 실패: 브라우저 재생 권한을 확인해 주세요."));
+        }).catch(() => {
+          video.muted = true;
+          video.play().then(() => {
+            requestAnimationFrame(renderFrame);
+          }).catch(() => {
+            isCancelled = true;
+            cleanup();
+            reject(new Error("동영상 인코딩 재생 실패: 브라우저 재생 권한을 확인해 주세요."));
+          });
         });
 
       } catch (err: any) {

@@ -197,6 +197,7 @@ export default function EditPdfPage() {
 
   // Canvas Refs
   const bgCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const renderTaskRef = useRef<any>(null);
   const drawCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const workspaceScrollRef = useRef<HTMLDivElement | null>(null);
@@ -363,8 +364,22 @@ export default function EditPdfPage() {
 
       const ctx = bgCanvas.getContext("2d");
       if (ctx) {
+        // Cancel any in-flight PDF.js render on the same canvas to avoid concurrent render() errors
+        if (renderTaskRef.current) {
+          try {
+            renderTaskRef.current.cancel();
+          } catch {
+            // ignore cancel error
+          }
+          renderTaskRef.current = null;
+        }
         ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        const task = page.render({ canvasContext: ctx, viewport });
+        renderTaskRef.current = task;
+        await task.promise;
+        if (renderTaskRef.current === task) {
+          renderTaskRef.current = null;
+        }
       }
 
       // Sync draw canvas dimensions
@@ -407,7 +422,8 @@ export default function EditPdfPage() {
       }
 
       setDetectedTexts(detected);
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.name === "RenderingCancelledException") return;
       console.error("Page render error:", err);
     } finally {
       setIsDetectingText(false);
