@@ -19,7 +19,7 @@ export default function PdfToPowerpointPage() {
   const [pptBlob, setPptBlob] = useState<Blob | null>(null);
 
   const handleFileSelected = async (files: File[]) => {
-    const pdfFile = files.find((f) => f.type === "application/pdf" || f.name.endsWith(".pdf"));
+    const pdfFile = files.find((f) => f.type === "application/pdf" || f.name.toLowerCase().endsWith(".pdf"));
     if (!pdfFile) return;
 
     setFile(pdfFile);

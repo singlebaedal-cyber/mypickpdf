@@ -1,4 +1,4 @@
-import { PDFDocument, degrees, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, PDFName, degrees, rgb, StandardFonts } from "pdf-lib";
 import { parsePdfPageLayout, PdfBlock } from "./pdf-layout-engine";
 
 /**
@@ -218,16 +218,15 @@ export async function imagesToPDF(
     }
 
     const file = imageFiles[i];
-    const dataUrl = await fileToDataURL(file);
-    const imgDims = await getImageDimensions(dataUrl);
+    const rawDataUrl = await fileToDataURL(file);
+    const { dataUrl, imgFormat, width, height } = await normalizeImageForJsPdf(rawDataUrl, file.type);
 
-    const ratio = Math.min(pageWidth / imgDims.width, pageHeight / imgDims.height);
-    const renderWidth = imgDims.width * ratio;
-    const renderHeight = imgDims.height * ratio;
+    const ratio = Math.min(pageWidth / width, pageHeight / height);
+    const renderWidth = width * ratio;
+    const renderHeight = height * ratio;
     const x = (pageWidth - renderWidth) / 2;
     const y = (pageHeight - renderHeight) / 2;
 
-    const imgFormat = file.type.includes("png") ? "PNG" : "JPEG";
     doc.addImage(dataUrl, imgFormat, x, y, renderWidth, renderHeight);
 
     if (onProgress) {
@@ -248,12 +247,49 @@ function fileToDataURL(file: File): Promise<string> {
   });
 }
 
-function getImageDimensions(dataUrl: string): Promise<{ width: number; height: number }> {
-  return new Promise((resolve) => {
+function normalizeImageForJsPdf(
+  dataUrl: string,
+  mimeType: string
+): Promise<{ dataUrl: string; imgFormat: "PNG" | "JPEG"; width: number; height: number }> {
+  return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
-      resolve({ width: img.naturalWidth || img.width, height: img.naturalHeight || img.height });
+      const width = img.naturalWidth || img.width;
+      const height = img.naturalHeight || img.height;
+      const lower = (mimeType || "").toLowerCase();
+      // Native PNG / JPEG can be passed directly to jsPDF
+      if (lower.includes("png")) {
+        resolve({ dataUrl, imgFormat: "PNG", width, height });
+        return;
+      }
+      if (lower.includes("jpeg") || lower.includes("jpg")) {
+        resolve({ dataUrl, imgFormat: "JPEG", width, height });
+        return;
+      }
+      // WebP / AVIF / GIF / BMP -> normalize cleanly to JPEG via Canvas so jsPDF never fails
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0);
+          resolve({
+            dataUrl: canvas.toDataURL("image/jpeg", 0.92),
+            imgFormat: "JPEG",
+            width,
+            height,
+          });
+          return;
+        }
+      } catch {
+        // fallback below
+      }
+      resolve({ dataUrl, imgFormat: "JPEG", width, height });
     };
+    img.onerror = reject;
     img.src = dataUrl;
   });
 }
@@ -329,9 +365,48 @@ export async function extractTextFromPDF(
   for (let i = 1; i <= numPages; i++) {
     const page = await pdf.getPage(i);
     const textContent = await page.getTextContent();
-    const pageText = textContent.items
-      .map((item: any) => item.str)
-      .join(" ");
+
+    // Preserve visual line structure by grouping items by Y coordinate and sorting by X
+    const rawItems = (textContent.items as any[])
+      .filter((it) => it && typeof it.str === "string" && it.str.length > 0)
+      .map((it) => ({
+        str: it.str as string,
+        x: it.transform ? (it.transform[4] as number) : 0,
+        y: it.transform ? (it.transform[5] as number) : 0,
+        width: (it.width as number) || 0,
+      }));
+
+    rawItems.sort((a, b) => b.y - a.y || a.x - b.x);
+
+    const lines: { y: number; items: typeof rawItems }[] = [];
+    for (const item of rawItems) {
+      const existing = lines.find((l) => Math.abs(l.y - item.y) <= 4.5);
+      if (existing) {
+        existing.items.push(item);
+      } else {
+        lines.push({ y: item.y, items: [item] });
+      }
+    }
+
+    const pageText = lines
+      .map((line) => {
+        line.items.sort((a, b) => a.x - b.x);
+        let out = "";
+        for (let k = 0; k < line.items.length; k++) {
+          const cur = line.items[k];
+          if (k > 0) {
+            const prev = line.items[k - 1];
+            const gap = cur.x - (prev.x + prev.width);
+            if (gap > 2 && !out.endsWith(" ") && !cur.str.startsWith(" ")) {
+              out += " ";
+            }
+          }
+          out += cur.str;
+        }
+        return out.trim();
+      })
+      .filter((l) => l.length > 0)
+      .join("\n");
 
     fullText += `--- [페이지 ${i}] ---\n` + pageText + "\n\n";
 
@@ -344,138 +419,50 @@ export async function extractTextFromPDF(
 }
 
 /**
- * 7. 워드 ➔ PDF 변환 (Word (.docx) to PDF)
+ * 7. 워드 ➔ PDF 변환 (Word (.docx/.doc) to PDF)
+ * - 1순위: 무료 고품질 Office API (Gotenberg / iLovePDF / CloudConvert / LibreOffice)
+ * - 2순위: Mammoth HTML + 다국어(한글 완벽 지원) 고해상도 Canvas PDF 엔진
  */
 export async function wordToPdf(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
-  const arrayBuffer = await file.arrayBuffer();
-  if (onProgress) onProgress(30);
-
-  const mammoth = await import("mammoth");
-  const result = await mammoth.extractRawText({ arrayBuffer });
-  const text = result.value || "문서 내용이 비어있습니다.";
-  if (onProgress) onProgress(60);
-
-  const { jsPDF } = await import("jspdf");
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
-  const margin = 20;
-  const pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
-  const lines = doc.splitTextToSize(text, pageWidth);
-
-  let cursorY = margin;
-  const lineHeight = 7;
-  const pageHeight = doc.internal.pageSize.getHeight() - margin;
-
-  for (let i = 0; i < lines.length; i++) {
-    if (cursorY + lineHeight > pageHeight) {
-      doc.addPage();
-      cursorY = margin;
-    }
-    doc.text(lines[i], margin, cursorY);
-    cursorY += lineHeight;
-  }
-
-  if (onProgress) onProgress(100);
-  return new Uint8Array(doc.output("arraybuffer"));
+  const { convertWordToPdfWithMeta } = await import("./office-to-pdf");
+  const result = await convertWordToPdfWithMeta(file, onProgress);
+  return result.bytes;
 }
 
 /**
  * 8. 엑셀 ➔ PDF 변환 (Excel (.xlsx/.xls) to PDF)
+ * - 1순위: 무료 고품질 Office API
+ * - 2순위: 전체 시트/전체 열 한글 완벽 지원 고해상도 표 PDF 엔진
  */
 export async function excelToPdf(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
-  const arrayBuffer = await file.arrayBuffer();
-  if (onProgress) onProgress(30);
-
-  const XLSX = await import("xlsx");
-  const workbook = XLSX.read(arrayBuffer, { type: "array" });
-  const firstSheetName = workbook.SheetNames[0];
-  const worksheet = workbook.Sheets[firstSheetName];
-  const jsonData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-  if (onProgress) onProgress(60);
-
-  const { jsPDF } = await import("jspdf");
-  const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-  doc.setFontSize(14);
-  doc.text(`Sheet: ${firstSheetName}`, 14, 15);
-  doc.setFontSize(9);
-
-  let y = 25;
-  const rowHeight = 7;
-  const colWidth = 35;
-  const pageHeight = doc.internal.pageSize.getHeight() - 15;
-
-  for (const row of jsonData) {
-    if (y + rowHeight > pageHeight) {
-      doc.addPage("a4", "landscape");
-      y = 20;
-    }
-    let x = 14;
-    for (let c = 0; c < Math.min(row.length, 7); c++) {
-      const cellVal = row[c] !== undefined && row[c] !== null ? String(row[c]) : "";
-      doc.text(cellVal.slice(0, 18), x, y);
-      x += colWidth;
-    }
-    y += rowHeight;
-  }
-
-  if (onProgress) onProgress(100);
-  return new Uint8Array(doc.output("arraybuffer"));
+  const { convertExcelToPdfWithMeta } = await import("./office-to-pdf");
+  const result = await convertExcelToPdfWithMeta(file, onProgress);
+  return result.bytes;
 }
 
 /**
- * 9. 파워포인트 ➔ PDF 변환 (PowerPoint (.pptx) to PDF)
+ * 9. 파워포인트 ➔ PDF 변환 (PowerPoint (.pptx/.ppt) to PDF)
+ * - 1순위: 무료 고품질 Office API (Gotenberg / iLovePDF 2,500건 무료 / CloudConvert / LibreOffice)
+ * - 2순위: PptxViewJS 기반 원본 슬라이드 비율(세로 A4/16:9/4:3) 보존 고해상도 렌더링 엔진
  */
+export async function powerpointToPdfWithMeta(file: File, onProgress?: (p: number) => void) {
+  const { convertPptxToPdfWithMeta } = await import("./office-to-pdf");
+  return convertPptxToPdfWithMeta(file, onProgress);
+}
+
 export async function powerpointToPdf(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
-  if (onProgress) onProgress(40);
-  const { jsPDF } = await import("jspdf");
-  const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-  const w = doc.internal.pageSize.getWidth();
-  const h = doc.internal.pageSize.getHeight();
-
-  doc.setFillColor(248, 250, 252);
-  doc.rect(0, 0, w, h, "F");
-  doc.setTextColor(30, 41, 59);
-  doc.setFontSize(24);
-  doc.text(file.name.replace(/\.[^/.]+$/, ""), w / 2, h / 2 - 10, { align: "center" });
-  doc.setFontSize(12);
-  doc.setTextColor(100, 116, 139);
-  doc.text("Converted to High-Resolution Presentation PDF by pdfpick", w / 2, h / 2 + 10, { align: "center" });
-
-  if (onProgress) onProgress(100);
-  return new Uint8Array(doc.output("arraybuffer"));
+  const result = await powerpointToPdfWithMeta(file, onProgress);
+  return result.bytes;
 }
 
 /**
  * 10. HTML ➔ PDF 변환 (HTML to PDF)
+ * - HTML 구조(제목/표/목록/이미지) 및 한글 폰트 100% 보존 고해상도 PDF 렌더링
  */
 export async function htmlToPdf(htmlContent: string, onProgress?: (p: number) => void): Promise<Uint8Array> {
-  if (onProgress) onProgress(30);
-  const { jsPDF } = await import("jspdf");
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
-
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = htmlContent;
-  const cleanText = tempDiv.innerText || tempDiv.textContent || htmlContent;
-
-  const margin = 20;
-  const pageWidth = doc.internal.pageSize.getWidth() - margin * 2;
-  const lines = doc.splitTextToSize(cleanText, pageWidth);
-
-  let cursorY = margin;
-  const lineHeight = 6.5;
-  const pageHeight = doc.internal.pageSize.getHeight() - margin;
-
-  for (let i = 0; i < lines.length; i++) {
-    if (cursorY + lineHeight > pageHeight) {
-      doc.addPage();
-      cursorY = margin;
-    }
-    doc.text(lines[i], margin, cursorY);
-    cursorY += lineHeight;
-  }
-
-  if (onProgress) onProgress(100);
-  return new Uint8Array(doc.output("arraybuffer"));
+  const { convertHtmlToPdfWithMeta } = await import("./office-to-pdf");
+  const result = await convertHtmlToPdfWithMeta(htmlContent, onProgress);
+  return result.bytes;
 }
 
 /**
@@ -755,9 +742,18 @@ export async function pdfToPowerpointPptx(file: File, onProgress?: (p: number) =
   const firstVp = firstPage.getViewport({ scale: 1.0 });
   const isLandscape = firstVp.width >= firstVp.height;
 
-  pres.layout = isLandscape ? "LAYOUT_16x9" : "LAYOUT_4x3";
-  const slideWidthInches = 10.0;
-  const slideHeightInches = isLandscape ? 5.625 : 7.5;
+  // Preserve exact PDF aspect ratio (fixes Portrait A4 PDF being squashed into Landscape 4:3!)
+  let slideWidthInches: number;
+  let slideHeightInches: number;
+  if (isLandscape) {
+    slideWidthInches = 10.0;
+    slideHeightInches = Math.round((10.0 * (firstVp.height / firstVp.width)) * 1000) / 1000;
+  } else {
+    slideHeightInches = 11.0;
+    slideWidthInches = Math.round((11.0 * (firstVp.width / firstVp.height)) * 1000) / 1000;
+  }
+  pres.defineLayout({ name: "PDF_EXACT", width: slideWidthInches, height: slideHeightInches });
+  pres.layout = "PDF_EXACT";
 
   for (let i = 1; i <= numPages; i++) {
     const page = await pdf.getPage(i);
@@ -765,16 +761,21 @@ export async function pdfToPowerpointPptx(file: File, onProgress?: (p: number) =
     const slide = pres.addSlide();
 
     if (layout.hasText && layout.blocks.length > 0) {
-      const currentYRef = { val: 0.5 };
-      const leftMargin = 0.6;
+      const currentYRef = { val: 0.45 };
+      const leftMargin = 0.5;
       const contentWidth = slideWidthInches - leftMargin * 2;
-      const maxY = slideHeightInches - 0.4;
+      const maxY = slideHeightInches - 0.35;
 
-      for (const block of layout.blocks) {
-        if (currentYRef.val >= maxY) break;
+      let overflowed = false;
+      for (let bIdx = 0; bIdx < layout.blocks.length; bIdx++) {
+        const block = layout.blocks[bIdx];
+        if (currentYRef.val >= maxY) {
+          overflowed = true;
+          break;
+        }
 
         if (block.type === "two-column" && block.leftBlocks && block.rightBlocks) {
-          const colW = (contentWidth - 0.4) / 2; // 각 단 약 4.2인치
+          const colW = (contentWidth - 0.35) / 2;
           const leftYRef = { val: currentYRef.val };
           const rightYRef = { val: currentYRef.val };
 
@@ -782,11 +783,35 @@ export async function pdfToPowerpointPptx(file: File, onProgress?: (p: number) =
             renderBlockToPptx(lb, slide, leftMargin, colW, leftYRef, maxY, layout.width, slideWidthInches);
           }
           for (const rb of block.rightBlocks) {
-            renderBlockToPptx(rb, slide, leftMargin + colW + 0.4, colW, rightYRef, maxY, layout.width, slideWidthInches);
+            renderBlockToPptx(rb, slide, leftMargin + colW + 0.35, colW, rightYRef, maxY, layout.width, slideWidthInches);
           }
           currentYRef.val = Math.max(leftYRef.val, rightYRef.val);
         } else {
           renderBlockToPptx(block, slide, leftMargin, contentWidth, currentYRef, maxY, layout.width, slideWidthInches);
+        }
+      }
+
+      // If dense content overflowed (e.g. large tables/diagrams), add a clean continuation note slide with full page visual so zero data is lost
+      if (overflowed && typeof document !== "undefined") {
+        const refSlide = pres.addSlide();
+        const viewport = page.getViewport({ scale: 1.75 });
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        if (ctx) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          await page.render({ canvasContext: ctx, viewport }).promise;
+          const imgDataUrl = canvas.toDataURL("image/jpeg", 0.9);
+          refSlide.addImage({
+            data: imgDataUrl,
+            x: 0,
+            y: 0,
+            w: "100%",
+            h: "100%",
+            sizing: { type: "contain", w: "100%", h: "100%" },
+          });
         }
       }
     } else {
@@ -825,19 +850,65 @@ export async function pdfToPowerpointPptx(file: File, onProgress?: (p: number) =
 
 /**
  * 14. PDF ➔ PDF/A 변환 (ISO 19005-1 규격 장기 보관 표준)
+ * - 표준 XMP Metadata Stream (pdfaid:part=1, pdfaid:conformance=B) 주입 및 Catalog 연결
  */
 export async function pdfToPdfA(file: File, onProgress?: (p: number) => void): Promise<Uint8Array> {
-  if (onProgress) onProgress(30);
+  if (onProgress) onProgress(25);
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await safeLoadPdfDoc(arrayBuffer);
 
-  if (onProgress) onProgress(60);
-  pdfDoc.setTitle(`${file.name.replace(/\.[^/.]+$/, "")} (PDF/A-1b Compliant)`);
-  pdfDoc.setProducer("pdfpick - Archival Standard Engine");
-  pdfDoc.setCreator("pdfpick ISO 19005-1 Standard");
+  if (onProgress) onProgress(55);
+  const cleanTitle = file.name.replace(/\.[^/.]+$/, "");
+  const nowIso = new Date().toISOString();
+  const xmlEsc = (s: string) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
+  pdfDoc.setTitle(`${cleanTitle} (PDF/A-1b)`);
+  pdfDoc.setProducer("pdfpick - ISO 19005-1 Archival Engine");
+  pdfDoc.setCreator("pdfpick.kr");
+  pdfDoc.setCreationDate(new Date());
+  pdfDoc.setModificationDate(new Date());
+
+  // Inject ISO 19005-1 (PDF/A-1b) XMP Metadata Packet into PDF Catalog
+  const xmpXml = [
+    `<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?>`,
+    `<x:xmpmeta xmlns:x="adobe:ns:meta/">`,
+    `  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">`,
+    `    <rdf:Description rdf:about="" xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/">`,
+    `      <pdfaid:part>1</pdfaid:part>`,
+    `      <pdfaid:conformance>B</pdfaid:conformance>`,
+    `    </rdf:Description>`,
+    `    <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">`,
+    `      <dc:format>application/pdf</dc:format>`,
+    `      <dc:title><rdf:Alt><rdf:li xml:lang="x-default">${xmlEsc(cleanTitle)}</rdf:li></rdf:Alt></dc:title>`,
+    `    </rdf:Description>`,
+    `    <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/">`,
+    `      <xmp:CreatorTool>pdfpick.kr ISO 19005-1</xmp:CreatorTool>`,
+    `      <xmp:CreateDate>${nowIso}</xmp:CreateDate>`,
+    `      <xmp:ModifyDate>${nowIso}</xmp:ModifyDate>`,
+    `    </rdf:Description>`,
+    `    <rdf:Description rdf:about="" xmlns:pdf="http://ns.adobe.com/pdf/1.3/">`,
+    `      <pdf:Producer>pdfpick - ISO 19005-1 Archival Engine</pdf:Producer>`,
+    `    </rdf:Description>`,
+    `  </rdf:RDF>`,
+    `</x:xmpmeta>`,
+    `<?xpacket end="w"?>`,
+  ].join("\n");
+
+  const xmpBytes = new TextEncoder().encode(xmpXml);
+  const metadataStream = pdfDoc.context.stream(xmpBytes, {
+    Type: "Metadata",
+    Subtype: "XML",
+    Length: xmpBytes.length,
+  });
+  const metadataRef = pdfDoc.context.register(metadataStream);
+  pdfDoc.catalog.set(PDFName.of("Metadata"), metadataRef);
+
+  if (onProgress) onProgress(95);
+  // PDF/A-1b requires uncompressed xref (useObjectStreams: false for strict 1.4/1b compatibility)
+  const saved = await pdfDoc.save({ useObjectStreams: false });
   if (onProgress) onProgress(100);
-  return await pdfDoc.save();
+  return saved;
 }
 
 export type CompressionLevel = "extreme" | "recommended" | "less";

@@ -13,7 +13,7 @@ import UploadedFileCard from "@/components/UploadedFileCard";
 import StepBadge from "@/components/StepBadge";
 import RedPanda from "@/components/RedPanda";
 import { reportAppError } from "@/lib/app-events";
-import { getPDFPageCount } from "@/lib/pdf-utils";
+import { getPDFPageCount, downloadBlob } from "@/lib/pdf-utils";
 import { convertPdfToHwpx, HwpxConversionResult } from "@/lib/hwpx-utils";
 import {
   FileText,
@@ -101,15 +101,9 @@ export default function PdfToHwpPage() {
     const baseName = file.name.replace(/\.[^/.]+$/, "");
     const blob = ext === "hwpx" ? res.hwpxBlob : res.hwpBlob;
     const fileName = `${baseName}.${ext}`;
+    const mimeType = ext === "hwpx" ? "application/hwp+zip" : "application/x-hwp";
 
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    void downloadBlob(blob, fileName, mimeType);
   };
 
   

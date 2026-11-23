@@ -135,7 +135,7 @@ export async function convertPdfToHwpx(
     let pageImageBuffer: Uint8Array | null = null;
     const shouldRenderImage =
       options.mode === "imageOnly" ||
-      (options.mode === "hybrid" && (pageLines.length < 5 || options.mode === "hybrid"));
+      options.mode === "hybrid";
 
     if (shouldRenderImage && typeof document !== "undefined") {
       try {
@@ -210,9 +210,16 @@ export async function convertPdfToHwpx(
         });
       }
 
-      const isLandscape = viewport.width > viewport.height;
-      const targetWidthMm = isLandscape ? 240 : 170;
-      const targetHeightMm = Math.round(targetWidthMm * (viewport.height / viewport.width));
+      // A4 세로 페이지의 인쇄 가능 폭(210 - 18*2 = 174mm)을 넘지 않도록 안전하게 제한
+      const maxPrintableWidthMm = 170;
+      const maxPrintableHeightMm = 230;
+      const aspect = viewport.height / viewport.width;
+      let targetWidthMm = maxPrintableWidthMm;
+      let targetHeightMm = Math.round(targetWidthMm * aspect);
+      if (targetHeightMm > maxPrintableHeightMm) {
+        targetHeightMm = maxPrintableHeightMm;
+        targetWidthMm = Math.round(targetHeightMm / aspect);
+      }
 
       try {
         builder.addImage(pageImageBuffer, "jpg", {

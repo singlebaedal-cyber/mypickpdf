@@ -18,7 +18,10 @@ export default function ExcelToPdfPage() {
   const [pdfBlob, setPdfBlob] = useState<Uint8Array | null>(null);
 
   const handleFileSelected = (files: File[]) => {
-    const xlsFile = files.find((f) => f.name.endsWith(".xlsx") || f.name.endsWith(".xls"));
+    const xlsFile = files.find((f) => {
+      const lower = f.name.toLowerCase();
+      return lower.endsWith(".xlsx") || lower.endsWith(".xls");
+    });
     if (!xlsFile) {
       alert("Excel 스프레드시트 (.xlsx) 파일을 선택해 주세요.");
       return;

@@ -169,7 +169,7 @@ export default function PdfToImagePage() {
                     </div>
                   </div>
                   <button
-                    onClick={() => downloadBlob(zipBlob, `${file.name}_images.zip`, "application/zip")}
+                    onClick={() => downloadBlob(zipBlob, `${file.name.replace(/\.[^/.]+$/, "")}_images.zip`, "application/zip")}
                     className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 flex items-center gap-2 shrink-0 hover:scale-105 transition-all"
                   >
                     <Download className="w-4 h-4" />

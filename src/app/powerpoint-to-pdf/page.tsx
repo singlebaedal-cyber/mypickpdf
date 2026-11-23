@@ -8,23 +8,38 @@ import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import MascotActionNotice from "@/components/MascotActionNotice";
-import { powerpointToPdf, downloadBlob } from "@/lib/pdf-utils";
+import { powerpointToPdfWithMeta, downloadBlob } from "@/lib/pdf-utils";
+import type { OfficeConversionEngine } from "@/lib/office-to-pdf";
 import { Presentation, Download, CheckCircle, RefreshCw } from "lucide-react";
+
+const ENGINE_LABELS: Record<OfficeConversionEngine, string> = {
+  gotenberg: "Gotenberg LibreOffice 고정밀 서버 엔진",
+  ilovepdf: "iLovePDF Office 고정밀 클라우드 API",
+  cloudconvert: "CloudConvert MS Office 고정밀 API",
+  libreoffice: "LibreOffice 로컬 고정밀 엔진",
+  "client-pptxviewjs": "브라우저 고해상도 슬라이드 렌더링 엔진 (무제한 무료)",
+  "client-html-canvas": "브라우저 고해상도 문서 렌더링 엔진",
+};
 
 export default function PowerpointToPdfPage() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [pdfBlob, setPdfBlob] = useState<Uint8Array | null>(null);
+  const [resultMeta, setResultMeta] = useState<{ pageCount: number; engine: OfficeConversionEngine } | null>(null);
 
   const handleFileSelected = (files: File[]) => {
-    const pptFile = files.find((f) => f.name.endsWith(".pptx") || f.name.endsWith(".ppt"));
+    const pptFile = files.find((f) => {
+      const lower = f.name.toLowerCase();
+      return lower.endsWith(".pptx") || lower.endsWith(".ppt");
+    });
     if (!pptFile) {
-      alert("PowerPoint (.pptx) 파일을 선택해 주세요.");
+      alert("PowerPoint (.pptx, .ppt) 파일을 선택해 주세요.");
       return;
     }
     setFile(pptFile);
     setPdfBlob(null);
+    setResultMeta(null);
   };
 
   const handleConvert = async () => {
@@ -32,16 +47,17 @@ export default function PowerpointToPdfPage() {
 
     try {
       setIsProcessing(true);
-      setProgress(30);
+      setProgress(10);
 
-      const result = await powerpointToPdf(file, (p) => setProgress(p));
-      setPdfBlob(result);
+      const result = await powerpointToPdfWithMeta(file, (p) => setProgress(p));
+      setPdfBlob(result.bytes);
+      setResultMeta({ pageCount: result.pageCount, engine: result.engine });
       setIsProcessing(false);
 
-      downloadBlob(result, `${file.name.replace(/\.[^/.]+$/, "")}.pdf`);
-    } catch (err) {
+      downloadBlob(result.bytes, `${file.name.replace(/\.[^/.]+$/, "")}.pdf`);
+    } catch (err: any) {
       console.error(err);
-      alert("PowerPoint 문서를 PDF로 변환하는 중 오류가 발생했습니다.");
+      alert(err?.message || "PowerPoint 문서를 PDF로 변환하는 중 오류가 발생했습니다.");
       setIsProcessing(false);
     }
   };
@@ -50,17 +66,17 @@ export default function PowerpointToPdfPage() {
     {
       step: 1,
       title: "PPT 파일 업로드",
-      desc: "발표용 파워포인트 (.pptx) 문서를 선택합니다.",
+      desc: "발표용·제안서용 파워포인트 (.pptx, .ppt) 문서를 선택합니다.",
     },
     {
       step: 2,
-      title: "슬라이드 렌더링",
-      desc: "각 슬라이드를 16:9 와이드 비율의 고화질 가로형 PDF로 변환합니다.",
+      title: "원본 비율 고해상도 렌더링",
+      desc: "각 슬라이드의 원본 비율(세로 A4·16:9·4:3), 표, 도형, 이미지를 그대로 고화질 PDF로 변환합니다.",
     },
     {
       step: 3,
       title: "PDF 다운로드",
-      desc: "모바일이나 태블릿에서 바로 발표 가능한 전자문서로 다운로드합니다.",
+      desc: "PC·모바일·태블릿 어디서나 글꼴 깨짐 없이 바로 열람 가능한 PDF로 다운로드합니다.",
     },
   ];
 
@@ -102,7 +118,7 @@ export default function PowerpointToPdfPage() {
               <MascotActionNotice
                 mood="ready"
                 title="PowerPoint 슬라이드가 안전하게 준비되었습니다!"
-                description="슬라이드 텍스트 및 개체를 분석하여 가로형 고품질 PDF로 즉시 변환합니다."
+                description="모든 슬라이드의 원본 비율, 한글 폰트, 표, 이미지를 그대로 유지해 고화질 PDF로 변환합니다."
                 actionHint="우측 하단 [PDF로 변환 시작] 버튼을 눌러주세요!"
               />
 
@@ -110,6 +126,7 @@ export default function PowerpointToPdfPage() {
                 onClick={() => {
                   setFile(null);
                   setPdfBlob(null);
+                  setResultMeta(null);
                 }}
                 className="text-xs font-semibold text-slate-500 hover:text-rose-600 flex items-center gap-1"
               >
@@ -139,8 +156,14 @@ export default function PowerpointToPdfPage() {
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-8 h-8 text-emerald-600 shrink-0" />
                     <div>
-                      <h4 className="font-extrabold text-emerald-900">PDF 다운로드 준비 완료</h4>
-                      <p className="text-xs text-emerald-700">다운로드가 시작되지 않았다면 버튼을 클릭하세요.</p>
+                      <h4 className="font-extrabold text-emerald-900">
+                        PDF 다운로드 준비 완료 {resultMeta ? `(총 ${resultMeta.pageCount}페이지)` : ""}
+                      </h4>
+                      <p className="text-xs text-emerald-700">
+                        {resultMeta
+                          ? `${ENGINE_LABELS[resultMeta.engine]}으로 변환되었습니다.`
+                          : "다운로드가 시작되지 않았다면 버튼을 클릭하세요."}
+                      </p>
                     </div>
                   </div>
                   <button

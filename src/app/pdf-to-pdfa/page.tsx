@@ -18,7 +18,7 @@ export default function PdfToPdfaPage() {
   const [pdfaBlob, setPdfaBlob] = useState<Uint8Array | null>(null);
 
   const handleFileSelected = (files: File[]) => {
-    const pdfFile = files.find((f) => f.type === "application/pdf" || f.name.endsWith(".pdf"));
+    const pdfFile = files.find((f) => f.type === "application/pdf" || f.name.toLowerCase().endsWith(".pdf"));
     if (!pdfFile) return;
 
     setFile(pdfFile);

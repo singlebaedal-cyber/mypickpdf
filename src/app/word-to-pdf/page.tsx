@@ -18,7 +18,10 @@ export default function WordToPdfPage() {
   const [pdfBlob, setPdfBlob] = useState<Uint8Array | null>(null);
 
   const handleFileSelected = (files: File[]) => {
-    const docFile = files.find((f) => f.name.endsWith(".docx") || f.name.endsWith(".doc"));
+    const docFile = files.find((f) => {
+      const lower = f.name.toLowerCase();
+      return lower.endsWith(".docx") || lower.endsWith(".doc");
+    });
     if (!docFile) {
       alert("Word 문서 (.docx) 파일을 선택해 주세요.");
       return;
