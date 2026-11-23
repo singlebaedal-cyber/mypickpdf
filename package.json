@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cfb": "^1.2.2",
     "chart.js": "^4.6.1",
     "clsx": "^2.1.1",
     "docx": "^9.7.1",
@@ -19,6 +20,7 @@
     "lucide-react": "^0.453.0",
     "mammoth": "^1.12.3",
     "next": "^14.2.15",
+    "pako": "^3.0.3",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^3.11.174",
     "pptxgenjs": "^4.0.1",

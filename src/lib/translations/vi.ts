@@ -50,6 +50,8 @@ export const vi: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Chuyển đổi sang chuẩn lưu trữ dài hạn ISO 19005-1",
   "tool_pdf_to_hwp": "PDF sang HWPX",
   "tool_pdf_to_hwp_desc": "Chuyển đổi sang tài liệu văn phòng Hangul (.hwpx)",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Chọn tệp",
   "btn_add_files": "Thêm tệp khác",
   "btn_reset": "Đặt lại tất cả",

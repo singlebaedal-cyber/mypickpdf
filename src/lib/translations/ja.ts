@@ -67,6 +67,8 @@ export const ja: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "ISO 19005-1 長期保存標準規格へ変換",
   "tool_pdf_to_hwp": "PDF HWP/HWPX 変換",
   "tool_pdf_to_hwp_desc": "PDF を編集可能なハングル文書 (.hwpx / .hwp) に変換",
+  "tool_hwp_to_pdf": "HWP/HWPX PDF・Word変換",
+  "tool_hwp_to_pdf_desc": "韓国語ハングル(.hwpx, .hwp)文書をPDF・Word・Excel・テキストに即座に変換",
   "btn_select_files": "ファイルを選択",
   "drop_title_default": "ここにファイルをドロップしてください",
   "drop_subtitle_default": "または下のボタンをクリックして選択",

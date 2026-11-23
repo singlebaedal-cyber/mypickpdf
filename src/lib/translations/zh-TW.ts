@@ -60,6 +60,8 @@ export const zhTW: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "轉換為適合長期歸檔的 ISO 標準 PDF/A",
   "tool_pdf_to_hwp": "PDF 轉 HWP/HWPX",
   "tool_pdf_to_hwp_desc": "將 PDF 轉換為公文標準韓語文件",
+  "tool_hwp_to_pdf": "HWP/HWPX 轉 PDF/Word",
+  "tool_hwp_to_pdf_desc": "將韓文文件 (.hwpx, .hwp) 即時轉換為 PDF、Word、Excel 或純文字",
   "btn_select_files": "選擇檔案",
   "drop_title_default": "將檔案拖放到此處",
   "drop_subtitle_default": "或點擊下方按鈕選擇檔案",

@@ -67,6 +67,8 @@ export const zhCN: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "转换为 ISO 19005-1 长期归档标准",
   "tool_pdf_to_hwp": "PDF 转 HWP/HWPX",
   "tool_pdf_to_hwp_desc": "将 PDF 转换为韩文韩信文字 (.hwpx / .hwp) 格式",
+  "tool_hwp_to_pdf": "HWP/HWPX 转 PDF/Word",
+  "tool_hwp_to_pdf_desc": "将韩文文档 (.hwpx, .hwp) 即时转换为 PDF、Word、Excel 或纯文本",
   "btn_select_files": "选择文件",
   "drop_title_default": "将文件拖放到此处",
   "drop_subtitle_default": "或点击下方按钮选择文件",

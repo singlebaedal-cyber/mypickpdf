@@ -171,6 +171,18 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
 
   // 3. To PDF
   {
+    id: "hwp-to-pdf",
+    href: "/hwp-to-pdf",
+    titleKey: "tool_hwp_to_pdf",
+    descKey: "tool_hwp_to_pdf_desc",
+    icon: FileText,
+    category: "convert_to",
+    colorGradient: "from-sky-500 to-blue-600",
+    colorLight: "text-sky-600 bg-sky-50",
+    badge: "HWPX",
+    keywords: ["한글", "hwp", "hwpx", "한글 pdf 변환", "한글 워드 변환", "한글 엑셀 변환", "공고문", "제안요청서"],
+  },
+  {
     id: "image-to-pdf",
     href: "/image-to-pdf",
     titleKey: "tool_img_to_pdf",

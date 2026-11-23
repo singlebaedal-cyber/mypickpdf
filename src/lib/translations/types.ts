@@ -58,6 +58,8 @@ export type TranslationKey =
   | "tool_pdf_to_pdfa_desc"
   | "tool_pdf_to_hwp"
   | "tool_pdf_to_hwp_desc"
+  | "tool_hwp_to_pdf"
+  | "tool_hwp_to_pdf_desc"
   | "btn_select_files"
   | "drop_title_default"
   | "drop_subtitle_default"

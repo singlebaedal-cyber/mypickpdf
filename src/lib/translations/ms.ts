@@ -60,6 +60,8 @@ export const ms: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Tukar ke format piawaian ISO PDF/A untuk pengarkiban jangka panjang",
   "tool_pdf_to_hwp": "PDF ke HWP/HWPX",
   "tool_pdf_to_hwp_desc": "Tukar PDF ke dokumen rasmi format Hangul (.hwpx / .hwp)",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Pilih Fail",
   "drop_title_default": "Seret & lepaskan fail di sini",
   "drop_subtitle_default": "atau klik butang di bawah untuk memilih fail",

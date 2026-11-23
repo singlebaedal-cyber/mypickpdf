@@ -60,6 +60,8 @@ export const ca: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Converteix al format estàndard ISO PDF/A per a l'arxiu a llarg termini",
   "tool_pdf_to_hwp": "PDF a HWP/HWPX",
   "tool_pdf_to_hwp_desc": "Converteix PDF a format estàndard coreà (.hwpx / .hwp)",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Seleccionar fitxers",
   "drop_title_default": "Arrossega els fitxers aquí",
   "drop_subtitle_default": "o fes clic al botó inferior per triar fitxers",

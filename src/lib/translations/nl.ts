@@ -60,6 +60,8 @@ export const nl: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Converteer naar ISO-standaard PDF/A voor langdurige archivering",
   "tool_pdf_to_hwp": "PDF naar HWP/HWPX",
   "tool_pdf_to_hwp_desc": "Converteer PDF naar standaard Koreaanse documenten (.hwpx / .hwp)",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Bestanden Selecteren",
   "drop_title_default": "Sleep bestanden hierheen",
   "drop_subtitle_default": "of klik op de knop hieronder om bestanden te kiezen",

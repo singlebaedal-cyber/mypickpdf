@@ -103,6 +103,22 @@ export const TOOLS_SEO_MAP: Record<string, ToolSeoData> = {
       "나라장터 공고문 한글 변환",
     ],
   },
+  "hwp-to-pdf": {
+    title: "한글(HWP·HWPX) PDF·워드·엑셀 변환 무료 - 한컴오피스 없이 1초 변환",
+    description:
+      "아래아한글(.hwpx, .hwp) 제안요청서·공고문·계약서를 PDF, MS 워드(.docx), 엑셀(.xlsx), 텍스트(.txt)로 무료 변환하세요. 표와 이미지, 가로/세로 구역을 유지하며 서버 전송 없이 100% 로컬 처리됩니다.",
+    canonical: "https://pdfpick.kr/hwp-to-pdf",
+    keywords: [
+      "한글 PDF 변환",
+      "HWP PDF 변환",
+      "HWPX PDF 변환",
+      "한글 워드 변환",
+      "HWPX DOCX 변환",
+      "한글 엑셀 표 추출",
+      "한컴오피스 없이 한글 파일 열기",
+      "무료 HWP 변환 사이트",
+    ],
+  },
   "pdf-to-word": {
     title: "PDF 워드 변환 무료 - 서식 깨짐 없는 PDF to Word (DOCX) 변환기",
     description:

@@ -67,6 +67,8 @@ export const ko: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "ISO 19005-1 장기 보관 표준 PDF/A 규격 변환",
   "tool_pdf_to_hwp": "PDF 한글(HWP/HWPX) 변환",
   "tool_pdf_to_hwp_desc": "PDF 문서를 공공기관 표준 한글(.hwpx / .hwp)로 변환",
+  "tool_hwp_to_pdf": "한글(HWP/HWPX) PDF·워드 변환",
+  "tool_hwp_to_pdf_desc": "한글(.hwpx, .hwp) 문서를 PDF, Word(.docx), Excel(.xlsx), 텍스트로 즉시 변환",
   "btn_select_files": "파일 선택하기",
   "drop_title_default": "여기에 파일을 끌어다 놓으세요",
   "drop_subtitle_default": "또는 아래 버튼을 클릭하여 파일 선택",

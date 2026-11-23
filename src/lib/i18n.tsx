@@ -115,6 +115,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "ISO 19005-1 장기 보관 표준 PDF/A 규격 변환",
     tool_pdf_to_hwp: "PDF 한글(HWP/HWPX) 변환",
     tool_pdf_to_hwp_desc: "PDF 문서를 공공기관 표준 한글(.hwpx / .hwp)로 변환",
+    tool_hwp_to_pdf: "한글(HWP/HWPX) PDF·워드 변환",
+    tool_hwp_to_pdf_desc: "한글(.hwpx, .hwp) 문서를 PDF, Word(.docx), Excel(.xlsx), 텍스트로 즉시 변환",
 
     // Common Buttons & Labels
     btn_select_files: "파일 선택하기",
@@ -416,6 +418,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Convert PDF to ISO 19005-1 archival standard",
     tool_pdf_to_hwp: "PDF to HWP/HWPX",
     tool_pdf_to_hwp_desc: "Convert PDF to editable Hangul Word (.hwpx / .hwp) document",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Select Files",
     drop_title_default: "Drop files here",
@@ -714,6 +718,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "ISO 19005-1 長期保存標準規格へ変換",
     tool_pdf_to_hwp: "PDF HWP/HWPX 変換",
     tool_pdf_to_hwp_desc: "PDF を編集可能なハングル文書 (.hwpx / .hwp) に変換",
+    tool_hwp_to_pdf: "HWP/HWPX PDF・Word変換",
+    tool_hwp_to_pdf_desc: "韓国語ハングル(.hwpx, .hwp)文書をPDF・Word・Excel・テキストに即座に変換",
 
     btn_select_files: "ファイルを選択",
     drop_title_default: "ここにファイルをドロップしてください",
@@ -1012,6 +1018,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "转换为 ISO 19005-1 长期归档标准",
     tool_pdf_to_hwp: "PDF 转 HWP/HWPX",
     tool_pdf_to_hwp_desc: "将 PDF 转换为韩文韩信文字 (.hwpx / .hwp) 格式",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "选择文件",
     drop_title_default: "将文件拖放到此处",
@@ -1309,6 +1317,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "轉換為 ISO 19005-1 長期封存標準 PDF/A",
     tool_pdf_to_hwp: "PDF 轉 HWP/HWPX",
     tool_pdf_to_hwp_desc: "將 PDF 轉換為韓文 Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX 轉 PDF/Word",
+    tool_hwp_to_pdf_desc: "將韓文文件 (.hwpx, .hwp) 即時轉換為 PDF、Word、Excel 或純文字",
 
     btn_select_files: "選擇檔案",
     drop_title_default: "將檔案拖放到此處",
@@ -1579,6 +1589,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Convierte a formato estándar de archivo ISO 19005-1",
     tool_pdf_to_hwp: "PDF a HWP/HWPX",
     tool_pdf_to_hwp_desc: "Convierte PDF a documento Hangul (.hwpx / .hwp) editable",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Seleccionar Archivos",
     drop_title_default: "Arrastra tus archivos aquí",
@@ -1876,6 +1888,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Convertir selon la norme d'archivage ISO 19005-1",
     tool_pdf_to_hwp: "PDF en HWP/HWPX",
     tool_pdf_to_hwp_desc: "Convertir un PDF en document Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Sélectionner des fichiers",
     drop_title_default: "Déposez vos fichiers ici",
@@ -2145,6 +2159,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "In ISO 19005-1 Archivierungsstandard umwandeln",
     tool_pdf_to_hwp: "PDF in HWP/HWPX",
     tool_pdf_to_hwp_desc: "PDF in Hangul Word (.hwpx / .hwp) umwandeln",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Dateien auswählen",
     drop_title_default: "Dateien hier ablegen",
@@ -2414,6 +2430,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Converti nello standard di archiviazione ISO 19005-1",
     tool_pdf_to_hwp: "PDF in HWP/HWPX",
     tool_pdf_to_hwp_desc: "Converti PDF in formato Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Seleziona file",
     drop_title_default: "Trascina i file qui",
@@ -2683,6 +2701,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Converter para o padrão de arquivamento ISO 19005-1",
     tool_pdf_to_hwp: "PDF para HWP/HWPX",
     tool_pdf_to_hwp_desc: "Converter PDF para o formato Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Selecionar Arquivos",
     drop_title_default: "Arraste os arquivos para cá",
@@ -2952,6 +2972,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Конвертация в стандарт долгосрочного хранения ISO 19005-1",
     tool_pdf_to_hwp: "PDF в HWP/HWPX",
     tool_pdf_to_hwp_desc: "Конвертация PDF в стандартный документ Hangul (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Выбрать файлы",
     drop_title_default: "Перетащите файлы сюда",
@@ -3221,6 +3243,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Chuyển đổi sang tiêu chuẩn lưu trữ dài hạn ISO 19005-1",
     tool_pdf_to_hwp: "PDF sang HWP/HWPX",
     tool_pdf_to_hwp_desc: "Chuyển đổi PDF sang định dạng Hangul (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Chọn tệp tin",
     drop_title_default: "Kéo và thả tệp vào đây",
@@ -3490,6 +3514,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "แปลงเป็นมาตรฐานการจัดเก็บเอกสารระยะยาว ISO 19005-1",
     tool_pdf_to_hwp: "PDF เป็น HWP/HWPX",
     tool_pdf_to_hwp_desc: "แปลง PDF เป็นรูปแบบ Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "เลือกไฟล์",
     drop_title_default: "ลากและวางไฟล์ที่นี่",
@@ -3759,6 +3785,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Ubah ke standar pengarsipan jangka panjang ISO 19005-1",
     tool_pdf_to_hwp: "PDF ke HWP/HWPX",
     tool_pdf_to_hwp_desc: "Ubah PDF ke format dokumen Hangul (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Pilih File",
     drop_title_default: "Tarik dan lepas file di sini",
@@ -4028,6 +4056,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "ISO 19005-1 दीर्घकालिक संग्रह मानक में बदलें",
     tool_pdf_to_hwp: "PDF से HWP/HWPX",
     tool_pdf_to_hwp_desc: "PDF को हैंगुल वर्ड (.hwpx / .hwp) दस्तावेज़ में बदलें",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "फ़ाइलें चुनें",
     drop_title_default: "फ़ाइलें यहाँ खींचें और छोड़ें",
@@ -4297,6 +4327,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "التحويل إلى معيار الأرشفة طويل الأمد ISO 19005-1",
     tool_pdf_to_hwp: "PDF إلى HWP/HWPX",
     tool_pdf_to_hwp_desc: "تحويل PDF إلى مستند Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "اختر الملفات",
     drop_title_default: "اسحب الملفات وأفلتها هنا",
@@ -4566,6 +4598,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "ISO 19005-1 uzun süreli arşivleme standardına dönüştürün",
     tool_pdf_to_hwp: "PDF'den HWP/HWPX'e",
     tool_pdf_to_hwp_desc: "PDF'yi Hangul Word (.hwpx / .hwp) belgesine dönüştürün",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Dosyaları Seç",
     drop_title_default: "Dosyaları buraya sürükleyip bırakın",
@@ -4835,6 +4869,8 @@ export const translations = {
     tool_pdf_to_pdfa_desc: "Converteer naar ISO 19005-1 archiveringsstandaard",
     tool_pdf_to_hwp: "PDF naar HWP/HWPX",
     tool_pdf_to_hwp_desc: "Converteer PDF naar Hangul Word (.hwpx / .hwp)",
+    tool_hwp_to_pdf: "HWP/HWPX to PDF & Word",
+    tool_hwp_to_pdf_desc: "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
 
     btn_select_files: "Bestanden selecteren",
     drop_title_default: "Sleep bestanden hierheen",

@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/video-to-gif", priority: 0.9, changeFrequency: "weekly" as const },
     
     // To PDF
+    { url: "/hwp-to-pdf", priority: 1.0, changeFrequency: "daily" as const },
     { url: "/image-to-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/word-to-pdf", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/powerpoint-to-pdf", priority: 0.9, changeFrequency: "weekly" as const },

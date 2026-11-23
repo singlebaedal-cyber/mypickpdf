@@ -60,6 +60,8 @@ export const el: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Μετατρέψτε στο πρότυπο ISO PDF/A για μακροχρόνια αρχειοθέτηση",
   "tool_pdf_to_hwp": "PDF σε HWP/HWPX",
   "tool_pdf_to_hwp_desc": "Μετατρέψτε PDF σε επίσημο κορεατικό πρότυπο εγγράφων",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Επιλογή αρχείων",
   "drop_title_default": "Σύρετε τα αρχεία εδώ",
   "drop_subtitle_default": "ή κάντε κλικ στο κουμπί παρακάτω για να επιλέξετε αρχεία",

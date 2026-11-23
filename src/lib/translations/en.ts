@@ -82,6 +82,8 @@ export const en: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Convert PDF to ISO 19005-1 archival standard",
   "tool_pdf_to_hwp": "PDF to HWP/HWPX",
   "tool_pdf_to_hwp_desc": "Convert PDF to editable Hangul Word (.hwpx / .hwp) document",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Select Files",
   "drop_title_default": "Drop files here",
   "drop_subtitle_default": "or click the button below to browse",

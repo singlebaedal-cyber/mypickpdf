@@ -60,6 +60,8 @@ export const sw: TranslationDictionary = {
   "tool_pdf_to_pdfa_desc": "Geuza kuwa muundo wa kiwango cha ISO PDF/A kwa uhifadhi wa muda mrefu",
   "tool_pdf_to_hwp": "PDF hadi HWP/HWPX",
   "tool_pdf_to_hwp_desc": "Geuza PDF kuwa muundo rasmi wa hati za Kikorea",
+  "tool_hwp_to_pdf": "HWP/HWPX to PDF & Word",
+  "tool_hwp_to_pdf_desc": "Convert Korean Hangul (.hwpx, .hwp) files to PDF, Word, Excel, or TXT instantly",
   "btn_select_files": "Chagua Faili",
   "drop_title_default": "Vuta na udondoshe faili hapa",
   "drop_subtitle_default": "au bofya kitufe cha chini kuchagua faili kutoka kifaa chako",
