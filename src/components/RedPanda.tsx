@@ -28,6 +28,7 @@ export default function RedPanda({
   withSpeechBubble,
 }: RedPandaProps) {
   const pixelSize = typeof size === "number" ? `${size}px` : size;
+  const numericSize = typeof size === "number" ? size : 120;
 
   // New Image-based Mascot States from User Asset Kit
 
@@ -51,6 +52,10 @@ export default function RedPanda({
           <img
             src="/mascot/mascot_loading.png"
             alt="문서 처리 중인 래서팬더"
+            width={numericSize}
+            height={numericSize}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain relative z-10 animate-pulse drop-shadow-md"
           />
         </div>
@@ -76,6 +81,10 @@ export default function RedPanda({
           <img
             src="/mascot/mascot_ready.png"
             alt="준비 완료된 래서팬더"
+            width={numericSize}
+            height={numericSize}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain drop-shadow-md"
           />
         </div>
@@ -101,6 +110,10 @@ export default function RedPanda({
           <img
             src="/mascot/mascot_hooray.png"
             alt="축하하는 래서팬더"
+            width={numericSize}
+            height={numericSize}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain drop-shadow-xl"
           />
         </div>
@@ -126,6 +139,10 @@ export default function RedPanda({
           <img
             src="/mascot/mascot_success.png"
             alt="성공한 래서팬더"
+            width={numericSize}
+            height={numericSize}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain drop-shadow-md"
           />
         </div>
@@ -148,6 +165,10 @@ export default function RedPanda({
           <img
             src="/mascot/mascot_thinking.png"
             alt="고민하는 래서팬더"
+            width={numericSize}
+            height={numericSize}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain drop-shadow-sm"
           />
         </div>
@@ -169,6 +190,10 @@ export default function RedPanda({
           <img
             src="/mascot/mascot_error.png"
             alt="오류 상태 래서팬더"
+            width={numericSize}
+            height={numericSize}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain drop-shadow-sm"
           />
         </div>
@@ -309,6 +334,10 @@ export default function RedPanda({
         <img
           src="/mascot/mascot_ready.png"
           alt="마이픽 래서팬더"
+          width={numericSize}
+          height={numericSize}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-contain drop-shadow-xl"
         />
       </div>

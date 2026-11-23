@@ -17,6 +17,7 @@ interface FaqSectionProps {
   items?: FAQItem[];
   title?: string;
   subtitle?: string;
+  includeSchema?: boolean;
 }
 
 export default function FaqSection({
@@ -24,6 +25,7 @@ export default function FaqSection({
   items,
   title,
   subtitle,
+  includeSchema = true,
 }: FaqSectionProps) {
   const { lang } = useLanguage();
   const defaultMeta = getFaqMeta(lang);
@@ -103,11 +105,13 @@ export default function FaqSection({
 
   return (
     <section className="my-16 max-w-4xl mx-auto px-4">
-      {/* Inject AEO Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {/* Inject AEO Schema (only once per page) */}
+      {includeSchema && resolvedItems.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold mb-3">

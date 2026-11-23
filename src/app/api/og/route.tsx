@@ -165,7 +165,7 @@ export async function GET(req: NextRequest) {
             {[
               "PDF 합치기·압축",
               "도장·서명·주민번호 가리기",
-              "PDF ⇄ 한글(HWPX)",
+              "PDF · 한글(HWPX) 변환",
               "AI 논문 번역",
             ].map((tag, i) => (
               <div
@@ -192,7 +192,7 @@ export async function GET(req: NextRequest) {
               display: "flex",
             }}
           >
-            무설치 · 무제한 100% 무료 →
+            무설치 · 무제한 100% 무료
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { getLocalizedArticle, getLocalizedArticles } from "@/lib/guides-data";
+import { useLocalizedArticle, useLocalizedArticles } from "@/lib/use-localized-guides";
 import RedPanda from "@/components/RedPanda";
 import FaqSection from "@/components/FaqSection";
 
@@ -22,8 +22,8 @@ interface GuideDetailClientViewProps {
 
 export default function GuideDetailClientView({ slug }: GuideDetailClientViewProps) {
   const { lang, t } = useLanguage();
-  const article = getLocalizedArticle(slug, lang);
-  const allArticles = getLocalizedArticles(lang);
+  const article = useLocalizedArticle(slug, lang);
+  const allArticles = useLocalizedArticles(lang);
   const relatedArticles = allArticles
     .filter((a) => a.slug !== article.slug)
     .sort((a, b) => (a.category === article.category ? -1 : b.category === article.category ? 1 : 0))
@@ -350,6 +350,7 @@ export default function GuideDetailClientView({ slug }: GuideDetailClientViewPro
           items={article.faqList}
           title={t("guides_faq_title")}
           subtitle={t("guides_faq_desc")}
+          includeSchema={false}
         />
       )}
 

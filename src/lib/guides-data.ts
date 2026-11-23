@@ -1,5 +1,4 @@
 import type { Language } from "./i18n";
-import guidesTranslationsRaw from "./guides-translations.json";
 
 export interface GuideArticle {
   slug: string;
@@ -1590,16 +1589,32 @@ pdfpick은 파일을 서버로 전송하지 않고 **사용자의 스마트폰·
 ];
 
 
-const guidesTranslations: Record<string, Record<string, any>> = guidesTranslationsRaw as any;
+let guidesTranslationsCache: Record<string, Record<string, any>> | null = null;
+let guidesTranslationsPromise: Promise<Record<string, Record<string, any>>> | null = null;
+
+export function hasGuidesTranslationsLoaded(): boolean {
+  return guidesTranslationsCache !== null;
+}
+
+export async function loadGuidesTranslations(): Promise<Record<string, Record<string, any>>> {
+  if (guidesTranslationsCache) return guidesTranslationsCache;
+  if (!guidesTranslationsPromise) {
+    guidesTranslationsPromise = import("./guides-translations.json").then((mod) => {
+      guidesTranslationsCache = (mod.default || mod) as Record<string, Record<string, any>>;
+      return guidesTranslationsCache;
+    });
+  }
+  return guidesTranslationsPromise;
+}
 
 export function getLocalizedArticle(slugOrArticle: string | GuideArticle, lang: Language): GuideArticle {
   const original = typeof slugOrArticle === "string"
     ? GUIDE_ARTICLES.find((a) => a.slug === slugOrArticle) || GUIDE_ARTICLES[0]
     : slugOrArticle;
 
-  if (lang === "ko") return original;
+  if (lang === "ko" || !guidesTranslationsCache) return original;
 
-  const langDict = guidesTranslations[lang] || guidesTranslations["en"];
+  const langDict = guidesTranslationsCache[lang] || guidesTranslationsCache["en"];
   const trans = langDict?.[original.slug];
 
   if (!trans) return original;

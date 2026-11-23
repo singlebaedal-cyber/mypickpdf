@@ -174,7 +174,7 @@ export default async function Image() {
             "🌐 AI 18개국어 PDF 번역",
             "📑 PDF 합치기·분할",
             "📉 화질유지 80% 압축",
-            "🇰🇷 PDF ⇄ 한글(HWP/HWPX)",
+            "🇰🇷 PDF · 한글(HWP/HWPX) 변환",
             "📊 Word · Excel · PPT · JPG 변환",
             "🎬 동영상 압축 & GIF 움짤",
           ].map((label, idx) => (

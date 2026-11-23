@@ -30,7 +30,7 @@ import AdBanner from "@/components/AdBanner";
 import FaqSection from "@/components/FaqSection";
 import RedPanda from "@/components/RedPanda";
 import { useLanguage } from "@/lib/i18n";
-import { getLocalizedArticles } from "@/lib/guides-data";
+import { useLocalizedArticles } from "@/lib/use-localized-guides";
 import { getGlobalFaqs, getFaqMeta, getMainPageExtraContent } from "@/lib/faqs-data";
 import { HOWTO_SCHEMA } from "@/lib/seo-config";
 import RecentToolsBar from "@/components/RecentToolsBar";
@@ -41,7 +41,7 @@ export default function HomePage() {
   const globalFaqs = getGlobalFaqs(lang);
   const faqMeta = getFaqMeta(lang);
   const extraContent = getMainPageExtraContent(lang);
-  const localizedArticles = getLocalizedArticles(lang);
+  const localizedArticles = useLocalizedArticles(lang);
 
   const coreTools = [
     { title: t("tool_pdf_to_hwp"), desc: t("tool_pdf_to_hwp_desc"), href: "/pdf-to-hwp", icon: FileText, color: "from-blue-600 to-cyan-600", badge: lang === "ko" ? "한글/HWP" : "HWPX" },
@@ -78,31 +78,12 @@ export default function HomePage() {
     { title: t("tool_pdf_to_pdfa"), desc: t("tool_pdf_to_pdfa_desc"), href: "/pdf-to-pdfa", icon: Archive, color: "from-indigo-600 to-purple-600", badge: "PDF/A" },
   ];
 
-  const homepageFaqSchema = globalFaqs && globalFaqs.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: globalFaqs.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.answer,
-      },
-    })),
-  } : null;
-
   return (
     <div className="py-8 sm:py-12 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(HOWTO_SCHEMA) }}
       />
-      {homepageFaqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
-        />
-      )}
       {/* Universal Desktop/Mobile Drag & Drop Zone */}
       <UniversalDragDrop />
 

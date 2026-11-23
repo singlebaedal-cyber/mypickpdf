@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, BookOpen, Bookmark, Share2, Check } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { TOOLS_REGISTRY } from "@/lib/tools-registry";
-import { getLocalizedArticles } from "@/lib/guides-data";
+import { useLocalizedArticles } from "@/lib/use-localized-guides";
 
 interface RelatedToolsSectionProps {
   currentToolId?: string;
@@ -76,7 +76,7 @@ export default function RelatedToolsSection({ currentToolId }: RelatedToolsSecti
     (tool) => tool.id !== currentToolId && !pairIds.includes(tool.id)
   ).slice(0, 6);
 
-  const allGuides = getLocalizedArticles(lang);
+  const allGuides = useLocalizedArticles(lang);
   const matchingGuides = currentToolId
     ? allGuides.filter((g) => g.relatedToolHref === `/${currentToolId}`)
     : [];

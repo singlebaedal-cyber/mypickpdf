@@ -8,12 +8,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import { getLocalizedArticles } from "@/lib/guides-data";
+import { useLocalizedArticles } from "@/lib/use-localized-guides";
 import RedPanda from "@/components/RedPanda";
 
 export default function GuidesClientView() {
   const { lang, t } = useLanguage();
-  const articles = getLocalizedArticles(lang);
+  const articles = useLocalizedArticles(lang);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
