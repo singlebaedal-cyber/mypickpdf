@@ -107,25 +107,28 @@ export async function compressVideo(
         let origW = video.videoWidth || 1280;
         let origH = video.videoHeight || 720;
 
-        // Calculate target dimensions and bitrate based on compression level
+        // Calculate original bitrate so low-bitrate videos NEVER inflate when compressed
+        const origBitrate = Math.max(150000, Math.round((originalSize * 8) / Math.max(1, duration)));
+
+        // Calculate target dimensions and adaptive bitrate based on compression level
         let maxDim = 1280;
-        let targetBitrate = 2000000; // 2.0 Mbps
+        let targetBitrate = Math.min(2000000, Math.round(origBitrate * 0.65));
         let fps = 30;
 
         if (level === "extreme") {
           // 카카오톡 / 메일 전송용 (초강력 압축)
           maxDim = 720;
-          targetBitrate = 900000; // 0.9 Mbps
+          targetBitrate = Math.min(900000, Math.max(160000, Math.round(origBitrate * 0.45)));
           fps = 24;
         } else if (level === "recommended") {
           // 표준 밸런스 압축
           maxDim = 1080;
-          targetBitrate = 1800000; // 1.8 Mbps
+          targetBitrate = Math.min(1800000, Math.max(220000, Math.round(origBitrate * 0.65)));
           fps = 30;
         } else {
           // 가벼운 압축 (고화질 유지)
           maxDim = 1920;
-          targetBitrate = 3200000; // 3.2 Mbps
+          targetBitrate = Math.min(3200000, Math.max(300000, Math.round(origBitrate * 0.85)));
           fps = 30;
         }
 
@@ -206,12 +209,18 @@ export async function compressVideo(
             }
           } catch (e) {}
 
-          const compressedBlob = new Blob(chunks, { type: mediaRecorder.mimeType || "video/mp4" });
+          let compressedBlob = new Blob(chunks, { type: mediaRecorder.mimeType || "video/mp4" });
+          let finalExt = ext;
+          // If the source video was already ultra-compressed and re-encoding made it larger, retain original bytes
+          if (compressedBlob.size >= originalSize) {
+            compressedBlob = file;
+            finalExt = file.name.split(".").pop()?.toLowerCase() || "mp4";
+          }
           const compressedSize = compressedBlob.size;
           const ratio = Math.max(0, Math.round((1 - compressedSize / originalSize) * 100));
 
           const baseName = file.name.replace(/\.[^/.]+$/, "");
-          const downloadName = `${baseName}_compressed.${ext}`;
+          const downloadName = `${baseName}_compressed.${finalExt}`;
           const resultUrl = URL.createObjectURL(compressedBlob);
 
           cleanup();
@@ -220,7 +229,7 @@ export async function compressVideo(
             originalSize,
             compressedSize,
             ratio,
-            format: ext,
+            format: finalExt,
             downloadName,
             url: resultUrl,
           });

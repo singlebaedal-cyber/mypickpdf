@@ -8,6 +8,7 @@ import FaqSection from "@/components/FaqSection";
 import AdBanner from "@/components/AdBanner";
 import ProcessingOverlay from "@/components/ProcessingOverlay";
 import { encodeGif, GifFrame } from "@/lib/gif-encoder";
+import { downloadBlob } from "@/lib/pdf-utils";
 import { 
   FileVideo, 
   Download, 
@@ -116,14 +117,21 @@ export default function VideoToGifPage() {
         const targetTime = startTime + i * intervalSec;
         if (targetTime > video.duration) break;
 
-        video.currentTime = targetTime;
-        await new Promise<void>((resolve) => {
-          const onSeeked = () => {
-            video.removeEventListener("seeked", onSeeked);
-            resolve();
-          };
-          video.addEventListener("seeked", onSeeked);
-        });
+        // Avoid Safari/iPhone hang when seeking to the exact current timestamp (e.g. t=0)
+        if (Math.abs(video.currentTime - targetTime) > 0.005) {
+          await new Promise<void>((resolve) => {
+            let done = false;
+            const finish = () => {
+              if (done) return;
+              done = true;
+              video.removeEventListener("seeked", finish);
+              resolve();
+            };
+            video.addEventListener("seeked", finish);
+            video.currentTime = targetTime;
+            setTimeout(finish, 1500);
+          });
+        }
 
         ctx.drawImage(video, 0, 0, finalW, finalH);
         const imgData = ctx.getImageData(0, 0, finalW, finalH);
@@ -146,13 +154,8 @@ export default function VideoToGifPage() {
       setIsProcessing(false);
       URL.revokeObjectURL(fileUrl);
 
-      // Auto download
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${file.name.replace(/\.[^/.]+$/, "")}_pdfpick.gif`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      // Auto download (supports mobile/KakaoTalk Web Share fallback)
+      await downloadBlob(gifBlob, `${file.name.replace(/\.[^/.]+$/, "")}_pdfpick.gif`, "image/gif");
 
     } catch (err: any) {
       console.error(err);

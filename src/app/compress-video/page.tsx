@@ -37,6 +37,7 @@ import { reportAppError } from "@/lib/app-events";
 export default function CompressVideoPage() {
   const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
+  const [videoMeta, setVideoMeta] = useState<{ duration: number; width: number; height: number } | null>(null);
   const [level, setLevel] = useState<VideoCompressionLevel>("recommended");
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -50,7 +51,31 @@ export default function CompressVideoPage() {
     if (videoFile) {
       setFile(videoFile);
       setResult(null);
+      setVideoMeta(null);
+
+      // Measure duration and resolution for transparent time estimation
+      const tempVideo = document.createElement("video");
+      tempVideo.preload = "metadata";
+      const url = URL.createObjectURL(videoFile);
+      tempVideo.src = url;
+      tempVideo.onloadedmetadata = () => {
+        if (isFinite(tempVideo.duration) && tempVideo.duration > 0) {
+          setVideoMeta({
+            duration: Math.round(tempVideo.duration),
+            width: tempVideo.videoWidth || 0,
+            height: tempVideo.videoHeight || 0,
+          });
+        }
+        URL.revokeObjectURL(url);
+      };
+      tempVideo.onerror = () => URL.revokeObjectURL(url);
     }
+  };
+
+  const formatDuration = (sec: number): string => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return m > 0 ? `${m}분 ${s}초` : `${s}초`;
   };
 
   const formatFileSize = (bytes: number): string => {
@@ -239,8 +264,22 @@ export default function CompressVideoPage() {
             {/* Uploaded File Info */}
             <UploadedFileCard
               file={file}
-              onReset={() => setFile(null)}
+              onReset={() => {
+                setFile(null);
+                setVideoMeta(null);
+              }}
             />
+
+            {videoMeta && (
+              <div className="px-4 py-3 rounded-xl bg-indigo-50/70 border border-indigo-200/70 flex flex-wrap items-center justify-between gap-2 text-xs text-indigo-900">
+                <span className="font-bold">
+                  🎬 {videoMeta.width > 0 ? `${videoMeta.width}×${videoMeta.height}` : "동영상"} • 길이 {formatDuration(videoMeta.duration)}
+                </span>
+                <span className="text-indigo-700 font-medium">
+                  브라우저 실시간 로컬 인코딩 예상 시간: 약 {formatDuration(videoMeta.duration)} (탭을 닫지 말고 기다려 주세요)
+                </span>
+              </div>
+            )}
 
             {/* Compression Options */}
             <div>
